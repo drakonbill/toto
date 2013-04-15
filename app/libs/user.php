@@ -18,7 +18,7 @@ class libs_user {
         global $reg;
         if (!isset($id))
             $id = "-1";
-        $data = mysql_query("SELECT * from membres WHERE iddumembre = '$id'", $reg->dbcon);
+        $data = mysql_query("SELECT * from member WHERE id_member = '$id'", $reg->dbcon);
         while ($row = mysql_fetch_assoc($data)) {
             foreach ($row as $key => $value) {
                 $this->userData[$key] = $value;
