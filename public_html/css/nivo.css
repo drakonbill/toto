@@ -1,0 +1,129 @@
+/*
+ * jQuery Nivo Slider v3.1
+ * http://nivo.dev7studios.com
+ *
+ * Copyright 2012, Dev7studios
+ * Free to use and abuse under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ */
+ 
+/* The Nivo Slider styles */
+.nivoSlider {
+	position:relative;
+	width:100%;
+	height:auto;
+}
+.nivoSlider img {
+	position:absolute;
+	top:0px;
+	left:0px;
+	max-width: none;
+}
+.nivo-main-image {
+	display: block !important;
+	position: relative !important; 
+	width: 100% !important;
+}
+
+/* If an image is wrapped in a link */
+.nivoSlider a.nivo-imageLink {
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	border:0;
+	padding:0;
+	margin:0;
+	z-index:6;
+	display:none;
+}
+/* The slices and boxes in the Slider */
+.nivo-slice {
+	display:block;
+	position:absolute;
+	z-index:5;
+	height:100%;
+	top:0;
+}
+.nivo-box {
+	display:block;
+	position:absolute;
+	z-index:5;
+	overflow:hidden;
+}
+.nivo-box img { display:block; }
+
+/* Caption styles */
+.nivo-caption {
+	position:absolute;
+	left:10px;
+	bottom:0px;
+	line-height: 35px;
+    width: 35px;
+	color:#fff;
+	width:50%;
+	z-index:8;
+	padding: 0;
+	z-index:101;
+	opacity: 1;
+	overflow: hidden;
+	display: none;
+	-moz-opacity: 1;
+	filter:alpha(opacity=100);
+}
+.nivo-caption p {
+	padding:5px;
+	margin:0;
+}
+.nivo-caption a {
+	display:inline !important;
+}
+.nivo-html-caption {
+    display:none;
+}
+/* Direction nav styles (e.g. Next & Prev) */
+.nivo-directionNav a {
+	position:absolute;
+	top:50%;
+	z-index:9;
+	cursor:pointer;
+	margin-top: -27px;
+    width: 55px;
+    height: 54px;
+    text-indent: 100%;
+    overflow: hidden;
+}
+.nivo-prevNav {
+	background-image: url(../Images/slider-left.png);
+	left:-27px;
+}
+.nivo-nextNav {
+	background-image: url(../Images/slider-right.png);
+	right:-27px;
+}
+/* Control nav styles (e.g. 1,2,3...) */
+.nivo-controlNav {
+	line-height: 35px;
+	width: 100%;
+	height: 35px;
+	position: absolute;
+	text-align:right;
+	background-image: url(../Images/slider-text-bgr.png);
+	left: 0;
+    bottom: 0;
+    z-index:100;
+}
+.nivo-controlNav a {
+	cursor:pointer;
+	background-image: url(../Images/slider-na.png);
+    text-indent: 100%;
+    width: 11px;
+    height: 9px;
+    overflow: hidden;
+    display: inline-block;
+    margin-right: 11px;
+}
+.nivo-controlNav a:hover, .nivo-controlNav a.active {
+	background-image: url(../Images/slider-a.png);
+}

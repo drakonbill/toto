@@ -1,0 +1,187 @@
+@charset "utf-8";
+/* CSS Document */
+
+form{margin:0;padding:0;}
+form .hideform{display:none;}
+fieldset{margin:1em 0;border:none;border-top:1px solid #eee;}
+form legend,.hometitle{margin-bottom:.5em;color:#fff;background:transparent;font-size:1.3em;font-weight:bold;text-shadow:0 1px 1px #000;}
+#signup label{float:left;width:135px;padding:0 1em;text-align:right;height:21px;text-shadow:0 1px 1px #B0C4DE;}
+fieldset div{margin-top:.5em;padding:0;display:block;}
+fieldset div input {width:150px; padding:2px; border: 1px solid #00637f; height:19px; background: #ffffff url('images/bg-input.png') repeat-x top; color: #8e8f93;}
+fieldset div select{padding:1px;margin:0px;}
+div.fm-multi div{margin:0 0; font-weight:bold;}
+div.fm-multi input{width:1em;}
+div.fm-multi label{display:block;padding-left:.2em;text-align:left;}
+input#etes-yes, input#etes-no {width:1em; border:none;}
+#fm-submit, #personnelles_infos input[type='submit']{clear:both;text-align:center;}
+#fm-submit input, #personnelles_infos input[type='submit']{padding:2px 1em;font-weight:bold; font:Verdana; font-size:13px;color:#000;height:32px; border:1px solid #00637f;
+-moz-border-radius: 4px; -webkit-border-radius: 4px; text-shadow: 0px 1px 1px #fff; 
+background: -moz-linear-gradient(top, #fff 1%, #999 100%);  /*firefox*/  
+background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#fff), color-stop(100%,#999));  /*webkit*/ }
+#fm-submit input:hover, #personnelles_infos input[type='submit']:hover { 
+background: -moz-linear-gradient(top, #ddd 3%, #aaa 100%);  /*firefox*/  
+background: -webkit-gradient(linear, left top, left bottom, color-stop(3%,#ddd), color-stop(100%,#aaa)); /*webkit*/ }
+input:focus { background: #ffffff url('images/bg-input-focus.png') repeat-x top; color:#535456;}
+fieldset div.fm-req{font-weight:bold; position:relative;}
+fieldset div.fm-req label:before{content:"* ";}
+#signup { z-index:10; width:376px; height:auto; margin:20px 0 20px 550px; padding:5px; text-align:left; position:absolute; border:1px solid rgba(68,68,68,0.5);
+background: url(../Images/su_bg2.jpg); border: 1px solid #8b8b8b;-moz-border-radius: 15px; -webkit-border-radius: 15px; -moz-box-shadow: 0px 0px 15px rgba(68,68,68,0.5); -webkit-box-shadow: 0px 0px 15px rgba(68,68,68,0.5); }
+p#fm-intro{margin:0;}
+/*Password Strength*/
+#passwordDescription{
+	padding:0 32px;}
+#passwordStrength{
+	height:10px;display:block;margin:3px 32px;}
+.strength0{
+	width:5px;background:#cccccc;}
+.strength1{
+	width:50px;	background:#ff0000;}
+.strength2{
+	width:100px;background:#ff5f5f;}
+.strength3{
+	width:150px;background:#56e500;}
+.strength4{
+	width:200px;background:#4dcd00;}
+.strength5{
+	background:#399800;	width:250px;}
+/*Error Message*/
+#msg {display:none; position:absolute; z-index:200; background: url(../Images/arrow.gif) left center no-repeat; padding-left:7px}
+#msgcontent {display:block; font-size:10px; background:#8ac641; border:2px solid #a4d36b; border-left:none; padding:5px; min-width:150px; max-width:250px}
+/* Sign In Form*/
+#signin { padding:18px 0 0 400px;  }
+#signin label {	font-size: 11px;color: #fff; font-weight: bold;letter-spacing: .5px; width:110px; display:block; margin-bottom:5px;}
+#signin input[type=text], #signin input[type=password] { height:17px; background: #ffffff url('images/bg-input.png') repeat-x top; color: #8e8f93; padding: 2px; border: 1px solid #00637f; }
+#signin input[type=submit] { letter-spacing:1px;text-align:center; font-size:11px; border:1px solid #41d5ff; margin:18px 0 0 0; padding:3px 3px; color:#FFF; 
+background: -moz-linear-gradient(top, #05c7fe 1%, #00b5e8 100%); /* firefox */ 
+background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#05c7fe), color-stop(100%,#00b5e8)); /* webkit */ background:#05c7fe; }
+#signin input[type=submit]:hover { background: -moz-linear-gradient(top, #42d4fe 1%, #29cdfb 100%); /* firefox */ background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#42d4fe), color-stop(100%,#29cdfb)); background:#42d4fe;  }
+#personnelles_infos ul { list-style-type: none; }
+#personnelles_infos label {	font-size: 11px;color: #746f6f; font-weight: bold;letter-spacing: .5px; width:110px; display:block; margin-bottom:5px;}
+#personnelles_infos a {	font-size: 11px;color: #746f6f; letter-spacing: .5px; }
+#personnelles_infos form fieldset { margin-top:0px; border-top: 1px solid #bfb9b9; }
+#personnelles_infos form legend { color: #8f8b8b; text-shadow: 0 1px 1px #FFF;}
+.error-input-vue { color: #746f6f; position:relative; width:550px; border:2px solid #bab1b1; background:#cfc5c5; font:12px Arial, Verdana, sans-serif; font:Arial; font-weight:normal; padding-left: 5px; margin-left:-5px; }
+/*Research Bar*/
+form#research { float:left;margin:36px 0 0 50px; }
+form#research input[type=text] { font-size:12px; margin: 0 0; height:17px; background: #ffffff url('images/bg-input.png') repeat-x top; width: 185px; color: #8e8f93; padding: 2px; border: 1px solid #00637f; border-right: 0px; }
+form#research input[type=submit] {background:url(../Images/search_icon.jpg) no-repeat left; width:27px; height:23px; margin: 0 0; border: 1px solid #00637f; border-left:0px; float:right; }
+/*Amis*/
+#amis {margin:8px 0 0 0;}
+/*Chat page*/
+#chat-form input {width:167px; float:right;}
+#chat-form input[type=submit] {width:80px; margin-top:5px; font-size:12px; text-align:center;}
+/*Message Page - message view*/
+#message-write form{margin-left:15px;}
+#message-write input { height:14px; width:300px; font-size:12px; margin-top:10px; float:left; clear:left;}
+#message-write textarea { width:300px; font-size:11px; margin-top:10px; height:150px;float:left;}
+#message-write input[type=submit] {background:#48c6ea; width:80px; text-align:center; height:26px; border:1px solid #247d97;}
+#message-write input[type=submit]:hover {background:#6bdcfc;}
+/*Upload*/
+#progress { width:400px; border:1px solid black; background:#FFFFFF; height:25px; z-index:15; position:relative; }
+#progress .barprogress { display:none; position:absolute; top:0; left:0; height:25px; z-index:14; background:#FFCC66; }
+/* Resize */
+.imgareaselect-border1 { background: url(images/border-v.gif) repeat-y left top; }
+.imgareaselect-border2 { background: url(umages/border-h.gif) repeat-x left top; }
+.imgareaselect-border3 { background: url(images/border-v.gif) repeat-y right top; }
+.imgareaselect-border4 { background: url(images/border-h.gif) repeat-x left bottom; }
+.imgareaselect-border1, .imgareaselect-border2,
+.imgareaselect-border3, .imgareaselect-border4 { opacity: 0.5; filter: alpha(opacity=50); }
+.imgareaselect-handle { background-color: #fff; border: solid 1px #000; opacity: 0.5; filter: alpha(opacity=50); }
+.imgareaselect-outer { background-color: #000; opacity: 0.5; filter: alpha(opacity=50); }
+.imgareaselect-selection {  }
+/*EVENT*/
+.formulaire {
+	position: relative;
+	width: 450px;
+	background: #f5f5f5;
+	border: 1px solid #d4d4d4;
+	margin-top: 50px;
+	margin-bottom: -35px;
+	float: left;
+	padding: 5px;
+	font-size: 12px;
+}
+
+#error {
+	position: relative;
+	width: 740px;
+	background: #f5f5f5;
+	border: 1px solid #d4d4d4;
+	margin-top: 50px;
+	margin-bottom: -35px;
+	float: left;
+	padding: 5px;
+	font-size: 12px;
+	display: none;
+}
+
+.imagedetail {
+	position: relative;
+	background: #f5f5f5;
+	border: 1px solid #d4d4d4;
+	float: right;
+	width: 275px;
+	min-height: 100px;
+	margin-top: 50px;
+	margin-bottom: -35px;
+	margin-left: 5px;
+	text-align: center;
+	font-size: 12px;
+}
+
+div#groupepredefinie, div#contactpredefinie, select#ville, br#ville, label[for=ville] {
+	display: none;
+}
+
+.imagedetail h4 {
+	font-weight: bold;
+	color: #5b5757;
+}
+
+.formulaire h2, .formulaire h4 {
+	border-bottom: 1px solid black;
+	margin-top: 0px;
+}
+
+form .formulaire label {
+	float: left;
+	width: 175px;
+	height: 15px;
+	margin-bottom:5px;
+	font-weight: bold;
+	color: #5b5757;
+}
+
+.formulaire input[type=text], form select, textarea {
+	margin-bottom: 15px;
+}
+
+form select option:disabled {
+	background: #FFCC66;
+}
+
+form input[type=text], form input[type=password] {
+	width: 175px;
+	height: 21px;
+}
+
+form#connexion input[type=text], form#connexion input[type=password] {
+	width: 150px;
+	height: 17px;
+}
+
+textarea {
+	width: 440px;
+	height: 75px;
+}
+
+form select {
+	text-align: center;
+	max-width: 150px;
+}
+
+form input[type=submit] {
+	padding: 5px;
+	background: #d4d4d4;
+	border: 1px solid black;
+}

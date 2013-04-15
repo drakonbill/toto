@@ -1,0 +1,145 @@
+
+.popup-other {
+	background:/* #f9d2de*/ #eee;
+	border: 1px solid /*#757575*/ #ccc;
+    position:fixed;
+    text-align:justify;
+    width:960px;
+	height: auto;
+    font:normal normal normal 12px/normal Arial, Verdana, sans-serif;
+    /*display:none;*/    
+	z-index:1001;
+	padding: 15px;
+	top: 25px;
+}
+
+.popup-other h2 {
+	margin: 0;
+}
+
+
+.popup-other span.information {
+	margin-bottom: 15px;
+	display: block;
+}
+
+.popup-other div.contentdetail {
+	background: white;
+	padding: 15px;
+	-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px;
+	border:1px solid #ddd;
+	margin-bottom: 15px;
+	position: relative;
+	overflow: auto;
+}
+
+.popup-other div.contentdetail p {
+	position:relative;
+	margin-left:15px;
+	width:600px;
+	padding:0;
+}
+
+.popup-other div.noverflow {
+	overflow: visible;
+}
+
+.popup-other label {
+	margin-top: 15px;
+}
+
+.popup-other div.contentdetail h2 {
+	color: #545252;
+	border-bottom: 1px solid #bfbbbb;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 1%;
+	margin: 0 auto;
+	width: 98%;
+	font: 21px "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-weight: bold;
+	margin-bottom: 15px;
+	cursor: default;
+}
+
+
+.popup-other div.loading {
+	display: block;
+	width: 95%;
+	margin: 0 auto;
+	position: relative;
+	margin-bottom: 25px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #e9e5e6;
+}
+
+.popup-other div.loading img#photo, .popup-other div.loading img#photo_event {
+	max-width: 150px;
+	max-height: 150px;
+	border-color:#f9f9f9;-webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,.05),0 0 8px rgba(82,168,236,.6);-moz-box-shadow:inset 0 1px 3px rgba(0,0,0,.05),0 0 8px rgba(82,168,236,.6);box-shadow:inset 0 1px 3px rgba(0,0,0,.05),0 0 8px rgba(82,168,236,.6);
+}
+
+.popup-other div.loading div.contentimgnoResize {
+	float: left;
+	margin-top: 0;
+	position: relative;
+}
+
+.popup-other div.loading div.contentimgResize {
+	float: right;
+	margin-top: 0;
+	position: relative;
+}
+
+.popup-other div.loading div.imgResize {
+	position:relative; overflow:hidden; width:75px; height:75px;
+	border: 4px solid #f9f9f9;
+	margin-top: 0;
+}
+
+.popup-other_add_event div.loading div.imgResize {
+	width:274px; height:137px;
+}
+
+.popup-other div.error {
+	display: none;
+}
+
+/*.close {
+    float:right;
+    padding-right:15px;
+    font-weight:bold;
+    font-size:18px;
+    color:white;
+    text-decoration:none;
+}*/
+
+.pop {
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    font-size:18px;
+    color:black;
+    text-decoration:none;
+    font-family:Arial, Verdana, sans-serif;
+}
+
+.popup-othermini {
+	width: 450px;
+	z-index:25000;
+}
+
+.background-mini {
+    display:none;
+    position:fixed;
+    height:100%;
+    width:100%;
+    top:0;
+    left:0;
+    background:#000;
+    z-index:1000;
+}
+
+.background-mini {
+	z-index:24000;
+}

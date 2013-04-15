@@ -1,0 +1,45 @@
+<div id="connexion-bar"></div>
+    <div id="connexion-box">
+        <div id="connexion-box-in">
+            <h3 class="cbox-title blue">Connexion</h3><?php
+                                if (isset($login["error"]['token']))
+                                    echo $login["error"]['token'];
+                                    
+                                ?>
+            <div class="connexion-shadow-1"></div>
+            <form method="post" action="/index/login" id="connexion">
+                <div class="cfix connexion-form-in">
+                    <div class="connexion-form-col ld">
+                        <p>
+                            <label for="email" class="blue">Email : </label>
+                            <br />
+                            <input type="text" class="text" name="email" id="email" size="30" value="" /><?php echo (isset($login["error"]["email"]) ? '<div class="error-input-vue">' . $login["error"]["email"] . '</div>' : ''); ?>
+                            <span class="form-validation"></span>
+                        </p>
+                        <p><a href="index.php?page=lostpassword" class="rev connexion-small">Mot de passe oublié ?</a></p>
+                    </div> <!-- .connexion-form-col -->
+                    <div class="connexion-form-col rd">
+                        <p>
+                            <label for="password" class="blue">Mot de passe : </label>
+                            <br />
+                            <input type="password" class="text" name="password" id="password" size="30" value="" /><?php echo (isset($login["error"]["password"]) ? '<div class="error-input-vue">' . $login["error"]["password"] . '</div>' : ''); ?>
+                            <span class="form-validation"></span>
+                        </p>
+                    </div> <!-- .connexion-form-col -->
+                </div> <!-- .cfix -->
+                <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?>">
+                <div class="connexion-submit-cont">
+                    <input type="submit" class="submit" name="submit" value="" title="Connexion" />
+                </div> <!-- .connexion-submit-cont -->
+            </form> <!-- .connexion-form -->
+            <div class="connexion-shadow-2"></div>
+            <div id="home-icons">
+                <img src="<?php echo $conf["url"]; ?>Images/icon-1.png" alt="" />
+                <img src="<?php echo $conf["url"]; ?>Images/icon-2.png" alt="" />
+                <img src="<?php echo $conf["url"]; ?>Images/icon-3.png" alt="" />
+                <img src="<?php echo $conf["url"]; ?>Images/icon-4.png" alt="" />
+                <img src="<?php echo $conf["url"]; ?>Images/icon-5.png" alt="" />
+                <img src="<?php echo $conf["url"]; ?>Images/icon-6.png" alt="" />
+            </div> <!-- #home-icons -->
+        </div> <!-- #connexion-box-in -->
+    </div> <!-- #connexion-box -->

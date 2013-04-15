@@ -1,0 +1,4 @@
+*{ zoom:1; }
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section{ display:block; }
+.cfix{ zoom:1; }

@@ -1,0 +1,321 @@
+body
+{
+    font:75%/1.5 Arial,sans-serif;
+    color:#424040;
+    background:#e4e4f6 url('../Images/fond.png') repeat-x;
+}
+
+a {
+    text-decoration:none;
+    color:#7A7DED;
+    font-weight: bold;
+    font-size:13px;
+    padding-left:15px;
+}
+
+hr.clear
+{
+    clear:both;
+    border:0px;
+}
+
+/******************* TOP **********************/
+
+div#top
+{
+    position:relative;
+    width:940px;
+    height:auto;
+    margin:0 auto;
+    border-bottom:1px solid #adb6e7;
+    padding-bottom:15px;
+    margin-bottom:15px;
+}
+
+div#logo
+{
+
+}
+
+div#navigtop ul
+{
+    position:absolute;
+    top:6px;
+    left:400px;
+    list-style-type:none;
+    height:35px;
+}
+
+div#navigtop ul li
+{
+    width:90px;
+    float:left;
+    margin-right:2px;
+}
+
+div#navigtop ul li.profil
+{
+    background:url('../Images/fondminimenu.png') no-repeat top;
+}
+
+div#navigtop ul li.profil a
+{
+    background:url('../Images/icones/User.png') no-repeat top;
+}
+
+div#navigtop ul li.discussion:hover
+{
+    background:url('../Images/fondminimenu.png') no-repeat top;
+}
+
+div#navigtop ul li.discussion a
+{
+    background:url('../Images/icones/Discussion.png') no-repeat top;
+}
+
+
+div#navigtop ul li.mail:hover
+{
+    background:url('../Images/fondminimenu.png') no-repeat top;
+}
+
+div#navigtop ul li.mail a
+{
+    background:url('../Images/icones/Mail.png') no-repeat top;
+}
+
+div#navigtop ul li.contact:hover
+{
+    background:url('../Images/fondminimenu.png') no-repeat top;
+}
+
+div#navigtop ul li.contact a
+{
+    background:url('../Images/icones/Users.png') no-repeat top;
+}
+
+div#navigtop ul li a
+{
+    font-size:12px;
+    color:#8f8989;
+    text-decoration:none;
+    padding:35px 0 11px 0;
+    display:block;
+    text-align:center;
+}
+
+div#deconnection
+{
+    position:absolute;
+    right:15px;
+    top:2px;
+    width:101px;
+    height:21px;
+    background:url('../Images/fondminibouton.png') repeat-x;
+    margin-right:5px;
+    border:1px solid #a5a2a0;
+    text-align:center;
+}
+
+div#deconnection a
+{
+    text-decoration:none;
+    font-size:12px;
+    color:#383636;
+    display:block;
+    width:101px;
+    height:19px;
+    padding-top:2px;
+}
+
+div#deconnection a:hover
+{
+}
+
+/*********************** MAIN *********************/
+
+div#main
+{
+    width:940px;
+    height:auto;
+    margin:0 auto;
+}
+
+/********************* NAVIG CENTER *******************/
+
+div#recherche
+{
+    position:relative;
+    float:left;
+    width:687px;
+    height:auto;
+    background:#FFFFFF url('../Images/fondarrondi.png') no-repeat bottom left;
+}
+
+div#recherche h2
+{
+    background:#FFFFFF url('../Images/fondarrondi.png') no-repeat top left;
+    margin-top:0px;
+    padding:15px;
+}
+
+/******************** NAVIG RIGHT *******************/
+
+div#navigdroite
+{
+    position:relative;
+    float:right;
+    width:250px;
+}
+
+div#fairerencontre
+{
+    position:relative;
+    float:right;
+    width:222px;
+    height:43px;
+    background:url('../Images/fondgrosbouton.png') no-repeat;
+    margin-right:5px;
+}
+
+div#fairerencontre a
+{
+    font-weight:bold;
+    text-decoration:none;
+    font-size:13px;
+    color:#532805;
+    display:block;
+    width:201px;
+    height:31px;
+    padding-left:21px;
+    padding-top:12px;
+}
+
+div#fairerencontre a:hover
+{
+    text-decoration:underline;
+}
+
+div#evenement
+{
+    float:right;
+    width:217px;
+    height:250px;
+    background:url('../Images/fondmenu.png') no-repeat;
+    padding-left:15px;
+    display:block;
+}
+div#evenement a {
+    display:block;
+    margin-top:4px;
+    padding:0;
+}
+
+div#evenement2
+{
+    float:right;
+    width:217px;
+    height:232px;
+    background:url('../Images/fondmenu.png') no-repeat;
+    padding-left:15px;
+    display:block;
+}
+
+.error-input
+{
+    color: #FF0000;
+    font-size: 11px;
+    display: none;
+    float:right;
+    width:225px;
+    margin-top:0px;
+    margin-right:5px;
+}
+
+.error-input p
+{
+    color: #FF0000;
+    font-size: 11px;
+    display: none;
+    float:right;
+    margin-right:2px;
+}
+
+/*************************** INSCRIPTION ******************************/
+
+div#connexion
+{
+    width:232px;
+    float:right;
+}
+
+input[type=text],input[type=password]
+{
+    width:200px;
+    height:19px;
+    border:1px solid #b3bbea;
+    background:#fffff;
+    margin-bottom:8px;
+}
+
+select
+{
+    height:25px;
+    margin-right:2px;
+    margin-bottom:8px;
+    margin-left:0px;
+}
+
+select#month select#year select#day
+{
+    width:55px;
+}
+
+select#ville
+{
+    width:155px;
+}
+
+select#research
+{
+    width:95px;
+}
+
+label
+{
+    width:195px;
+    display:block;
+    float:left;
+    color:#7a7ded;
+    font-weight:bold;
+    font-size:13px;
+    font:Arial;
+    height:31px;
+}
+
+input[type=submit]
+{
+    margin-top:15px;
+    margin-right:auto;
+    margin-left:auto;
+    position:relative;
+    display:block;
+    background:url('../Images/fondminibouton2.png') repeat-x;
+    height:25px;
+    width:95px;
+    border:1px solid #334ccf;
+    font-weight:bold;
+    font:Verdana;
+    font-size:12px;
+    color:#FFFFFF;
+}
+
+.password {
+    font-size : 12px;
+    border : 1px solid #cc9933;
+    width : 200px;
+    font-family : arial, sans-serif;
+}
+.pstrength-minchar {
+    font-size : 10px;
+}

@@ -1,0 +1,47 @@
+	.dropdownCell{
+		position: relative;
+		border : 1px solid #bbb;
+		width: 250px;
+		height: 17px;
+		cursor: pointer;
+		font-family: arial;
+		font-size: 10pt;	
+		height: 27px;
+		background: url('../Images/icones/arrow.gif') right top no-repeat;
+		padding-top: 7px;
+		padding-left: 5px;
+	}
+
+	.dropdownCell img{
+		margin : 0px 3px 0px 3px;
+		vertical-align: middle;
+		margin-top: -2px;
+		width: 24px;
+	}
+
+	.dropdownPanel{
+		border : 1px solid #bbb;
+		width: 250px;
+		position: absolute;
+		z-index: 1050;
+		overflow: auto;
+		max-height: 250px;
+	}
+
+	.dropdownOpt{
+		background-color: #fff;
+		cursor: pointer;
+		font-family: arial;
+		font-size: 10pt;
+		padding: 5px;
+	}
+
+	.dropdownOpt img{
+		margin : 0px 3px 0px 3px;
+		vertical-align: middle;
+		width: 24px;
+	}
+
+	.dropdownOptSelected{
+		background-color: #ccc;
+	}

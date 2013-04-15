@@ -1,0 +1,205 @@
+/************************* BLOC ARRONDI ****************************/
+/*       BLOC 1             */
+
+div.blocarrondi1,div.blocarrondi2
+{
+	position:relative;	
+	float:left;
+	margin-bottom:19px;
+}
+	
+div.deux .centre
+{
+	height:155px;
+}
+
+div#autre
+ {
+	float:right;
+}
+
+div.blocarrondi1 .haut
+{	
+	font-weight:bold;
+	font-size:17px;
+	background:url('../Images/divarrondi1/haut.png') no-repeat;
+	width:317px;	
+	height:29px;
+	display:block;	
+	padding-left:11px;	
+	padding-top:11px;
+}
+
+div.blocarrondi1 .centre
+{	
+	background:url('../Images/divarrondi1/centre.png') repeat-y;
+	width:321px;
+	display:block;
+	padding-left:7px;	
+	padding-top:5px;
+}
+
+div.blocarrondi1 .bas
+{	
+	background:url('../Images/divarrondi1/bas.png') no-repeat;	
+	width:328px;	
+	height:14px;	
+	display:block;
+}
+div.blocarrondi1 .centre span.information
+{	
+	font-weight:bold;	
+	font-size:13px;
+	width:50px;
+}
+
+div.blocarrondi1 .centre img,div.blocarrondigrand .centre img
+{	
+	border:1px solid #b7b9c0;
+	position:relative;
+	float:left;
+}
+
+div.blocarrondi1 .centre .informationsgenerales
+{	
+	float:left;
+	margin-top:0px;
+	margin-left:5px;
+	font:Arial;
+}
+/*                  BLOC 1 GRAND                  */
+
+div.blocarrondigrand1,div.blocarrondigrand2,div.blocarrondigrand3,div.blocarrondigrand
+{	
+	position:relative;
+	float:left;
+	display:block;	
+	width:679px;
+	margin-bottom:19px;
+}
+
+div.blocarrondigrand1 .haut
+{	
+	font-weight:bold;	
+	font-size:17px;	
+	background:url('../Images/divarrondigrand1/haut.png') no-repeat;	
+	width:668px;	
+	height:29px;	
+	display:block;
+	padding-left:11px;
+	padding-top:11px;
+}
+
+div.blocarrondigrand1 .centre
+{	
+	background:url('../Images/divarrondigrand1/centre.png') repeat-y;
+	width:672px;
+	display:block;
+	padding-left:7px;
+	padding-top:5px;
+	height:auto;
+}
+
+div.blocarrondigrand1 .bas
+{
+	background:url('../Images/divarrondigrand1/bas.png') no-repeat;	
+	width:679px;	
+	height:14px;
+	display:block;
+}
+/*                BLOC 2                   */
+
+/*                BLOC 2 GRAND              */
+div.blocarrondigrand2 .haut
+{
+	font-weight:bold;
+	font-size:17px;
+	background:url('../Images/divarrondigrand2/haut.png') no-repeat;
+	width:668px;	
+	height:29px;	
+	display:block;	
+	padding-left:11px;	
+	padding-top:11px;
+}
+
+div.blocarrondigrand2 .centre
+{
+	background:url('../Images/divarrondigrand2/centre.png') repeat-y;	
+	width:672px;	
+	display:block;
+	padding-left:7px;
+	padding-top:5px;	
+	height:auto;
+}
+
+div.blocarrondigrand2 .bas
+{
+	background:url('../Images/divarrondigrand2/bas.png') no-repeat;	
+	width:679px;	
+	height:14px;	
+	display:block;
+}
+/*                       BLOC 3                        */
+
+/*                           BLOC 3 GRAND             */
+div.blocarrondigrand3 .haut
+{
+	font-weight:bold;	
+	font-size:17px;	
+	background:url('../Images/divarrondigrand3/haut.png') no-repeat;
+	width:668px;	
+	height:29px;
+	display:block;
+	padding-left:11px;
+	padding-top:11px;
+}
+
+div.blocarrondigrand3 .centre
+{
+	background:url('../Images/divarrondigrand3/centre.png') repeat-y;
+	width:672px;	
+	display:block;
+	padding-left:7px;
+	padding-top:5px;	
+	height:auto;
+}
+
+div.blocarrondigrand3 .bas
+{
+	background:url('../Images/divarrondigrand3/bas.png') no-repeat;	
+	width:679px;	
+	height:14px;
+	display:block;
+	position:relative;
+	float:left;
+}
+
+/****** BLOC ARRONDI GRAND PRINCIPAL *************/
+
+div.blocarrondigrand .haut
+{
+	font-weight:bold;	
+	font-size:17px;	
+	background:url('../Images/divarrondigrandConteneur/haut.png') no-repeat;
+	width:679px;	
+	height:10px;
+	display:block;
+}
+
+div.blocarrondigrand .centre
+{
+	background:url('../Images/divarrondigrandConteneur/centre.png') repeat-y;
+	width:672px;	
+	display:block;
+	padding-left:7px;
+	height:auto;
+	clear:both;
+}
+
+div.blocarrondigrand .bas
+{
+	background:url('../Images/divarrondigrandConteneur/bas.png') no-repeat;	
+	width:679px;	
+	height:10px;
+	display:block;
+}

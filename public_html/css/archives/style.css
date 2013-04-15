@@ -1,0 +1,497 @@
+
+body
+{
+	font:75%/1.5 Arial,sans-serif;
+	color:#424040;
+	background:#e4e4f6 url('../Images/fond.png') repeat-x;
+}
+
+hr.clear
+{
+	clear:both;
+	border:0px;
+	margin:0px;
+}
+
+/******************* TOP **********************/
+
+div#top
+{
+	position:relative;
+	width:940px;
+	height:auto;
+	margin:0 auto;
+	border-bottom:1px solid #adb6e7;
+	padding-bottom:15px;
+	margin-bottom:15px;
+}
+
+div#logo
+{
+
+}
+
+div#navigtop ul
+{
+	position:absolute;
+	top:6px;
+	left:400px;
+	list-style-type:none;
+	height:35px;
+}
+
+div#navigtop ul li
+{
+	width:90px;
+	float:left;
+	margin-right:2px;
+}
+
+div#navigtop ul li.profil
+{
+	background:url('../Images/fondminimenu.png') no-repeat top;
+}
+
+div#navigtop ul li.profil a
+{
+	background:url('../Images/icones/User.png') no-repeat top;
+}
+
+div#navigtop ul li.discussion:hover
+{
+	background:url('../Images/fondminimenu.png') no-repeat top;
+}
+
+div#navigtop ul li.discussion a
+{
+	background:url('../Images/icones/Discussion.png') no-repeat top;
+}
+
+
+div#navigtop ul li.mail:hover
+{
+	background:url('../Images/fondminimenu.png') no-repeat top;
+}
+
+div#navigtop ul li.mail a
+{
+	background:url('../Images/icones/Mail.png') no-repeat top;
+}
+
+div#navigtop ul li.contact:hover
+{
+	background:url('../Images/fondminimenu.png') no-repeat top;
+}
+
+div#navigtop ul li.contact a
+{
+	background:url('../Images/icones/Users.png') no-repeat top;
+}
+
+div#navigtop ul li a
+{
+	font-size:12px;
+	color:#7a7272;
+	text-decoration:none;
+	padding:35px 0 11px 0;
+	display:block;
+	text-align:center;
+}
+
+div#deconnection
+{
+	position:absolute;
+	right:15px;
+	top:2px;
+	width:101px;
+	height:21px;
+	background:url('../Images/fondminibouton.png') repeat-x;
+	margin-right:5px;
+	border:1px solid #a5a2a0;
+	text-align:center;
+}
+
+div#deconnection a
+{
+	text-decoration:none;
+	font-size:12px;
+	color:#383636;
+	display:block;
+	width:101px;
+	height:19px;
+	padding-top:2px;
+}
+
+div#deconnection a:hover
+{
+}
+
+/*********************** MAIN *********************/
+
+div#main
+{
+	width:940px;
+	height:auto;
+	margin:0 auto;
+}
+
+div#contenu
+{
+	position:relative;
+	float:left;
+	display:block;
+	width:679px;
+	height:200px;
+}
+/********************* NAVIG CENTER *******************/
+
+div#contenucentral
+{
+	position:relative;
+	float:left;
+	width:687px;
+	height:auto;
+	background:url('../Images/fondarrondi.png') no-repeat bottom left;
+}
+
+div#contenucentral h2
+{
+	background:#FFFFFF url('../Images/fondarrondi.png') no-repeat top left;
+	margin-top:0px;
+	padding:15px;
+}
+
+/******************** NAVIG RIGHT *******************/
+
+div#navigdroite
+{
+	position:relative;
+	float:right;
+	width:232px;
+	padding-top:0px;
+}
+
+div#fairerencontre
+{
+	position:relative;
+	float:right;
+	width:222px;
+	height:43px;
+	background:url('../Images/fondgrosbouton.png') no-repeat;
+	margin-right:5px;
+}
+
+div#fairerencontre a
+{
+	font-weight:bold;
+	text-decoration:none;
+	font-size:13px;
+	color:#532805;
+	display:block;
+	width:201px;
+	height:31px;
+	padding-left:21px;
+	padding-top:12px;
+}
+
+div#fairerencontre a:hover
+{
+	text-decoration:underline;
+}
+
+div#evenement
+{
+	float:right;
+	width:217px;
+	height:232px;
+	background:url('../Images/fondmenu.png') no-repeat;
+	padding-left:15px;
+	display:block;
+}
+
+div#evenement2
+{
+	float:right;
+	width:217px;
+	height:232px;
+	background:url('../Images/fondmenu.png') no-repeat;
+	padding-left:15px;
+	display:block;
+}
+
+.error-input
+{
+    color: #FF0000;
+    font-size: 14px;
+    display: none;
+}
+
+.error-input p
+{
+    color: #FF0000;
+    font-size: 14px;
+    display: none;
+}
+
+/********************* PROFIL ********************************/
+
+div#menuprofil
+{
+	margin-left:auto;
+	margin-right:auto;
+	position:relative;
+	display:block;
+	width:215px;
+	margin-top:0px;
+	padding-top:0px;
+}
+
+div#menuprofil ul
+{
+	display:block;
+	list-style-type:none;
+	padding:0px;
+	margin-top:0px;
+}
+
+div#menuprofil ul li
+{
+	display:block;
+	border:1px solid #a5a2a0;
+	border-bottom:0px;
+	height:21px;
+	margin-left:0px;
+	background:url('../Images/fondminibouton.png') repeat-x;
+}
+
+div#menuprofil ul li a
+{
+	padding-top:2px;
+	padding-left:2px;
+	display:block;
+	color:#383636;
+	text-decoration:none;
+	font-weight:bold;
+}
+
+div#menuprofil ul li a:hover
+{
+	text-decoration:underline;
+}
+
+div#contenu h3
+{
+	margin-top:0px;
+	border-bottom:1px solid #b7b9c0;
+	color:#808186;
+}
+
+/****** VOIR PROFIL ************/
+div.blocarrondigrand .infosProfil
+{
+	position:relative;
+	float:left;
+	height:auto;
+}
+
+div.blocarrondigrand .profil1
+{
+	width:159px;
+		margin-right:35px;
+}
+
+div.blocarrondigrand .profil1 h3
+{
+	width:159px;
+}
+
+div.blocarrondigrand .profil2
+{
+	width:250px;
+	margin-right:35px;
+}
+
+div.blocarrondigrand .profil2 h3
+{
+	width:250px;
+}
+
+div.blocarrondigrand .profil3
+{
+	width:170px;
+}
+
+div.blocarrondigrand .profil3 h3
+{
+	width:170px;
+}
+
+div.blocarrondigrand .infosTexte
+{
+	font-weight:bold;
+}
+
+/********* CHANGER INFOS ***************/
+div.blocarrondigrand .changerinfos1
+{
+	width:659px;
+}
+
+div.blocarrondigrand .changerinfos1 h3
+{
+	width:659px;
+}
+
+/************ CHANGER GOUT *************************/
+ul.tabNavigation
+{
+	position:relative;
+	padding-left:0px;
+	padding-top:0px;
+	z-index:25;
+	height:26px;
+	border-bottom:1px solid black;
+	margin-bottom:0px;
+}
+
+ul.tabNavigation li
+{
+	list-style-type:none;
+	display:inline;
+	width:75px;
+	float:left;
+	padding:0px;
+	background:#FFFFFF;
+}
+
+ul.tabNavigation li.bordure
+{
+	border-right:1px solid black;
+}
+
+ul.tabNavigation li a
+{
+	display:block;
+	height:21px;
+	padding-top:2px;
+	padding-bottom:2px;
+	padding-left:15px;
+	border-top:1px solid black;
+	border-left:1px solid black;
+	border-bottom:1px solid black;
+}
+
+ul.tabNavigation li a.selected
+{
+	border-bottom:0px;
+	padding-bottom:3px;
+	background:#FFCC66;
+}
+
+ul.tabNavigation li a.selected:hover
+{
+}
+
+ul.tabNavigation li a:hover
+{
+	display:block;
+	background:#FFCC66;
+}
+
+div.tabs div.passions
+{
+	z-index:24;
+	background:#FFCC66;
+	border-right:1px solid black;
+	border-left:1px solid black;
+	border-bottom:1px solid black;
+}
+
+/************* FORMULAIRE *************************/
+
+div#connexion
+{
+	width:232px;
+	float:right;
+}
+
+input[type=text],input[type=password]
+{
+	width:200px;
+	height:18px;
+	border:1px solid #b3bbea;
+	background:#eaecf8;
+	margin-bottom:8px;
+}
+
+select
+{
+	height:25px;
+	margin-right:2px;
+	margin-bottom:8px;
+	margin-left:0px;
+}
+
+select#month select#year select#day
+{
+	width:55px;
+}
+
+select#ville
+{
+	width:155px;
+}
+
+select#research
+{
+	width:95px;
+}
+
+label
+{
+	width:195px;
+	display:block;
+	float:left;
+	color:#7a7ded;
+	font-weight:bold;
+	font-size:13px;
+	font:Arial;
+	height:31px;
+}
+
+input[type=submit]
+{
+	margin-top:15px;
+	margin-right:auto;
+	margin-left:auto;
+	position:relative;
+	display:block;
+	background:url('../Images/fondminibouton2.png') repeat-x;
+	height:25px;
+	width:125px;
+	border:1px solid #334ccf;
+	font-weight:bold;
+	font:Verdana;
+	font-size:12px;
+	color:#FFFFFF;
+}
+
+.error-input
+{
+    color: #FF0000;
+    font-size: 11px;
+    display: none;
+	float:right;
+	width:225px;
+	margin-top:0px;
+	margin-right:5px;
+}
+
+.error-input p
+{
+    color: #FF0000;
+    font-size: 11px;
+    display: none;
+	float:right;
+	margin-right:2px;
+}
