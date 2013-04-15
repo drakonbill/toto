@@ -9,6 +9,6 @@ $dbcon = new config_mysql();
 $reg->dbcon = $dbcon->getConnection(); //register it
 
 //load app libs
-$reg->user = new libs_user(@$_SESSION["iddumembre"]); //user data lib
+$reg->user = new libs_user(@$_SESSION["id_member"]); //user data lib
 
 ?>
