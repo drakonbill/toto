@@ -1,5 +1,5 @@
 <?php
-//test for git
+//ok
 define("PUBDIR", dirname(__DIR__));
 require("../bootstrap.php");
 ?>
