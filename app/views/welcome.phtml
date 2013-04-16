@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title><?php echo $conf["title"]; ?></title>
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+
+        <link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>css/main.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>css/nivo.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>js/fancybox/jquery.fancybox.css" media="screen" />
+        <!--[if IE]>
+        <script type="text/javascript" src="<?php echo $conf["url"]; ?>scripts/html5shiv.js"></script>
+        <link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>styles/ie.css" media="screen" />
+        <![endif]-->
+
+        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/jquery.js"></script>
+        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/fancybox/jquery.fancybox.js"></script>
+        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/jquery.equalheights.js"></script>
+        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/slider.js"></script>
+        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/bind.js"></script>
+    </head>
+    <body>
+        <div id="wrap-outer">
+            <div id="logo-block">
+                <a href="index.php" id="logo" class="rep">MeetOParty</a>
+                <div id="top-social-links">
+                    <a href="http://www.facebook.com/Meetoparty" id="top-facebook-link" class="rep">Facebbok</a>
+                    <a href="https://twitter.com/Meetoparty" id="top-twitter-link" class="rep">Twitter</a>
+                </div> <!-- #top-social-links -->
+                <div id="top-small-title">
+                    Associez vos <span class="blue">envies</span>
+                    <br />
+                    au rythme de vos <span class="blue">hobbies!</span>
+                </div> <!-- #top-small-title -->
+            </div> <!-- #logo-block -->
+
+            <div id="header" class="cfix">
+                <div id="header-left">
+                    <div id="header-left-in1">
+                        <div id="header-left-in2">
+                            <ul class="menu" id="left-menu">
+                                <li><a href="#">
+                                        <span class="menu-icon"><img src="Images/menu-icon-fav.png" alt="" /></span>
+                                        <span class="menu-text">Evenement</span>
+                                    </a></li>
+                                <li><a href="#">
+                                        <span class="menu-icon"><img src="Images/menu-icon-messages.png" alt="" /></span>
+                                        <span class="menu-text">Discussion</span>
+                                    </a></li>
+                                <li><a href="index.php?page=listecontact">
+                                        <span class="menu-icon"><img src="Images/menu-icon-users.png" alt="" /></span>
+                                        <span class="menu-text">Contact</span>
+                                    </a></li>
+                                <li><a href="index.php?page=voirprofil">
+                                        <span class="menu-icon"><img src="Images/menu-icon-user.png" alt="" /></span>
+                                        <span class="menu-text">Profil</span>
+                                    </a></li>
+                                <li class="nom"><a href="index.php">
+                                        <span class="menu-icon"><img src="Images/menu-icon-home.png" alt="" /></span>
+                                        <span class="menu-text">Accueil</span>
+                                    </a></li>
+                            </ul>
+                        </div> <!-- #header-left-in2 -->
+                    </div> <!-- #header-left-in1 -->
+                </div> <!-- #header-left -->
+                <div id="header-right">
+                    <div id="header-right-in1">
+                        <div id="header-right-in2">
+                            <ul class="menu" id="right-menu">
+                                <li><a href="index.php?page=messagerie">
+                                        <span class="menu-icon"><img src="Images/menu-icon-email.png" alt="" /></span>
+                                        <span class="menu-text">Message</span>
+                                    </a></li>
+                                <li class="nom"><a href="#">
+                                        <span class="menu-icon"><img src="Images/menu-icon-news.png" alt="" /></span>
+                                        <span class="menu-text">News</span>
+                                    </a></li>
+                            </ul>
+
+                            <div id="recherche-box">
+                                <div class="cfix">
+                                    <a href="#" class="ld"><img src="Images/btn-recherche.png" alt="" /></a>
+                                    <a href="index.php?page=deconnexion" class="rd"><img src="Images/btn-decon.png" alt="" /></a>
+                                </div> <!-- .cfix -->
+                                <form method="get" action="#" class="search-form">
+                                    <fieldset>
+                                        <input type="text" class="text" name="search" id="search" value="" />
+                                        <input type="submit" class="submit" value="" title="Submit data" />
+                                    </fieldset>
+                                </form>
+                            </div> <!-- #recherche-box -->
+                        </div> <!-- #header-right-in2 -->
+                    </div> <!-- #header-right-in1 -->
+                </div> <!-- #header-right-->
+            </div> <!-- #header -->
+
+            <div class="beta cfix">
+                <div class="beta-left">
+                    <div class="bl-photo">
+                        <strong><em>Nicolas DUPOND</em></strong>
+                        <br /><br />
+                        <a href="#" class="bl-link bgr-blue"><img src="Images/clip-face2.jpg" alt="" /></a>
+                    </div> <!-- .bl-photo -->
+                    <div class="bl-right">
+                        <div>
+                            Ne le 30/01/1990
+                            <br />
+                            Travail chez xxxx
+                        </div>
+                        <div class="white-quote">
+                            <div class="white-tip"></div>
+                            Partagetr vos idees...!
+                            <a href="#" class="btn-partager rep">Partager</a>
+                        </div> <!-- .white-quote -->
+                    </div> <!-- .bl-right -->
+                </div> <!-- .beta-left -->
+                <div class="beta-right">
+                    <div class="cfix">
+                        <div class="br-photo">
+                            <a href="#" class="br-link bgr-pink"><img src="Images/clip-face1.jpg" alt="" /></a>
+                        </div> <!-- .br-photo -->
+                        <div class="br-text">
+                            <div><strong><em>Megane BLANC,</em></strong> vous a ecrit</div>
+                            <div class="black-quote">
+                                ...jeudi c'est bon pour toi ??
+                                <br />
+                                Je peux passer te chercher...
+                                <div class="black-tip"></div>
+                                <div class="funny-quotes"></div>
+                            </div> <!-- .black-quote -->
+                        </div> <!-- .br-text -->
+                    </div> <!-- .cfix -->
+                    <div class="br-pagination cfix">
+                        <div class="pages-lbl ld">Actualites</div>
+                        <ul class="pages rd">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div> <!-- .br-pagination -->
+                </div> <!-- .beta-right -->
+            </div> <!-- .beta -->
+
+            <div id="connexion-bar"></div>
+            <div id="connexion-box">
+                <div id="connexion-box-in">
+                    <h3 class="cbox-title blue">Bienvenue sur la phase BETA</h3>
+                    <div class="connexion-shadow-1"></div>
+                    <?php
+                    while ($news = mysql_fetch_assoc($loading->result)) {
+                        $tmp = explode("-", $news['date']);
+                        $date = $tmp[2] . "/" . $tmp[1] . "/" . $tmp[0];
+                        echo $news['title'];
+                        echo $news['news'];
+                    }
+                    ?>
+                    <p><strong><em><?php echo $news['title']; ?></em></strong></p>
+                    <p><?php echo $news['news']; ?></p>
+                    <p>&laquo;<strong class="blue">Date : <?php echo $date; ?></strong>&raquo;</p>
+
+                    <div class="connexion-shadow-2"></div>
+                    <div id="home-icons">
+                        <img src="Images/icon-1.png" alt="" />
+                        <img src="Images/icon-2.png" alt="" />
+                        <img src="Images/icon-3.png" alt="" />
+                        <img src="Images/icon-4.png" alt="" />
+                        <img src="Images/icon-5.png" alt="" />
+                        <img src="Images/icon-6.png" alt="" />
+                    </div> <!-- #home-icons -->
+                </div> <!-- #connexion-box-in -->
+            </div> <!-- #connexion-box -->
+
+            <div class="blue-box-top blue-box-asdf"></div>
+            <div class="blue-box">
+                <div class="blue-box-in cfix equal-heights">
+                    <div class="blue-box-col ld">
+                        <div class="equal">
+                            <h2>Qu’est ce que Meetoparty ?</h2>
+                            <p>Origine de vos futurs evenements, ce site est le cocktail parfait entre reseau social et site de rencontres. Cette revolution dont vous connaissez deja le principe, s’offre a vous comme etant un outil gratuit et simple d’utilisation. Meetoparty est le resultat final d’une etude sur l’evolution des relations sociales. Aujourd’hui, peu sont ceux qui osent aller vers une personne inconnue. Meetoparty a pour objectif de changer le court des choses.</p>
+                            <p>Meetoparty vous propose un moyen ludique et attractif d’organiser des rencontres reelles avec des inconnus dans le cadre du partage de vos passions. A la cle ? Se creer de nouveaux liens d’amitie et plus si affinites.</p>
+                        </div> <!-- .equal -->
+                    </div> <!-- .blue-box-col -->
+                    <div class="blue-box-col rd">
+                        <div class="equal">
+                            <h2>Faites des rencontres qui vous ressemblent !</h2>
+                            <p>Marre des soirées ou sorties ou vous ne vous sentez pas à votre place ? Envie de nouvelles expériences ou de faire de nouvelles connaissance ? Meetoparty est fait pour vous !</p>
+                            <p>Meetoparty vous accompagne et vous aide dans votre démarche en vous permettant de créer des centaines d’évènements, sorties ou soirées possibles en lien avec vos passions !</p>
+                            <p>Déclencheur de rencontres, nous vous souhaitons de merveilleux moments.</p>
+                        </div> <!-- .equal -->
+                    </div> <!-- .blue-box-col -->
+                </div> <!-- .blue-box-in -->
+            </div> <!-- .blue-box -->
+
+            <div id="footer">
+                <ul id="footer-links">
+                    <li><a href="#" class="rev">Mentions légales</a></li>
+                    <li><a href="index.php?page=contact" class="rev">Contactez-nous</a></li>
+                    <li><a href="#" class="rev">Publicité</a></li>
+                    <li><a href="index.php?page=index-entreprise" class="rev">Entreprises</a></li>
+                    <li><a href="#" class="rev">Confidentialité</a></li>
+                    <li><a href="#" class="rev">Conditions d’utilisation</a></li>
+                    <li><a href="#" class="rev">Aide</a></li>
+                    <li><a href="#" class="rev">Meetoparty ®</a></li>
+                </ul>
+
+                <div class="cfix designed-cont">
+                    <div class="designed ld">
+                        <span class="designed-line ld">&nbsp;</span>
+                        <span class="designed-line rd">&nbsp;</span>
+                    </div> <!-- .designed -->
+                    <div class="designed rd">
+                        <span class="designed-line ld">&nbsp;</span>
+                        <span class="designed-line rd">&nbsp;</span>
+                    </div> <!-- .designed -->
+                    <div id="footer-logo"></div>
+                </div> <!-- .cfix -->
+            </div> <!-- #footer -->
+        </div> <!-- #wrap-outer -->
+
+        <div style="display:none;">
+        </div>
+    </body>
+</html>
