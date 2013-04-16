@@ -28,7 +28,7 @@ class models_ajax_inscription extends Model {
             if (!empty($result['id_member'])) {
                 $error = 1;
                 $compteur++;
-                echo $error; //isnt ok to model do output, but for ajax i dont have fastest solution
+                
             }
         }
 
@@ -38,13 +38,13 @@ class models_ajax_inscription extends Model {
             if (!empty($result2['id_member'])) {
                 $error = 2;
                 $compteur++;
-                echo $error;
+               
             }
         }
 
         if ($compteur == 2) {
             $error = 3;
-            echo $error;
+           
         }
        // return $error;
     }

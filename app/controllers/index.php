@@ -18,6 +18,7 @@ class controllers_index extends Controller {
             //pack some data
             //$index["token"] = @$reg->token;
             //load views
+            $this->loadView("header", "");
             $this->loadView("index", $index);
         }
     }
