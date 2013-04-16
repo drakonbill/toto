@@ -1,24 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
-        <meta charset="utf-8" />
-        <title><?php echo $conf["title"]; ?></title>
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
-
-        <link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>css/main.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>css/nivo.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>js/fancybox/jquery.fancybox.css" media="screen" />
-        <!--[if IE]>
-        <script type="text/javascript" src="<?php echo $conf["url"]; ?>scripts/html5shiv.js"></script>
-        <link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>styles/ie.css" media="screen" />
-        <![endif]-->
-
-        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/jquery.js"></script>
-        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/fancybox/jquery.fancybox.js"></script>
-        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/jquery.equalheights.js"></script>
-        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/slider.js"></script>
-        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/bind.js"></script>
+        <?php
+        $contr->loadvWidget("header_page");
+        ?>
     </head>
     <body>
 
@@ -45,12 +30,14 @@
                 <div id="header-right">
                     <div id="header-right-in1">
                         <div id="header-right-in2">
-                            <p class="error"><?php
+                            <p class="error">
+                                <?php
                                 if (isset($login["error"]))
                                     foreach ($login["error"] as $key => $value) {
                                         echo "$key: $value";
                                     }
-                                ?></p>
+                                ?>
+                            </p>
                             <form method="post" action="/index/login" id="login-form" class="cfix">
                                 <div class="header-form-group">
                                     <label for="login-email">Email</label>
@@ -155,9 +142,9 @@
                                         ?>
                                     </select>
                                     <select id="register-mois" name="register-mois">
-<?php
-echo $data["mois"];
-?>
+                                        <?php
+                                        echo $data["mois"];
+                                        ?>
                                     </select>
                                     <select id="register-annee" name="register-annee">
 

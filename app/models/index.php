@@ -44,17 +44,16 @@ class models_index extends Model {
         return $data;
     }
 
-    function setToken(){
-        
-         
-                // Génération des tokens
-                $token = uniqid(rand(), true);
-                $_SESSION['token'] = $token;
-                $_SESSION['token_time'] = time();
-         
-             return $token;   
-        
+    function setToken() {
+
+        // Génération des tokens
+        $token = uniqid(rand(), true);
+        $_SESSION['token'] = $token;
+        $_SESSION['token_time'] = time();
+
+        return $token;
     }
+
 }
 
 ?>

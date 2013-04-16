@@ -7,6 +7,10 @@
  * @Author : Miki and Quentin
  */
 
+// For the fonction of crypting (password)
+define("PREFIXE", "prefixeprotecmeeto");
+define("SUFFIXE", "suffixeprotecparty");
+
 class libs_user {
 
     // Informations of the user 
@@ -64,6 +68,13 @@ class libs_user {
             $this->userData[$name] = $value;
         }
     }
+    
+    // To crypt the password of a member
+    function hacher($passe) {
+        $passe = md5(sha1(PREFIXE) . $passe . sha1(SUFFIXE));
+        return $passe;
+    }
+
 }
 
 ?>
