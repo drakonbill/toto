@@ -45,12 +45,14 @@
                 <div id="header-right">
                     <div id="header-right-in1">
                         <div id="header-right-in2">
-                            <p class="error"><?php
+                            <p class="error">
+                                <?php
                                 if (isset($login["error"]))
                                     foreach ($login["error"] as $key => $value) {
                                         echo "$key: $value";
                                     }
-                                ?></p>
+                                ?>
+                            </p>
                             <form method="post" action="/index/login" id="login-form" class="cfix">
                                 <div class="header-form-group">
                                     <label for="login-email">Email</label>
@@ -155,9 +157,9 @@
                                         ?>
                                     </select>
                                     <select id="register-mois" name="register-mois">
-<?php
-echo $data["mois"];
-?>
+                                        <?php
+                                        echo $data["mois"];
+                                        ?>
                                     </select>
                                     <select id="register-annee" name="register-annee">
 
