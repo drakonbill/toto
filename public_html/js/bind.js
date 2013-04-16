@@ -203,7 +203,7 @@ function validateRegisterForm1(){
         if($("#register-code-postal").val().length == 5) {
             $.ajax({
                 type: 'POST',
-                url: 'js/Ajax-PHP/inscription/inscription2.php',
+                url: 'ajax/inscription2',
                 data: "cp="+$("#register-code-postal").val(),
                 dataType: 'json',
                 success:
@@ -309,7 +309,7 @@ function validateRegisterForm1(){
 
             $.ajax({
                 type: 'POST',
-                url: 'js/Ajax-PHP/inscription/inscription.php',
+                url: 'ajax/inscription/',
                 data: "register-pseudo="+$("#register-pseudo").val()+"&register-email="+$("#register-email").val(),
                 async: false,
                 success:
@@ -320,7 +320,7 @@ function validateRegisterForm1(){
                     else if(result=='2') {
                         $("#register-email").parent().find('.form-validation').fadeIn("slow").html("L'email est déjà pris.").removeClass('validation-ok').addClass('validation-error');
                     }
-                    else if(result=='123'){
+                    else if(result=='3'){
                         $("#register-pseudo").parent().find('.form-validation').fadeIn("slow").html("Le pseudo est déjà pris.").removeClass('validation-ok').addClass('validation-error');
                         $("#register-email").parent().find('.form-validation').fadeIn("slow").html("L'email est déjà pris.").removeClass('validation-ok').addClass('validation-error');
                     }
