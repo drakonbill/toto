@@ -24,7 +24,11 @@ class controllers_index extends Controller {
 
     function logedAction() {
         //load welcome model/view
-        echo " THIS IS WELCOME PAGE!!!! <br/> ";
+        // echo " THIS IS WELCOME PAGE!!!! <br/> ";
+        $welcomeM = $this->loadModel("welcome");
+        $welcome = $welcomeM->indexModel();
+        
+        $this->loadView("welcome", $welcome);
     }
 
     function loginAction() {
