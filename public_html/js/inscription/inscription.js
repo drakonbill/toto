@@ -309,7 +309,7 @@ $(function(){
             // La partie AJAX
             $.ajax({
                 type: 'POST',
-                url: 'js/Ajax-PHP/inscription/inscription.php',
+                url: '/ajax/inscription',
                 data: $('#form').serialize(),
                 async: false,
                 success:
