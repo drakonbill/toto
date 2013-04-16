@@ -31,7 +31,7 @@ class controllers_index extends Controller {
         $loginM = $this->loadModel("login");
         $login = $loginM->indexModel();
         //print_r($login);
-        if (!isset($login['iddumembre'])) {
+        if (!isset($login['id_member'])) {
             $this->reg->login = $login;
             $this->indexAction();
         }
