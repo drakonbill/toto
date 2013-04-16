@@ -24,7 +24,7 @@ class View {
         $data = $this->data; //data got form model        
         $reg = $this->reg;  // registry, for special cases
         $widgets = $this->reg->mWidget; //widget models -- this need to be changed!!!!
-        $applibs = $this->reg->applib; //app libs data -- MUST MAKE app lib loader!!!
+        $applibs = $this->reg->applib; //app libs data
         $contr = $this->reg->controller;
         $conf = $this->reg->appconf;
         $login = $this->reg->login;
