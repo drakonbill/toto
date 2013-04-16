@@ -320,7 +320,7 @@ function validateRegisterForm1(){
                     else if(result=='2') {
                         $("#register-email").parent().find('.form-validation').fadeIn("slow").html("L'email est déjà pris.").removeClass('validation-ok').addClass('validation-error');
                     }
-                    else if(result=='3'){
+                    else if(result=='123'){
                         $("#register-pseudo").parent().find('.form-validation').fadeIn("slow").html("Le pseudo est déjà pris.").removeClass('validation-ok').addClass('validation-error');
                         $("#register-email").parent().find('.form-validation').fadeIn("slow").html("L'email est déjà pris.").removeClass('validation-ok').addClass('validation-error');
                     }
