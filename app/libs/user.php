@@ -24,7 +24,7 @@ class libs_user {
             $id = "-1";
 
         // Select basic member informations + member_details
-        $query = mysql_query("SELECT * FROM member M, member_details D WHERE M.id_member = D.id_member AND M.id_member = '$id'", $reg->dbcon);
+        $query = mysql_query("SELECT * FROM member M, member_details D WHERE M.id_member = D.id_member AND M.id_member = '$id'", $reg->dbcon) or die(mysql_error());
         while ($row = mysql_fetch_assoc($query)) {
             foreach ($row as $key => $value) {
                 $this->userData[$key] = $value;

@@ -203,7 +203,7 @@ function validateRegisterForm1(){
         if($("#register-code-postal").val().length == 5) {
             $.ajax({
                 type: 'POST',
-                url: 'ajax/inscription2',
+                url: 'js/Ajax-PHP/inscription/inscription2.php',
                 data: "cp="+$("#register-code-postal").val(),
                 dataType: 'json',
                 success:
@@ -309,7 +309,7 @@ function validateRegisterForm1(){
 
             $.ajax({
                 type: 'POST',
-                url: 'ajax/inscription/',
+                url: 'js/Ajax-PHP/inscription/inscription.php',
                 data: "register-pseudo="+$("#register-pseudo").val()+"&register-email="+$("#register-email").val(),
                 async: false,
                 success:
