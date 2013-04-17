@@ -20,6 +20,7 @@ class controllers_index extends Controller {
             //load views
             $this->loadView("header", "");
             $this->loadView("index", $index);
+            $this->loadView("footer", "");
         }
     }
 
@@ -29,7 +30,9 @@ class controllers_index extends Controller {
         $welcomeM = $this->loadModel("welcome");
         $welcome = $welcomeM->indexModel();
         
+        $this->loadView("header", "Welcome");
         $this->loadView("welcome", $welcome);
+        $this->loadView("footer", "");
     }
 
     function loginAction() {
@@ -42,6 +45,7 @@ class controllers_index extends Controller {
         }
         else
             $this->logedAction();
+            //header('Location: '.$this->reg->appconf['url']);
     }
 
 }
