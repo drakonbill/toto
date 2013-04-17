@@ -44,7 +44,7 @@
                                     <a href="index.php?page=lostpassword" class="header-small rev">Mot de passe oublié ?</a>
                                     <div class="form-icon icon-password"></div>           
                                 </div> <!-- .header-form-group -->
-                                <input type="hidden" name="token" value="<?php echo $data['token'] ?>">
+                                <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?>">
                                     <div class="header-form-group header-submit-cont nom">
                                         <label>&nbsp;</label>
                                         <input type="submit" class="submit" name="submit" value="" title="Connexion" />
