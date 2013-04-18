@@ -6,7 +6,9 @@ class controllers_index extends Controller {
 
         $user = $this->reg->user;
         if ($user->loggedin()) {
-            $this->logedAction();
+            $controller = new controllers_welcome();
+            $controller->indexAction();
+            $this->reg->controler = $controller;
         } else {
             //load model and fill data with
             $indexM = $this->loadModel("index");
@@ -20,17 +22,11 @@ class controllers_index extends Controller {
             //load views
             $this->loadView("header", "");
             $this->loadView("index", $index);
+            $this->loadView("footer", "");
         }
     }
 
-    function logedAction() {
-        //load welcome model/view
-        // echo " THIS IS WELCOME PAGE!!!! <br/> ";
-        $welcomeM = $this->loadModel("welcome");
-        $welcome = $welcomeM->indexModel();
-        
-        $this->loadView("welcome", $welcome);
-    }
+    
 
     function loginAction() {
         $loginM = $this->loadModel("login");
@@ -41,7 +37,11 @@ class controllers_index extends Controller {
             $this->indexAction();
         }
         else
-            $this->logedAction();
+            $controller = new controllers_welcome();
+            $controller->indexAction();
+            $this->reg->controler = $controller;
+            //$this->logedAction();
+            //header('Location: '.$this->reg->appconf['url']);
     }
 
 }

@@ -28,7 +28,7 @@
                                 <?php
                                 if (isset($login["error"]))
                                     foreach ($login["error"] as $key => $value) {
-                                        echo "$key: $value";
+ //                                       echo "$key: $value";
                                     }
                                 ?>
                             </p>
@@ -44,7 +44,7 @@
                                     <a href="index.php?page=lostpassword" class="header-small rev">Mot de passe oublié ?</a>
                                     <div class="form-icon icon-password"></div>           
                                 </div> <!-- .header-form-group -->
-                                <input type="hidden" name="token" value="<?php echo $data['token'] ?>">
+                                <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?>">
                                     <div class="header-form-group header-submit-cont nom">
                                         <label>&nbsp;</label>
                                         <input type="submit" class="submit" name="submit" value="" title="Connexion" />
@@ -73,33 +73,7 @@
                 $contr->loadvWidget("slider");
             ?>
 
-            <div id="footer">
-                <ul id="footer-links">
-                    <li><a href="#" class="rev">Mentions légales</a></li>
-                    <li><a href="#" class="rev">Contactez-nous</a></li>
-                    <li><a href="#" class="rev">Publicité</a></li>
-                    <li><a href="#" class="rev">Entreprises</a></li>
-                    <li><a href="#" class="rev">Confidentialité</a></li>
-                    <li><a href="#" class="rev">Conditions d’utilisation</a></li>
-                    <li><a href="#" class="rev">Aide</a></li>
-                    <li><a href="#" class="rev">Meetoparty ®</a></li>
-                </ul>
-
-                <div class="cfix designed-cont">
-                    <div class="designed ld">
-                        <span class="designed-line ld">&nbsp;</span>
-                        <span class="designed-line rd">&nbsp;</span>
-                        <span class="designed-in"></span>
-                    </div> <!-- .designed -->
-                    <div class="designed rd">
-                        <span class="designed-line ld">&nbsp;</span>
-                        <span class="designed-line rd">&nbsp;</span>
-                        <span class="designed-in"></span>
-                    </div> <!-- .designed -->
-                    <div id="footer-logo"></div>
-                </div> <!-- .cfix -->
-            </div> <!-- #footer -->
-        </div> <!-- #wrap-outer -->
+            
 
         <div style="display:none;">
             <div id="register">
@@ -206,5 +180,4 @@
                 </form>
             </div> <!-- #register -->
         </div>
-    </body>
-</html>
+   

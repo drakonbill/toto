@@ -14,9 +14,14 @@ class models_login extends Model {
         $loginEmail = $this->reg->clean->POST('email');
         // I want to include the hacher function in the user lib ... But don't know how to do that 
         $loginPassword = $this->reg->clean->POST('password');
-        $password =  md5(sha1(PREFIXE) . $loginPassword  . sha1(SUFFIXE));
+        $password =  $this->reg->user->hacher($loginPassword);//md5(sha1(PREFIXE) . $loginPassword  . sha1(SUFFIXE));
         $loginToken = $this->reg->clean->POST('token');
-
+        
+        $debug = $this->reg->debug;
+        array_push($debug, "Token", $loginToken);
+        array_push($debug, "Sess", $_SESSION['token']);
+        $this->reg->debug = $debug;
+        
         // If the token is not empty
         if (isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($loginToken)) {
             // If the token in session, and sent with the connexion form are equal

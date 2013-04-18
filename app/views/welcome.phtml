@@ -20,23 +20,23 @@
                         <div id="header-left-in2">
                             <ul class="menu" id="left-menu">
                                 <li><a href="#">
-                                        <span class="menu-icon"><img src="Images/menu-icon-fav.png" alt="" /></span>
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-fav.png" alt="" /></span>
                                         <span class="menu-text">Evenement</span>
                                     </a></li>
                                 <li><a href="#">
-                                        <span class="menu-icon"><img src="Images/menu-icon-messages.png" alt="" /></span>
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-messages.png" alt="" /></span>
                                         <span class="menu-text">Discussion</span>
                                     </a></li>
                                 <li><a href="index.php?page=listecontact">
-                                        <span class="menu-icon"><img src="Images/menu-icon-users.png" alt="" /></span>
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-users.png" alt="" /></span>
                                         <span class="menu-text">Contact</span>
                                     </a></li>
                                 <li><a href="index.php?page=voirprofil">
-                                        <span class="menu-icon"><img src="Images/menu-icon-user.png" alt="" /></span>
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-user.png" alt="" /></span>
                                         <span class="menu-text">Profil</span>
                                     </a></li>
                                 <li class="nom"><a href="index.php">
-                                        <span class="menu-icon"><img src="Images/menu-icon-home.png" alt="" /></span>
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-home.png" alt="" /></span>
                                         <span class="menu-text">Accueil</span>
                                     </a></li>
                             </ul>
@@ -48,19 +48,19 @@
                         <div id="header-right-in2">
                             <ul class="menu" id="right-menu">
                                 <li><a href="index.php?page=messagerie">
-                                        <span class="menu-icon"><img src="Images/menu-icon-email.png" alt="" /></span>
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-email.png" alt="" /></span>
                                         <span class="menu-text">Message</span>
                                     </a></li>
                                 <li class="nom"><a href="#">
-                                        <span class="menu-icon"><img src="Images/menu-icon-news.png" alt="" /></span>
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-news.png" alt="" /></span>
                                         <span class="menu-text">News</span>
                                     </a></li>
                             </ul>
 
                             <div id="recherche-box">
                                 <div class="cfix">
-                                    <a href="#" class="ld"><img src="Images/btn-recherche.png" alt="" /></a>
-                                    <a href="index.php?page=deconnexion" class="rd"><img src="Images/btn-decon.png" alt="" /></a>
+                                    <a href="#" class="ld"><img src="<?php echo $conf["url"]; ?>Images/btn-recherche.png" alt="" /></a>
+                                    <a href="index.php?page=deconnexion" class="rd"><img src="<?php echo $conf["url"]; ?>Images/btn-decon.png" alt="" /></a>
                                 </div> <!-- .cfix -->
                                 <form method="get" action="#" class="search-form">
                                     <fieldset>
@@ -79,7 +79,7 @@
                     <div class="bl-photo">
                         <strong><em>Nicolas DUPOND</em></strong>
                         <br /><br />
-                        <a href="#" class="bl-link bgr-blue"><img src="Images/clip-face2.jpg" alt="" /></a>
+                        <a href="#" class="bl-link bgr-blue"><img src="<?php echo $conf["url"]; ?>Images/clip-face2.jpg" alt="" /></a>
                     </div> <!-- .bl-photo -->
                     <div class="bl-right">
                         <div>
@@ -97,7 +97,7 @@
                 <div class="beta-right">
                     <div class="cfix">
                         <div class="br-photo">
-                            <a href="#" class="br-link bgr-pink"><img src="Images/clip-face1.jpg" alt="" /></a>
+                            <a href="#" class="br-link bgr-pink"><img src="<?php echo $conf["url"]; ?>Images/clip-face1.jpg" alt="" /></a>
                         </div> <!-- .br-photo -->
                         <div class="br-text">
                             <div><strong><em>Megane BLANC,</em></strong> vous a ecrit</div>
@@ -142,12 +142,12 @@
 
                     <div class="connexion-shadow-2"></div>
                     <div id="home-icons">
-                        <img src="Images/icon-1.png" alt="" />
-                        <img src="Images/icon-2.png" alt="" />
-                        <img src="Images/icon-3.png" alt="" />
-                        <img src="Images/icon-4.png" alt="" />
-                        <img src="Images/icon-5.png" alt="" />
-                        <img src="Images/icon-6.png" alt="" />
+                        <img src="<?php echo $conf["url"]; ?>Images/icon-1.png" alt="" />
+                        <img src="<?php echo $conf["url"]; ?>Images/icon-2.png" alt="" />
+                        <img src="<?php echo $conf["url"]; ?>Images/icon-3.png" alt="" />
+                        <img src="<?php echo $conf["url"]; ?>Images/icon-4.png" alt="" />
+                        <img src="<?php echo $conf["url"]; ?>Images/icon-5.png" alt="" />
+                        <img src="<?php echo $conf["url"]; ?>Images/icon-6.png" alt="" />
                     </div> <!-- #home-icons -->
                 </div> <!-- #connexion-box-in -->
             </div> <!-- #connexion-box -->
@@ -173,33 +173,7 @@
                 </div> <!-- .blue-box-in -->
             </div> <!-- .blue-box -->
 
-            <div id="footer">
-                <ul id="footer-links">
-                    <li><a href="#" class="rev">Mentions légales</a></li>
-                    <li><a href="index.php?page=contact" class="rev">Contactez-nous</a></li>
-                    <li><a href="#" class="rev">Publicité</a></li>
-                    <li><a href="index.php?page=index-entreprise" class="rev">Entreprises</a></li>
-                    <li><a href="#" class="rev">Confidentialité</a></li>
-                    <li><a href="#" class="rev">Conditions d’utilisation</a></li>
-                    <li><a href="#" class="rev">Aide</a></li>
-                    <li><a href="#" class="rev">Meetoparty ®</a></li>
-                </ul>
-
-                <div class="cfix designed-cont">
-                    <div class="designed ld">
-                        <span class="designed-line ld">&nbsp;</span>
-                        <span class="designed-line rd">&nbsp;</span>
-                    </div> <!-- .designed -->
-                    <div class="designed rd">
-                        <span class="designed-line ld">&nbsp;</span>
-                        <span class="designed-line rd">&nbsp;</span>
-                    </div> <!-- .designed -->
-                    <div id="footer-logo"></div>
-                </div> <!-- .cfix -->
-            </div> <!-- #footer -->
-        </div> <!-- #wrap-outer -->
-
+           
         <div style="display:none;">
         </div>
-    </body>
-</html>
+    

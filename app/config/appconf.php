@@ -1,7 +1,8 @@
 <?php
 ## add specific app data here
 $appconf["title"] = "Meetoparty"; 
-$appconf["url"] = "http://localhost/";
+//this must remove from app config
+$appconf["url"] = 'http://'.$_SERVER['SERVER_NAME'].'/';//PUBDIR; //"http://localhost/";
 
 ## add other config files if use
 //include_once('mysql.php'); // autoload will do include
