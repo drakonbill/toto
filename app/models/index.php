@@ -55,7 +55,7 @@ class models_index extends Model {
             $_SESSION['token'] = $token;
             $_SESSION['token_time'] = time();
         }
-        return $token;
+        return $_SESSION['token'];
     }
 
 }

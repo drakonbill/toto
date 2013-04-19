@@ -26,23 +26,6 @@ class controllers_index extends Controller {
         }
     }
 
-    
-
-    function loginAction() {
-        $loginM = $this->loadModel("login");
-        $login = $loginM->indexModel();
-        //print_r($login);
-        if (!isset($login['id_member'])) {
-            $this->reg->login = $login;
-            $this->indexAction();
-        }
-        else
-            $controller = new controllers_welcome();
-            $controller->indexAction();
-            $this->reg->controler = $controller;
-            //$this->logedAction();
-            //header('Location: '.$this->reg->appconf['url']);
-    }
 
 }
 
