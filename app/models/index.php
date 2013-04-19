@@ -44,13 +44,17 @@ class models_index extends Model {
         return $data;
     }
 
+    // Fonction to set a new token
     function setToken() {
 
-        // Génération des tokens
-        $token = uniqid(rand(), true);
-        $_SESSION['token'] = $token;
-        $_SESSION['token_time'] = time();
-
+        // Token generation 
+        
+        // To avoid Bug with token
+        if (empty($_SESSION['token']) && empty($_SESSION['token_time'])) {
+            $token = uniqid(rand(), true);
+            $_SESSION['token'] = $token;
+            $_SESSION['token_time'] = time();
+        }
         return $token;
     }
 
