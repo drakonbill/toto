@@ -16,8 +16,7 @@ class models_logout extends Model {
         setcookie("email_member", "", time() - 3600);
         setcookie("password_member", "", time() - 3600);
         
-        // Index redirection
-        header('Location: /index');
+        
     }
 
 }

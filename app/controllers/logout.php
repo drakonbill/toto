@@ -7,6 +7,8 @@ class controllers_logout extends Controller {
         $logoutM = $this->loadModel("logout");
         $logout = $logoutM->indexModel();
        
+        // Index redirection
+        header('Location: /index');
     }
 }
 

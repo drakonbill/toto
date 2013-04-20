@@ -51,7 +51,7 @@ class models_index extends Model {
         $timestamp_old = time() - (10 * 60);
 
         // To avoid Bug with token
-        if (($_SESSION['token_time'] < $timestamp_old) || (empty($_SESSION['token']) && empty($_SESSION['token_time']))) {
+        if ((@$_SESSION['token_time'] < $timestamp_old) || (@empty($_SESSION['token']) && @empty($_SESSION['token_time']))) {
             // If the token has expiered 
 
             $token = uniqid(rand(), true);

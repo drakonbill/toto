@@ -7,7 +7,7 @@ ini_set("display_errors", 1);
 // end of debuging code
 function debug($status) {
 //    DEBUG FUNCTION -------------------------------<<<<<
-   // print_r($status) ; echo "<br/>\n";
+    print_r($status) ; echo "<br/>\n";
 }
 
 ## start the sessions

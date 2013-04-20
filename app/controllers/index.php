@@ -6,9 +6,11 @@ class controllers_index extends Controller {
 
         $user = $this->reg->user;
         if ($user->loggedin()) {
-            $controller = new controllers_welcome();
-            $controller->indexAction();
-            $this->reg->controler = $controller;
+//            $controller = new controllers_welcome();
+//            $controller->indexAction();
+//            $this->reg->controler = $controller;
+            
+                header('Location: /welcome');
         } else {
             //load model and fill data with
             $indexM = $this->loadModel("index");
@@ -19,6 +21,7 @@ class controllers_index extends Controller {
             //$this->loadmWidgets(array("hello","last10"));
             //pack some data
             //$index["token"] = @$reg->token;
+            
             //load views
             $this->loadView("header", "");
             $this->loadView("index", $index);
