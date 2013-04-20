@@ -16,10 +16,10 @@ class models_login extends Model {
         $password =  $this->reg->user->hacher($loginPassword);//md5(sha1(PREFIXE) . $loginPassword  . sha1(SUFFIXE));
         $loginToken = $this->reg->clean->POST('token');
         
-        $debug = $this->reg->debug;
+       /*  $debug = $this->reg->debug;
         array_push($debug, "Token", $loginToken);
         array_push($debug, "Sess", $_SESSION['token']);
-        $this->reg->debug = $debug;
+        $this->reg->debug = $debug; */
         
         // If the token is not empty
         if (isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($loginToken)) {
