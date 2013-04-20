@@ -5,35 +5,30 @@
  *
  * @author Miki
  */
-class Controller {
+abstract class Controller extends Core {
 
-    protected $reg;
-
-    public function __construct() {
-
-        global $reg;
-        $this->reg = $reg;
+    public function __construct($option = array()) {
+        parent::__construct($option);
     }
 
     ## owerride this function in Your controller
 
-    public function indexAction() {
-        
-    }
+    abstract public function indexAction();
 
     ## make model object and add them in registry
 
-    public function loadModel($name) {
+    public function loadModel($name, $opt = "") {
 
-        return $this->loader("models_" . $name);
+        return $this->loader("models_" . $name, $opt);
     }
 
     ## make view object and add them in registry
 
     public function loadView($name, $data) {
 
-
-        return new View($name, $data);
+        $options = array('name'=>$name, 'data' => $data);
+        return new View($options);
+//        return new View($name, $data);
     }
 
     ## make widgets objects for models and add them in registry 
@@ -53,21 +48,22 @@ class Controller {
 
     public function loadvWidget($name) {
 
-        
-            @$mWidget = $this->reg->mWidget;
+
+        @$mWidget = $this->reg->mWidget;
         if (isset($mWidget[$name]))
             $data = $mWidget[$name];
         else
             $data = "";
-
-        return new View("widgets/" . $name, $data);
+        
+        $options = array('name'=>"widgets/" . $name, 'data' => $data);
+        return new View($options);
     }
 
     ## create new object and return reference ( call autoloader to include class file )
 
-    private function loader($load) {
+    private function loader($load, $opt) {
 
-        return new $load;
+        return new $load($opt);
     }
 
 }

@@ -5,17 +5,15 @@
  * initialize view data and load view
  * @author Miki
  */
-class View {
+class View extends Core{
 
-    protected $reg, $data;
+    protected $data;
 
-    public function __construct($name, $data) {
-        global $reg;
-        $this->reg = $reg;
-        $this->data = $data;
-        debug($data);
-        $this->includeView($name);
-        //
+    public function __construct($option) {
+        parent::__construct($option);
+        
+        $this->data = $option['data'];
+        $this->includeView($option['name']);
     }
 
     //this function load view and pass local copy for all data needed inside it

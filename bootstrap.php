@@ -36,6 +36,7 @@ $reg->urlParse = new urlParse();
 
 debug("registry  ...filling with libs");
 ## these are the base classes so that any class can extend them
+require_once(COREDIR . 'Core.php');
 require_once(COREDIR . 'Controller.php');
 require_once(COREDIR . 'Model.php');
 require_once(COREDIR . 'View.php');

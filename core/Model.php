@@ -10,21 +10,13 @@
  *
  * @author Miki
  */
-abstract class Model {
+class Model extends Core {
 
-    //put your code here
-    protected $reg;
-    protected $db;
-
-    public function __construct() {
-        global $reg;
-        $this->reg = $reg;
-        $this->db = $reg->dbcon;
-
-        //$this->indexModel();
+    public function __construct($option = array()) {
+        parent::__construct($option);
     }
 
-    abstract function indexModel();
+    public function indexModel($option = array()){}
 }
 
 ?>
