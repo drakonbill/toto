@@ -9,7 +9,6 @@ class models_login extends Model {
 
     public function indexModel() {
 
-
         // Variable definition : Email, Password, and Token
         $loginEmail = $this->reg->clean->POST('email');
         // I want to include the hacher function in the user lib ... But don't know how to do that 
@@ -77,13 +76,13 @@ class models_login extends Model {
                     }
                 } else {
                     // Error in the global variable data
-                    $data['error']['token'] = "D&eacute;lai insatisfaisant.";
+                    $data['error']['token'] = "Délai insatisfaisant.";
                 }
             } else {
                 $data['error']['token'] = "Mauvais jeton d'accès";
             }
         } else {
-            $data['error']['token'] = "Jeton d\'accès inexistant";
+            $data['error']['token'] = "Jeton d'accès inexistant";
         }
         return $data;
     }
