@@ -18,6 +18,7 @@ spl_autoload_register('my_autoloader');
 require_once('core/config/conf.php');
 
 ## load some libs (move to config??)
+require_once(COREDIR . 'lib/validate.php');
 require_once(COREDIR . 'lib/error.php');
 require_once(COREDIR . 'lib/urlParse.php');
 require_once(COREDIR . 'lib/cleanData.php');
@@ -33,6 +34,7 @@ debug("registry  ...ok");
 $reg->clean = new cleanData(); //this lib dont have extra setings, and can be loaded
 $reg->error = new error();
 $reg->urlParse = new urlParse();
+$reg->validate = new validate();
 
 debug("registry  ...filling with libs");
 ## these are the base classes so that any class can extend them

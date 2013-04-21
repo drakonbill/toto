@@ -18,7 +18,7 @@ class models_ajax_inscription extends Model {
 
         $pseudo = $clean->POST('register-pseudo');
         $email = $clean->POST('register-email');
-
+        
         $error = "";
         $compteur = 0;
 
@@ -32,7 +32,7 @@ class models_ajax_inscription extends Model {
             }
         }
 
-        if (!empty($email)) {
+        if (!empty($email) && $this->validate->Email($email)) {
             $requete2 = mysql_query("SELECT * from member WHERE email_member = '$email'") or die("Impossible de sélectionner l'email : " . mysql_error());
             $result2 = mysql_fetch_assoc($requete2);
             if (!empty($result2['id_member'])) {
