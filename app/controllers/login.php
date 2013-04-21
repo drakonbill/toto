@@ -14,11 +14,11 @@ class controllers_login extends Controller {
             $this->reg->controler = $controller;
         }
         else
-//            $controller = new controllers_welcome();
-//            $controller->indexAction();
-//            $this->reg->controler = $controller;
+              $controller = new controllers_welcome();
+              $controller->indexAction();
+              $this->reg->controler = $controller;
             
-             header('Location: /welcome');
+     //        header('Location: /welcome');
             
     }
 
