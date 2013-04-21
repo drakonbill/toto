@@ -79,13 +79,15 @@ class models_login extends Model {
                     }
                 } else {
                     // Error in the global variable data
-                    $data['error']['token'] = "Délai insatisfaisant.";
+                    $data['error']['token'] = "La connexion a expirée. Veuillez vous identifier de nouveau.";
                 }
             } else {
-                $data['error']['token'] = "Mauvais jeton d'accès";
+                $data['error']['token'] = "Un problème est arrivé durant la connexion. Veuillez réessayer.";
+                header('Location: /index');
             }
         } else {
-            $data['error']['token'] = "Jeton d'accès inexistant";
+            $data['error']['token'] = "Jeton d'accès inexistant.";
+            header('Location: /index');
         }
         return $data;
     }
