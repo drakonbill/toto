@@ -26,7 +26,7 @@ abstract class Controller extends Core {
 
     public function loadView($name, $data) {
 
-        $options = array('name'=>$name, 'data' => $data);
+        $options = array('name' => $name, 'data' => $data);
         return new View($options);
 //        return new View($name, $data);
     }
@@ -54,8 +54,8 @@ abstract class Controller extends Core {
             $data = $mWidget[$name];
         else
             $data = "";
-        
-        $options = array('name'=>"widgets/" . $name, 'data' => $data);
+
+        $options = array('name' => "widgets/" . $name, 'data' => $data);
         return new View($options);
     }
 
@@ -64,6 +64,14 @@ abstract class Controller extends Core {
     private function loader($load, $opt) {
 
         return new $load($opt);
+    }
+
+    public function redirect($name) {
+        $clasName = "controllers_" . $name;
+        $controller = new $clasName();
+
+        $this->reg->controler = $controller;
+        return $controller;
     }
 
 }

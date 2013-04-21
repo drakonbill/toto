@@ -10,14 +10,18 @@ class controllers_ajax extends Controller{
         $indexM = $this->loadModel("ajax_inscription");
         $return = $indexM->inscription();
         
-        echo $return; // maybe to make view for this one echo ?
+        $this->loadView("ajax", $return); 
         
     }
     function inscription2Action (){
         $indexM = $this->loadModel("ajax_inscription");
         $return = $indexM->inscription2();
         
-        echo $return; // maybe to make view for this one echo ?
+       $this->loadView("ajax", $return); 
+    }
+
+    public function indexAction() {
+        //if you wish to call siteurl/ajax only
     }
     
 }
