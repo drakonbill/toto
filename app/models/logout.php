@@ -8,15 +8,17 @@
 class models_logout extends Model {
 
     public function indexModel() {
-        
+
         // Unset id of the member in session
         unset($_SESSION['id_member']);
-        
+
         // Destroying the cookie
-        setcookie("email_member", "", time() - 3600);
-        setcookie("password_member", "", time() - 3600);
-        
-        
+        if ((!empty($_COOKIE['email_member'])) && (!empty($_COOKIE['password_member']))) {
+            setcookie('email_member', null, time() - 3600, '/');
+            setcookie('password_member', null, time() - 3600, '/');
+           // unset($_COOKIE['email_member']);
+           // unset($_COOKIE['password_member']);
+        }
     }
 
 }
