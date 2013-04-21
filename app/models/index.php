@@ -48,7 +48,7 @@ class models_index extends Model {
     function setToken() {
 
         // Token generation 
-        $timestamp_old = time() - (10 * 60);
+        $timestamp_old = time() - (2 * 60);
 
         // To avoid Bug with token
         if ((@$_SESSION['token_time'] < $timestamp_old) || (@empty($_SESSION['token']) && @empty($_SESSION['token_time']))) {
