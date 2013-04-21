@@ -1,10 +1,10 @@
 <?php
+
 /**
  * Description of login
  *
  * @author Miki
  */
-
 class models_login extends Model {
 
     public function indexModel() {
@@ -13,14 +13,13 @@ class models_login extends Model {
         $loginEmail = $this->reg->clean->POST('email');
         // I want to include the hacher function in the user lib ... But don't know how to do that 
         $loginPassword = $this->reg->clean->POST('password');
-        $password =  $this->reg->user->hacher($loginPassword);//md5(sha1(PREFIXE) . $loginPassword  . sha1(SUFFIXE));
+        $password = $this->reg->user->hacher($loginPassword); //md5(sha1(PREFIXE) . $loginPassword  . sha1(SUFFIXE));
         $loginToken = $this->reg->clean->POST('token');
-        
-       /*  $debug = $this->reg->debug;
-        array_push($debug, "Token", $loginToken);
-        array_push($debug, "Sess", $_SESSION['token']);
-        $this->reg->debug = $debug; */
-        
+
+        // For the coockie : var memoriser, if it's check : cookies on, if not, no cookies.
+
+        $logincookie = $this->reg->clean->POST('memoriser');
+
         // If the token is not empty
         if (isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($loginToken)) {
             // If the token in session, and sent with the connexion form are equal
@@ -48,13 +47,17 @@ class models_login extends Model {
                             // ID of the member in session 
                             $_SESSION['id_member'] = $data['id_member'];
 
-                            $expire = 5 * 24 * 3600; //durée du cookie à 5 jours
-                            $tempo_email = $loginEmail;
-                            $tempo_password = $loginPassword;
-                            setcookie('email_member', $tempo_email, time() + $expire);
-                            setcookie('password_member', $tempo_password, time() + $expire);
+                            // cookies 
+                            if ($logincookie == 1) {
+                                $expire = 7 * 24 * 3600; //durée du cookie à 7 jours
+                                $tempo_email = $loginEmail;
+                                $tempo_password = $password;
+                                setcookie('email_member', $tempo_email, time() + $expire);
+                                setcookie('password_member', $tempo_password, time() + $expire);
+                                setcookie('logout', 1, time() + $expire);
+                            }
                         } else {
-                            $data["error"]["password"] = "wrong password";
+                            $data["error"]["password"] = "Le mot de passe que vous avez entré n'est pas correct.";
                         }
                     } else {
                         $cookieEmail = $_COOKIE['email_member'];
