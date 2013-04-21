@@ -3,8 +3,12 @@
 class controllers_index extends Controller {
 
     function indexAction() {
-
+        
         $user = $this->reg->user;
+        
+        // To clean cookies 
+        $user->clean_cookie();
+        
         if ($user->loggedin()) {
 //            $controller = new controllers_welcome();
 //            $controller->indexAction();
