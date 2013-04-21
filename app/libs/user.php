@@ -68,11 +68,24 @@ class libs_user {
             $this->userData[$name] = $value;
         }
     }
-    
+
     // To crypt the password of a member
     function hacher($passe) {
         $passe = md5(sha1(PREFIXE) . $passe . sha1(SUFFIXE));
         return $passe;
+    }
+
+    // Function to delete empty cookies, because of a bugue with the logout
+    function clean_cookie() {
+
+        if (isset($_COOKIE['logout'])) {
+            if ($_COOKIE['logout'] == 1) {
+                setcookie('logout', null, time() - 3600, '/');
+                header("Refresh : 0; url=");
+            }
+        } else {
+            return 0;
+        }
     }
 
 }
