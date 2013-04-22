@@ -380,7 +380,7 @@ $(document).ready(function() {
 				$(this).addClass("ac_loading");
 				$.ajax({
 					type: 'POST',
-					url: 'js/Ajax-PHP/evenement/search_cp.php',
+					url: 'ajax/inscription2',
 					data: $(this).serialize(),
 					dataType: 'json',
 					success:
@@ -437,7 +437,7 @@ $(document).ready(function() {
 		});
 		
 		$("div#event_organise div.fun-block-inside2 div#event_organise_passion input#passionvalue").autocomplete(
-			  "js/Ajax-PHP/passion/choicePassion.php",
+			  "ajax/choicePassion",
 		  {
 				minChars:2,
 				cacheLength:10,
