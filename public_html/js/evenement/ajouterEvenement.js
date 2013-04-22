@@ -287,7 +287,7 @@ function addPrivate() {
 		$("div.error_privee").html("Chargement...");
 		$.ajax({
 			type: 'POST',
-			url: 'js/Ajax-PHP/evenement/addEvent_verifmembre.php',
+			url: 'ajax/verifMember',
 			data: "pseudomembre="+pseudo_membre,
 			success:
 				function(result) {

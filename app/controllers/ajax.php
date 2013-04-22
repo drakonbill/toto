@@ -19,6 +19,13 @@ class controllers_ajax extends Controller{
         
        $this->loadView("ajax", $return); 
     }
+    
+    function verifMemberAction (){
+        $indexM = $this->loadModel("ajax_member");
+        $return = $indexM->verifMember();
+        
+       $this->loadView("ajax", $return); 
+    }
 
     public function indexAction() {
         //if you wish to call siteurl/ajax only
