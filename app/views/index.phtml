@@ -1,183 +1,114 @@
 
-    <body>
+<?php
+/* Chargement du contenu */
+if (isset($login["error"]))
+    $contr->loadvWidget("loginbox");
+else
+    $contr->loadvWidget("slider");
+?>
 
-        <div id="wrap-outer">
-            <div id="logo-block">
-                <a href="/index" id="logo" class="rep">Meetoparty</a>
-                <div id="top-social-links">
-                    <a href="http://www.facebook.com/Meetoparty" id="top-facebook-link" class="rep">Facebbok</a>
-                    <a href="https://twitter.com/Meetoparty" id="top-twitter-link" class="rep">Twitter</a>
-                </div> <!-- # -->
-            </div> <!-- #logo-block -->
+<div style="display:none;">
+    <div id="register">
+        <h1 class="popup-caption">Inscrivez-vous gratuitement</h1>
+        <form method="post" action="?page=validation-inscription" id="register-form">
+            <div class="popup-content cfix">
+                <div class="popup-form-col ld">
+                    <p>
+                        <label for="register-email">Email :</label>
+                        <br />
+                        <input type="text" class="text" name="register-email" id="register-email" size="30" value="" /><br/>
+                        <span class="form-validation"></span>
+                    </p>
+                    <p>
+                        <label for="register-password">Mot de passe :</label>
+                        <br />
+                        <input type="password" class="text" name="password" id="register-password" size="30" value="" /><br/>
+                        <span class="form-validation"></span>
+                    </p>
+                    <p>
+                        <label for="register-pseudo">Pseudo :</label>
+                        <br />
+                        <input type="text" class="text" name="pseudo" id="register-pseudo" size="30" value="" /><br/>
+                        <span class="form-validation"></span>
+                    </p>
 
-            <div id="header" class="cfix">
-                <div id="header-left">
-                    <div id="header-left-in1">
-                        <div id="header-left-in2">
-                            <div id="inscription-cont">
-                                <span id="txt-inscription" class="rep">Inscription</span
-                                ><a href="#register" class="popup rep" id="register-link">C'est parti</a>
-                            </div> <!-- #inscription-cont -->
-                        </div> <!-- #header-left-in2 -->
-                    </div> <!-- #header-left-in1 -->
-                </div> <!-- #header-left -->
-                <div id="header-right">
-                    <div id="header-right-in1">
-                        <div id="header-right-in2">
-                            <p class="error">
+                    <div class="register-form-part2">
+                        <p>
+                            <label>&nbsp;</label>
+                            <br />
+                            <select id="register-jour" name="register-jour">
                                 <?php
-                                if (isset($login["error"]))
-                                    foreach ($login["error"] as $key => $value) {
- //                                       echo "$key: $value";
-                                    }
+                                echo $data["jour"];
                                 ?>
-                            </p>
-                            <form method="post" action="/login" id="login-form" class="cfix">
-                                <div class="header-form-group">
-                                    <label for="login-email">Email</label>
-                                    <input type="text" class="text" name="email" id="email" value="" />
-                                    <div class="form-icon icon-username"></div>
-                                </div> <!-- .header-form-group -->
-                                <div class="header-form-group">
-                                    <label for="login-pass">Mot de passe</label>
-                                    <input type="password" class="text" name="password" id="password" value="" />
-                                    <a href="index.php?page=lostpassword" class="header-small rev">Mot de passe oublié ?</a>
-                                    <div class="form-icon icon-password"></div>           
-                                </div> <!-- .header-form-group -->
-                                <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?>">
-                                    <div class="header-form-group header-submit-cont nom">
-                                        <label>&nbsp;</label>
-                                        <input type="submit" class="submit" name="submit" value="" title="Connexion" />
-                                        <label for="memoriser" class="header-small">Mémoriser</label>
-                                        <input type="checkbox" name="memoriser" id="memoriser" value="1" />
-                                    </div> <!-- .header-form-group -->
-                            </form>
-                        </div> <!-- #header-right-in2 -->
-                    </div> <!-- #header-right-in1 -->
-                </div> <!-- #header-right-->
-            </div> <!-- #header -->
+                            </select>
+                            <select id="register-mois" name="register-mois">
+                                <?php
+                                echo $data["mois"];
+                                ?>
+                            </select>
+                            <select id="register-annee" name="register-annee">
 
-            <div id="home-caption">
-                <h2>
-                    Associez vos <span class="blue">envies</span>
-                    <br />
-                    au rythme de vos <span class="blue">hobbies!</span>
-                </h2>
-            </div> <!-- #home-caption -->
-
-            <?php
-            /* Chargement du contenu */
-            if (isset($login["error"]))
-                $contr->loadvWidget("loginbox");
-            else
-                $contr->loadvWidget("slider");
-            ?>
-
-            
-
-        <div style="display:none;">
-            <div id="register">
-                <h1 class="popup-caption">Inscrivez-vous gratuitement</h1>
-                <form method="post" action="?page=validation-inscription" id="register-form">
-                    <div class="popup-content cfix">
-                        <div class="popup-form-col ld">
-                            <p>
-                                <label for="register-email">Email :</label>
-                                <br />
-                                <input type="text" class="text" name="register-email" id="register-email" size="30" value="" /><br/>
-                                <span class="form-validation"></span>
-                            </p>
-                            <p>
-                                <label for="register-password">Mot de passe :</label>
-                                <br />
-                                <input type="password" class="text" name="password" id="register-password" size="30" value="" /><br/>
-                                <span class="form-validation"></span>
-                            </p>
-                            <p>
-                                <label for="register-pseudo">Pseudo :</label>
-                                <br />
-                                <input type="text" class="text" name="pseudo" id="register-pseudo" size="30" value="" /><br/>
-                                <span class="form-validation"></span>
-                            </p>
-
-                            <div class="register-form-part2">
-                                <p>
-                                    <label>&nbsp;</label>
-                                    <br />
-                                    <select id="register-jour" name="register-jour">
-                                        <?php
-                                        echo $data["jour"];
-                                        ?>
-                                    </select>
-                                    <select id="register-mois" name="register-mois">
-                                        <?php
-                                        echo $data["mois"];
-                                        ?>
-                                    </select>
-                                    <select id="register-annee" name="register-annee">
-
-                                        <?php
-                                        echo $data["annee"];
-                                        ?>
-                                    </select><br/>
-                                    <span class="form-validation"></span>
-                                </p>
-                                <p>
-                                    <label for="register-etes-1">Vous êtes :</label>
-                                    <br />
-                                    <input type="radio" name="etes" id="register-etes-1" value="Homme" />
-                                    <label for="register-etes-1">Un homme</label>
-                                    <input type="radio" name="etes" id="register-etes-2" value="Femme" class="seppa" />
-                                    <label for="register-etes-2">Une femme</label><br/>
-                                    <span class="form-validation"></span>
-                                </p>
-                            </div> <!-- .register-form-part2 -->
-                        </div> <!-- .popup-form-col -->
-                        <div class="popup-form-col rd">
-                            <p>
-                                <label for="register-confirmation-email">Confirmation de l'email :</label>
-                                <br />
-                                <input type="text" class="text" name="register-confirmation-email" id="register-confirmation-email" size="30" value="" /><br/>
-                                <span class="form-validation"></span>
-                            </p>
-                            <p>
-                                <label for="register-confirmation-password">Confirmation du mot de passe :</label>
-                                <br />
-                                <input type="password" class="text" name="register-confirmation-password" id="register-confirmation-password" size="30" value="" /><br/>
-                                <span class="form-validation"></span>
-                            </p>
-                            <p>
-                                <label for="register-pays">Pays :</label>
-                                <br />
-                                <select name="pays" id="register-pays">
-                                    <option value="France">France</option>
-                                    <option value="Belgique">Belgique</option>
-                                    <option value="Suisse">Suisse</option>
-                                </select><br/>
-                                <span class="form-validation"></span>
-                            </p>
-                            <div class="register-form-part2">
-                                <p>
-                                    <label for="register-code-postal">Code postal :</label>
-                                    <br />
-                                    <input type="text" class="text" name="register-code-postal" id="register-code-postal" size="30" value="" /><br/>
-                                    <span class="form-validation"></span>
-                                    <label for="register-ville"><br/>Ville<br/></label>
-                                    <select name="register-ville" id="register-ville"/></select>
-                                </p>
-                                <p>
-                                    <label for="register-accepte">J'accepte les conditions d'inscription</label>
-                                    <br />
-                                    <input type="checkbox" name="accepte" id="register-accepte" value="1" />
-                                    <span class="form-validation"></span>
-                                </p>
-                            </div> <!-- .register-form-part2 -->
-                        </div> <!-- .popup-form-col -->
-                    </div> <!-- .popup-content -->
-                    <div class="popup-submit-cont">
-                        <input type="submit" class="submit" name="submit" value="" title="Je m'inscris!" />
-                    </div> <!-- .popup-submit-cont -->
-                </form>
-            </div> <!-- #register -->
-        </div>
-   
+                                <?php
+                                echo $data["annee"];
+                                ?>
+                            </select><br/>
+                            <span class="form-validation"></span>
+                        </p>
+                        <p>
+                            <label for="register-etes-1">Vous êtes :</label>
+                            <br />
+                            <input type="radio" name="etes" id="register-etes-1" value="Homme" />
+                            <label for="register-etes-1">Un homme</label>
+                            <input type="radio" name="etes" id="register-etes-2" value="Femme" class="seppa" />
+                            <label for="register-etes-2">Une femme</label><br/>
+                            <span class="form-validation"></span>
+                        </p>
+                    </div> <!-- .register-form-part2 -->
+                </div> <!-- .popup-form-col -->
+                <div class="popup-form-col rd">
+                    <p>
+                        <label for="register-confirmation-email">Confirmation de l'email :</label>
+                        <br />
+                        <input type="text" class="text" name="register-confirmation-email" id="register-confirmation-email" size="30" value="" /><br/>
+                        <span class="form-validation"></span>
+                    </p>
+                    <p>
+                        <label for="register-confirmation-password">Confirmation du mot de passe :</label>
+                        <br />
+                        <input type="password" class="text" name="register-confirmation-password" id="register-confirmation-password" size="30" value="" /><br/>
+                        <span class="form-validation"></span>
+                    </p>
+                    <p>
+                        <label for="register-pays">Pays :</label>
+                        <br />
+                        <select name="pays" id="register-pays">
+                            <option value="France">France</option>
+                            <option value="Belgique">Belgique</option>
+                            <option value="Suisse">Suisse</option>
+                        </select><br/>
+                        <span class="form-validation"></span>
+                    </p>
+                    <div class="register-form-part2">
+                        <p>
+                            <label for="register-code-postal">Code postal :</label>
+                            <br />
+                            <input type="text" class="text" name="register-code-postal" id="register-code-postal" size="30" value="" /><br/>
+                            <span class="form-validation"></span>
+                            <label for="register-ville"><br/>Ville<br/></label>
+                            <select name="register-ville" id="register-ville"/></select>
+                        </p>
+                        <p>
+                            <label for="register-accepte">J'accepte les conditions d'inscription</label>
+                            <br />
+                            <input type="checkbox" name="accepte" id="register-accepte" value="1" />
+                            <span class="form-validation"></span>
+                        </p>
+                    </div> <!-- .register-form-part2 -->
+                </div> <!-- .popup-form-col -->
+            </div> <!-- .popup-content -->
+            <div class="popup-submit-cont">
+                <input type="submit" class="submit" name="submit" value="" title="Je m'inscris!" />
+            </div> <!-- .popup-submit-cont -->
+        </form>
+    </div> <!-- #register -->
+</div>
