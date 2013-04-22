@@ -1,45 +1,64 @@
 <div id="connexion-bar"></div>
-    <div id="connexion-box">
-        <div id="connexion-box-in">
-            <h3 class="cbox-title blue">Connexion</h3><?php
-                                if (isset($login["error"]['token']))
-                                    echo $login["error"]['token'];
-                                    
-                                ?>
-            <div class="connexion-shadow-1"></div>
-            <form method="post" action="/login" id="connexion">
-                <div class="cfix connexion-form-in">
-                    <div class="connexion-form-col ld">
-                        <p>
-                            <label for="email" class="blue">Email : </label>
-                            <br />
-                            <input type="text" class="text" name="email" id="email" size="30" value="" /><?php echo (isset($login["error"]["email"]) ? '<div class="error-input-vue">' . $login["error"]["email"] . '</div>' : ''); ?>
-                            <span class="form-validation"></span>
-                        </p>
-                        <p><a href="index.php?page=lostpassword" class="rev connexion-small">Mot de passe oublié ?</a></p>
-                    </div> <!-- .connexion-form-col -->
-                    <div class="connexion-form-col rd">
-                        <p>
-                            <label for="password" class="blue">Mot de passe : </label>
-                            <br />
-                            <input type="password" class="text" name="password" id="password" size="30" value="" /><?php echo (isset($login["error"]["password"]) ? '<div class="error-input-vue">' . $login["error"]["password"] . '</div>' : ''); ?>
-                            <span class="form-validation"></span>
-                        </p>
-                    </div> <!-- .connexion-form-col -->
-                </div> <!-- .cfix -->
-                <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?>">
-                <div class="connexion-submit-cont">
-                    <input type="submit" class="submit" name="submit" value="" title="Connexion" />
-                </div> <!-- .connexion-submit-cont -->
-            </form> <!-- .connexion-form -->
-            <div class="connexion-shadow-2"></div>
-            <div id="home-icons">
-                <img src="<?php echo $conf["url"]; ?>Images/icon-1.png" alt="" />
-                <img src="<?php echo $conf["url"]; ?>Images/icon-2.png" alt="" />
-                <img src="<?php echo $conf["url"]; ?>Images/icon-3.png" alt="" />
-                <img src="<?php echo $conf["url"]; ?>Images/icon-4.png" alt="" />
-                <img src="<?php echo $conf["url"]; ?>Images/icon-5.png" alt="" />
-                <img src="<?php echo $conf["url"]; ?>Images/icon-6.png" alt="" />
-            </div> <!-- #home-icons -->
-        </div> <!-- #connexion-box-in -->
-    </div> <!-- #connexion-box -->
+<div id="connexion-box">
+    <div id="connexion-box-in">
+        <h3 class="cbox-title blue">Connexion</h3><?php
+if (isset($login["error"]['token']))
+    echo $login["error"]['token'];
+?>
+        <div class="connexion-shadow-1"></div>
+        <form method="post" action="/login" id="connexion">
+            <div class="cfix connexion-form-in">
+                <div class="connexion-form-col ld">
+                    <p>
+                        <label for="email" class="blue">Email : </label>
+                        <br />
+                        <input type="text" class="text" name="email" id="email" size="30" value="" /><?php echo (isset($login["error"]["email"]) ? '<div class="error-input-vue">' . $login["error"]["email"] . '</div>' : ''); ?>
+                        <span class="form-validation"></span>
+                    </p>
+                    <p><a href="index.php?page=lostpassword" class="rev connexion-small">Mot de passe oublié ?</a></p>
+                </div> <!-- .connexion-form-col -->
+                <div class="connexion-form-col rd">
+                    <p>
+                        <label for="password" class="blue">Mot de passe : </label>
+                        <br />
+                        <input type="password" class="text" name="password" id="password" size="30" value="" /><?php echo (isset($login["error"]["password"]) ? '<div class="error-input-vue">' . $login["error"]["password"] . '</div>' : ''); ?>
+                        <span class="form-validation"></span>
+                    </p>
+                </div> <!-- .connexion-form-col -->
+            </div> <!-- .cfix -->
+            <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?>">
+            <div class="connexion-submit-cont">
+                <input type="submit" class="submit" name="submit" value="" title="Connexion" />
+            </div> <!-- .connexion-submit-cont -->
+        </form> <!-- .connexion-form -->
+        <div class="connexion-shadow-2"></div>
+        <div id="home-icons">
+            <img src="<?php echo $conf["url"]; ?>Images/icon-1.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-2.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-3.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-4.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-5.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-6.png" alt="" />
+        </div> <!-- #home-icons -->
+    </div> <!-- #connexion-box-in -->
+</div> <!-- #connexion-box -->
+<div class="blue-box-top blue-box-asdf"></div>
+<div class="blue-box">
+    <div class="blue-box-in cfix equal-heights">
+        <div class="blue-box-col ld">
+            <div class="equal">
+                <h2>Qu’est ce que Meetoparty ?</h2>
+                <p>Origine de vos futurs evenements, ce site est le cocktail parfait entre reseau social et site de rencontres. Cette revolution dont vous connaissez deja le principe, s’offre a vous comme etant un outil gratuit et simple d’utilisation. Meetoparty est le resultat final d’une etude sur l’evolution des relations sociales. Aujourd’hui, peu sont ceux qui osent aller vers une personne inconnue. Meetoparty a pour objectif de changer le court des choses.</p>
+                <p>Meetoparty vous propose un moyen ludique et attractif d’organiser des rencontres reelles avec des inconnus dans le cadre du partage de vos passions. A la cle ? Se creer de nouveaux liens d’amitie et plus si affinites.</p>
+            </div> <!-- .equal -->
+        </div> <!-- .blue-box-col -->
+        <div class="blue-box-col rd">
+            <div class="equal">
+                <h2>Faites des rencontres qui vous ressemblent !</h2>
+                <p>Marre des soirées ou sorties ou vous ne vous sentez pas à votre place ? Envie de nouvelles expériences ou de faire de nouvelles connaissance ? Meetoparty est fait pour vous !</p>
+                <p>Meetoparty vous accompagne et vous aide dans votre démarche en vous permettant de créer des centaines d’évènements, sorties ou soirées possibles en lien avec vos passions !</p>
+                <p>Déclencheur de rencontres, nous vous souhaitons de merveilleux moments.</p>
+            </div> <!-- .equal -->
+        </div> <!-- .blue-box-col -->
+    </div> <!-- .blue-box-in -->
+</div> <!-- .blue-box -->
