@@ -16,7 +16,7 @@ class models_ajax_passion extends Model {
         
         global $reg;
         
-        $q = $reg->clean->post(trim($_GET['q']));
+        $q = trim($_GET['q']);
         $result = "";
         
         if(!empty($q)) {

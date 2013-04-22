@@ -23,7 +23,7 @@ class controllers_event extends Controller {
         //$index["token"] = @$reg->token;
 
         //load views
-        $this->loadView("header", "");
+
         $this->loadView("header_co", "");
         $this->loadView("addevent", "");
         $this->loadView("footer", "");
