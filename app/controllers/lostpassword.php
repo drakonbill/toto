@@ -17,6 +17,5 @@ class controllers_lostpassword extends Controller {
     }
 
 }
-
 ?>
 ?>
