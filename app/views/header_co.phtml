@@ -1,73 +1,146 @@
-<div id="wrap-outer">
-<div id="logo-block">
-    <a href="index.php" id="logo" class="rep">MeetOParty</a>
-    <div id="top-social-links">
-        <a href="http://www.facebook.com/Meetoparty" id="top-facebook-link" class="rep">Facebbok</a>
-        <a href="https://twitter.com/Meetoparty" id="top-twitter-link" class="rep">Twitter</a>
-    </div> <!-- #top-social-links -->
-    <div id="top-small-title">
-        Associez vos <span class="blue">envies</span>
-        <br />
-        au rythme de vos <span class="blue">hobbies!</span>
-    </div> <!-- #top-small-title -->
-</div> <!-- #logo-block -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title><?php echo $conf["title"];
+echo $data ? " - $data" : ""; ?></title>
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
 
-<div id="header" class="cfix">
-    <div id="header-left">
-        <div id="header-left-in1">
-            <div id="header-left-in2">
-                <ul class="menu" id="left-menu">
-                    <li><a href="#">
-                            <span class="menu-icon"><img src="Images/menu-icon-fav.png" alt="" /></span>
-                            <span class="menu-text">Evenement</span>
-                        </a></li>
-                    <li><a href="#">
-                            <span class="menu-icon"><img src="Images/menu-icon-messages.png" alt="" /></span>
-                            <span class="menu-text">Discussion</span>
-                        </a></li>
-                    <li><a href="index.php?page=listecontact">
-                            <span class="menu-icon"><img src="Images/menu-icon-users.png" alt="" /></span>
-                            <span class="menu-text">Contact</span>
-                        </a></li>
-                    <li><a href="index.php?page=voirprofil">
-                            <span class="menu-icon"><img src="Images/menu-icon-user.png" alt="" /></span>
-                            <span class="menu-text">Profil</span>
-                        </a></li>
-                    <li class="nom"><a href="index.php">
-                            <span class="menu-icon"><img src="Images/menu-icon-home.png" alt="" /></span>
-                            <span class="menu-text">Accueil</span>
-                        </a></li>
-                </ul>
-            </div> <!-- #header-left-in2 -->
-        </div> <!-- #header-left-in1 -->
-    </div> <!-- #header-left -->
-    <div id="header-right">
-        <div id="header-right-in1">
-            <div id="header-right-in2">
-                <ul class="menu" id="right-menu">
-                    <li><a href="index.php?page=messagerie">
-                            <span class="menu-icon"><img src="Images/menu-icon-email.png" alt="" /></span>
-                            <span class="menu-text">Message</span>
-                        </a></li>
-                    <li class="nom"><a href="#">
-                            <span class="menu-icon"><img src="Images/menu-icon-news.png" alt="" /></span>
-                            <span class="menu-text">News</span>
-                        </a></li>
-                </ul>
+        <link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>css/main.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>css/nivo.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>js/fancybox/jquery.fancybox.css" media="screen" />
+        <!--[if IE]>
+        <script type="text/javascript" src="<?php echo $conf["url"]; ?>scripts/html5shiv.js"></script>
+        <link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>styles/ie.css" media="screen" />
+        <![endif]-->
 
-                <div id="recherche-box">
+        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/jquery.js"></script>
+        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/fancybox/jquery.fancybox.js"></script>
+        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/jquery.equalheights.js"></script>
+        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/slider.js"></script>
+        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/bind.js"></script>
+    </head>
+    <body>
+        <div id="wrap-outer">
+            <div id="logo-block">
+                <a href="index.php" id="logo" class="rep">MeetoParty</a>
+                <div id="top-social-links">
+                    <a href="http://www.facebook.com/Meetoparty" id="top-facebook-link" class="rep">Facebbok</a>
+                    <a href="https://twitter.com/Meetoparty" id="top-twitter-link" class="rep">Twitter</a>
+                </div> <!-- #top-social-links -->
+                <div id="top-small-title">
+                    Associez vos <span class="blue">envies</span>
+                    <br />
+                    au rythme de vos <span class="blue">hobbies!</span>
+                </div> <!-- #top-small-title -->
+            </div> <!-- #logo-block -->
+
+            <div id="header" class="cfix">
+                <div id="header-left">
+                    <div id="header-left-in1">
+                        <div id="header-left-in2">
+                            <ul class="menu" id="left-menu">
+                                <li><a href="#">
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-fav.png" alt="" /></span>
+                                        <span class="menu-text">Evenement</span>
+                                    </a></li>
+                                <li><a href="#">
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-messages.png" alt="" /></span>
+                                        <span class="menu-text">Discussion</span>
+                                    </a></li>
+                                <li><a href="index.php?page=listecontact">
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-users.png" alt="" /></span>
+                                        <span class="menu-text">Contact</span>
+                                    </a></li>
+                                <li><a href="index.php?page=voirprofil">
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-user.png" alt="" /></span>
+                                        <span class="menu-text">Profil</span>
+                                    </a></li>
+                                <li class="nom"><a href="index.php">
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-home.png" alt="" /></span>
+                                        <span class="menu-text">Accueil</span>
+                                    </a></li>
+                            </ul>
+                        </div> <!-- #header-left-in2 -->
+                    </div> <!-- #header-left-in1 -->
+                </div> <!-- #header-left -->
+                <div id="header-right">
+                    <div id="header-right-in1">
+                        <div id="header-right-in2">
+                            <ul class="menu" id="right-menu">
+                                <li><a href="index.php?page=messagerie">
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-email.png" alt="" /></span>
+                                        <span class="menu-text">Message</span>
+                                    </a></li>
+                                <li class="nom"><a href="#">
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-news.png" alt="" /></span>
+                                        <span class="menu-text">News</span>
+                                    </a></li>
+                            </ul>
+
+                            <div id="recherche-box">
+                                <div class="cfix">
+                                    <a href="#" class="ld"><img src="<?php echo $conf["url"]; ?>Images/btn-recherche.png" alt="" /></a>
+                                    <a href="/logout" class="rd"><img src="<?php echo $conf["url"]; ?>Images/btn-decon.png" alt="" /></a>
+                                </div> <!-- .cfix -->
+                                <form method="get" action="#" class="search-form">
+                                    <fieldset>
+                                        <input type="text" class="text" name="search" id="search" value="" />
+                                        <input type="submit" class="submit" value="" title="Submit data" />
+                                    </fieldset>
+                                </form>
+                            </div> <!-- #recherche-box -->
+                        </div> <!-- #header-right-in2 -->
+                    </div> <!-- #header-right-in1 -->
+                </div> <!-- #header-right-->
+            </div> <!-- #header -->
+
+            <div class="beta cfix">
+                <div class="beta-left">
+                    <div class="bl-photo">
+                        <strong><em>Nicolas DUPOND</em></strong>
+                        <br /><br />
+                        <a href="#" class="bl-link bgr-blue"><img src="<?php echo $conf["url"]; ?>Images/clip-face2.jpg" alt="" /></a>
+                    </div> <!-- .bl-photo -->
+                    <div class="bl-right">
+                        <div>
+                            Ne le 30/01/1990
+                            <br />
+                            Travail chez xxxx
+                        </div>
+                        <div class="white-quote">
+                            <div class="white-tip"></div>
+                            Partagetr vos idees...!
+                            <a href="#" class="btn-partager rep">Partager</a>
+                        </div> <!-- .white-quote -->
+                    </div> <!-- .bl-right -->
+                </div> <!-- .beta-left -->
+                <div class="beta-right">
                     <div class="cfix">
-                        <a href="#" class="ld"><img src="Images/btn-recherche.png" alt="" /></a>
-                        <a href="index.php?page=deconnexion" class="rd"><img src="Images/btn-decon.png" alt="" /></a>
+                        <div class="br-photo">
+                            <a href="#" class="br-link bgr-pink"><img src="<?php echo $conf["url"]; ?>Images/clip-face1.jpg" alt="" /></a>
+                        </div> <!-- .br-photo -->
+                        <div class="br-text">
+                            <div><strong><em>Megane BLANC,</em></strong> vous a ecrit</div>
+                            <div class="black-quote">
+                                ...jeudi c'est bon pour toi ??
+                                <br />
+                                Je peux passer te chercher...
+                                <div class="black-tip"></div>
+                                <div class="funny-quotes"></div>
+                            </div> <!-- .black-quote -->
+                        </div> <!-- .br-text -->
                     </div> <!-- .cfix -->
-                    <form method="get" action="#" class="search-form">
-                        <fieldset>
-                            <input type="text" class="text" name="search" id="search" value="" />
-                            <input type="submit" class="submit" value="" title="Submit data" />
-                        </fieldset>
-                    </form>
-                </div> <!-- #recherche-box -->
-            </div> <!-- #header-right-in2 -->
-        </div> <!-- #header-right-in1 -->
-    </div> <!-- #header-right-->
-</div> <!-- #header -->
+                    <div class="br-pagination cfix">
+                        <div class="pages-lbl ld">Actualites</div>
+                        <ul class="pages rd">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div> <!-- .br-pagination -->
+                </div> <!-- .beta-right -->
+            </div> <!-- .beta -->

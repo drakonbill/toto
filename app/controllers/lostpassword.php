@@ -4,7 +4,7 @@ class controllers_lostpassword extends Controller {
 
     function indexAction() {
 
-        $user = $this->reg->user;
+        //$user = $this->reg->user;
 
 //load model and fill data with
         $indexM = $this->loadModel("lostpassword");
