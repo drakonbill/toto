@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta charset="utf-8" />
-        <title><?php echo $conf["title"]; echo $data?" - $data":""; ?></title>
+        <title><?php echo $conf["title"];
+echo $data ? " - $data" : ""; ?></title>
         <meta name="description" content="" />
         <meta name="keywords" content="" />
 
@@ -20,3 +21,69 @@
         <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/slider.js"></script>
         <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/bind.js"></script>
     </head>
+
+    <body>
+
+        <div id="wrap-outer">
+            <div id="logo-block">
+                <a href="/index" id="logo" class="rep">Meetoparty</a>
+                <div id="top-social-links">
+                    <a href="http://www.facebook.com/Meetoparty" id="top-facebook-link" class="rep">Facebbok</a>
+                    <a href="https://twitter.com/Meetoparty" id="top-twitter-link" class="rep">Twitter</a>
+                </div> <!-- # -->
+            </div> <!-- #logo-block -->
+
+            <div id="header" class="cfix">
+                <div id="header-left">
+                    <div id="header-left-in1">
+                        <div id="header-left-in2">
+                            <div id="inscription-cont">
+                                <span id="txt-inscription" class="rep">Inscription</span
+                                ><a href="#register" class="popup rep" id="register-link">C'est parti</a>
+                            </div> <!-- #inscription-cont -->
+                        </div> <!-- #header-left-in2 -->
+                    </div> <!-- #header-left-in1 -->
+                </div> <!-- #header-left -->
+                <div id="header-right">
+                    <div id="header-right-in1">
+                        <div id="header-right-in2">
+                            <p class="error">
+                                <?php
+                                if (isset($login["error"]))
+                                    foreach ($login["error"] as $key => $value) {
+                                        //                                       echo "$key: $value";
+                                    }
+                                ?>
+                            </p>
+                            <form method="post" action="/login" id="login-form" class="cfix">
+                                <div class="header-form-group">
+                                    <label for="login-email">Email</label>
+                                    <input type="text" class="text" name="email" id="email" value="" />
+                                    <div class="form-icon icon-username"></div>
+                                </div> <!-- .header-form-group -->
+                                <div class="header-form-group">
+                                    <label for="login-pass">Mot de passe</label>
+                                    <input type="password" class="text" name="password" id="password" value="" />
+                                    <a href="index.php?page=lostpassword" class="header-small rev">Mot de passe oublié ?</a>
+                                    <div class="form-icon icon-password"></div>           
+                                </div> <!-- .header-form-group -->
+                                <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?>">
+                                    <div class="header-form-group header-submit-cont nom">
+                                        <label>&nbsp;</label>
+                                        <input type="submit" class="submit" name="submit" value="" title="Connexion" />
+                                        <label for="memoriser" class="header-small">Mémoriser</label>
+                                        <input type="checkbox" name="memoriser" id="memoriser" value="1" />
+                                    </div> <!-- .header-form-group -->
+                            </form>
+                        </div> <!-- #header-right-in2 -->
+                    </div> <!-- #header-right-in1 -->
+                </div> <!-- #header-right-->
+            </div> <!-- #header -->
+
+            <div id="home-caption">
+                <h2>
+                    Associez vos <span class="blue">envies</span>
+                    <br />
+                    au rythme de vos <span class="blue">hobbies!</span>
+                </h2>
+            </div> <!-- #home-caption -->
