@@ -1,5 +1,8 @@
 <?php
 
+## start the sessions
+session_start();
+
 // debuging disable when not needed
 error_reporting(2047);
 ini_set("display_errors", 1);
@@ -7,36 +10,20 @@ ini_set("display_errors", 1);
 // end of debuging code
 function debug($status) {
 //    DEBUG FUNCTION -------------------------------<<<<<
-    print_r($status) ; echo "<br/>\n";
+   // print_r($status) ; echo "<br/>\n";
 }
 
-## start the sessions
-session_start();
-
 spl_autoload_register('my_autoloader');
-## load core config
-require_once('core/config/conf.php');
 
-## load some libs (move to config??)
-require_once(COREDIR . 'lib/validate.php');
-require_once(COREDIR . 'lib/error.php');
-require_once(COREDIR . 'lib/urlParse.php');
-require_once(COREDIR . 'lib/cleanData.php');
-require_once(COREDIR . 'lib/libMySQL.php');
-
-debug("libs  ...ok");
 ##load registry
 require_once 'core/Registry.php';
 $reg = new Registry();
-
 debug("registry  ...ok");
-##add to Registry (move to config?!?)
-$reg->clean = new cleanData(); //this lib dont have extra setings, and can be loaded
-$reg->error = new error();
-$reg->urlParse = new urlParse();
-$reg->validate = new validate();
 
-debug("registry  ...filling with libs");
+## load core config
+require_once('core/config/conf.php');
+debug("config  ...ok");
+
 ## these are the base classes so that any class can extend them
 require_once(COREDIR . 'Core.php');
 require_once(COREDIR . 'Controller.php');
@@ -44,6 +31,7 @@ require_once(COREDIR . 'Model.php');
 require_once(COREDIR . 'View.php');
 debug("main Controller/Model/View  ...included");
 ## end of critical includes
+
 ## enter custom code here it is not recomended to edit below this block
 #######################################################################
 ## load app config
@@ -52,6 +40,7 @@ $reg->appconf = $appconf;
 debug("app config  ...ok");
 #######################################################################
 ## end of custom code block 
+
 ## DataStore for url params
 $_URL = array();
 
