@@ -1,0 +1,399 @@
+
+<link rel="stylesheet" type="text/css" href="css/jquery.listederoulante.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.autocomplete.css" />
+<link rel="stylesheet" type="text/css" href="js/popup/style-popup.css" />
+
+<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+
+
+<script type="text/javascript" src="js/files/jquery.resize.js"></script>
+        <script type="text/javascript" src="js/files/jquery-ui-1.8.8.custom.min.js"></script>
+        <script type="text/javascript" src="js/files/formulairedesign.js"></script>
+		<script type="text/javascript" src="js/files/jquery.autocomplete.js"></script>
+		<script type="text/javascript" src="js/files/jquery.text-shadow.js"></script>
+		<script type="text/javascript" src="js/files/jquery.border.js"></script>
+		<script type="text/javascript" src="js/tchat/jquery-position.js"></script>
+		<script type="text/javascript" src="js/files/jquery.listederoulante.js"></script>
+		<script type="text/javascript" src="js/files/jquery.upload.js"></script>
+		<script type="text/javascript" src="js/popup/popup.js"></script>
+
+<script type="text/javascript" src="js/evenement/ajouterEvenement.js"></script>
+
+<div class="popup-other popup-othermini" style="display: none; "></div>
+<div class="beta cfix">
+        <div class="beta-left">
+          <div class="bl-photo">
+            <strong><em>Nicolas DUPOND</em></strong>
+            <br /><br />
+            <a href="#" class="bl-link bgr-blue"><img src="Images/clip-face2.jpg" alt="" /></a>
+          </div> <!-- .bl-photo -->
+          <div class="bl-right">
+            <div>
+              Ne le 30/01/1990
+              <br />
+              Travail chez xxxx
+            </div>
+            <div class="white-quote">
+              <div class="white-tip"></div>
+              Partagetr vos idees...!
+              <a href="#" class="btn-partager rep">Partager</a>
+            </div> <!-- .white-quote -->
+          </div> <!-- .bl-right -->
+        </div> <!-- .beta-left -->
+        <div class="beta-right">
+          <div class="cfix" id="act1">
+            <div class="br-photo">
+              <a href="#" class="br-link bgr-blue"><img src="Images/clip-face3.jpg" alt="" /></a>
+            </div> <!-- .br-photo -->
+            <div class="br-text">
+              <div><strong><em>John WHITE,</em></strong></div>
+              <div class="black-quote">
+                Votre amis a un nouveau contact &laquo;<span class="pink">Laura GIROUD</span>&raquo;
+                <br />
+                &nbsp;
+                <div class="black-tip"></div>
+                <div class="funny-quotes"></div>
+              </div> <!-- .black-quote -->
+            </div> <!-- .br-text -->
+          </div> <!-- .cfix -->
+
+          <div class="cfix" id="act2" style="display:none;">
+            <div class="br-photo">
+              <a href="#" class="br-link bgr-blue"><img src="Images/clip-face1.jpg" alt="" /></a>
+            </div> <!-- .br-photo -->
+            <div class="br-text">
+              <div><strong><em>Eva GREEN,</em></strong></div>
+              <div class="black-quote">
+                Other text here!
+                <br />
+                &nbsp;
+                <div class="black-tip"></div>
+                <div class="funny-quotes"></div>
+              </div> <!-- .black-quote -->
+            </div> <!-- .br-text -->
+          </div> <!-- .cfix -->
+
+          <div class="cfix" id="act3" style="display:none;">
+            <div class="br-photo">
+              <a href="#" class="br-link bgr-pink"><img src="Images/clip-face2.jpg" alt="" width="62" /></a>
+            </div> <!-- .br-photo -->
+            <div class="br-text">
+              <div><strong><em>Rayan Gosling,</em></strong></div>
+              <div class="black-quote">
+                Other text here!
+                <br />
+                &nbsp;
+                <div class="black-tip"></div>
+                <div class="funny-quotes"></div>
+              </div> <!-- .black-quote -->
+            </div> <!-- .br-text -->
+          </div> <!-- .cfix -->
+
+          <div class="cfix" id="act4" style="display:none;">
+            <div class="br-photo">
+              <a href="#" class="br-link bgr-blue"><img src="Images/clip-face3.jpg" alt="" /></a>
+            </div> <!-- .br-photo -->
+            <div class="br-text">
+              <div><strong><em>John WHITE,</em></strong></div>
+              <div class="black-quote">
+                Votre amis a un nouveau contact &laquo;<span class="pink">Laura GIROUD</span>&raquo;
+                <br />
+                &nbsp;
+                <div class="black-tip"></div>
+                <div class="funny-quotes"></div>
+              </div> <!-- .black-quote -->
+            </div> <!-- .br-text -->
+          </div> <!-- .cfix -->
+
+          <div class="cfix" id="act5" style="display:none;">
+            <div class="br-photo">
+              <a href="#" class="br-link bgr-blue"><img src="Images/clip-face1.jpg" alt="" /></a>
+            </div> <!-- .br-photo -->
+            <div class="br-text">
+              <div><strong><em>Eva GREEN,</em></strong></div>
+              <div class="black-quote">
+                Other text here!
+                <br />
+                &nbsp;
+                <div class="black-tip"></div>
+                <div class="funny-quotes"></div>
+              </div> <!-- .black-quote -->
+            </div> <!-- .br-text -->
+          </div> <!-- .cfix -->
+
+          <!--
+            Please note: with these links, href="#ID" attribute
+            corresponds to id="ID" attribute of DIVs above
+          -->
+          <div class="br-pagination cfix" id="actualites-pagination">
+            <div class="pages-lbl ld">Actualites</div>
+            <ul class="pages rd">
+              <li><a href="#act1" class="active">1</a></li>
+              <li><a href="#act2">2</a></li>
+              <li><a href="#act3">3</a></li>
+              <li><a href="#act4">4</a></li>
+              <li><a href="#act5">5</a></li>
+            </ul>
+          </div> <!-- .br-pagination -->
+        </div> <!-- .beta-right -->
+      </div> <!-- .beta -->
+
+      <div id="inside-main" class="cfix">
+        <!-- This is the main content area -->
+        <div id="inside-column">
+          <div id="inside-column-wrap">
+            <div class="inside-column-inside">
+			<?php //include 'Modules/tchat/notifications.php'; ?>
+			  <hr class="clear"/>
+              <div class="connexion-shadow-1"></div>
+              
+            </div> <!-- .inside-column-inside -->
+            <div class="inside-column-inside" style="padding:0">
+              <div class="ca blue-man-cont" style="margin-bottom:0">
+                <span class="title_eventorganise"><img src="Images/blue-man.png" alt="" class="vam blue-man" width="85" heigth="101" />Evènement organisé</span>
+              </div> <!-- .ca -->
+             
+            </div> <!-- .inside-column-inside -->
+            <div class="inside-column-sep"></div>
+            <div class="inside-column-inside">
+              <div class="cfix">
+                <div class="conversation-main">
+                  <div class="conversation-main-inside">
+                    <div class="chat-meta"><strong><em>Evènement organisé</em></strong></div>
+                    <div class="chat-msg bgr-grey2">
+                      Evènement très utile lorsque vous souhaitez que d'autres personnes y participent. Vous pouvez le rendre public ou privé. A la différence des mini events, l'évènement organisé peut être un évènement long et doit être lié à certaines passions afin qu'il puisse être découvert par des gens partageant ces mêmes passions.
+                      <div class="chat-tip-left"></div>
+                    </div> <!-- .chat-msg -->
+                  </div> <!-- .conversation-main-inside -->
+                </div> <!-- .conversation-main -->
+                <div class="conversation-left">
+                  <a href="#" class="user-avatar bgr-grey2"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
+                </div> <!-- .conversation-left -->
+              </div> <!-- .cfix -->
+            </div> <!-- .inside-column-inside -->
+            <div id="event_organise" class="fun-block cfix">
+              <div class="fun-block-inside">
+                <div class="fun-block-inside2">
+                </div> <!-- .fun-block-inside2 -->
+              </div> <!-- .fun-block-inside -->
+              <ul class="fun-block-nav">
+              </ul> <!-- .fun-block-nav -->
+            </div> <!-- .fun-block -->
+			 <div id="event_mini" class="fun-block cfix" style="display:none;">
+              <div class="fun-block-inside">
+                <div class="fun-block-inside2">
+                </div> <!-- .fun-block-inside2 -->
+              </div> <!-- .fun-block-inside -->
+              <ul class="fun-block-nav">
+              </ul> <!-- .fun-block-nav -->
+            </div> <!-- .fun-block -->
+          </div> <!-- #inside-column-wrap -->
+        </div> <!-- #inside-column -->
+
+        <div id="sidebar-left">
+          <div id="sidebar-left-in">
+            <h2 class="sb-title"><span>Amis en linge</span></h2>
+            <div class="cfix">
+              <div class="sb-block">
+                <ul class="users-list2 cfix">
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-blue"><img src="Images/clip-face3.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-blue"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face3.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-blue"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face3.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                </ul> <!-- .users-list2 -->
+                <p class="nom">
+                  <br />
+                  <a href="#" class="rev blue">Liste d'amis</a>
+                </p>
+              </div>
+            </div>
+			<?php 
+				/*************************************************** TCHAT ****************************************/
+				//include 'Modules/tchat/tchat-left.php';
+				/*************************************************** FINTCHAT ****************************************/
+			?>
+
+          </div> <!-- #sidebar-left-in -->
+        </div> <!-- #sidebar-left -->
+
+        <div id="sidebar-right">
+          <div id="sidebar-right-in">
+            <h2 class="sb-title"><span>Mes evenements</span></h2>
+            <div class="sb-block">
+              <div class="event-caption cfix">
+                <a href="#" class="rd user-avatar bgr-darkblue"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
+                <br />
+                <strong><em>Nuit de films,</em></strong>
+                <br />
+                <small>venderdi 12 Decembre</small>
+              </div> <!-- .cfix -->
+              <p>Cet evenement est l'occasion de xxxx x x xxx xxxx xxx x x x xxxxxxxxx x x xx !</p>
+              <p>
+                <br />
+                <strong class="blue">A venir</strong>
+              </p>
+              <ul class="events-list">
+                <li>
+                  <strong><em>Nuit de films,</em></strong>
+                  <br />
+                  <small>venderdi 12 Decembre</small>
+                </li>
+                <li>
+                  <strong><em>First fraday,</em></strong>
+                  <br />
+                  <small>lundi 15 Decembre</small>
+                </li>
+                <li>
+                  <strong><em>Cinema,</em></strong>
+                  <br />
+                  <small>mardi 16 Decembre</small>
+                </li>
+              </ul>
+            </div> <!-- .sb-block -->
+            <h2 class="sb-title"><span>Evenements Conseilles</span></h2>
+            <div class="sb-block">
+              <div class="event-caption cfix">
+                <a href="#" class="rd user-avatar bgr-darkblue"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
+                <br />
+                <strong><em>Nuit de films,</em></strong>
+                <br />
+                <small>venderdi 12 Decembre</small>
+              </div> <!-- .cfix -->
+              <p>Cet evenement est l'occasion de xxxx x x xxx xxxx xxx x x x xxxxxxxxx x x xx !</p>
+            </div> <!-- .sb-block -->
+            <h2 class="sb-title"><span>Partenariat</span></h2>
+            <div class="sb-block">
+              <a href="#"><img src="Images/clip-cola.jpg" alt="" width="175" /></a>
+            </div> <!-- .advertisement -->
+          </div> <!-- #sidebar-right-in -->
+        </div> <!-- #sidebar-right -->
+
+        <div id="main-footer">
+          <div class="connexion-shadow-2 nom"></div>
+          <div id="home-icons">
+            <img src="Images/icon-1.png" alt="" />
+            <img src="Images/icon-2.png" alt="" />
+            <img src="Images/icon-3.png" alt="" />
+            <img src="Images/icon-4.png" alt="" />
+            <img src="Images/icon-5.png" alt="" />
+            <img src="Images/icon-6.png" alt="" />
+          </div> <!-- #home-icons -->
+        </div> <!-- #main-footer -->
+      </div> <!-- .cfix -->
+
+	  
+<div class="blue-box-top blue-box-asdf"></div>
+<div class="blue-box">
+    <div class="blue-box-in cfix equal-heights">
+        <div class="blue-box-col ld">
+            <div class="equal">
+                <h2>Qu’est ce que Meetoparty ?</h2>
+                <p>Origine de vos futurs evenements, ce site est le cocktail parfait entre reseau social et site de rencontres. Cette revolution dont vous connaissez deja le principe, s’offre a vous comme etant un outil gratuit et simple d’utilisation. Meetoparty est le resultat final d’une etude sur l’evolution des relations sociales. Aujourd’hui, peu sont ceux qui osent aller vers une personne inconnue. Meetoparty a pour objectif de changer le court des choses.</p>
+                <p>Meetoparty vous propose un moyen ludique et attractif d’organiser des rencontres reelles avec des inconnus dans le cadre du partage de vos passions. A la cle ? Se creer de nouveaux liens d’amitie et plus si affinites.</p>
+            </div> <!-- .equal -->
+        </div> <!-- .blue-box-col -->
+        <div class="blue-box-col rd">
+            <div class="equal">
+                <h2>Faites des rencontres qui vous ressemblent !</h2>
+                <p>Marre des soirées ou sorties ou vous ne vous sentez pas à votre place ? Envie de nouvelles expériences ou de faire de nouvelles connaissance ? Meetoparty est fait pour vous !</p>
+                <p>Meetoparty vous accompagne et vous aide dans votre démarche en vous permettant de créer des centaines d’évènements, sorties ou soirées possibles en lien avec vos passions !</p>
+                <p>Déclencheur de rencontres, nous vous souhaitons de merveilleux moments.</p>
+            </div> <!-- .equal -->
+        </div> <!-- .blue-box-col -->
+    </div> <!-- .blue-box-in -->
+</div>

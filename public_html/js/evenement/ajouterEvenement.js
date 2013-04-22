@@ -380,7 +380,7 @@ $(document).ready(function() {
 				$(this).addClass("ac_loading");
 				$.ajax({
 					type: 'POST',
-					url: 'js/Ajax-PHP/inscription/inscription2.php',
+					url: 'js/Ajax-PHP/evenement/search_cp.php',
 					data: $(this).serialize(),
 					dataType: 'json',
 					success:
@@ -437,7 +437,7 @@ $(document).ready(function() {
 		});
 		
 		$("div#event_organise div.fun-block-inside2 div#event_organise_passion input#passionvalue").autocomplete(
-			  "js/Ajax-PHP/changement/changergout.php",
+			  "js/Ajax-PHP/passion/choicePassion.php",
 		  {
 				minChars:2,
 				cacheLength:10,
@@ -457,7 +457,7 @@ $(document).ready(function() {
 			$("#erreurpassion").fadeOut();
 			$.ajax({
 			type: 'POST',
-			url: 'js/Ajax-PHP/evenement/enregistrergout_event.php',
+			url: 'js/Ajax-PHP/passion/enregistrergout_event.php',
 			data: "passion="+$("input#passionvalue").val()+"&categorie="+$("input#categorievalue").val(),
 			success:
 				function(result) {
@@ -480,7 +480,7 @@ $(document).ready(function() {
 						
 						$.ajax({
 						type: 'GET',
-						url: 'js/Ajax-PHP/changement/categoriegout.php',
+						url: 'js/Ajax-PHP/passion/categoriegout.php',
 						data: "mode=categorie",
 						success:
 							function(result) {
@@ -495,7 +495,7 @@ $(document).ready(function() {
 								resizeimg.cancelSelection();
 								
 							$("div.popup-othermini div.loading").html("<img src='css/images/loader-autocomplete.gif'/>");
-							$(this).upload('js/Ajax-PHP/changement/enregistrericonegout.php', function(res) {
+							$(this).upload('js/Ajax-PHP/passion/enregistrericonegout.php', function(res) {
 								if(res.substring(0,2) == "1;")
 								{
 									image = res.split(";");
@@ -549,7 +549,7 @@ $(document).ready(function() {
 									if(typeof(x1) != "undefined" && typeof(y1) != "undefined" && typeof(x2) != "undefined" && typeof(y2) != "undefined" && typeof(w) != "undefined" && typeof(h) != "undefined" && typeof($('div.popup-othermini img#photo')) != "undefined" && typeof($('div.popup-othermini img#photo')) != "undefined" && parseInt(x1) == x1 && parseInt(x2) == x2 && parseInt(y1) == y1 && parseInt(y2) == y2 && parseInt(w) == w && parseInt(h) == h && parseInt($('div.popup-othermini img#photo').height()) == $('div.popup-othermini img#photo').height() && parseInt($('div.popup-othermini img#photo').width()) == $('div.popup-othermini img#photo').width()) {
 										$.ajax({
 											type: 'POST',
-											url: 'js/Ajax-PHP/evenement/enregistrergout_event.php',
+											url: 'js/Ajax-PHP/passion/enregistrergout_event.php',
 											data: "mode=enregistrericone&passion="+$("input#passionvalue").val()+"&categorie="+$("div#listecategorie").val()+"&x1="+x1+"&y1="+y1+"&x2="+x2+"&y2="+y2+"&w="+w+"&h="+h+"&image="+image[2]+"&imageheight="+$('div.popup-othermini img#photo').height()+"&imagewidth="+$('div.popup-othermini img#photo').width(),
 											success:
 												function(result) {
@@ -580,7 +580,7 @@ $(document).ready(function() {
 
 									$.ajax({
 										type: 'POST',
-										url: 'js/Ajax-PHP/evenement/enregistrergout_event.php',
+										url: 'js/Ajax-PHP/passion/enregistrergout_event.php',
 										data: "mode=enregistrergout&passion="+$("input#passionvalue").val()+"&categorie="+$("div#listecategorie").val(),
 										success:
 											function(result) {
@@ -624,7 +624,7 @@ $(document).ready(function() {
 					else {
 						$.ajax({
 							type: 'POST',
-							url: 'js/Ajax-PHP/changement/enregistrergout.php',
+							url: 'js/Ajax-PHP/passion/enregistrergout.php',
 							data: "passion="+$("input#passionvalue").val()+"&categorie="+$("div#listecategorie").val(),
 							success:
 								function(result) {
@@ -799,8 +799,8 @@ $(document).ready(function() {
 			if(event_confidentialite_info == 2 && membre_confidentialite == "")
 				erreur += "- Vous devez ajouter les contacts autorisés à voir votre évènement privé<br/>";
 			
-			if(cpt_passion < 2 || passion == "")
-				erreur += "- Vous devez lier 2 mots clefs/passions minimum<br/>";
+			if(cpt_passion < 1 || passion == "")
+				erreur += "- Vous devez lier 1 mot clef/passion minimum<br/>";
 
 			if(erreur != "")
 				$("div#event_organise div.fun-block-inside2 div#addThisEvent").html("<h2>Erreur</h2>"+erreur);
