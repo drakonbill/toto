@@ -1,16 +1,16 @@
 <?php
 class cleanData{
 	function GET($varName){
-		return addslashes(@$_GET[$varName]);
+		return addslashes(trim(@$_GET[$varName]));
 	}
 	
 	function POST($varName){
-		return addslashes(@$_POST[$varName]);
+		return addslashes(trim(@$_POST[$varName]));
 	}
 	
 	function URL($varName){
 		global $_URL;
-		return addslashes(@$_URL[$varName]);
+		return addslashes(trim(@$_URL[$varName]));
 	}
 }
 ?>

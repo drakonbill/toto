@@ -33,7 +33,14 @@ class controllers_ajax extends Controller{
         
         $this->loadView("ajax", $return); 
     }
-
+    
+    function registerPassionEventAction() {
+        $indexM = $this->loadModel("ajax_passion");
+        $return = $indexM->registerPassionEvent();
+        
+        $this->loadView("ajax", $return); 
+    }
+    
     public function indexAction() {
         //if you wish to call siteurl/ajax only
     }

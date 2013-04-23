@@ -457,7 +457,7 @@ $(document).ready(function() {
 			$("#erreurpassion").fadeOut();
 			$.ajax({
 			type: 'POST',
-			url: 'js/Ajax-PHP/passion/enregistrergout_event.php',
+			url: 'ajax/registerPassionEventAction',
 			data: "passion="+$("input#passionvalue").val()+"&categorie="+$("input#categorievalue").val(),
 			success:
 				function(result) {

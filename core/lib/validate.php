@@ -2,7 +2,7 @@
 
 class validate {
 
-    private function String($values) {
+    public function String($values) {
 
         if (!is_string($this->source[$name]))
             return FALSE;
@@ -17,7 +17,7 @@ class validate {
             return TRUE;
     }
 
-    private function Numeric($values) {
+    public function Numeric($values) {
 
 
         if (filter_var($values, FILTER_VALIDATE_INT) != true)
@@ -26,7 +26,7 @@ class validate {
             return TRUE;
     }
 
-    private function Email($values) {
+    public function Email($values) {
 
 
         if (filter_var($values, FILTER_VALIDATE_EMAIL) === FALSE)
@@ -35,7 +35,7 @@ class validate {
             return TRUE;
     }
 
-    private function EmailInjection($values) {
+    public function EmailInjection($values) {
 
 
         if (preg_match('((?:\n|\r|\t|%0A|%0D|%08|%09)+)i', $values))
@@ -44,7 +44,7 @@ class validate {
             return TRUE;
     }
 
-    private function Float($values) {
+    public function Float($values) {
 
 
         if (filter_var($values, FILTER_VALIDATE_FLOAT) === false)
@@ -53,7 +53,7 @@ class validate {
             return TRUE;
     }
 
-    private function Url($values) {
+    public function Url($values) {
 
 
         if (filter_var($values, FILTER_VALIDATE_URL) === FALSE)
@@ -62,7 +62,7 @@ class validate {
             return TRUE;
     }
 
-    private function Date($values, $format = 'YYYY/MM/DD') {
+    public function Date($values, $format = 'YYYY/MM/DD') {
 
 
         switch ($format):
@@ -109,7 +109,7 @@ class validate {
             return TRUE;
     }
 
-    private function Ipv4($values) {
+    public function Ipv4($values) {
 
 
         if (filter_var($values, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) === FALSE)
@@ -118,7 +118,7 @@ class validate {
             return TRUE;
     }
 
-    private function Ipv6($values) {
+    public function Ipv6($values) {
 
 
         if (filter_var($values, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) === FALSE)

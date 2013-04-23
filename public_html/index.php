@@ -1,5 +1,5 @@
 <?php
 
-define("PUBDIR", dirname(__DIR__));
+define("PUBDIR", dirname(__FILE__)."/");
 require("../bootstrap.php");
 ?>
