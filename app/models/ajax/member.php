@@ -29,6 +29,8 @@ class models_ajax_member extends Model {
                 return "notok";
         }
      }
+     
+     
 }
 
 ?>

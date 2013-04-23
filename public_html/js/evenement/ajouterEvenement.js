@@ -362,7 +362,7 @@ $(document).ready(function() {
 		
 		$("div#event_organise div.fun-block-inside2 div#event_organise_where").append("<ul id='listepays'><li value='1'>France</li><li value='2'>Belgique</li></ul><input class='contentinput' type='text' name='cp' id='cp' value='Saisissez un code postal' /><div class='error-input'></div><br/><select class='hidefirst' id='ville' name='ville'></select><br id='ville'/><input class='contentinput' type='text' name='adresse' id='adresse' value='Saisissez une adresse ou un lieu' />");
 		
-		$("div#event_organise div.fun-block-inside2 div#event_organise_photo").append("<h4>Votre image ne doit pas dépassée 5 Mo.<br/>Les images sont recadrés au format 16:9.</h4><input type='file' name='photo' id='photo' /><div class='loading'></div>");
+		$("div#event_organise div.fun-block-inside2 div#event_organise_photo").append("<h4>Votre image ne doit pas dépassée 5 Mo.<br/>Les images sont recadrés au format 16:9.</h4><input type='file' name='photo' id='photo' /><div class='loading'></div><div class='error'></div>");
 		
 		$("div#event_organise div.fun-block-inside2 div#event_organise_passion").append("<input type='text' class='contentinput' name='passionvalue' id='passionvalue' value=\"Saisissez le nom de la passion\" /><input type='hidden' id='categorievalue' name='categorievalue' value='' /><a id='contentvalid' class='contentvalid' href='javascript:void()' onclick='lierPassion()'>Lier cette passion</a><ul id='liste_passion'></ul>");
 		
@@ -457,7 +457,7 @@ $(document).ready(function() {
 			$("#erreurpassion").fadeOut();
 			$.ajax({
 			type: 'POST',
-			url: 'ajax/registerPassionEventAction',
+			url: 'ajax/registerPassion',
 			data: "passion="+$("input#passionvalue").val()+"&categorie="+$("input#categorievalue").val(),
 			success:
 				function(result) {
@@ -480,7 +480,7 @@ $(document).ready(function() {
 						
 						$.ajax({
 						type: 'GET',
-						url: 'js/Ajax-PHP/passion/categoriegout.php',
+						url: 'ajax/categoryPassion',
 						data: "mode=categorie",
 						success:
 							function(result) {
@@ -495,7 +495,7 @@ $(document).ready(function() {
 								resizeimg.cancelSelection();
 								
 							$("div.popup-othermini div.loading").html("<img src='css/images/loader-autocomplete.gif'/>");
-							$(this).upload('js/Ajax-PHP/passion/enregistrericonegout.php', function(res) {
+							$(this).upload('ajax/registerImagePassion', function(res) {
 								if(res.substring(0,2) == "1;")
 								{
 									image = res.split(";");
@@ -549,7 +549,7 @@ $(document).ready(function() {
 									if(typeof(x1) != "undefined" && typeof(y1) != "undefined" && typeof(x2) != "undefined" && typeof(y2) != "undefined" && typeof(w) != "undefined" && typeof(h) != "undefined" && typeof($('div.popup-othermini img#photo')) != "undefined" && typeof($('div.popup-othermini img#photo')) != "undefined" && parseInt(x1) == x1 && parseInt(x2) == x2 && parseInt(y1) == y1 && parseInt(y2) == y2 && parseInt(w) == w && parseInt(h) == h && parseInt($('div.popup-othermini img#photo').height()) == $('div.popup-othermini img#photo').height() && parseInt($('div.popup-othermini img#photo').width()) == $('div.popup-othermini img#photo').width()) {
 										$.ajax({
 											type: 'POST',
-											url: 'js/Ajax-PHP/passion/enregistrergout_event.php',
+											url: 'ajax/registerPassion',
 											data: "mode=enregistrericone&passion="+$("input#passionvalue").val()+"&categorie="+$("div#listecategorie").val()+"&x1="+x1+"&y1="+y1+"&x2="+x2+"&y2="+y2+"&w="+w+"&h="+h+"&image="+image[2]+"&imageheight="+$('div.popup-othermini img#photo').height()+"&imagewidth="+$('div.popup-othermini img#photo').width(),
 											success:
 												function(result) {
@@ -580,7 +580,7 @@ $(document).ready(function() {
 
 									$.ajax({
 										type: 'POST',
-										url: 'js/Ajax-PHP/passion/enregistrergout_event.php',
+										url: 'ajax/registerPassion',
 										data: "mode=enregistrergout&passion="+$("input#passionvalue").val()+"&categorie="+$("div#listecategorie").val(),
 										success:
 											function(result) {
@@ -655,7 +655,7 @@ $(document).ready(function() {
 			
 			$("div#event_organise div.fun-block-inside2  div#event_organise_photo div.loading").show();			
 			$("div#event_organise div.fun-block-inside2  div.loading").html("<img src='css/images/loader-autocomplete.gif'/>");
-			$(this).upload('js/Ajax-PHP/evenement/enregistrericoneevent.php', function(res) {
+			$(this).upload('ajax/registerImageEvent', function(res) {
 				if(res.substring(0,2) == "1;")
 				{
 					image_photo = res.split(";");
@@ -695,7 +695,7 @@ $(document).ready(function() {
 				else
 				{
 					$("div#event_organise div.fun-block-inside2  div#event_organise_photo div.error").fadeIn().html(res);
-					$("div#event_organise div.fun-block-inside2  div#event_organise_photo div.loading_loading").empty();
+					$("div#event_organise div.fun-block-inside2  div#event_organise_photo div.loading").empty();
 				}
 			}, 'php');
 		});
@@ -807,7 +807,7 @@ $(document).ready(function() {
 			else {
 				$.ajax({
 					type: 'POST',
-					url: 'js/Ajax-PHP/evenement/addEventOrganise.php',
+					url: 'ajax/addEvent',
 					data: "x1="+x1_photo+"&x2="+x2_photo+"&y1="+y1_photo+"&y2="+y2_photo+"&w="+w_photo+"&h="+h_photo+"&image="+image_photo[2]+"&imagewidth="+image_width_photo+"&imageheight="+image_height_photo+"&subject="+subject+"&content_happends="+content_happends+"&pays="+pays+"&cp="+cp+"&ville="+ville+"&lieu="+lieu+"&event_confidentialite_info="+event_confidentialite_info+"&membre_confidentialite="+membre_confidentialite+"&passion="+passion+"&date_debut="+date_debut.getTime()+"&date_fin="+date_fin.getTime()+"&time_option1="+time_option1+"&time_option2="+time_option2,
 					success:
 						function(result) {

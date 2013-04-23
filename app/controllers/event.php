@@ -13,20 +13,26 @@
 class controllers_event extends Controller {
     
     function indexAction() {
-        $indexM = $this->loadModel("event");
-        $index = $indexM->addEventModel();
+        
+        if(isset($_SESSION['id_member'])) {
+            $indexM = $this->loadModel("event");
+            $index = $indexM->addEventModel();
 
 
-        //load widgets data ( from models, if they need it)
-        //$this->loadmWidgets(array("hello","last10"));
-        //pack some data
-        //$index["token"] = @$reg->token;
+            //load widgets data ( from models, if they need it)
+            //$this->loadmWidgets(array("hello","last10"));
+            //pack some data
+            //$index["token"] = @$reg->token;
 
-        //load views
+            //load views
 
-        $this->loadView("header_co", "");
-        $this->loadView("addevent", "");
-        $this->loadView("footer", "");
+            $this->loadView("header_co", "");
+            $this->loadView("addevent", "");
+            $this->loadView("footer", "");
+        }
+        else 
+              $this->redirect ("index")->indexAction();
+ 
     }
     
     
