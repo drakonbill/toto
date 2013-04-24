@@ -1712,3 +1712,43 @@ a.event_reponse { display: block; width: 100%; text-align: center; bottom: 0; po
 .notifications li .notif-room ul li > span { position: absolute; display: block; left: 50px; top: 5px; font-size: 10px; }
 .notifications li .notif-room ul li img.avatar { position: absolute; left: 5px; top: 5px; width: 35px; height: 35px; }
 .notifications li .notif-room { display: none; }
+
+/* For the lost password */
+.email-box {
+    background-image: url("../images/email.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    margin: 5% auto 0 5%;
+    min-height: 300px;
+    position: relative;
+}
+
+.email-form {	margin: 8% auto 0;
+	position:absolute;
+	padding-left:5%;
+	width: 520px;}
+	
+.email-bold {color:#fff; font-weight:bold; font-size:16px; }
+.email-desc {color:#fff; font-weight:normal; font-size:14px; }
+.email-form label {
+    display: inline-block;
+    height: 35px;
+    width: 150px !important;
+	color:#FFF;
+	font-weight:bold;
+	font-size:14px;
+}	
+.email-form .text {
+    background-color: #E1E1E1;
+    background-image: url("../images/input-bgr.png");
+    background-position: center top;
+    background-repeat: repeat-x;
+    border-color: #D3D4D4;
+    border-style: solid;
+    border-width: 2px;
+    font-size: 11px;
+    height: 20px;
+    line-height: 14px;
+    padding: 2px;
+}
