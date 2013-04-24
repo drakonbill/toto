@@ -33,7 +33,7 @@ class libs_user {
     }
 
     // Get the information you need in the $name variable
-    function __get($name) {
+    public function __get($name) {
         if (isset($this->userData[$name]))
             return $this->userData[$name];
         else
@@ -53,6 +53,31 @@ class libs_user {
     // Check is an id is stocked on a session or not : if the member is logged or not
     function loggedin() {
         return isset($_SESSION['id_member']);
+    }
+
+    function photoURL($id = '') {
+        global $reg;
+        $url = $reg->appconf["memberdir"];
+
+        if ($id == '' || $id == $this->id_member)
+            $photo_member = $this->photo_member == "" ? "no-photo.jpg" : $this->photo_member;
+        else
+        {
+            $rez = $this->getDB("photo_member", $id);
+           $photo_member =  $rez[0]==""? "m-no-photo.jpg" : $rez[0];
+        }
+           
+        $url .= $photo_member;
+        return $url;
+    }
+
+    function getDB($select, $id) {
+
+        global $reg;
+        $query = mysql_query("SELECT $select FROM member WHERE id_member = '$id'", $reg->dbcon) or die(mysql_error());
+       
+       
+        return mysql_fetch_array($query);
     }
 
     // Delete a selected informations 

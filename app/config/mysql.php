@@ -8,8 +8,6 @@ class config_mysql extends libMySQL {
 	
 	public function __construct(){
 		 parent::__construct($this->host, $this->user, $this->pass, $this->db);
-		
-		// return $this->connection;
 	}
 	
         public function getConnection() {

@@ -1,4 +1,4 @@
-<?php
+  <?php
 
 /*
  * To change this template, choose Tools | Templates
@@ -14,7 +14,7 @@ class controllers_event extends Controller {
     
     function indexAction() {
         
-        if(isset($_SESSION['id_member'])) {
+        if($user->loggedin()) {
             $indexM = $this->loadModel("event");
             $index = $indexM->addEventModel();
 

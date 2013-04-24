@@ -14,7 +14,7 @@ class error {
         global $reg;
         $data = "ERROR";
         $conf = $reg->appconf;
-        
+        $user = $reg->user;
          if($reg->user->loggedin()) include("../" . APPDIR . "views/header_co.phtml");
          else include("../" . APPDIR . "views/header.phtml");
          

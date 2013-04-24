@@ -14,7 +14,8 @@ class controllers_login extends Controller {
             $this->loadView("footer", "");
         }
         else
-            $this->redirect("welcome")->indexAction();
+           // $this->redirect("welcome")->indexAction();
+            header('Location: /welcome'); //must use this because $_SESSION is needed from begin of load
     }
 
 }

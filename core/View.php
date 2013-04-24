@@ -25,7 +25,8 @@ class View extends Core {
         $applibs = $this->reg->applib; //app libs data
         $contr = $this->reg->controller; //controller object, for some special access options
         $conf = $this->reg->appconf; // application config data from appconf.php appconf array
-
+        $user = $this->reg->user;
+        
         $login = $this->reg->login; // this isnt needed to be here, it is just now and it is from login model data
 
         include("../" . APPDIR . "views/" . $name . ".phtml");

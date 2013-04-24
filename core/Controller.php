@@ -22,12 +22,30 @@ abstract class Controller extends Core {
         return $this->loader("models_" . $name, $opt);
     }
 
-    ## make view object and add them in registry
+    ## make view object
 
     public function loadView($name, $data) {
 
         $options = array('name' => $name, 'data' => $data);
         return new View($options);
+//        return new View($name, $data);
+    }
+
+    public function loadHView($name, $data) {
+
+       
+
+        if ($user->loggedin()) {
+            $this->loadmWidgets(array("news","messages"));
+            $this->loadView("header-co", "");
+        } else {
+            
+            $this->loadView("header","");
+        }
+
+        $this->loadView($name, $data);
+        $this->loadView("footer", "");
+
 //        return new View($name, $data);
     }
 
