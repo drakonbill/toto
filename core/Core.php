@@ -17,7 +17,7 @@ class Core {
     protected $db;
     protected $option;
     protected $validate;
-
+    protected $user;
 
     public function __construct($option) {
 
@@ -26,6 +26,7 @@ class Core {
         $this->option = $option;
         $this->db = $reg->dbcon;
         $this->validate = $reg->validate;
+        $this->user = $reg->user;
     }
 
     public function addData($add) {
