@@ -57,26 +57,25 @@ class libs_user {
 
     function photoURL($id = '') {
         global $reg;
-        $url = $reg->appconf["memberdir"];
+
 
         if ($id == '' || $id == $this->id_member)
-            $photo_member = $this->photo_member == "" ? "no-photo.jpg" : $this->photo_member;
-        else
-        {
+            $photo_member = $this->photo_member == "" ? $reg->appconf["memberdir"] . "no-photo.jpg" : TARGET . $this->photo_member;
+        else {
             $rez = $this->getDB("photo_member", $id);
-           $photo_member =  $rez[0]==""? "m-no-photo.jpg" : $rez[0];
+            $photo_member = $rez[0] == "" ? $reg->appconf["memberdir"] . "m-no-photo.jpg" : TARGET . $rez[0];
         }
-           
-        $url .= $photo_member;
-        return $url;
+
+
+        return $photo_member;
     }
 
     function getDB($select, $id) {
 
         global $reg;
         $query = mysql_query("SELECT $select FROM member WHERE id_member = '$id'", $reg->dbcon) or die(mysql_error());
-       
-       
+
+
         return mysql_fetch_array($query);
     }
 

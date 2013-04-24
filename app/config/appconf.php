@@ -11,4 +11,7 @@ $reg->dbcon = $dbcon->getConnection(); //register it
 //load app libs
 $reg->user = new libs_user(@$_SESSION["id_member"]); //user data lib
 
+//app constants
+define('TARGET', MEMDIR.hash('crc32',crc32(PREFIXE).$_SESSION['id_member'].crc32(SUFFIXE)).'/');    // Repertoire cible
+
 ?>
