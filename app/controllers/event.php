@@ -13,8 +13,8 @@
 class controllers_event extends Controller {
     
     function indexAction() {
-        $user = $this->user;
-        if($user->loggedin()) {
+        
+        if($this->user->loggedin()) {
             $indexM = $this->loadModel("event");
             $index = $indexM->addEventModel();
 
