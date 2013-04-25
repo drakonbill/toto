@@ -36,7 +36,7 @@ abstract class Controller extends Core {
        
 
         if ($user->loggedin()) {
-            $this->loadmWidgets(array("news","messages"));
+            $this->loadmWidgets(array("news"));
             $this->loadView("header-co", "");
         } else {
             
