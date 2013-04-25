@@ -102,7 +102,7 @@ echo $data ? " - $data" : "";
                     <div class="bl-photo">
                         <strong><em><?php echo $user->pseudo_member; ?></em></strong>
                         <br /><br />
-                        <a href="#" class="bl-link bgr-blue"><img src="<?php echo $user->photoURL(); ?>" alt="" /></a>
+                        <a href="/#" class="bl-link bgr-blue"><img src="<?php echo $user->photoURL(); ?>" alt="" /></a>
                     </div> <!-- .bl-photo -->
                     <div class="bl-right">
                         <div>
@@ -118,6 +118,8 @@ echo $data ? " - $data" : "";
                     </div> <!-- .bl-right -->
                 </div> <!-- .beta-left -->
                 <div class="beta-right">
-                   <?php $contr->loadvWidget("news"); ?>
+                   <?php //$contr->loadvWidget("news"); 
+                   ?>
+                    
                 </div> <!-- .beta-right -->
             </div> <!-- .beta -->

@@ -67,7 +67,7 @@ class libs_user {
         }
 
 
-        return $photo_member;
+        return "/".$photo_member;
     }
 
     function getDB($select, $id) {
