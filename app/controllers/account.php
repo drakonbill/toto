@@ -10,8 +10,8 @@ class controllers_account extends Controller {
 // Login method
     function login() {
 
-        $loginM = $this->loadModel("login");
-        $login = $loginM->indexModel();
+        $loginM = $this->loadModel("account");
+        $login = $loginM->login();
         $this->reg->login = $login;
 
         if (!isset($_SESSION['id_member'])) {
@@ -26,8 +26,8 @@ class controllers_account extends Controller {
 // Logout method 
     function logout() {
 
-        $logoutM = $this->loadModel("logout");
-        $logout = $logoutM->indexModel();
+        $logoutM = $this->loadModel("account");
+        $logout = $logoutM->logout();
 
         header('Location: /index');
     }
@@ -38,8 +38,8 @@ class controllers_account extends Controller {
 
 //$user = $this->reg->user;
 //load model and fill data with
-        $indexM = $this->loadModel("lostpassword");
-        $index = $indexM->indexModel();
+        $indexM = $this->loadModel("account");
+        $index = $indexM->lostpassword();
 
 //load views
         $this->loadView("header", "");
