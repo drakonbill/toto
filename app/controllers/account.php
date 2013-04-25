@@ -8,7 +8,7 @@ class controllers_account extends Controller {
     }
 
 // Login method
-    function login() {
+    function loginAction() {
 
         $loginM = $this->loadModel("account");
         $login = $loginM->login();
@@ -24,7 +24,7 @@ class controllers_account extends Controller {
     }
 
 // Logout method 
-    function logout() {
+    function logoutAction() {
 
         $logoutM = $this->loadModel("account");
         $logout = $logoutM->logout();
@@ -34,7 +34,7 @@ class controllers_account extends Controller {
 
 // Lost password method
 
-    function lostpassword() {
+    function lostpasswordAction() {
 
 //$user = $this->reg->user;
 //load model and fill data with
