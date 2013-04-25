@@ -15,7 +15,7 @@ class models_ajax_event extends Model {
                 global $reg;
                 
                 // Constantes
-                define('TARGET', MEMDIR.hash('crc32',crc32(PREFIXE).$_SESSION['id_member'].crc32(SUFFIXE)).'/');    // Repertoire cible
+
                 define('MAX_SIZE', 2000000);    // Taille max en octets du fichier
                 define('WIDTH_MAX', 2000);    // Largeur max de l'image en pixels
                 define('HEIGHT_MAX', 2000);    // Hauteur max de l'image en pixels
@@ -89,7 +89,7 @@ class models_ajax_event extends Model {
                                         if(move_uploaded_file($_FILES['photo']['tmp_name'], TARGET.$nomImage))
                                         {
                                           $message = '1;';
-                                          $message .= MEMDIR.hash('crc32',crc32(PREFIXE).$_SESSION['id_member'].crc32(SUFFIXE))."/".$nomImage;
+                                          $message .= "/".MEMDIR.hash('crc32',crc32(PREFIXE).$_SESSION['id_member'].crc32(SUFFIXE))."/".$nomImage;
                                           $message .= ";".$nomImage;
                                         }
                                         else
@@ -137,8 +137,6 @@ class models_ajax_event extends Model {
     
     function addEvent() {
         global $reg;
-        
-        define('TARGET', MEMDIR.hash('crc32',crc32(PREFIXE).$_SESSION['id_member'].crc32(SUFFIXE)).'/');
 
         $erreur="";
         if(isset($_POST['x1']) && isset($_POST['x2']) && isset($_POST['y1']) && isset($_POST['y2']) && isset($_POST['w']) && isset($_POST['h']) && isset($_POST['image']) && isset($_POST['imageheight']) && isset($_POST['imagewidth'])) {

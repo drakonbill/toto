@@ -22,7 +22,7 @@ class models_ajax_passion extends Model {
         if(!empty($q)) {
             $resultat = mysql_query("SELECT id_passion,name_passion,icon_passion AS icone,passion_category.icone AS icone_categorie,name_category from passion inner join passion_category on passion.id_category=passion_category.id_category WHERE name_passion LIKE '%".$q."%' LIMIT 11") or die(mysql_error());
             while ($donnees = mysql_fetch_assoc($resultat)) {
-                        $result .= ucfirst($donnees['name_passion'])."|".ucfirst($donnees['name_category'])."|".(!empty($donnees['icone'])?$donnees['icone']:$donnees['icone_categorie'])."\n";
+                        $result .= ucfirst($donnees['name_passion'])."|".ucfirst($donnees['name_category'])."|/".(!empty($donnees['icone'])?$donnees['icone']:$donnees['icone_categorie'])."\n";
             }
 
             if(mysql_num_rows($resultat) == 0) {
@@ -40,7 +40,7 @@ class models_ajax_passion extends Model {
                 
                 $result = "";
                 while($data = mysql_fetch_array($requete)) 
-                        $result .= "<li value='".$data['id_category']."'><img src='".$data['icone']."' alt='".$data['name_category']."' />".ucfirst($data['name_category'])."</li>";
+                        $result .= "<li value='".$data['id_category']."'><img src='/".$data['icone']."' alt='".$data['name_category']."' />".ucfirst($data['name_category'])."</li>";
                 
                 return $result;
         }
@@ -53,7 +53,6 @@ class models_ajax_passion extends Model {
                 global $reg;
                 
                 // Constantes
-                define('TARGET', MEMDIR.hash('crc32',crc32(PREFIXE).$_SESSION['id_member'].crc32(SUFFIXE)).'/');    // Repertoire cible
                 define('MAX_SIZE', 2000000);    // Taille max en octets du fichier
                 define('WIDTH_MAX', 2000);    // Largeur max de l'image en pixels
                 define('HEIGHT_MAX', 2000);    // Hauteur max de l'image en pixels
@@ -85,7 +84,7 @@ class models_ajax_passion extends Model {
                         // On verifie l'extension du fichier
                         if(in_array(strtolower($extension),$tabExt))
                         {
-                           switch ($_FILES["photo"]["error"])
+                           switch ($_FILES["filepassion"]["error"])
                             {
 
                                     case 1 : return ("<p>Erreur : la taille du fichier dépasse le maximum autorisé ".ini_get('upload_max_filesize')."</p>\n");
@@ -126,7 +125,7 @@ class models_ajax_passion extends Model {
                                         if(move_uploaded_file($_FILES['filepassion']['tmp_name'], TARGET.$nomImage))
                                         {
                                           $message = '1;';
-                                          $message .= MEMDIR.hash('crc32',crc32(PREFIXE).$_SESSION['id_member'].crc32(SUFFIXE))."/".$nomImage;
+                                          $message .= "/".MEMDIR.hash('crc32',crc32(PREFIXE).$_SESSION['id_member'].crc32(SUFFIXE))."/".$nomImage;
                                           $message .= ";".$nomImage;
                                         }
                                         else
@@ -176,8 +175,6 @@ class models_ajax_passion extends Model {
         
         global $reg;
         
-        define('TARGET', MEMDIR.hash('crc32',crc32(PREFIXE).$_SESSION['id_member'].crc32(SUFFIXE)).'/');    // Repertoire cible
-        
         $result = "";
         
         if($_SESSION['id_member'] != "")
@@ -215,7 +212,7 @@ class models_ajax_passion extends Model {
                                                         $cropped = $this->resizeThumbnailImage(TARGET.$image, "Images/iconespassion/".$nomImageFinal,$w,$h,$x1,$y1,$imageheight,$imagewidth);
 
                                                         mysql_query("INSERT INTO passion VALUES (default, '".$passion."', '".$categorie."', '".$_SESSION['id_member']."', '"."Images/iconespassion/".$nomImageFinal."')") or die(mysql_error());
-                                                        $result = "2;".$data_verif_categorie['nomcategorie'].";".stripslashes($passion).";".mysql_insert_id().";Images/iconespassion/".$nomImageFinal;
+                                                        $result = "2;".$data_verif_categorie['name_category'].";".stripslashes($passion).";".mysql_insert_id().";/Images/iconespassion/".$nomImageFinal;
                                                         return $result;
                                                 }
                                         }
@@ -225,14 +222,14 @@ class models_ajax_passion extends Model {
 
                                                 if($data_verif_categorie > 0) {
                                                         mysql_query("INSERT INTO passion VALUES (default, '".$passion."', '".$categorie."', '".$_SESSION['id_member']."', default)") or die(mysql_error());
-                                                        $result = "2;".$data_verif_categorie['name_category'].";".stripslashes($passion).";".mysql_insert_id().";".$data_verif_categorie['icone'];
+                                                        $result = "2;".$data_verif_categorie['name_category'].";".stripslashes($passion).";".mysql_insert_id().";/".$data_verif_categorie['icone'];
                                                         return $result;
                                                 }
                                         }
                                         else if($data_verif_new != 0) {
                                                 $idpassion = mysql_fetch_array($requete_verif_new);
 
-                                                $result = "2;".$idpassion['name_category'].";".stripslashes($passion).";".$idpassion['id_passion'].";".($idpassion['icone_passion'] == NULL?$idpassion['icone']:$idpassion['icone_passion']);
+                                                $result = "2;".$idpassion['name_category'].";".stripslashes($passion).";".$idpassion['id_passion'].";/".($idpassion['icone_passion'] == NULL?$idpassion['icone']:$idpassion['icone_passion']);
                                                 return $result;
                                         }
 
