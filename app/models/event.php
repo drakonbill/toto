@@ -18,6 +18,16 @@ class models_event extends Model {
         return true;
     }
     
+    function displayEventModel() {
+        
+        
+        return true;
+    }
+    
+    function indexModel() {
+        
+        
+    }
 }
 
 ?>
