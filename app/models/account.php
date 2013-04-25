@@ -1,53 +1,54 @@
 <?php
 
-/**
- * Description of login
- *
- * @author Miki
- */
-class models_login extends Model {
+class models_account extends Model {
 
+// No need for the moment
     public function indexModel() {
+        
+    }
 
-        // Variable definition : Email, Password, and Token
+// Login Model
+    public function login() {
+
+// Variable definition : Email, Password, and Token
         $loginEmail = $this->reg->clean->POST('email');
-        // I want to include the hacher function in the user lib ... But don't know how to do that 
+// I want to include the hacher function in the user lib ... But don't know how to do that 
         $loginPassword = $this->reg->clean->POST('password');
         $password = $this->reg->user->hacher($loginPassword); //md5(sha1(PREFIXE) . $loginPassword  . sha1(SUFFIXE));
         $loginToken = $this->reg->clean->POST('token');
 
-        // For the coockie : var memoriser, if it's check : cookies on, if not, no cookies.
+// For the coockie : var memoriser, if it's check : cookies on, if not, no cookies.
 
         $logincookie = $this->reg->clean->POST('memoriser');
 
-        // If the token is not empty
+// If the token is not empty
         if (isset($_SESSION['token']) && isset($_SESSION['token_time']) && isset($loginToken)) {
-            // If the token in session, and sent with the connexion form are equal
+// If the token in session, and sent with the connexion form are equal
             if ($_SESSION['token'] == $loginToken) {
-                // During of the token
+// During of the token
                 $timestamp_old = time() - (10 * 60);
-                // If the token has expiered 
+// If the token has expiered 
                 if ($_SESSION['token_time'] >= $timestamp_old) {
-                    // If the cookie is not empty
+// If the cookie is not empty
                     if (!isset($_COOKIE['email_member']) OR !isset($_COOKIE['password_member'])) {
 
-                        // Email selection 
+// Email selection 
                         $query = mysql_query("SELECT * from member WHERE email_member = '$loginEmail'") or die("Impossible de sélectionner le pseudo : " . mysql_error());
                         if (mysql_num_rows($query) != 1) {
                             $data["error"]["email"] = "wrong email";
                         }
 
-                        // Password selection with the good email, to see if the email OR the password is false. To know which one is false.
+// Password selection with the good email, to see if the email OR the password is false. To know which one is false.
                         $query2 = mysql_query("SELECT id_member from member WHERE email_member = '$loginEmail' AND password_member = '$password'") or die("Impossible de sélectionner le pseudo : " . mysql_error());
                         if (mysql_num_rows($query2) == 1) {
 
                             $row = mysql_fetch_assoc($query2);
 
                             $data = $row;
-                            // ID of the member in session 
+// ID of the member in session 
                             $_SESSION['id_member'] = $data['id_member'];
 
-                            // cookies 
+// cookies 
                             if ($logincookie == 1) {
                                 $expire = 7 * 24 * 3600; //durée du cookie à 7 jours
                                 $tempo_email = $loginEmail;
@@ -69,7 +70,7 @@ class models_login extends Model {
                             $row = mysql_fetch_assoc($query);
 
                             $data = $row;
-                            // ID of the member in session 
+// ID of the member in session 
                             $_SESSION['id_member'] = $data['id_member'];
                         } else {
                             $data["error"]["cookie"] = "wrong cookie";
@@ -78,7 +79,7 @@ class models_login extends Model {
                         }
                     }
                 } else {
-                    // Error in the global variable data
+// Error in the global variable data
                     $data['error']['token'] = "La connexion a expirée. Veuillez vous identifier de nouveau.";
                 }
             } else {
@@ -90,6 +91,26 @@ class models_login extends Model {
             header('Location: /index');
         }
         return $data;
+    }
+
+    // Logout Model
+
+    public function logout() {
+
+        // Unset id of the member in session
+        unset($_SESSION['id_member']);
+
+        // Destroying the cookie
+        if ((!empty($_COOKIE['email_member'])) && (!empty($_COOKIE['password_member']))) {
+            setcookie('email_member', null, time() - 3600, '/');
+            setcookie('password_member', null, time() - 3600, '/');
+            // unset($_COOKIE['email_member']);
+            // unset($_COOKIE['password_member']);
+        }
+    }
+    
+    public function lostpassword() {
+
     }
 
 }
