@@ -35,19 +35,12 @@ class controllers_event extends Controller {
  
     }
     
-    function displayAction() {
-
+    function indexAction() {
+        global $_URL;
+        
         if($this->user->loggedin()) {
             $indexM = $this->loadModel("event");
-            $index = $indexM->displayEventModel();
-
-
-            //load widgets data ( from models, if they need it)
-            //$this->loadmWidgets(array("hello","last10"));
-            //pack some data
-            //$index["token"] = @$reg->token;
-
-            //load views
+            $index = $indexM->indexModel();
 
             $this->loadView("header_co", "");
             $this->loadView("displayevent", $_URL['id']);
@@ -55,11 +48,6 @@ class controllers_event extends Controller {
         }
         else 
               $this->redirect ("index")->indexAction();
- 
-    }
-    
-    function indexAction() {
-        
     }
     
     

@@ -352,6 +352,7 @@ class models_ajax_event extends Model {
                 chmod($thumb_image_name, 0777);
                 return $thumb_image_name;
     }
+    
 }
 
 ?>
