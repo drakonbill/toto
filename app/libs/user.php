@@ -67,7 +67,7 @@ class libs_user {
         }
 
 
-        return "/".$photo_member;
+        return "/" . $photo_member;
     }
 
     function getDB($select, $id) {
@@ -110,6 +110,39 @@ class libs_user {
         } else {
             return 0;
         }
+    }
+    
+    // Function to send and email proprely
+    function postMail($messtxt, $messhtml, $sujet, $to, $from, $reply = "") {
+        if (empty($reply))
+            $reply = $from;
+        $destinataire = "$to[0] <$to[1]>";
+        $boundary = "_" . md5(uniqid(rand()));
+        $entete = "MIME-Version: 1.0\n";
+
+        $entete .= "X-Sender: <" . $_SERVER['SERVER_NAME'] . ">\n";
+        $entete .= "X-Mailer: PHP\n";
+        $entete .= "X-auth-smtp-user: webmaster@" . $_SERVER['SERVER_NAME'] . " \n";
+        $entete .= "X-abuse-contact: webmaster@" . $_SERVER['SERVER_NAME'] . " \n";
+
+        $entete .= "Reply-to: $reply[0] <$reply[1]>\n";
+        $entete .= "From:$from[0] <$from[1]>\n";
+        $entete .= "Content-Type: multipart/alternative; boundary=\"$boundary\"";
+
+        $message = "--" . $boundary . "\n";
+        $message.= "This is a multi-part message in MIME format.\n\n";
+
+        $message .= "Content-Type: text/plain; charset=\"UTF-8\"\n";
+        $message .= "Content-Transfer-Encoding: quoted-printable\n\n";
+        $message .= $messtxt;
+        $message .= "\n\n";
+        $message .= "--" . $boundary . "\n";
+        $message .= "Content-Type: text/html; charset=\"UTF-8\"\n";
+        $message .= "Content-Transfer-Encoding: quoted-printable\n\n";
+        $message .= str_replace("=", "=3D", $messhtml);
+        $message .= "\n\n";
+
+        return @mail($destinataire, $sujet, $message, $entete);
     }
 
 }
