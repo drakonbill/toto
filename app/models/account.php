@@ -35,7 +35,7 @@ class models_account extends Model {
 // Email selection 
                         $query = mysql_query("SELECT * from member WHERE email_member = '$loginEmail'") or die("Impossible de sélectionner le pseudo : " . mysql_error());
                         if (mysql_num_rows($query) != 1) {
-                            $data["error"]["email"] = "wrong email";
+                            $data["error"]["email"] = "L'adresse email que vous avez entré est inconnue.";
                         }
 
 // Password selection with the good email, to see if the email OR the password is false. To know which one is false.
@@ -45,9 +45,13 @@ class models_account extends Model {
                             $row = mysql_fetch_assoc($query2);
 
                             $data = $row;
-// ID of the member in session 
-                            $_SESSION['id_member'] = $data['id_member'];
 
+                            if ($_SESSION['account_locked'] < 10) {
+// ID of the member in session 
+                                $_SESSION['id_member'] = $data['id_member'];
+                            } else {
+                                $data["error"]["locked"] = "A cause d'un grand nombre de tentatives, votre session est temporairement bloquée.";
+                            }
 // cookies 
                             if ($logincookie == 1) {
                                 $expire = 7 * 24 * 3600; //durée du cookie à 7 jours
@@ -59,6 +63,17 @@ class models_account extends Model {
                             }
                         } else {
                             $data["error"]["password"] = "Le mot de passe que vous avez entré n'est pas correct.";
+                            // Installation of locked account with sessions if the member aptent 10 times
+                            if (!isset($_SESSION['account_locked'])) {
+                                $_SESSION['account_locked'] = 1;
+                            }
+
+                            if ((isset($_SESSION['account_locked'])) && ($_SESSION['account_locked'] < 10)) {
+                                $_SESSION['account_locked'] = $_SESSION['account_locked'] + 1;
+                            }
+                            if ((isset($_SESSION['account_locked'])) && ($_SESSION['account_locked'] == 10)) {
+                                $data["error"]["locked"] = "A cause d'un grand nombre de tentatives, votre session est temporairement bloquée.";
+                            }
                         }
                     } else {
                         $cookieEmail = $_COOKIE['email_member'];
@@ -76,6 +91,17 @@ class models_account extends Model {
                             $data["error"]["cookie"] = "wrong cookie";
                             setcookie('email_member', "", time() - 1000);
                             setcookie('password_member', "", time() - 1000);
+
+                            if (!isset($_SESSION['account_locked'])) {
+                                $_SESSION['account_locked'] = 1;
+                            }
+
+                            if ((isset($_SESSION['account_locked'])) && ($_SESSION['account_locked'] < 10)) {
+                                $_SESSION['account_locked'] = $_SESSION['account_locked'] + 1;
+                            }
+                            if ((isset($_SESSION['account_locked'])) && ($_SESSION['account_locked'] == 10)) {
+                                $data["error"]["locked"] = "A cause d'un grand nombre de tentatives, votre session est temporairement bloquée.";
+                            }
                         }
                     }
                 } else {
@@ -108,9 +134,9 @@ class models_account extends Model {
             // unset($_COOKIE['password_member']);
         }
     }
-    
-    public function lostpassword() {
 
+    public function lostpassword() {
+        
     }
 
 }
