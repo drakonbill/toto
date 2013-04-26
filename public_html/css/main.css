@@ -1719,7 +1719,7 @@ a.event_reponse { display: block; width: 100%; text-align: center; bottom: 0; po
     background-repeat: no-repeat;
     background-size: contain;
     display: block;
-    margin: 5% auto 0 5%;
+    margin: 1% 1% 1% 1%;
     min-height: 300px;
     position: relative;
 }
