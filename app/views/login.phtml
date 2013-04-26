@@ -4,9 +4,12 @@
         <h3 class="cbox-title blue">Connexion</h3><?php
 if (isset($login["error"]['token']))
     echo $login["error"]['token'];
+
+if (isset($login["error"]['locked']))
+    echo $login["error"]['locked'];
 ?>
         <div class="connexion-shadow-1"></div>
-        <form method="post" action="/login" id="connexion">
+        <form method="post" action="accout/login/" id="connexion">
             <div class="cfix connexion-form-in">
                 <div class="connexion-form-col ld">
                     <p>
