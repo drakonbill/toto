@@ -88,7 +88,7 @@ class models_account extends Model {
 // ID of the member in session 
                             $_SESSION['id_member'] = $data['id_member'];
                         } else {
-                            $data["error"]["cookie"] = "wrong cookie";
+                            $data["error"]["cookie"] = "Une erreur est survenue lors de la mémorisation de votre connexion. Veuillez réessayer.";
                             setcookie('email_member', "", time() - 1000);
                             setcookie('password_member', "", time() - 1000);
 
