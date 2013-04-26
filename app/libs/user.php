@@ -111,7 +111,7 @@ class libs_user {
             return 0;
         }
     }
-    
+
     // Function to send and email proprely
     function postMail($messtxt, $messhtml, $sujet, $to, $from, $reply = "") {
         if (empty($reply))
@@ -143,6 +143,11 @@ class libs_user {
         $message .= "\n\n";
 
         return @mail($destinataire, $sujet, $message, $entete);
+    }
+
+    //Function to get the IP of the member
+    function get_ip() {
+        return (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
     }
 
 }
