@@ -47,6 +47,17 @@ class controllers_account extends Controller {
         $this->loadView("footer", "");
     }
 
+    // Validation of the registration 
+    function validationregistrationActio() {
+        
+        $indexM = $this->loadModel("account");
+        $index = $indexM->validationregistration();
+        
+        $this->loadView("header", "");
+        $this->loadView("validationregistration", $index);
+        $this->loadView("footer", "");
+    }
+
 }
 
 ?>
