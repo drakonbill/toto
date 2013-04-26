@@ -45,8 +45,15 @@ class controllers_event extends Controller {
     
     function indexAction() {
         
-    }
-    
+//        $model = $this->loadModel("event");
+//        $allEvents =  $model->allUserEvents();
+//        
+//        foreach ($allEvents as $idEvent) {
+//            $events[$idEvent] = $model ->displayModel($idEvent);
+//             
+//        }
+//         $this->loadView("displayevent", $events); 
+    }   
     
     
 }

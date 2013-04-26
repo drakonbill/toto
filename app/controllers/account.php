@@ -4,7 +4,7 @@ class controllers_account extends Controller {
 
 // No IndexAction
     function indexAction() {
-        
+        header('Location: /index'); // meetoparty/account will redirect on index
     }
 
 // Login method
@@ -48,7 +48,7 @@ class controllers_account extends Controller {
     }
 
     // Validation of the registration 
-    function validationregistrationActio() {
+    function validationregistrationAction() {
         
         $indexM = $this->loadModel("account");
         $index = $indexM->validationregistration();
