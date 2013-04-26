@@ -1,1 +1,451 @@
-<?php echo $data;?>
+
+<link rel="stylesheet" type="text/css" href="http://openlayers.org/dev/theme/default/style.css" />
+<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
+<?php $loading = $data;?>
+<script type="text/javascript" src="http://openlayers.org/dev/OpenLayers.js"></script>
+<script type="text/javascript">var lon="<?php echo $loading->lon;?>";var lat="<?php echo $loading->lat;?>";</script>
+<script type="text/javascript" src="<?php echo $conf['url'];?>js/evenement/mesEvenement.js"></script>
+
+
+
+      <div id="inside-main" class="cfix">
+        <!-- This is the main content area -->
+        <div id="inside-column">
+          <div id="inside-column-wrap">
+            <div class="inside-column-inside">
+			  <?php //include 'Modules/tchat/notifications.php'; ?>
+			  <hr class="clear"/>
+              <div class="connexion-shadow-1"></div>
+    
+            </div> <!-- .inside-column-inside -->
+            <div class="inside-column-sep"></div>
+			<?php
+				/******************************************************************************************
+				*           CONTENT EVENT ********************
+				******************************************/
+			?>
+            <div class="inside-column-inside">
+              <div class="cfix">
+                <div class="conversation-main">
+                  <div class="conversation-main-inside">
+                    <div class="chat-meta cfix">
+                      <div class="rd new-small blue">
+                        <a href="#" class="rev">Voir evenement</a>
+                        -
+                        <a href="#" class="rev">Lieu</a>
+                      </div>
+                      <strong>Evenement</strong> <?php echo $loading->date_result;?></strong>
+                    </div>
+                    <div class="chat-msg bgr-darkblue">
+                      <span class="white"><?php echo $loading->nomevenement;?> (<?php echo $loading->confidentialite_texte;?>),</span>
+                      <a href="#" class="rev blue">organise par <?php echo $loading->auteur;?></a>
+                      <div class="chat-tip-left"></div>
+                    </div> <!-- .chat-msg -->
+                  </div> <!-- .conversation-main-inside -->
+                </div> <!-- .conversation-main -->
+                <div class="conversation-left">
+                  <a href="#" class="user-avatar bgr-darkblue"><img src="<?php echo $conf['url'].TARGET.$loading->avatar;?>" alt="" width="42" /></a>
+                </div>
+              </div> <!-- .cfix -->
+                <br />
+				<div class='wrapper_event'>
+					<div class="display_event_ou">
+						<p>
+							<span class="title_event">Où ?</span>
+						</p>
+						<img src="Images/carte.png" alt="France" />
+					</div>
+					<div class="wrapper_map"><div id="map" class="smallmap"></div></div>
+				</div>
+				<hr class="clear" />
+				<div class='wrapper_event'>
+					<div class='present_event'>
+						<h4><span class="title_event"><?php echo $loading->nomevenement;?></span></h4>
+						<img class='image_event' src='<?php echo $conf['url'].TARGET.$loading->image;?>' alt='<?php echo $loading->nomevenement;?>' />
+						<img src='Images/jesuisfan.png' alt='Je suis fan' />
+						<h4><span class="nb_fan">45 fans</span></h4>
+					</div>
+					
+					<div class="inside-column-inside display_event_whathappens">
+					  <p>
+						<span class="title_event">Qu'est ce qu'il se passe ?</span>
+						<br /><br />
+						<?php echo $loading->description;?>
+					  </p>
+					</div>
+					<hr class="clear" />
+				</div>
+				 <!-- .inside-column-inside -->
+			<hr class="clear"/>
+
+            
+			<div class="wrapper_event">
+				<div class="inside-column-inside display_event_quivient">
+					  <p>
+						<span class="title_event">Qui vient ?</span>
+						<br />&nbsp;
+					  </p>
+						<ul class="users-list2 cfix">
+						  <li class="user">
+							<a href="#" class="user-photo bgr-pink"><img src="images/clip-face1.jpg" alt="" width="42" /></a>
+							<div class="user-popup-info">
+							  <strong><em>Marie Nguyen,</em></strong>
+							  <br /><br />
+							  Ne le 24/06/1991
+							  <br />
+							  Etudiante a l'Universite xxx Habite a Tours
+							  <div class="black-tip"></div>
+							</div>
+						  </li>
+						  <li class="user">
+							<a href="#" class="user-photo bgr-pink"><img src="images/clip-face2.jpg" alt="" width="42" /></a>
+							<div class="user-popup-info">
+							  <strong><em>Marie Nguyen,</em></strong>
+							  <br /><br />
+							  Ne le 24/06/1991
+							  <br />
+							  Etudiante a l'Universite xxx Habite a Tours
+							  <div class="black-tip"></div>
+							</div>
+						  </li>
+						  <li class="user">
+							<a href="#" class="user-photo bgr-blue"><img src="images/clip-face3.jpg" alt="" width="42" /></a>
+							<div class="user-popup-info">
+							  <strong><em>Marie Nguyen,</em></strong>
+							  <br /><br />
+							  Ne le 24/06/1991
+							  <br />
+							  Etudiante a l'Universite xxx Habite a Tours
+							  <div class="black-tip"></div>
+							</div>
+						  </li>
+						  <li class="user">
+							<a href="#" class="user-photo bgr-pink"><img src="images/clip-face1.jpg" alt="" width="42" /></a>
+							<div class="user-popup-info">
+							  <strong><em>Marie Nguyen,</em></strong>
+							  <br /><br />
+							  Ne le 24/06/1991
+							  <br />
+							  Etudiante a l'Universite xxx Habite a Tours
+							  <div class="black-tip"></div>
+							</div>
+						  </li>
+						  <li class="user">
+							<a href="#" class="user-photo bgr-pink"><img src="images/clip-face2.jpg" alt="" width="42" /></a>
+							<div class="user-popup-info">
+							  <strong><em>Marie Nguyen,</em></strong>
+							  <br /><br />
+							  Ne le 24/06/1991
+							  <br />
+							  Etudiante a l'Universite xxx Habite a Tours
+							  <div class="black-tip"></div>
+							</div>
+						  </li>
+						  <li class="user">
+							<a href="#" class="user-photo bgr-blue"><img src="images/clip-face3.jpg" alt="" width="42" /></a>
+							<div class="user-popup-info">
+							  <strong><em>Marie Nguyen,</em></strong>
+							  <br /><br />
+							  Ne le 24/06/1991
+							  <br />
+							  Etudiante a l'Universite xxx Habite a Tours
+							  <div class="black-tip"></div>
+							</div>
+						  </li>
+						</ul>
+						<a class='event_reponse' href='javascript:void()'><img src='Images/event_reponse.png' alt='Je viendrai'/></a>
+					</div> <!-- .inside-column-inside -->
+				<div class="inside-column-inside  display_event_sponsorise">
+				  <p>
+					<span class="title_event">Photos</span>
+					<br />&nbsp;
+				  </p>
+					<ul class="users-list2 cfix">
+					  <li class="user">
+						<a href="#" class="user-photo bgr-blue2"><img src="images/clip-face1.jpg" alt="" width="42" /></a>
+						<div class="user-popup-info">
+						  <strong><em>Marie Nguyen,</em></strong>
+						  <br /><br />
+						  Ne le 24/06/1991
+						  <br />
+						  Etudiante a l'Universite xxx Habite a Tours
+						  <div class="black-tip"></div>
+						</div>
+					  </li>
+
+					  <li class="user-descr"><a href="#" class="rev">Cinema</a></li>
+
+					  <li class="user">
+						<a href="#" class="user-photo bgr-blue2"><img src="images/clip-face2.jpg" alt="" width="42" /></a>
+						<div class="user-popup-info">
+						  <strong><em>Marie Nguyen,</em></strong>
+						  <br /><br />
+						  Ne le 24/06/1991
+						  <br />
+						  Etudiante a l'Universite xxx Habite a Tours
+						  <div class="black-tip"></div>
+						</div>
+					  </li>
+
+					  <li class="user-descr"><a href="#" class="rev">Films d'action</a></li>
+					</ul>
+				</div> <!-- .inside-column-inside -->
+
+			</div>
+			<hr class="clear"/>
+			<div class="wrapper_event">
+				<div class="inside-column-inside display_event_passionslies">
+				  <p>
+					<span class="title_event">Passions liees</span>
+					<br />&nbsp;
+				  </p>
+					<ul class="list_passion">
+					<?php
+						while($data_passion = mysql_fetch_array($loading->data_passion)) {
+							echo "<li><a href='#' class='user-photo bgr-blue3'><img src='/".($data_passion['iconepassion']!=""?$data_passion['iconepassion']:$data_passion['iconecat'])."' alt='".$data_passion['name_passion']."'/></a><span class='text_passion'><h4>".$data_passion['name_passion']."</h4>Catégorie : ".$data_passion['name_category']."</span></li>";
+						}
+					?>
+					</ul>
+				</div> <!-- .inside-column-inside -->
+				<div class="inside-column-inside display_event_comments">
+					<p>
+						<span class="title_event"><?php
+							if(!$loading->termine)
+								echo "Vous avez une question ?";
+							else
+								echo "Notez l'évènement";
+							?></span>
+						<br />&nbsp;
+					  </p>
+					  <form class="comment">
+						<input type="hidden" name="idevent" id="idevent" value="<?php echo  $loading->idevent;?>" />
+						<div class="contentCommentHeader">
+							<a href="#" class="avatar"><img src="Images/clip-face2.jpg" alt="" /></a>
+							<div class="right-contentCommentHeader"><input class="sendComment" name="sendComment" id="sendComment" value="<?php echo (mysql_num_rows($loading->resultat_mycomment) == 0?"Soyez le premier à commenter":"Saisissez votre message");?>" /></div>				
+						</div>
+					  </form>
+					  <ul class="listComment">
+					  <?php
+						if(mysql_num_rows($loading->resultat_mycomment) != 0) {
+							while($data_mycomment = mysql_fetch_array($loading->resultat_mycomment)) {
+								echo "<li><img src='".$data_mycomment['maphoto']."' alt=''/><span class='text_comment'><div class='chat-tip-left'></div><h4>".ucfirst($data_mycomment['pseudo'])." ".date("d-m-Y à H:i", $data_mycomment['date'])."</h4>".$data_mycomment['message']."</span></li>";
+							}
+						}
+						else {
+							echo "<li>Aucun commentaires pour le moment</li>";
+						}
+					  ?>
+					  </ul>
+					  <hr class="clear"/>
+				</div>
+				<hr class="clear"/>
+			</div>
+			</div>
+          </div> <!-- #inside-column-wrap -->
+        </div> <!-- #inside-column -->
+
+        <div id="sidebar-left">
+          <div id="sidebar-left-in">
+            <h2 class="sb-title"><span>Amis en linge</span></h2>
+            <div class="cfix">
+              <div class="sb-block">
+                <ul class="users-list2 cfix">
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-blue"><img src="Images/clip-face3.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-blue"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face3.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-blue"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face3.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                </ul> <!-- .users-list2 -->
+                <p class="nom">
+                  <br />
+                  <a href="#" class="rev blue">Liste d'amis</a>
+                </p>
+              </div>
+            </div>
+			<?php 
+				/*************************************************** TCHAT ****************************************/
+				//include 'Modules/tchat/tchat-left.php';
+				/*************************************************** FINTCHAT ****************************************/
+			?>
+
+          </div> <!-- #sidebar-left-in -->
+        </div> <!-- #sidebar-left -->
+
+        <div id="sidebar-right">
+          <div id="sidebar-right-in">
+            <h2 class="sb-title"><span>Mes evenements</span></h2>
+            <div class="sb-block">
+              <div class="event-caption cfix">
+                <a href="#" class="rd user-avatar bgr-darkblue"><img src="images/clip-face1.jpg" alt="" width="42" /></a>
+                <br />
+                <strong><em>Nuit de films,</em></strong>
+                <br />
+                <small>venderdi 12 Decembre</small>
+              </div> <!-- .cfix -->
+              <p>Cet evenement est l'occasion de xxxx x x xxx xxxx xxx x x x xxxxxxxxx x x xx !</p>
+              <p>
+                <br />
+                <strong class="blue">A venir</strong>
+              </p>
+              <ul class="events-list">
+                <li>
+                  <strong><em>Nuit de films,</em></strong>
+                  <br />
+                  <small>venderdi 12 Decembre</small>
+                </li>
+                <li>
+                  <strong><em>First fraday,</em></strong>
+                  <br />
+                  <small>lundi 15 Decembre</small>
+                </li>
+                <li>
+                  <strong><em>Cinema,</em></strong>
+                  <br />
+                  <small>mardi 16 Decembre</small>
+                </li>
+              </ul>
+            </div> <!-- .sb-block -->
+            <h2 class="sb-title"><span>Evenements Conseilles</span></h2>
+            <div class="sb-block">
+              <div class="event-caption cfix">
+                <a href="#" class="rd user-avatar bgr-darkblue"><img src="images/clip-face1.jpg" alt="" width="42" /></a>
+                <br />
+                <strong><em>Nuit de films,</em></strong>
+                <br />
+                <small>venderdi 12 Decembre</small>
+              </div> <!-- .cfix -->
+              <p>Cet evenement est l'occasion de xxxx x x xxx xxxx xxx x x x xxxxxxxxx x x xx !</p>
+            </div> <!-- .sb-block -->
+            <h2 class="sb-title"><span>Sponsorisé</span></h2>
+            <div class="sb-block">
+              <a href="#"><img src="images/clip-cola.jpg" alt="" width="175" />5 évènements crées, 5000 fans, Voir ses évènements</a>
+            </div> <!-- .advertisement -->
+          </div> <!-- #sidebar-right-in -->
+        </div> <!-- #sidebar-right -->
+		 <div id="main-footer">
+          <div class="connexion-shadow-2 nom"></div>
+          <div id="home-icons">
+            <img src="images/icon-1.png" alt="" />
+            <img src="images/icon-2.png" alt="" />
+            <img src="images/icon-3.png" alt="" />
+            <img src="images/icon-4.png" alt="" />
+            <img src="images/icon-5.png" alt="" />
+            <img src="images/icon-6.png" alt="" />
+          </div> <!-- #home-icons -->
+        </div> <!-- #main-footer -->
+      </div> <!-- .cfix -->
+
+      <div class="blue-box-top blue-box-asdf"></div>
+      <div class="blue-box">
+        <div class="blue-box-in cfix equal-heights">
+          <div class="blue-box-col ld">
+            <div class="equal">
+              <p>&laquo;&nbsp;Sam, celui qui conduit, c'est celui qui ne bois pas.&nbsp;&raquo;</p>
+              <p class="ra"><strong><em class="grey">Mister Cocktail</em></strong></p>
+            </div> <!-- .equal -->
+          </div> <!-- .blue-box-col -->
+          <div class="blue-box-col rd">
+            <div class="equal">
+              <p>&laquo;&nbsp;Ne soyez pas timide, les autres ne vont pas vous manger.&nbsp;&raquo;</p>
+              <p class="ra"><strong><em class="grey">Mister Cocktail</em></strong></p>
+            </div> <!-- .equal -->
+          </div> <!-- .blue-box-col -->
+        </div> <!-- .blue-box-in -->
+      </div> <!-- .blue-box -->
+
+
