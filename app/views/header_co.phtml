@@ -24,6 +24,7 @@ echo $data ? " - $data" : "";
     </head>
     <body>
         <div id="wrap-outer">
+            <div style="width: 1061px; margin: 0 auto; position: relative;">
             <div id="logo-block">
                 <a href="index.php" id="logo" class="rep">MeetoParty</a>
                 <div id="top-social-links">
@@ -41,7 +42,7 @@ echo $data ? " - $data" : "";
                 <div id="header-left">
                     <div id="header-left-in1">
                         <div id="header-left-in2">
-                            <ul class="menu" id="left-menu">
+                            <ul class="menu">
                                 <li><a href="#">
                                         <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-fav.png" alt="" /></span>
                                         <span class="menu-text">Evenement</span>
@@ -69,7 +70,7 @@ echo $data ? " - $data" : "";
                 <div id="header-right">
                     <div id="header-right-in1">
                         <div id="header-right-in2">
-                            <ul class="menu" id="right-menu">
+                            <ul class="menu">
                                 <li><a href="index.php?page=messagerie">
                                         <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-email.png" alt="" /></span>
                                         <span class="menu-text">Message</span>
@@ -118,8 +119,12 @@ echo $data ? " - $data" : "";
                     </div> <!-- .bl-right -->
                 </div> <!-- .beta-left -->
                 <div class="beta-right">
-                   <?php //$contr->loadvWidget("news"); 
+                   <?php $contr->loadvWidget("news"); 
                    ?>
                     
                 </div> <!-- .beta-right -->
-            </div> <!-- .beta -->
+                
+                
+        </div> <!-- .beta -->
+            
+            

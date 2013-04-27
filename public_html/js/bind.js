@@ -77,9 +77,6 @@ function top_resize(){
     $('#inside-column-wrap').height(h - 125);
 
 
-    $('#recherche-box').css({
-        marginRight : (($('#header-right-in2').width() - $('#right-menu').width() - $('#recherche-box').width()) / 2) + 'px'
-    });
 }
 
 var form_down = false;
