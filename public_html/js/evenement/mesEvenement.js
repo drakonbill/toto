@@ -44,7 +44,7 @@ function init(){
 function comeon(idevent) {
 	$.ajax({
 		type: 'GET',
-		url: 'js/Ajax-PHP/evenement/participate.php',
+		url: '/ajax/partipateEvent',
 		data: "idevent="+idevent,
 		success:
 			function(result) {
@@ -58,7 +58,7 @@ function comeon(idevent) {
 function fan(idevent) {
 	$.ajax({
 		type: 'GET',
-		url: 'js/Ajax-PHP/evenement/fan.php',
+		url: '/ajax/fanEvent',
 		data: "idevent="+idevent,
 		success:
 			function(result) {
@@ -74,10 +74,10 @@ $(document).ready(function() {
 	$("form.comment input#sendComment").live('keydown', function(event) {
 		if(event.which == 13) {
 			if($.trim($(this).val()) != "" && $.trim($("form.comment input#idevent").val()) != "") {
-				$("form.comment input#sendComment").css({'background':'url(Images/ajax-loader.gif) no-repeat right'});
+				$("form.comment input#sendComment").css({'background':'url(/Images/ajax-loader.gif) no-repeat right'});
 				$.ajax({
 					type: 'POST',
-					url: 'js/Ajax-PHP/evenement/addcomment.php',
+					url: '/ajax/addCommentEvent',
 					data: "idevent="+$.trim($("form.comment input#idevent").val())+"&message="+$.trim($(this).val())+"&note="+($("select#note").length > 0?$("select#note").val():""),
 					success:
 						function(result) {

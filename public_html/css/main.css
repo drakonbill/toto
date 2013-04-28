@@ -4,15 +4,27 @@
 	list-style:none;
 }
 html{
-	background:url(../images/bgr.jpg) repeat-x 50% 0 #cee7fa;
 	min-width:1000px;
 }
+
+html.htmlconnect{
+    background:url(../images/bgr.jpg) repeat-x 50% 0 #cee7fa;
+}
+
+html.htmlnoconnect{
+    background:url(../images/bgr2.jpg) repeat-x 50% 0 #cee7fa;
+}
+
 body{
 	font-family:Arial, sans-serif;
 	font-size:12px;
 	line-height:1.3;
-        background: url('../Images/fond-border-shadow.png') 50% repeat-y;
 }
+
+body.bodyconnect{
+     background: url('../Images/fond-border-shadow.png') 50% repeat-y;
+}
+
 .clear{
 	clear:both;
 	height:0;
@@ -78,9 +90,13 @@ a.rev:hover{ text-decoration:underline; }
 	width: 253px;
 	position: absolute;
 	left: 50%;
-	top: -30px;
 	margin-left: -122px;
 }
+
+.logo-block-co{
+    top: -30px;
+}
+
 #logo{
 	width:253px;
 	height:151px;

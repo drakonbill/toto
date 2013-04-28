@@ -353,6 +353,178 @@ class models_ajax_event extends Model {
                 return $thumb_image_name;
     }
     
+    function addComment() {
+        
+        global $reg;
+        
+        $message = $reg->clean->POST('message');
+        $idevent =  $_POST['idevent'];
+        $datenow = time();
+
+        $result = array();
+
+        if(!empty($message) && strlen($message) > 2 && isset($_SESSION['id_member']) && !empty($idevent) && is_numeric($idevent)) {
+
+                $requete_membre = mysql_query("SELECT pseudo_member,photo_member FROM member WHERE id_member='".$_SESSION['id_member']."'") or die(mysql_error());
+                $data_membre = mysql_fetch_array($requete_membre);
+
+                if(mysql_num_rows($requete_membre) != 0) {
+
+                        $requete_evenement = mysql_query("SELECT * FROM event WHERE id_event='".$idevent."'") or die(mysql_error());
+                        $data_evenement = mysql_fetch_array($requete_evenement);
+                        $nb_evenement = mysql_num_rows($requete_evenement);
+
+                        if($nb_evenement == 1) {
+
+                                $previous_time=0;
+                                $last_message = mysql_query("SELECT * FROM event_comments WHERE id_event='".$idevent."' AND id_member='".$_SESSION['id_member']."' ORDER BY date_comment DESC LIMIT 1") or die(mysql_error());
+                                if(mysql_num_rows($last_message) != 0) {
+                                        $data_previous_message = mysql_fetch_array($last_message);
+                                        $previous_time = strtotime($data_previous_message['date_comment']);
+                                }
+
+                                if($datenow - $previous_time > 35 || $previous_time == 0) {
+                                        mysql_query("INSERT INTO event_comments VALUES ('".$_SESSION['id_member']."','".$idevent."','".$message."',default)") or die(mysql_error());
+                                        $result[]="ok";
+                                        $result[]=array(ucfirst($data_membre['pseudo_member']),$data_membre['photo_member'],$message,date("d-m-Y à H:i",$datenow),-1);
+                                }
+                                else {
+                                        $result[]="error";
+                                        $result[]="Evitez les spams";
+                                }
+                        }
+                        else {
+                                $result[]="error";
+                                $result[]="Mauvais évènement";
+                        }
+                }
+                else {
+                        $result[]="error";
+                }
+        }
+        else {
+                $result[]="error";
+                $result[]="Veuillez saisir un message correct (plus de 2 caractères)";
+        }
+
+        return json_encode($result);
+    }
+    
+    function fan() {
+        
+        $idevent = $_GET['idevent'];
+
+        if(!empty($idevent) && is_numeric($idevent)) {
+                $requete_event = mysql_query("SELECT * FROM event WHERE id_event='".$idevent."'") or die(mysql_error());
+                $data_event = mysql_fetch_array($requete_event);
+
+                $verif_confidentialite=true;
+                
+                if($data_event['id_member'] == $_SESSION['id_member']) {
+		
+                }
+                else if($data_event['confidentiality_event'] == 0) {
+                        $requete_friend = mysql_query("SELECT * FROM member_contacts WHERE id_member='".$_SESSION['id_member']."' AND id_contact='".$data_event['id_member']."' AND condition_contact=1 OR id_contact='".$_SESSION['id_member']."' AND id_member='".$data_event['id_member']."' AND condition_contact=1");
+                        $nb_friend = mysql_num_rows($requete_friend);
+                        
+                        $nb_confidentialite=0;
+                        if($nb_friend != 2) {
+                            $requete_confidentialite = mysql_query("SELECT * FROM event_participant WHERE id_member='".$_SESSION['id_member']."' AND id_event='".$idevent."' AND status='accepte'") or die(mysql_error());
+                            $nb_confidentialite = mysql_num_rows($requete_confidentialite);
+                        }
+                        
+                        if($nb_friend != 2 ||  $nb_confidentialite == 1)
+                                $verif_confidentialite=false;
+                }
+                else if($data_event['confidentiality_event'] == 2) {
+                        $requete_confidentialite = mysql_query("SELECT * FROM event_confidentiality WHERE id_member='".$_SESSION['id_member']."' AND id_event='".$idevent."'") or die(mysql_error());
+                        $nb_confidentialite = mysql_num_rows($requete_confidentialite);
+                        
+                        if($nb_confidentialite != 1) {
+                            $requete_confidentialite = mysql_query("SELECT * FROM event_participant WHERE id_member='".$_SESSION['id_member']."' AND id_event='".$idevent."' AND status='accepte'") or die(mysql_error());
+                            $nb_confidentialite = mysql_num_rows($requete_confidentialite);
+                        }
+
+                        if($nb_confidentialite != 1)
+                                $verif_confidentialite=false;
+                }
+
+                if($verif_confidentialite) {
+                        $requete_verif_participate = mysql_query("SELECT * FROM event_fan WHERE id_event='".$idevent."' AND id_member='".$_SESSION['id_member']."'") or die(mysql_error());
+                        $nb_verif_participate = mysql_num_rows($requete_verif_participate);
+
+                        if($nb_verif_participate == 1) {
+                                mysql_query("DELETE FROM event_fan WHERE id_event='".$idevent."' AND id_member='".$_SESSION['id_member']."'") or die(mysql_error());
+                                return "Je suis fan";
+                        }
+                        else {
+                                mysql_query("INSERT INTO event_fan VALUES ('".$_SESSION['id_member']."','".$idevent."',default)") or die(mysql_error());
+                                return "Je ne suis plus fan";
+                        }
+                }
+        }
+    }
+    
+    function participate() {
+        
+        $idevent = $_GET['idevent'];
+
+        if(!empty($idevent) && is_numeric($idevent)) {
+                $requete_event = mysql_query("SELECT * FROM event WHERE id_event='".$idevent."'") or die(mysql_error());
+                $data_event = mysql_fetch_array($requete_event);
+
+                $verif_confidentialite=true;
+                if($data_event['id_member'] == $_SESSION['id_member']) {
+
+                }
+                else if($data_event['confidentiality_event'] == 2) {
+                        $requete_confidentialite = mysql_query("SELECT * FROM event_confidentiality WHERE id_member='".$_SESSION['id_member']."' AND id_event='".$idevent."'") or die(mysql_error());
+                        $nb_confidentialite = mysql_num_rows($requete_confidentialite);
+
+                        if($nb_confidentialite != 1)
+                                $verif_confidentialite=false;
+                }
+                else if($data_event['confidentiality_event'] == 0) {
+                        $requete_friend = mysql_query("SELECT * FROM member_contacts WHERE id_member='".$_SESSION['id_member']."' AND id_contact='".$data_event['id_member']."' AND condition_contact=1 OR id_contact='".$_SESSION['id_member']."' AND id_member='".$data_event['id_member']."' AND condition_contact=1");
+                        $nb_friend = mysql_num_rows($requete_friend);
+
+                        if($nb_friend != 2)
+                                $verif_confidentialite=false;
+                }
+
+                if($verif_confidentialite && strtotime($data_event['end_date_event']) > time()) {
+                        $requete_verif_participate = mysql_query("SELECT * FROM event_participant WHERE id_event='".$idevent."' AND id_member='".$_SESSION['id_member']."'") or die(mysql_error());
+                        $nb_verif_participate = mysql_num_rows($requete_verif_participate);
+
+                        if($nb_verif_participate == 1) {
+                                mysql_query("DELETE FROM event_participant WHERE id_event='".$idevent."' AND id_member='".$_SESSION['id_member']."'") or die(mysql_error());
+                                return "ok;Je viendrai";
+                        }
+                        else {
+                                mysql_query("INSERT INTO event_participant VALUES ('".$_SESSION['id_member']."','".$idevent."',default,'accepte',default)") or die(mysql_error());
+                                return "ok;Je ne viens plus";
+                        }
+                }
+                else if($data_event['confidentiality_event'] == 0 || $data_event['confidentiality_event'] == 2 && !$verif_confidentialite && strtotime($data_event['end_date_event']) > time()) {
+                        /*$requete_verif_participate = mysql_query("SELECT id_event FROM event_participant WHERE id_event='".$idevent."' AND id_member='".$_SESSION['id_member']."' AND status IN ('','')") or die(mysql_error());
+                        $data_verif_participate = mysql_fetch_array($requete_verif_participate);
+                        $nb_verif_participate = mysql_num_rows($requete_verif_participate);
+
+                        if($nb_verif_participate == 0) {
+                                mysql_query("INSERT INTO event_participant VALUES ('".$_SESSION['id_member']."','".$idevent."',default,'demande')") or die(mysql_error());
+                                echo "ok;J'annule ma demande";
+                        }
+                        else if($data_verif_participate['status'] == 1 || $data_verif_participate['status'] == 0) {
+                                mysql_query("DELETE FROM event_participant WHERE id_member='".$_SESSION['id_member']."' AND id_event='".$idevent."'") or die(mysql_error());
+                                echo "ok;Je voudrais venir";
+                        }*/
+                }
+                // TRAITER CAS:  - JE SUIS INVITE PAR PARTICIPANT ET J'ACCEPTE DE VENIR ET EVENEMENT NON TERMINE ET JE SUIS ETRANGER AU CONFIDENTIALITE
+               // - JE SUIS INVITE PAR AUTEUR ET J'ACCEPTE DE VENIR ET EVENEMENT NON TERMINE ET JE SUIS ETRANGER AU CONFIDENTIALITE
+                // EVENEMENT TERMINE ET J'Y ETAIS
+        }
+    }
+    
 }
 
 ?>

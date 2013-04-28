@@ -163,6 +163,7 @@ class models_event extends Model {
         
         return $this;
     }
+    
 }
 
 ?>

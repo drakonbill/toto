@@ -1,0 +1,227 @@
+
+	<link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>css/jquery.listederoulante.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>css/jquery.autocomplete.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>js/popup/style-popup.css" />
+
+<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+
+	
+	<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.resize.js"></script>
+        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery-ui-1.8.8.custom.min.js"></script>
+		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.autocomplete.js"></script>
+		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.text-shadow.js"></script>
+		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.border.js"></script>
+
+		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.listederoulante.js"></script>
+		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/popup/popup.js"></script>
+		
+		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.resize.js"></script>
+		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery-ui-1.8.8.custom.min.js"></script>
+		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.border.js"></script>
+		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.upload.js"></script>
+		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/popup/popup.js"></script>
+		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/changement/photoProfil.js"></script>
+                <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/changement/seePassion.js"></script>
+	
+	<div class="popup-other popup-othermini" style="display: none; "></div>
+
+
+<div id="inside-main" class="cfix">
+	<div id="sidebar-left">
+            <div id="sidebar-left-in">
+			<?php
+			//include 'Modules/amis/listeamis.php';
+			?>
+			<?php 
+				/*************************************************** TCHAT ****************************************/
+				//include 'Modules/tchat/tchat-left.php';
+				/*************************************************** FINTCHAT ****************************************/
+			?>
+			<h2 class="sb-title"><span>Recapitulatif</span></h2>
+			<div class="cfix">
+				<div class="sb-block">
+					0 nouveaux messages
+					<br />
+					<strong>5 visites</strong> <a href="#" class="rev blue"> Voir statistiques</a>
+					<br />
+					<strong>5 evenements</strong> en cours
+					<br />
+					<strong>15 contacts</strong>
+					<br />
+					<strong>26 begins</strong> sur vous
+					<br />
+					<strong>40 photos</strong> de vos activites
+				</div> <!-- .sb-block -->
+			</div> <!-- .cfix -->
+
+		</div> <!-- #sidebar-left-in -->
+	</div> <!-- #sidebar-left -->
+
+	<div id="sidebar-right">
+          <div id="sidebar-right-in">
+            <h2 class="sb-title"><span>Mes evenements</span></h2>
+            <div class="sb-block">
+              <div class="event-caption cfix">
+                
+                <a href="#" class="rd user-avatar bgr-darkblue"><img src="<?php echo $conf["url"]; ?>images/clip-face1.jpg" alt="" width="32" /></a>
+                <strong><em>Nuit de films,</em></strong>
+                <br />
+                <small>venderdi 12 Decembre</small>
+              </div> <!-- .cfix -->
+              <p>Cet evenement est l'occasion de xxxx x x xxx xxxx xxx x x x xxxxxxxxx x x xx !</p>
+              <p>
+                <br />
+                <strong class="blue">A venir</strong>
+              </p>
+              <ul class="events-list">
+                <li>
+                  <strong><em>Nuit de films,</em></strong>
+                  <br />
+                  <small>venderdi 12 Decembre</small>
+                </li>
+                <li>
+                  <strong><em>First fraday,</em></strong>
+                  <br />
+                  <small>lundi 15 Decembre</small>
+                </li>
+              </ul>
+            </div> <!-- .sb-block -->
+            <h2 class="sb-title"><span>Evenements Conseilles</span></h2>
+            <div class="sb-block">
+              <div class="event-caption cfix">
+				<img width="155px" src="http://localhost/meetoparty/Dossiermembre/ff53e449/2ba2e609461fab2a0a2ff6712af675ee.jpg" />
+                <br />
+                <strong><em>Nuit de films,</em></strong>
+                <br />
+                <small>venderdi 12 Decembre</small>
+              </div> <!-- .cfix -->
+              <p>Cet evenement est l'occasion de xxxx x x xxx xxxx xxx x x x xxxxxxxxx x x xx !</p>
+            </div> <!-- .sb-block -->
+            <h2 class="sb-title"><span>Sponsorisé</span></h2>
+            <div class="sb-block">
+              <a href="#"><img src="<?php echo $conf["url"]; ?>images/clip-cola.jpg" alt="" width="175" />5 évènements crées, 5000 fans, Voir ses évènements</a>
+            </div> <!-- .advertisement -->
+          </div> <!-- #sidebar-right-in -->
+        </div> <!-- #sidebar-right -->
+	
+    <!-- This is the main content area -->
+    <div id="inside-column">
+			<hr class="top-bar"/>
+			<?php //include 'Modules/tchat/notifications.php'; ?>
+			  <span class="title_event_header"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-fav.png" alt="" class="vam blue-man" width="27" />Mon profil</span>
+			  <hr class="clear"/>
+			  <div class="inside-column-sep"></div>
+            <div class="inside-column-inside">
+				<div class="cfix">
+                    <div class="conversation-main">
+                        <div class="conversation-main-inside cfix">
+                            <div class="ld user-titlro">
+                                <strong><em><?php echo ucfirst($data->profile_pseudo); ?></em></strong>
+                                <br /><br />
+                                <strong><em><a href="#" class="rev blue">Resume</a></em></strong>
+                            </div> <!-- .user-titlro -->
+                            <ul class="user-iconies cfix">
+                                <li><a href="#">
+                                        <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-resume.png" alt="" /></span>
+                                        <span class="user-iconies-2">Resume</span>
+                                    </a></li>
+                                <li><a href="#">
+                                        <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-photos.png" alt="" /></span>
+                                        <span class="user-iconies-2">Photos</span>
+                                    </a></li>
+                                <li><a href="#">
+                                        <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-passions.png" alt="" /></span>
+                                        <span class="user-iconies-2">Passions</span>
+                                    </a></li>
+                                <li><a href="#">
+                                        <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-contact.png" alt="" /></span>
+                                        <span class="user-iconies-2">Contact</span>
+                                    </a></li>
+                                <li><a href="#">
+                                        <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-parameter.png" alt="" /></span>
+                                        <span class="user-iconies-2">Parametres</span>
+                                    </a></li>
+                            </ul> <!-- .user-iconies -->
+                        </div> <!-- .conversation-main-inside -->
+                    </div>
+                    <div class="conversation-left">
+                        <a href="#" class="user-avatar bgr-blue"><img src="/<?php echo $data->profile_maphoto; ?>" alt="" width="42" /></a>
+						<a href="javascript:void()" id="modifAvatar">Modifier ma photo</a>
+                    </div> <!-- .conversation-left -->
+                </div> <!-- .cfix -->
+			</div>
+			<div class="inside-column-sep"></div>
+			<div class="inside-column-inside">
+	<div id="contentprofil">
+		<?php
+			if(empty($data->error['profil']))
+			{
+		?>
+
+					<h2 class="title_underline">Ajouter des Passions</h2>
+                        <input class="contentinput ac_input" type="text" name="passionvalue" id="passionvalue" value="Saisissez le nom d&#39;une de vos passions" autocomplete="off">
+                        <input type="hidden" name="categorievalue" id="categorievalue" value="">
+            <a href="javascript:void();" id="contentvalid" class="contentvalid">Ajouter à mes passions</a><br /><br />
+                        <hr class="clear"/>
+                    <h2 class="title_underline">Passions</h2>
+                    
+                    <?php 
+					if(count($data->profile_passion) == 0)
+						echo "<div id='content_passion'>Aucune passion liée pour le moment</div>";
+                                        else {
+                                            echo "<div id='content_passion'>";
+                                            foreach($data->profile_passion as $key => $t_categorie_passion) {
+                                                    echo "<h3 class='title_underline'>".ucfirst($data->profile_passioncat[$key])."</h3><ul class='listepassions cat".$key."'>";
+                                                    foreach($t_categorie_passion as $t_passion) {
+                                                            echo "<li id='passion".$t_passion['id_passion']."'><img src='/".($t_passion['icone']!=""?$t_passion['icone']:$t_passion['icone_cat'])."' alt='".$t_passion['name_passion']."' />".ucfirst($t_passion['name_passion'])."<br/><a href='javascript:void()' onclick='delete_passion(".$t_passion['id_passion'].")'>Supprimer</a></li>";
+                                                    }
+                                                    echo "</ul>";
+                                            }
+                                            echo "</div>";
+                                        }
+                    ?>
+                    </div>
+					
+			<?php 
+				}
+				else
+				{
+					echo $data->error['profil'];
+				}
+			?>
+	</div>
+	</div>
+
+			
+    </div> <!-- #inside-column -->
+<div id="main-footer">
+				<div class="connexion-shadow-2 nom"></div>
+				<div id="home-icons">
+					<img src="<?php echo $conf["url"]; ?>Images/icon-1.png" alt="" />
+					<img src="<?php echo $conf["url"]; ?>Images/icon-2.png" alt="" />
+					<img src="<?php echo $conf["url"]; ?>Images/icon-3.png" alt="" />
+					<img src="<?php echo $conf["url"]; ?>Images/icon-4.png" alt="" />
+					<img src="<?php echo $conf["url"]; ?>Images/icon-5.png" alt="" />
+					<img src="<?php echo $conf["url"]; ?>Images/icon-6.png" alt="" />
+				</div> <!-- #home-icons -->
+			</div> <!-- #main-footer -->
+</div> <!-- .cfix -->
+
+<div class="blue-box-top blue-box-asdf"></div>
+<div class="blue-box">
+    <div class="blue-box-in cfix equal-heights">
+        <div class="blue-box-col ld">
+            <div class="equal">
+                <p>&laquo;&nbsp;Sam, celui qui conduit, c'est celui qui ne bois pas.&nbsp;&raquo;</p>
+                <p class="ra"><strong><em class="grey">Mister Cocktail</em></strong></p>
+            </div> <!-- .equal -->
+        </div> <!-- .blue-box-col -->
+        <div class="blue-box-col rd">
+            <div class="equal">
+                <p>&laquo;&nbsp;Ne soyez pas timide, les autres ne vont pas vous manger.&nbsp;&raquo;</p>
+                <p class="ra"><strong><em class="grey">Mister Cocktail</em></strong></p>
+            </div> <!-- .equal -->
+        </div> <!-- .blue-box-col -->
+    </div> <!-- .blue-box-in -->
+</div> <!-- .blue-box -->
+

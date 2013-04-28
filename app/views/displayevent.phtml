@@ -291,7 +291,7 @@
 			<div class="event_header">
 				<div class="event_present">
 					<span class="title_event"><?php echo $loading->nomevenement;?></span>
-					<img class='image_event' src='<?php echo $loading->image;?>' alt='<?php echo $loading->nomevenement;?>' />
+					<img class='image_event' src='/<?php echo $loading->image;?>' alt='<?php echo $loading->nomevenement;?>' />
 					<p style="float: right; fond-size: 14px; font-weight: bold;"><img style="vertical-align:middle; width: 25px; margin-right: 5px;" src="<?php echo $conf["url"]; ?>Images/appareil-photo-numerique-icone-8912-32.png" alt="Photos" /><a class="rev blue" href="#">Voir les photos</a></p>
 					<a id="fan" href="javascript:void()" onclick="fan('<?php echo $loading->idevent;?>')"><?php echo $loading->link_fan;?></a>
 				</div>
@@ -369,13 +369,7 @@
 			</div>
 			<div class="inside-column-inside event_comments">
 					<p>
-						<span class="title_event"><?php
-							if(!$loading->termine)
-								echo "Vous avez une question ?";
-							else
-								echo "Notez l'évènement";
-							?></span>
-							<?php if($loading->termine) echo "<select id='note' name='note'>".$loading->note."</select>"; ?>
+						<span class="title_event">Commentaires</span>
 						<br />&nbsp;
 					  </p>
 					  <form class="comment">
@@ -389,7 +383,7 @@
 					  <?php
 						if(mysql_num_rows($loading->resultat_mycomment) != 0) {
 							while($data_mycomment = mysql_fetch_array($loading->resultat_mycomment)) {
-								echo "<li><img src='".$data_mycomment['maphoto']."' alt=''/><span class='text_comment'><div class='chat-tip-left'></div><h4>".ucfirst($data_mycomment['pseudo'])." ".date("d-m-Y à H:i", $data_mycomment['date']).($loading->termine?" Note:".$data_mycomment['appreciation']:"")."</h4>".$data_mycomment['message']."</span></li>";
+								echo "<li><img src='/".$data_mycomment['photo_member']."' alt=''/><span class='text_comment'><div class='chat-tip-left'></div><h4>".ucfirst($data_mycomment['pseudo_member'])." ".$data_mycomment['date_comment']."</h4>".$data_mycomment['message_member']."</span></li>";
 							}
 						}
 						else {
