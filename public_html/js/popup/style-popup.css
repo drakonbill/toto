@@ -129,6 +129,63 @@
 	z-index:25000;
 }
 
+/************** POPUP INVITATION *****************/
+
+div#pop_invitation {
+	background: white;
+	border: 1px solid black;
+	font-size: 12px;
+	padding: 5px;
+	position: fixed;
+	top: 55px;
+	right: 15px;
+}
+
+div#pop_invitation h2 {
+	text-align: center;
+}
+
+div#pop_invitation ul.liste_invitation {
+	width: 100%;
+}
+
+div#pop_invitation ul.liste_invitation li {
+	height: 55px;
+	background: white;
+	border: 1px solid black;
+	width: 100%;
+}
+
+div#pop_invitation ul.liste_invitation li img.avatar {
+	float:left;
+	width: 45px;
+	height: 45px;
+}
+
+/***** POPUP INFO ********************/
+
+div.pop_info {
+	background: white;
+	border: 1px solid black;
+	font-size: 12px;
+	padding: 5px;
+	position: fixed;
+	-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	height: auto;
+	min-height: 125px;
+	width: 250px;
+	z-index: 25000;
+}
+
+div.pop_info a.close_popup {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
+/***** BACKGROUND ******************/
 .background-mini {
     display:none;
     position:fixed;

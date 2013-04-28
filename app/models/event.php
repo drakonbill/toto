@@ -71,7 +71,15 @@ class models_event extends Model {
                 
                 $requete_mycomment = "SELECT * FROM event_comments inner join member on event_comments.id_member=member.id_member WHERE id_event='".$id_event."' ORDER BY date_comment DESC LIMIT 15";
 		$this->resultat_mycomment = mysql_query($requete_mycomment) or die(mysql_error());
-
+                
+                $requete_quivient = "SELECT * FROM event_participant inner join member on event_participant.id_member=member.id_member WHERE id_event='".$id_event."'";
+                $this->resultat_quivient = mysql_query($requete_quivient) or die(mysql_error());
+                $this->nb_quivient = mysql_num_rows($this->resultat_quivient);
+                $this->quivient = array();
+                while($data_quivient = mysql_fetch_array($this->resultat_quivient)) {
+                        $this->quivient[] = $data_quivient;
+                }
+                        
                 if(date("Y m d", $this->datedebut) == date("Y m d", $this->datefin)) {
                         $this->date_result = " <strong>le ".$Jour[date("w", $this->datedebut)]." ".date("d", $this->datedebut)." ".$Mois[date("n", $this->datedebut)-1]." ".date("Y", $this->datedebut)."</strong>";
                         if($data['time_option_start_event'] && $data['time_option_end_event'])
@@ -118,6 +126,30 @@ class models_event extends Model {
                                 $this->confidentialite_texte="Evènement privé";
                         break;
                 }
+                
+                $requete_verif_participate = mysql_query("SELECT * FROM event_participant WHERE id_event='".$this->idevent."' AND id_member='".$_SESSION['id_member']."'") or die(mysql_error());
+                $data_verif_participate = mysql_fetch_array($requete_verif_participate);
+                $nb_verif_participate = mysql_num_rows($requete_verif_participate);
+
+                if($nb_verif_participate == 1 && $data_verif_participate['status'] == '1') 
+                        $this->link_participate = "Je ne viens plus";
+                else if($nb_verif_participate == 1 && $data_verif_participate['status'] == '0') 
+                        $this->link_participate = "J'annule ma demande";
+                else 
+                        $this->link_participate = "Je viendrai";
+
+                $requete_verif_fan = mysql_query("SELECT * FROM event_fan WHERE id_event='".$this->idevent."' AND id_member='".$_SESSION['id_member']."'") or die(mysql_error());
+                $nb_verif_fan = mysql_num_rows($requete_verif_fan);
+
+                if($nb_verif_fan == 1) 
+                        $this->link_fan = "Je ne suis plus fan";
+                else 
+                        $this->link_fan = "Je suis fan";
+
+                $this->note="";
+                for($i=0; $i <= 5; $i++)
+                        $this->note.="<option value='".$i."'>".$i."</option>";
+                        
                 $this->longitude = $data['longitude_event'];
                 $this->latitude = $data['latitude_event'];
                 $this->ok=true;
@@ -131,6 +163,7 @@ class models_event extends Model {
         
         return $this;
     }
+    
 }
 
 ?>

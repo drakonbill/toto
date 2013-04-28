@@ -5,254 +5,19 @@
 <?php $loading = $data;?>
 <script type="text/javascript" src="http://openlayers.org/dev/OpenLayers.js"></script>
 <script type="text/javascript">var lon="<?php echo $loading->lon;?>";var lat="<?php echo $loading->lat;?>";</script>
-<script type="text/javascript" src="<?php echo $conf['url'];?>js/evenement/mesEvenement.js"></script>
-
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/evenement/mesEvenement.js"></script>
 
 
       <div id="inside-main" class="cfix">
-        <!-- This is the main content area -->
-        <div id="inside-column">
-          <div id="inside-column-wrap">
-            <div class="inside-column-inside">
-			  <?php //include 'Modules/tchat/notifications.php'; ?>
-			  <hr class="clear"/>
-              <div class="connexion-shadow-1"></div>
-    
-            </div> <!-- .inside-column-inside -->
-            <div class="inside-column-sep"></div>
-			<?php
-				/******************************************************************************************
-				*           CONTENT EVENT ********************
-				******************************************/
-			?>
-            <div class="inside-column-inside">
-              <div class="cfix">
-                <div class="conversation-main">
-                  <div class="conversation-main-inside">
-                    <div class="chat-meta cfix">
-                      <div class="rd new-small blue">
-                        <a href="#" class="rev">Voir evenement</a>
-                        -
-                        <a href="#" class="rev">Lieu</a>
-                      </div>
-                      <strong>Evenement</strong> <?php echo $loading->date_result;?></strong>
-                    </div>
-                    <div class="chat-msg bgr-darkblue">
-                      <span class="white"><?php echo $loading->nomevenement;?> (<?php echo $loading->confidentialite_texte;?>),</span>
-                      <a href="#" class="rev blue">organise par <?php echo $loading->auteur;?></a>
-                      <div class="chat-tip-left"></div>
-                    </div> <!-- .chat-msg -->
-                  </div> <!-- .conversation-main-inside -->
-                </div> <!-- .conversation-main -->
-                <div class="conversation-left">
-                  <a href="#" class="user-avatar bgr-darkblue"><img src="<?php echo $conf['url'].TARGET.$loading->avatar;?>" alt="" width="42" /></a>
-                </div>
-              </div> <!-- .cfix -->
-                <br />
-				<div class='wrapper_event'>
-					<div class="display_event_ou">
-						<p>
-							<span class="title_event">Où ?</span>
-						</p>
-						<img src="Images/carte.png" alt="France" />
-					</div>
-					<div class="wrapper_map"><div id="map" class="smallmap"></div></div>
-				</div>
-				<hr class="clear" />
-				<div class='wrapper_event'>
-					<div class='present_event'>
-						<h4><span class="title_event"><?php echo $loading->nomevenement;?></span></h4>
-						<img class='image_event' src='<?php echo $conf['url'].TARGET.$loading->image;?>' alt='<?php echo $loading->nomevenement;?>' />
-						<img src='Images/jesuisfan.png' alt='Je suis fan' />
-						<h4><span class="nb_fan">45 fans</span></h4>
-					</div>
-					
-					<div class="inside-column-inside display_event_whathappens">
-					  <p>
-						<span class="title_event">Qu'est ce qu'il se passe ?</span>
-						<br /><br />
-						<?php echo $loading->description;?>
-					  </p>
-					</div>
-					<hr class="clear" />
-				</div>
-				 <!-- .inside-column-inside -->
-			<hr class="clear"/>
-
-            
-			<div class="wrapper_event">
-				<div class="inside-column-inside display_event_quivient">
-					  <p>
-						<span class="title_event">Qui vient ?</span>
-						<br />&nbsp;
-					  </p>
-						<ul class="users-list2 cfix">
-						  <li class="user">
-							<a href="#" class="user-photo bgr-pink"><img src="images/clip-face1.jpg" alt="" width="42" /></a>
-							<div class="user-popup-info">
-							  <strong><em>Marie Nguyen,</em></strong>
-							  <br /><br />
-							  Ne le 24/06/1991
-							  <br />
-							  Etudiante a l'Universite xxx Habite a Tours
-							  <div class="black-tip"></div>
-							</div>
-						  </li>
-						  <li class="user">
-							<a href="#" class="user-photo bgr-pink"><img src="images/clip-face2.jpg" alt="" width="42" /></a>
-							<div class="user-popup-info">
-							  <strong><em>Marie Nguyen,</em></strong>
-							  <br /><br />
-							  Ne le 24/06/1991
-							  <br />
-							  Etudiante a l'Universite xxx Habite a Tours
-							  <div class="black-tip"></div>
-							</div>
-						  </li>
-						  <li class="user">
-							<a href="#" class="user-photo bgr-blue"><img src="images/clip-face3.jpg" alt="" width="42" /></a>
-							<div class="user-popup-info">
-							  <strong><em>Marie Nguyen,</em></strong>
-							  <br /><br />
-							  Ne le 24/06/1991
-							  <br />
-							  Etudiante a l'Universite xxx Habite a Tours
-							  <div class="black-tip"></div>
-							</div>
-						  </li>
-						  <li class="user">
-							<a href="#" class="user-photo bgr-pink"><img src="images/clip-face1.jpg" alt="" width="42" /></a>
-							<div class="user-popup-info">
-							  <strong><em>Marie Nguyen,</em></strong>
-							  <br /><br />
-							  Ne le 24/06/1991
-							  <br />
-							  Etudiante a l'Universite xxx Habite a Tours
-							  <div class="black-tip"></div>
-							</div>
-						  </li>
-						  <li class="user">
-							<a href="#" class="user-photo bgr-pink"><img src="images/clip-face2.jpg" alt="" width="42" /></a>
-							<div class="user-popup-info">
-							  <strong><em>Marie Nguyen,</em></strong>
-							  <br /><br />
-							  Ne le 24/06/1991
-							  <br />
-							  Etudiante a l'Universite xxx Habite a Tours
-							  <div class="black-tip"></div>
-							</div>
-						  </li>
-						  <li class="user">
-							<a href="#" class="user-photo bgr-blue"><img src="images/clip-face3.jpg" alt="" width="42" /></a>
-							<div class="user-popup-info">
-							  <strong><em>Marie Nguyen,</em></strong>
-							  <br /><br />
-							  Ne le 24/06/1991
-							  <br />
-							  Etudiante a l'Universite xxx Habite a Tours
-							  <div class="black-tip"></div>
-							</div>
-						  </li>
-						</ul>
-						<a class='event_reponse' href='javascript:void()'><img src='Images/event_reponse.png' alt='Je viendrai'/></a>
-					</div> <!-- .inside-column-inside -->
-				<div class="inside-column-inside  display_event_sponsorise">
-				  <p>
-					<span class="title_event">Photos</span>
-					<br />&nbsp;
-				  </p>
-					<ul class="users-list2 cfix">
-					  <li class="user">
-						<a href="#" class="user-photo bgr-blue2"><img src="images/clip-face1.jpg" alt="" width="42" /></a>
-						<div class="user-popup-info">
-						  <strong><em>Marie Nguyen,</em></strong>
-						  <br /><br />
-						  Ne le 24/06/1991
-						  <br />
-						  Etudiante a l'Universite xxx Habite a Tours
-						  <div class="black-tip"></div>
-						</div>
-					  </li>
-
-					  <li class="user-descr"><a href="#" class="rev">Cinema</a></li>
-
-					  <li class="user">
-						<a href="#" class="user-photo bgr-blue2"><img src="images/clip-face2.jpg" alt="" width="42" /></a>
-						<div class="user-popup-info">
-						  <strong><em>Marie Nguyen,</em></strong>
-						  <br /><br />
-						  Ne le 24/06/1991
-						  <br />
-						  Etudiante a l'Universite xxx Habite a Tours
-						  <div class="black-tip"></div>
-						</div>
-					  </li>
-
-					  <li class="user-descr"><a href="#" class="rev">Films d'action</a></li>
-					</ul>
-				</div> <!-- .inside-column-inside -->
-
-			</div>
-			<hr class="clear"/>
-			<div class="wrapper_event">
-				<div class="inside-column-inside display_event_passionslies">
-				  <p>
-					<span class="title_event">Passions liees</span>
-					<br />&nbsp;
-				  </p>
-					<ul class="list_passion">
-					<?php
-						while($data_passion = mysql_fetch_array($loading->data_passion)) {
-							echo "<li><a href='#' class='user-photo bgr-blue3'><img src='/".($data_passion['iconepassion']!=""?$data_passion['iconepassion']:$data_passion['iconecat'])."' alt='".$data_passion['name_passion']."'/></a><span class='text_passion'><h4>".$data_passion['name_passion']."</h4>Catégorie : ".$data_passion['name_category']."</span></li>";
-						}
-					?>
-					</ul>
-				</div> <!-- .inside-column-inside -->
-				<div class="inside-column-inside display_event_comments">
-					<p>
-						<span class="title_event"><?php
-							if(!$loading->termine)
-								echo "Vous avez une question ?";
-							else
-								echo "Notez l'évènement";
-							?></span>
-						<br />&nbsp;
-					  </p>
-					  <form class="comment">
-						<input type="hidden" name="idevent" id="idevent" value="<?php echo  $loading->idevent;?>" />
-						<div class="contentCommentHeader">
-							<a href="#" class="avatar"><img src="Images/clip-face2.jpg" alt="" /></a>
-							<div class="right-contentCommentHeader"><input class="sendComment" name="sendComment" id="sendComment" value="<?php echo (mysql_num_rows($loading->resultat_mycomment) == 0?"Soyez le premier à commenter":"Saisissez votre message");?>" /></div>				
-						</div>
-					  </form>
-					  <ul class="listComment">
-					  <?php
-						if(mysql_num_rows($loading->resultat_mycomment) != 0) {
-							while($data_mycomment = mysql_fetch_array($loading->resultat_mycomment)) {
-								echo "<li><img src='".$data_mycomment['maphoto']."' alt=''/><span class='text_comment'><div class='chat-tip-left'></div><h4>".ucfirst($data_mycomment['pseudo'])." ".date("d-m-Y à H:i", $data_mycomment['date'])."</h4>".$data_mycomment['message']."</span></li>";
-							}
-						}
-						else {
-							echo "<li>Aucun commentaires pour le moment</li>";
-						}
-					  ?>
-					  </ul>
-					  <hr class="clear"/>
-				</div>
-				<hr class="clear"/>
-			</div>
-			</div>
-          </div> <!-- #inside-column-wrap -->
-        </div> <!-- #inside-column -->
-
-        <div id="sidebar-left">
+		
+		<div id="sidebar-left">
           <div id="sidebar-left-in">
             <h2 class="sb-title"><span>Amis en linge</span></h2>
             <div class="cfix">
               <div class="sb-block">
                 <ul class="users-list2 cfix">
                   <li class="user">
-                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
+                    <a href="#" class="user-photo bgr-pink"><img src="/Images/clip-face1.jpg" alt="" width="42" /></a>
                     <div class="user-popup-info">
                       <strong><em>Marie Nguyen,</em></strong>
                       <br /><br />
@@ -263,7 +28,7 @@
                     </div>
                   </li>
                   <li class="user">
-                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
+                    <a href="#" class="user-photo bgr-pink"><img src="/Images/clip-face2.jpg" alt="" width="42" /></a>
                     <div class="user-popup-info">
                       <strong><em>Marie Nguyen,</em></strong>
                       <br /><br />
@@ -274,7 +39,7 @@
                     </div>
                   </li>
                   <li class="user">
-                    <a href="#" class="user-photo bgr-blue"><img src="Images/clip-face3.jpg" alt="" width="42" /></a>
+                    <a href="#" class="user-photo bgr-blue"><img src="/Images/clip-face3.jpg" alt="" width="42" /></a>
                     <div class="user-popup-info">
                       <strong><em>Marie Nguyen,</em></strong>
                       <br /><br />
@@ -285,7 +50,7 @@
                     </div>
                   </li>
                   <li class="user">
-                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
+                    <a href="#" class="user-photo bgr-pink"><img src="/Images/clip-face1.jpg" alt="" width="42" /></a>
                     <div class="user-popup-info">
                       <strong><em>Marie Nguyen,</em></strong>
                       <br /><br />
@@ -296,7 +61,7 @@
                     </div>
                   </li>
                   <li class="user">
-                    <a href="#" class="user-photo bgr-blue"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
+                    <a href="#" class="user-photo bgr-blue"><img src="/Images/clip-face2.jpg" alt="" width="42" /></a>
                     <div class="user-popup-info">
                       <strong><em>Marie Nguyen,</em></strong>
                       <br /><br />
@@ -307,7 +72,7 @@
                     </div>
                   </li>
                   <li class="user">
-                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face3.jpg" alt="" width="42" /></a>
+                    <a href="#" class="user-photo bgr-pink"><img src="/Images/clip-face3.jpg" alt="" width="42" /></a>
                     <div class="user-popup-info">
                       <strong><em>Marie Nguyen,</em></strong>
                       <br /><br />
@@ -318,7 +83,7 @@
                     </div>
                   </li>
                   <li class="user">
-                    <a href="#" class="user-photo bgr-blue"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
+                    <a href="#" class="user-photo bgr-blue"><img src="/Images/clip-face1.jpg" alt="" width="42" /></a>
                     <div class="user-popup-info">
                       <strong><em>Marie Nguyen,</em></strong>
                       <br /><br />
@@ -329,7 +94,7 @@
                     </div>
                   </li>
                   <li class="user">
-                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
+                    <a href="#" class="user-photo bgr-pink"><img src="/Images/clip-face2.jpg" alt="" width="42" /></a>
                     <div class="user-popup-info">
                       <strong><em>Marie Nguyen,</em></strong>
                       <br /><br />
@@ -340,7 +105,7 @@
                     </div>
                   </li>
                   <li class="user">
-                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face3.jpg" alt="" width="42" /></a>
+                    <a href="#" class="user-photo bgr-pink"><img src="/Images/clip-face3.jpg" alt="" width="42" /></a>
                     <div class="user-popup-info">
                       <strong><em>Marie Nguyen,</em></strong>
                       <br /><br />
@@ -371,8 +136,8 @@
             <h2 class="sb-title"><span>Mes evenements</span></h2>
             <div class="sb-block">
               <div class="event-caption cfix">
-                <a href="#" class="rd user-avatar bgr-darkblue"><img src="images/clip-face1.jpg" alt="" width="42" /></a>
-                <br />
+                
+                <a href="#" class="rd user-avatar bgr-darkblue"><img src="<?php echo $conf["url"]; ?>images/clip-face1.jpg" alt="" width="32" /></a>
                 <strong><em>Nuit de films,</em></strong>
                 <br />
                 <small>venderdi 12 Decembre</small>
@@ -393,17 +158,12 @@
                   <br />
                   <small>lundi 15 Decembre</small>
                 </li>
-                <li>
-                  <strong><em>Cinema,</em></strong>
-                  <br />
-                  <small>mardi 16 Decembre</small>
-                </li>
               </ul>
             </div> <!-- .sb-block -->
             <h2 class="sb-title"><span>Evenements Conseilles</span></h2>
             <div class="sb-block">
               <div class="event-caption cfix">
-                <a href="#" class="rd user-avatar bgr-darkblue"><img src="images/clip-face1.jpg" alt="" width="42" /></a>
+				<img width="155px" src="http://localhost/meetoparty/Dossiermembre/ff53e449/2ba2e609461fab2a0a2ff6712af675ee.jpg" />
                 <br />
                 <strong><em>Nuit de films,</em></strong>
                 <br />
@@ -413,21 +173,241 @@
             </div> <!-- .sb-block -->
             <h2 class="sb-title"><span>Sponsorisé</span></h2>
             <div class="sb-block">
-              <a href="#"><img src="images/clip-cola.jpg" alt="" width="175" />5 évènements crées, 5000 fans, Voir ses évènements</a>
+              <a href="#"><img src="<?php echo $conf["url"]; ?>images/clip-cola.jpg" alt="" width="175" />5 évènements crées, 5000 fans, Voir ses évènements</a>
             </div> <!-- .advertisement -->
           </div> <!-- #sidebar-right-in -->
         </div> <!-- #sidebar-right -->
-		 <div id="main-footer">
+		
+        <!-- This is the main content area -->
+        <div id="inside-column">
+			<hr class="top-bar"/>
+			<div id="inside-column-wrap">
+			  <?php //include 'Modules/tchat/notifications.php'; ?>
+			  <span class="title_event_header"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-fav.png" alt="" class="vam blue-man" width="27" />Evènement <?php if(!$loading->termine) echo "à venir"; else echo "terminé";?></span>
+			  <hr class="clear"/>
+			  <!--
+              <div class="inside-column-sep"></div>
+			  <div class="inside-column-inside">
+              <div id="slurpee">
+                <div id="slurpee-oh">
+                  <div id="slurpee-left"></div>
+                  <div id="slurpee-right"></div>
+                <div id="slurpee-in">-->
+				<?php
+					/*$mois_precedent=-1;
+					$cp_mois=0;
+					while($data_myevent = mysql_fetch_array($loading->resultat_myevent)) {
+						if($mois_precedent != -1 && $mois_precedent == date("n", strtotime($data_myevent['datedebut'])) && $cp_mois<2) {
+							echo '
+								<li class="cfix">
+								<a href="#" class="user-photo bgr-darkblue"><img src="images/clip-face1.jpg" alt="" width="20" height="20"/></a>
+								<span>
+								  <strong><em><a href="?page=event&id_event='.$data_myevent['idevenement'].'">'.$data_myevent['nomevenement'].'</a>,</em></strong>
+								  <span class="new-small">'.date("d/m/y", strtotime($data_myevent['datedebut'])).'</span>
+								</span></li>';
+							$cp_mois++;
+						}
+						else if($mois_precedent != -1 && ($cp_mois == 2 || $mois_precedent != date("n", strtotime($data_myevent['datedebut'])))) {
+							echo "</ul></div>";
+							echo '<div class="slurpee-sep"></div>';
+							echo '<div class="slurpee-col">
+							<div><strong class="white"><em>'.$loading->Mois[date("n", strtotime($data_myevent['datedebut']))-1].' '.date("Y", strtotime($data_myevent['datedebut'])).'</em></strong></div>
+							<ul class="slurpee-data">
+							  <li class="cfix">
+								<a href="#" class="user-photo bgr-darkblue"><img src="images/clip-face1.jpg" alt="" width="20" height="20"/></a>
+								<span>
+								  <strong><em><a href="?page=event&id_event='.$data_myevent['idevenement'].'">'.$data_myevent['nomevenement'].'</a>,</em></strong>
+								  <span class="new-small">'.date("d/m/y", strtotime($data_myevent['datedebut'])).'</span>
+								</span>
+							  ';
+						}
+						else {
+							echo '<div class="slurpee-sep"></div>';
+							echo '<div class="slurpee-col">
+							<div><strong class="white"><em>'.$loading->Mois[date("n", strtotime($data_myevent['datedebut']))-1].' '.date("Y", strtotime($data_myevent['datedebut'])).'</em></strong></div>
+							<ul class="slurpee-data">
+							  <li class="cfix">
+								<a href="#" class="user-photo bgr-darkblue"><img src="images/clip-face1.jpg" alt="" width="20" height="20"/></a>
+								<span>
+								  <strong><em><a href="?page=event&id_event='.$data_myevent['idevenement'].'">'.$data_myevent['nomevenement'].'</a>,</em></strong>
+								  <span class="new-small">'.date("d/m/y", strtotime($data_myevent['datedebut'])).'</span>
+								</span>
+							  ';
+						}
+						$mois_precedent = date("n", strtotime($data_myevent['datedebut']));
+					}
+					echo (mysql_num_rows($loading->resultat_myevent)!=0?"</ul></div>":"");*/
+				?>
+                  <!--<div class="slurpee-sep"></div>
+                  <div class="slurpee-col">
+                    <div><strong class="white"><em>Juillet 2012</em></strong></div>
+                    <ul class="slurpee-data">
+                      <li class="cfix">
+                        <a href="#" class="user-photo bgr-darkblue"><img src="images/clip-face1.jpg" alt="" width="20" height="20"/></a>
+                        <span>
+                          <strong><em>Nuit de films,</em></strong>
+                          <span class="new-small">12/07/12<br />Voir evenement</span>
+                        </span>
+                      </li>
+                      <li class="cfix">
+                        <a href="#" class="user-photo bgr-darkblue"><img src="images/clip-face1.jpg" alt="" width="20" height="20"/></a>
+                        <span>
+                          <strong><em>Nuit de films,</em></strong>
+                          <span class="new-small">12/07/12<br />Voir evenement</span>
+                        </span>
+                      </li>
+                    </ul>
+                  </div> --><!-- .slurpee-col --><!--
+				  <div class="slurpee-sep"></div>
+                  <div class="slurpee-col">
+                    <div><strong class="white"><em>Juillet 2012</em></strong></div>
+                    <ul class="slurpee-data">
+                      <li class="cfix">
+                        <a href="#" class="user-photo bgr-darkblue"><img src="images/clip-face1.jpg" alt="" width="20" height="20"/></a>
+                        <span>
+                          <strong><em>Nuit de films,</em></strong>
+                          <span class="new-small">12/07/12<br />Voir evenement</span>
+                        </span>
+                      </li>
+                      <li class="cfix">
+                        <a href="#" class="user-photo bgr-darkblue"><img src="images/clip-face1.jpg" alt="" width="20" height="20"/></a>
+                        <span>
+                          <strong><em>Nuit de films,</em></strong>
+                          <span class="new-small">12/07/12<br />Voir evenement</span>
+                        </span>
+                      </li>
+                    </ul>
+                  </div> --><!-- .slurpee-col -->
+                <!--</div>--> <!-- #slurpee-oh -->
+                <!--</div>--> <!-- #slurpee-in -->
+              <!--</div>--> <!-- #slurpee -->
+           <!-- </div>--> <!-- .inside-column-inside -->
+            <div class="inside-column-sep"></div>
+			<?php
+				/******************************************************************************************
+				*           CONTENT EVENT ********************
+				******************************************/
+			?>
+			<div class="event_header">
+				<div class="event_present">
+					<span class="title_event"><?php echo $loading->nomevenement;?></span>
+					<img class='image_event' src='/<?php echo $loading->image;?>' alt='<?php echo $loading->nomevenement;?>' />
+					<p style="float: right; fond-size: 14px; font-weight: bold;"><img style="vertical-align:middle; width: 25px; margin-right: 5px;" src="<?php echo $conf["url"]; ?>Images/appareil-photo-numerique-icone-8912-32.png" alt="Photos" /><a class="rev blue" href="#">Voir les photos</a></p>
+					<a id="fan" href="javascript:void()" onclick="fan('<?php echo $loading->idevent;?>')"><?php echo $loading->link_fan;?></a>
+				</div>
+				<div class="cfix event_author">
+					<div class="conversation-left">
+						<a href="#" class="user-avatar bgr-darkblue"><img src="<?php echo $loading->avatar;?>" alt="" width="35" height="35" /></a>
+					</div>
+					<div class="conversation-main">
+						<div class="chat-meta la"><?php echo $loading->date_result;?></strong></div>
+						<div class="chat-msg bgr-darkblue">
+							<span class="white"><?php echo $loading->nomevenement;?>,</span>
+							<a href="#" class="rev blue">organise par <?php echo $loading->auteur;?></a>
+							<div class="chat-tip-left"></div>
+						</div> <!-- .chat-msg -->
+					</div> <!-- .conversation-main -->
+				</div> <!-- .cfix -->
+				<div class="event_description">
+					<?php echo $loading->description;?>
+				</div>
+			</div>
+			<div class="event_content">
+				<div class="event_quivient">
+					<p>
+						<span class="title_event"><?php if(!$loading->termine) echo "Qui vient ?"; else echo "Qui y était ?";?></span>
+						<br />&nbsp;
+					</p>
+					<?php
+						if($loading->nb_quivient == 0)
+							echo "Aucune personne ne participe à cet évènement pour le moment";
+						else {
+							echo '<ul class="users-list2 cfix">';
+							foreach($loading->quivient as $quivient) {
+								echo ' <li class="user">
+									<a href="#" class="user-photo '.($quivient['sex_member']==1?'bgr-blue':'bgr-pink').'"><img src="'.$quivient['photo_member'].'" alt="" width="42" /></a>
+									<div class="user-popup-info">
+									  <strong><em>'.$quivient['pseudo_member'].',</em></strong>
+									  <br /><br />
+									  Ne le '.$quivient['birth_member'].'
+									  <br />
+									  Etudiante a l\'Universite xxx Habite a '.$quivient['city_member'].'
+									  <div class="black-tip"></div>
+									</div>
+								  </li>';
+							}
+						}
+					?>
+					<?php if(!$loading->termine):?><a id="comeon" href="javascript:void()" onclick="comeon('<?php echo $loading->idevent;?>')"><?php echo $loading->link_participate;?></a><?php endif;?>
+				</div>
+				<div class="event_passion">
+					<p>
+						<span class="title_event">Passions liees</span>
+						<br />&nbsp;
+					</p>
+					<ul class="list_passion">
+					<?php
+						while($data_passion = mysql_fetch_array($loading->data_passion)) {
+							echo "<li><a href='#' class='user-photo bgr-blue3'><img src='/".($data_passion['iconepassion']!=""?$data_passion['iconepassion']:$data_passion['iconecat'])."' alt='".$data_passion['name_passion']."'/></a><span class='text_passion'><h4>".$data_passion['name_passion']."</h4>Catégorie : ".$data_passion['name_category']."</span></li>";
+						}
+					?>
+					</ul>
+				</div>
+			</div>
+			<div class="event_content_other">
+				<div class="event_carte">
+					<p>
+						<span class="title_event">En France</span>
+						<span class="event_carte_info"><?php echo $loading->ville;?></span>
+						<br />&nbsp;
+					</p>
+					<img src="<?php echo $conf["url"]; ?>Images/carte.png" alt="France" />
+				</div>
+				<div class="event_map">
+					<div id="map" class="smallmap"></div>
+				</div>
+			</div>
+			<div class="inside-column-inside event_comments">
+					<p>
+						<span class="title_event">Commentaires</span>
+						<br />&nbsp;
+					  </p>
+					  <form class="comment">
+						<input type="hidden" name="idevent" id="idevent" value="<?php echo  $loading->idevent;?>" />
+						<div class="contentCommentHeader">
+							<a href="#" class="avatar"><img src="<?php echo $conf["url"]; ?>Images/clip-face2.jpg" alt="" /></a>
+							<div class="right-contentCommentHeader"><input class="sendComment" name="sendComment" id="sendComment" value="<?php echo (mysql_num_rows($loading->resultat_mycomment) == 0?"Soyez le premier à commenter":"Saisissez votre message");?>" /></div>				
+						</div>
+					  </form>
+					  <ul class="listComment">
+					  <?php
+						if(mysql_num_rows($loading->resultat_mycomment) != 0) {
+							while($data_mycomment = mysql_fetch_array($loading->resultat_mycomment)) {
+								echo "<li><img src='/".$data_mycomment['photo_member']."' alt=''/><span class='text_comment'><div class='chat-tip-left'></div><h4>".ucfirst($data_mycomment['pseudo_member'])." ".$data_mycomment['date_comment']."</h4>".$data_mycomment['message_member']."</span></li>";
+							}
+						}
+						else {
+							echo "<li>Aucun commentaires pour le moment</li>";
+						}
+					  ?>
+					  </ul>
+				</div>
+			</div>
+           
+			
+          </div> <!-- #inside-column-wrap -->
+		  <div id="main-footer">
           <div class="connexion-shadow-2 nom"></div>
           <div id="home-icons">
-            <img src="images/icon-1.png" alt="" />
-            <img src="images/icon-2.png" alt="" />
-            <img src="images/icon-3.png" alt="" />
-            <img src="images/icon-4.png" alt="" />
-            <img src="images/icon-5.png" alt="" />
-            <img src="images/icon-6.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>images/icon-1.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>images/icon-2.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>images/icon-3.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>images/icon-4.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>images/icon-5.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>images/icon-6.png" alt="" />
           </div> <!-- #home-icons -->
         </div> <!-- #main-footer -->
+        </div> <!-- #inside-column -->
       </div> <!-- .cfix -->
 
       <div class="blue-box-top blue-box-asdf"></div>

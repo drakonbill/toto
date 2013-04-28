@@ -243,6 +243,92 @@ class models_ajax_passion extends Model {
         }
     }
     
+    function registerPassionProfil() {
+        global $reg;
+        
+        $result = "";
+        
+        if($_SESSION['id_member'] != "")
+        {
+
+                $passion = $reg->clean->POST('passion');
+                $categorie = intval($_POST['categorie']);
+
+                if(isset($_POST['x1']) && isset($_POST['x2']) && isset($_POST['y1']) && isset($_POST['y2']) && isset($_POST['w']) && isset($_POST['h']) && isset($_POST['image']) && isset($_POST['imageheight']) && isset($_POST['imagewidth'])) {
+                        $x1 = intval($_POST['x1']);
+                        $y1 = intval($_POST['y1']);
+                        $x2 = intval($_POST['x2']);
+                        $y2 = intval($_POST['y2']);
+                        $w = intval($_POST['w']);
+                        $h = intval($_POST['h']);
+                        $image = $reg->clean->POST('image');
+                        $imageheight = intval($_POST['imageheight']);
+                        $imagewidth = intval($_POST['imagewidth']);
+                }
+
+                if(!empty($passion))
+                {
+                        $requete_verif_new = mysql_query("SELECT passion.id_passion,name_passion,name_category,passion_category.icone,passion.icon_passion AS icone_passion, passion.id_category FROM passion inner join passion_category on passion.id_category=passion_category.id_category WHERE name_passion='".strtolower($passion)."' ") or die(mysql_error());
+                        $data_verif_new = mysql_num_rows($requete_verif_new);
+                        
+                        $result = array();
+                        
+                        if($data_verif_new != 0 || isset($_POST['mode'])) {
+                                        $requete = mysql_query("SELECT member_passion.id_passion,id_category,name_passion FROM member_passion inner join passion on member_passion.id_passion=passion.id_passion WHERE member_passion.id_member='".$_SESSION['id_member']."' AND name_passion='".strtolower($passion)."'") or die(mysql_error());
+                                        $data = mysql_fetch_array($requete);
+                                        
+                                        if(empty($data['nompassion'])) {
+                                            if(isset($_POST['mode']) && $_POST['mode'] == "enregistrericone" && !empty($categorie) && isset($x1) && isset($y1) && isset($x2) && isset($y2) && isset($w) && isset($h) && isset($image) && isset($imageheight) & isset($imagewidth) && $data_verif_new == 0) {
+                                                    $requete_verif_categorie = mysql_query("SELECT name_category, icone FROM passion_category WHERE id_category='".$categorie."'") or die(mysql_error());
+                                                    $data_verif_categorie = mysql_num_rows($requete_verif_categorie);
+
+                                                    if($data_verif_categorie > 0) {
+                                                            $extension = pathinfo($image, PATHINFO_EXTENSION);
+                                                            $nomImageFinal = md5(uniqid()) .'.'. $extension;
+                                                            $cropped = $this->resizeThumbnailImage(TARGET.$image, "Images/iconespassion/".$nomImageFinal,$w,$h,$x1,$y1,$imageheight,$imagewidth);
+
+                                                            mysql_query("INSERT INTO passion VALUES (default, '".$passion."', '".$categorie."', '".$_SESSION['id_member']."', '"."Images/iconespassion/".$nomImageFinal."')") or die(mysql_error());
+                                                            mysql_query("INSERT INTO member_passion VALUES ('".$_SESSION['id_member']."', '".mysql_insert_id()."')") or die(mysql_error());
+                                                            $result[] = "ok";
+                                                            $result[] = $data_verif_categorie['name_category'].";".stripslashes($passion).";".mysql_insert_id().";/Images/iconespassion/".$nomImageFinal.";".$idpassion['id_category'];
+                                                            return json_encode($result);
+                                                    }
+                                            }
+                                            else if(isset($_POST['mode']) && $_POST['mode'] == "enregistrergout" && !empty($categorie) && $data_verif_new == 0) {
+                                                    $requete_verif_categorie = mysql_query("SELECT name_category, icone FROM passion_category WHERE id_category='".$categorie."'") or die(mysql_error());
+                                                    $data_verif_categorie = mysql_num_rows($requete_verif_categorie);
+
+                                                    if($data_verif_categorie > 0) {
+                                                            mysql_query("INSERT INTO passion VALUES (default, '".$passion."', '".$categorie."', '".$_SESSION['id_member']."', default)") or die(mysql_error());
+                                                            mysql_query("INSERT INTO member_passion VALUES ('".$_SESSION['id_member']."', '".mysql_insert_id()."')") or die(mysql_error());
+                                                            $result[] = "ok";
+                                                            $result[] = $data_verif_categorie['name_category'].";".stripslashes($passion).";".mysql_insert_id().";/".$data_verif_categorie['icone'].";".$idpassion['id_category'];
+                                                            return json_encode($result);
+                                                    }
+                                            }
+                                            else if($data_verif_new == 1) {
+                                                    $idpassion = mysql_fetch_array($requete_verif_new);
+                                                    
+                                                    mysql_query("INSERT INTO member_passion VALUES ('".$_SESSION['id_member']."', '".$idpassion['id_passion']."')") or die(mysql_error());
+                                                    $result[] = "ok";
+                                                    $result[] = $idpassion['name_category'].";".stripslashes($passion).";".$idpassion['id_passion'].";/".($idpassion['icone_passion'] == NULL?$idpassion['icone']:$idpassion['icone_passion']).";".$idpassion['id_category'];
+                                                    return json_encode($result);
+                                            }
+                                        }
+                                        else {
+                                                return json_encode(array("error","Passion déjà ajoutée"));
+                                        }
+
+
+                        }
+                        else {
+                                return json_encode(array("1"));
+                        }
+
+                }
+        }
+    }
+    
     private function resizeThumbnailImage($image, $thumb_image_name, $w, $h, $start_width, $start_height, $imageheight, $imagewidth){
 
 	$tAttribut = getimagesize($image);
@@ -295,6 +381,18 @@ class models_ajax_passion extends Model {
 	
 	chmod($thumb_image_name, 0777);
 	return $thumb_image_name;
+    }
+    
+    function deletePassion() {
+        $idpassion = $_GET['idpassion'];
+
+        if(isset($_SESSION['id_member']) && is_numeric($_SESSION['id_member']) && is_numeric($idpassion))
+        {
+
+                mysql_query("DELETE FROM member_passion WHERE id_member='".$_SESSION['id_member']."' && id_passion='".$idpassion."'") or die(mysql_error());
+
+                echo "1;".$idpassion;
+        }
     }
 }
 

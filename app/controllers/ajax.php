@@ -35,6 +35,20 @@ class controllers_ajax extends Controller{
        $this->loadView("ajax", $return); 
     }
     
+    function registerImageMemberAction(){
+        $indexM = $this->loadModel("ajax_member");
+        $return = $indexM->registerImage();
+        
+        $this->loadView("ajax", $return);
+    }
+    
+     function registerImageProfilMemberAction(){
+        $indexM = $this->loadModel("ajax_member");
+        $return = $indexM->registerImageProfil();
+        
+        $this->loadView("ajax", $return);
+    }
+    
     /*********************************************************************
      *  Passion 
      *******************************************************************/
@@ -67,6 +81,20 @@ class controllers_ajax extends Controller{
         $this->loadView("ajax", $return); 
     }
     
+    function deletePassionAction() {
+        $indexM = $this->loadModel("ajax_passion");
+        $return = $indexM->deletePassion();
+        
+        $this->loadView("ajax", $return); 
+    }
+    
+    function registerPassionProfilAction() {
+        $indexM = $this->loadModel("ajax_passion");
+        $return = $indexM->registerPassionProfil();
+        
+        $this->loadView("ajax", $return); 
+    }
+    
     
     /*********************************************************************
      *  Event 
@@ -82,6 +110,27 @@ class controllers_ajax extends Controller{
     function registerImageEventAction() {
         $indexM = $this->loadModel("ajax_event");
         $return = $indexM->registerImage();
+        
+        $this->loadView("ajax", $return); 
+    }
+    
+    function addCommentEventAction() {
+        $indexM = $this->loadModel("ajax_event");
+        $return = $indexM->addComment();
+        
+        $this->loadView("ajax", $return); 
+    }
+    
+    function fanEventAction() {
+        $indexM = $this->loadModel("ajax_event");
+        $return = $indexM->fan();
+        
+        $this->loadView("ajax", $return); 
+    }
+    
+    function participateEventAction() {
+        $indexM = $this->loadModel("ajax_event");
+        $return = $indexM->participate();
         
         $this->loadView("ajax", $return); 
     }

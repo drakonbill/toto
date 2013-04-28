@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" class="htmlconnect">
     <head>
         <meta charset="utf-8" />
         <title><?php echo $conf["title"];
@@ -16,15 +16,17 @@ echo $data ? " - $data" : "";
         <link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>styles/ie.css" media="screen" />
         <![endif]-->
 
-        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/jquery.js"></script>
+       <!-- <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/jquery.js"></script>-->
+         <script type="text/javascript" src="/js/files/jquery-1.7.0.min.js"></script>
         <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/fancybox/jquery.fancybox.js"></script>
         <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/jquery.equalheights.js"></script>
         <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/slider.js"></script>
         <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/bind.js"></script>
     </head>
-    <body>
+    <body class="bodyconnect">
         <div id="wrap-outer">
-            <div id="logo-block">
+            <div style="width: 1061px; margin: 0 auto; position: relative;">
+            <div id="logo-block" class="logo-block-co">
                 <a href="index.php" id="logo" class="rep">MeetoParty</a>
                 <div id="top-social-links">
                     <a href="http://www.facebook.com/Meetoparty" id="top-facebook-link" class="rep">Facebbok</a>
@@ -41,7 +43,7 @@ echo $data ? " - $data" : "";
                 <div id="header-left">
                     <div id="header-left-in1">
                         <div id="header-left-in2">
-                            <ul class="menu" id="left-menu">
+                            <ul class="menu">
                                 <li><a href="#">
                                         <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-fav.png" alt="" /></span>
                                         <span class="menu-text">Evenement</span>
@@ -69,7 +71,7 @@ echo $data ? " - $data" : "";
                 <div id="header-right">
                     <div id="header-right-in1">
                         <div id="header-right-in2">
-                            <ul class="menu" id="right-menu">
+                            <ul class="menu">
                                 <li><a href="index.php?page=messagerie">
                                         <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-email.png" alt="" /></span>
                                         <span class="menu-text">Message</span>
@@ -102,7 +104,7 @@ echo $data ? " - $data" : "";
                     <div class="bl-photo">
                         <strong><em><?php echo $user->pseudo_member; ?></em></strong>
                         <br /><br />
-                        <a href="/#" class="bl-link bgr-blue"><img src="<?php echo $user->photoURL(); ?>" alt="" /></a>
+                        <a href="/#" class="bl-link bgr-blue"><img id="avatar-profil" width="101px" src="<?php echo $user->photoURL(); ?>" alt="" /></a>
                     </div> <!-- .bl-photo -->
                     <div class="bl-right">
                         <div>
@@ -122,4 +124,8 @@ echo $data ? " - $data" : "";
                    ?>
                     
                 </div> <!-- .beta-right -->
-            </div> <!-- .beta -->
+                
+                
+        </div> <!-- .beta -->
+            
+            
