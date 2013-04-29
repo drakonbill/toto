@@ -50,6 +50,8 @@ class controllers_account extends Controller {
     // Validation of the registration 
     function validationregistrationAction() {
         
+        // Redirection if the mmeber does not come from the Registration POP-UP
+        
         $indexM = $this->loadModel("account");
         $index = $indexM->validationregistration();
         
