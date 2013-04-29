@@ -294,15 +294,15 @@ class models_account extends Model {
                         $messtxt .= "$lien<br><br>";
                         $messtxt .= "Merci,<br> A bientôt sur notre site <br> L'équipe de Meetoparty";
                         $messhtml = '<p>' . $messtxt . '</p>';
-                        $from = array('Meetoparty', "contact@meetoparty.fr");
+                        $from = array('Meetoparty', "no-reply@meetoparty.fr");
 
                         $this->reg->user->postMail($messtxt, $messhtml, $sujet, $to, $from, $reply = "");
 
-                        mkdir("Dossiermembre/" . hash('crc32', crc32(PREFIXE) . $lastid . crc32(SUFFIXE)) . ",0777");
+                        mkdir("memberdir/" . hash('crc32', crc32(PREFIXE) . $lastid . crc32(SUFFIXE)) . ",0777");
 
                         $data["result"] = "<p>Vous allez bientôt recevoir un mail de validation pour activer vore compte.</p><br>";
                         $data["result"] .= "<p>Vous allez être redirigé automatiquement dans 5 secondes vers l'accueil du site.</p>";
-                        header('Refresh: 7; url=index.php');
+                        header('Refresh: 7; url=/index');
                     } else {
                         $data["error"]['result'] = "<p>Erreur lors de l'inscription</p><br>";
                     }
@@ -319,9 +319,55 @@ class models_account extends Model {
             header('Location: /index');
         }
         return $data;
+    }
 
+// Validation of registration in email 
+    public function confirmationregistration() {
 
-        // End of functoin
+        //   $l = "meetoparty/account/confirmationregistration/code/$code/pseudo/$pseudo";
+        global $_URL;
+
+        $c = mysql_real_escape_string($_URL['code']);
+        $p = mysql_real_escape_string($_URL['pseudo']);
+        
+        $pseudo= $p;
+        $code = $c;
+
+        if (empty($pseudo) or empty($code))
+            $data['error']['empty'] = "Il y a eu un problème lors de votre inscription.<br> Veuillez contacter les webmaster du site";
+
+        if (empty($data['error']['empty'])) {
+
+            $query = mysql_query("SELECT pseudo_member from member WHERE pseudo_member = '$pseudo'") or die("Impossible de sélectionner l'email : " . mysql_error());
+
+            if (mysql_num_rows($query) == 1) {
+                $row = mysql_fetch_assoc($query);
+                $result = $row;
+            }
+
+            if (!empty($result['pseudo_member'])) {
+
+                $query2 = mysql_query("SELECT code_member from member WHERE pseudo_member = '$pseudo'") or die("Impossible de sélectionner l'email : " . mysql_error());
+
+                if (mysql_num_rows($query2) == 1) {
+                    $row = mysql_fetch_assoc($query2);
+                    $result2 = $row;
+                }
+
+                if ((!empty($result2['code_member'])) AND ($result2['code_member'] == $code)) {
+                    mysql_query("UPDATE member SET code_member = 0, level_member = 1 WHERE pseudo_member =  '$pseudo'");
+                    $data['result'] = "<h2>Votre inscription est maintenant terminée.</h2><br>";
+                    $data['result'] .= "<p>Vous pouvez vous connecter sur Meetoparty et profitez des avantages du site.</p><br>";
+                    header('Refresh: 7; url=/index');
+                } else {
+                    $data['error']['wrong'] = "Il y a eu un problème lors de votre inscription.<br> Veuillez contacter les webmaster du site";
+                }
+            } else {
+                $data['error']['wrong'] = "Il y a eu un problème lors de votre inscription.<br> Veuillez contacter les webmaster du site";
+            }
+        }
+        
+        return $data;
     }
 
 }
