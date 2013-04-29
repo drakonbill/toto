@@ -1,0 +1,29 @@
+<div id="connexion-bar"></div>
+<div id="connexion-box">
+    <div id="connexion-box-in">
+        <h3 class="cbox-title blue">Inscription sur Meetoparty</h3>
+        <div class="connexion-shadow-1"></div>
+        <div class="cfix connexion-form-in">
+            <div class="connexion-form-col ld">
+                <?php
+                if (!empty($data['error'])) {
+                    echo $data['error'];
+                }
+                else {
+                    echo $data['result'];
+                }
+                ?>
+
+            </div> 
+
+            <div class="connexion-shadow-2"></div>
+            <div id="home-icons">
+                <img src="Images/icon-1.png" alt="" />
+                <img src="Images/icon-2.png" alt="" />
+                <img src="Images/icon-3.png" alt="" />
+                <img src="Images/icon-4.png" alt="" />
+                <img src="Images/icon-5.png" alt="" />
+                <img src="Images/icon-6.png" alt="" />
+            </div> <!-- #home-icons -->
+        </div> <!-- #connexion-box-in -->
+    </div> <!-- #connexion-box -->
