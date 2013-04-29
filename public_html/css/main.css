@@ -12,7 +12,7 @@ html.htmlconnect{
 }
 
 html.htmlnoconnect{
-    background:url(../images/bgr2.jpg) repeat-x 50% 0 #cee7fa;
+    background:url(../images/bgr2.jpg) repeat 50% 0 #cee7fa;
 }
 
 body{
@@ -224,7 +224,8 @@ a.rev:hover{ text-decoration:underline; }
     background-position: top;
 }
 #login-form .text{
-	width: 112px;
+    width: 102px;
+    padding-right: 13px;
 }
 .form-icon{
 	position: absolute;
@@ -1772,3 +1773,79 @@ ul.listepassions li img {
 
 h2.title_underline { font-family: Arial; border-bottom: 1px solid #bfbbbb; font-size:16px; color: #545252; background: url('../Images/puce.png') left no-repeat; padding-left: 20px; margin-bottom: 15px;  margin-top: 15px; }
 h3.title_underline { border-left: 3px solid #FF99FF; padding: 5px; border-bottom: 1px dashed #FFCCFF; margin-bottom: 15px; }
+
+/* For the lost password */
+.email-box {
+    background-image: url("../images/email.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    margin: 1% 1% 1% 1%;
+    min-height: 300px;
+    position: relative;
+}
+
+.email-form {	margin: 8% auto 0;
+              position:absolute;
+              padding-left:5%;
+              width: 520px;}
+
+.email-bold {color:#fff; font-weight:bold; font-size:16px; }
+.email-desc {color:#fff; font-weight:normal; font-size:14px; }
+.email-form label {
+    display: inline-block;
+    height: 35px;
+    width: 150px !important;
+    color:#FFF;
+    font-weight:bold;
+    font-size:14px;
+}	
+.email-form .text {
+    background-color: #E1E1E1;
+    background-image: url("../Images/input-bgr.png");
+    background-position: center top;
+    background-repeat: repeat-x;
+    border-color: #D3D4D4;
+    border-style: solid;
+    border-width: 2px;
+    font-size: 11px;
+    height: 20px;
+    line-height: 14px;
+    padding: 2px;
+}
+
+.email-btn{
+    color: #fff;
+    background-image: url("../Images/btn-empty.png");
+    text-align: center;
+    text-decoration: none;
+    line-height: 28px;
+    width: 81px;
+    height: 28px;
+    display: inline-block;
+    border:none;
+    background-color:transparent;
+    position:absolute;
+    margin-left: 30%;
+}
+
+#lostpassword-box{
+    margin: -31px 194px 0;
+    position: relative;
+    background-image: url(../Images/sb-title-shadow.png);
+    background-position: 0 0;
+    background-repeat:repeat-y;
+}
+
+#lostpassword-box #home-icons{
+    margin-bottom:0px;
+}
+
+#lostpassword-box-in{
+    padding: 25px 20px;
+    margin:0 26px;
+    background:#fff;
+    border-top-width: 3px;
+    border-top-style: solid;
+    border-top-color: #69c4e6;
+}
