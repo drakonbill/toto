@@ -1,0 +1,53 @@
+<div id="connexion-bar"></div>
+<div id="lostpassword-box">
+    <div id="lostpassword-box-in">
+        <h3 class="cbox-title blue">Validation de votre inscription</h3>
+        <div class="connexion-shadow-1"></div>
+        <div class="connexion-box">
+            <?php
+            if (isset($data["error"]["empty"]))
+                echo $data["error"]["empty"];
+
+            if (isset($data["error"]["wrong"]))
+                echo $data["error"]["wrong"];
+            
+            // Now for result
+            
+            if(isset($data["result"]))
+                echo $data["result"];
+            
+            echo $data["code"];
+            echo $data["pseudo"];
+            ?>
+        </div> <!-- end contact-box div -->
+        <div class="connexion-shadow-2"></div>
+        <div id="home-icons">
+            <img src="<?php echo $conf["url"]; ?>Images/icon-1.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-2.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-3.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-4.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-5.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-6.png" alt="" />
+        </div> <!-- #home-icons -->
+    </div> <!-- #connexion-box-in -->
+</div> <!-- #connexion-box -->
+<div class="blue-box-top blue-box-asdf"></div>
+<div class="blue-box">
+    <div class="blue-box-in cfix equal-heights">
+        <div class="blue-box-col ld">
+            <div class="equal">
+                <h2>Qu’est ce que Meetoparty ?</h2>
+                <p>Origine de vos futurs evenements, ce site est le cocktail parfait entre reseau social et site de rencontres. Cette revolution dont vous connaissez deja le principe, s’offre a vous comme etant un outil gratuit et simple d’utilisation. Meetoparty est le resultat final d’une etude sur l’evolution des relations sociales. Aujourd’hui, peu sont ceux qui osent aller vers une personne inconnue. Meetoparty a pour objectif de changer le court des choses.</p>
+                <p>Meetoparty vous propose un moyen ludique et attractif d’organiser des rencontres reelles avec des inconnus dans le cadre du partage de vos passions. A la cle ? Se creer de nouveaux liens d’amitie et plus si affinites.</p>
+            </div> <!-- .equal -->
+        </div> <!-- .blue-box-col -->
+        <div class="blue-box-col rd">
+            <div class="equal">
+                <h2>Faites des rencontres qui vous ressemblent !</h2>
+                <p>Marre des soirées ou sorties ou vous ne vous sentez pas à votre place ? Envie de nouvelles expériences ou de faire de nouvelles connaissance ? Meetoparty est fait pour vous !</p>
+                <p>Meetoparty vous accompagne et vous aide dans votre démarche en vous permettant de créer des centaines d’évènements, sorties ou soirées possibles en lien avec vos passions !</p>
+                <p>Déclencheur de rencontres, nous vous souhaitons de merveilleux moments.</p>
+            </div> <!-- .equal -->
+        </div> <!-- .blue-box-col -->
+    </div> <!-- .blue-box-in -->
+</div> <!-- .blue-box -->
