@@ -9,11 +9,7 @@ class controllers_index extends Controller {
         // To clean cookies 
         $user->clean_cookie();
         
-        if ($user->loggedin()) {
-//            $controller = new controllers_welcome();
-//            $controller->indexAction();
-//            $this->reg->controler = $controller;
-            
+        if ($user->loggedin()) {            
                 header('Location: /welcome');
         } else {
             //load model and fill data with
