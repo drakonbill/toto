@@ -1,29 +1,116 @@
 <div id="connexion-bar"></div>
-<div id="connexion-box">
-    <div id="connexion-box-in">
+<div id="lostpassword-box">
+    <div id="lostpassword-box-in">
         <h3 class="cbox-title blue">Inscription sur Meetoparty</h3>
         <div class="connexion-shadow-1"></div>
-        <div class="cfix connexion-form-in">
-            <div class="connexion-form-col ld">
-                <?php
-                if (!empty($data['error'])) {
-                    echo $data['error'];
-                }
-                else {
-                    echo $data['result'];
-                }
-                ?>
+        <div class="connexion-box">
+            <?php
+            if (isset($data["error"]["pseudo"]))
+                echo $data["error"]["pseudo"];
 
-            </div> 
+            if (isset($data["error"]["email"]))
+                echo $data["error"]["email"];
 
-            <div class="connexion-shadow-2"></div>
-            <div id="home-icons">
-                <img src="Images/icon-1.png" alt="" />
-                <img src="Images/icon-2.png" alt="" />
-                <img src="Images/icon-3.png" alt="" />
-                <img src="Images/icon-4.png" alt="" />
-                <img src="Images/icon-5.png" alt="" />
-                <img src="Images/icon-6.png" alt="" />
-            </div> <!-- #home-icons -->
-        </div> <!-- #connexion-box-in -->
-    </div> <!-- #connexion-box -->
+            if (isset($data["error"]["password"]))
+                echo $data["error"]["password"];
+            
+            if (isset($data["error"]["confirmation"]))
+                echo $data["error"]["confirmation"];
+            
+            if (isset($data["error"]["birth"]))
+                echo $data["error"]["birth"];
+            
+            if (isset($data["error"]["pays"]))
+                echo $data["error"]["pays"];
+            
+            if (isset($data["error"]["cp"]))
+                echo $data["error"]["cp"];
+            
+            if (isset($data["error"]["pseudo-length"]))
+                echo $data["error"]["pseudo-length"];
+            
+            if (isset($data["error"]["confirmation-length"]))
+                echo $data["error"]["confirmation-length"];
+            
+            if (isset($data["error"]['pass-conf']))
+                echo $data["error"]['pass-conf'];
+            
+            if (isset($data["error"]['mail-length'] ))
+                echo $data["error"]['mail-length'] ;
+            
+            if (isset($data["error"]['birth-day'] ))
+                echo $data["error"]['birth-day'] ;
+            
+            if (isset($data["error"]['birth-month']))
+                echo $data["error"]['birth-month'] ;
+            
+            if (isset($data["error"]['birth-year']))
+                echo $data["error"]['birth-year'] ;
+            
+            if (isset($data["error"]['cp-length']))
+                echo $data["error"]['cp-length'];
+            
+            if (isset($data["error"]['mail-format']))
+                echo $data["error"]['mail-format'];
+            
+            if (isset($data["error"]["day-length"]))
+                echo $data["error"]["day-length"];
+            
+            if (isset($data["error"]["month-length"]))
+                echo $data["error"]['month-length'] ;
+            
+            if (isset($data["error"]['year-length'] ))
+                echo $data["error"]['year-length'] ;
+            
+            if (isset($data["error"]['cp-format']))
+                echo $data["error"]['cp-format'];
+            
+            if (isset($data["error"]['age']))
+                echo $data["error"]['age'];
+            
+            if (isset($data["error"]['pseudo-verif']))
+                echo $data["error"]['pseudo-verif'];
+            
+            if (isset($data["error"]['mail-verif']))
+                echo $data["error"]['mail-verif'];
+            
+            if (isset($data["error"]['result']))
+                echo $data["error"]['result'];
+            
+            // Now for result
+            
+            if(isset($data["result"]))
+                echo $data["result"];
+            ?>
+        </div> <!-- end contact-box div -->
+        <div class="connexion-shadow-2"></div>
+        <div id="home-icons">
+            <img src="<?php echo $conf["url"]; ?>Images/icon-1.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-2.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-3.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-4.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-5.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-6.png" alt="" />
+        </div> <!-- #home-icons -->
+    </div> <!-- #connexion-box-in -->
+</div> <!-- #connexion-box -->
+<div class="blue-box-top blue-box-asdf"></div>
+<div class="blue-box">
+    <div class="blue-box-in cfix equal-heights">
+        <div class="blue-box-col ld">
+            <div class="equal">
+                <h2>Qu’est ce que Meetoparty ?</h2>
+                <p>Origine de vos futurs evenements, ce site est le cocktail parfait entre reseau social et site de rencontres. Cette revolution dont vous connaissez deja le principe, s’offre a vous comme etant un outil gratuit et simple d’utilisation. Meetoparty est le resultat final d’une etude sur l’evolution des relations sociales. Aujourd’hui, peu sont ceux qui osent aller vers une personne inconnue. Meetoparty a pour objectif de changer le court des choses.</p>
+                <p>Meetoparty vous propose un moyen ludique et attractif d’organiser des rencontres reelles avec des inconnus dans le cadre du partage de vos passions. A la cle ? Se creer de nouveaux liens d’amitie et plus si affinites.</p>
+            </div> <!-- .equal -->
+        </div> <!-- .blue-box-col -->
+        <div class="blue-box-col rd">
+            <div class="equal">
+                <h2>Faites des rencontres qui vous ressemblent !</h2>
+                <p>Marre des soirées ou sorties ou vous ne vous sentez pas à votre place ? Envie de nouvelles expériences ou de faire de nouvelles connaissance ? Meetoparty est fait pour vous !</p>
+                <p>Meetoparty vous accompagne et vous aide dans votre démarche en vous permettant de créer des centaines d’évènements, sorties ou soirées possibles en lien avec vos passions !</p>
+                <p>Déclencheur de rencontres, nous vous souhaitons de merveilleux moments.</p>
+            </div> <!-- .equal -->
+        </div> <!-- .blue-box-col -->
+    </div> <!-- .blue-box-in -->
+</div> <!-- .blue-box -->
