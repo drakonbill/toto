@@ -162,7 +162,7 @@ class models_account extends Model {
             $data["error"]["pseudo"] = "<p>Veuillez remplir le pseudo.</p><br>";
 
         if (empty($email))
-            $data["error"]['mail'] = "<p>Veuillez remplir le mail.</p><br>";
+            $data["error"]['email'] = "<p>Veuillez remplir le mail.</p><br>";
 
         if (empty($password))
             $data["error"]['password'] = "<p>Veuillez remplir le mot de passe.</p><br>";
