@@ -1,5 +1,4 @@
 <?php
-
 class models_account extends Model {
 
 // No need for the moment
@@ -137,6 +136,162 @@ class models_account extends Model {
 
     public function lostpassword() {
         
+    }
+
+    public function validationregistration() {
+
+        // All informations in the registration form 
+        $pseudo = $this->reg->clean->POST('pseudo');
+        $loginPassword = $this->reg->clean->POST('password');
+        $password = $this->reg->user->hacher($loginPassword);
+        $loginConfirmation = $this->reg->clean->POST('register-confirmation-password');
+        $confirmation = $this->reg->user->hacher($loginConfirmation);
+        $email = $this->reg->clean->POST('register-email');
+        $day = $this->reg->clean->POST('register-jour');
+        $month = $this->reg->clean->POST('register-mois');
+        $year = $this->reg->clean->POST('register-annee');
+        $date = "$year-$day-$month";
+        $sexe = $this->reg->clean->POST('etes');
+        $pays = $this->reg->clean->POST('pays');
+        $cp = $this->reg->clean->POST('register-code-postal');
+        $ville = $this->reg->clean->POST('register-ville');
+        $conditions = $this->reg->clean->POST('accepte');
+        $ip = $this->reg->user->get_ip();
+
+        if (empty($pseudo))
+            $data["error"]["pseudo"] = "<p>Veuillez remplir le pseudo.</p><br>";
+
+        if (empty($email))
+            $data["error"]['mail'] = "<p>Veuillez remplir le mail.</p><br>";
+
+        if (empty($password))
+            $data["error"]['password'] = "<p>Veuillez remplir le mot de passe.</p><br>";
+
+        if (empty($confirmation))
+            $data["error"]['confirmation'] = "<p>Veuillez remplir le mot de passe de vérification.</p><br>";
+
+        if ((empty($day)) or (empty($month) or (empty($year))))
+            $data["error"]['birth'] = "<p>Veuillez remplir la date de naissance.</p><br>";
+
+        if (empty($pays))
+            $data["error"]['pays'] = "<p>Veuillez choisir un pays.</p><br>";
+
+        if (empty($cp))
+            $data["error"]['cp'] = "<p>Veuillez remplir le code postal.</p><br>";
+
+        if (empty($conditions))
+            $data["error"]['conditions'] = "<p>Veuillez accepter les conditions d'utilisation.</p><br>";
+
+        if ((strlen($pseudo) < 2) or (strlen($pseudo) > 40))
+            $data["error"]['pseudo-length'] = "<p>Le pseudo doit être compris entre 2 et 40 caractères.</p><br>";
+
+        if ((strlen($password) < 2) or (strlen($password) > 40))
+            $data["error"]['password-length'] = "<p>Le mot de passe doit être compris entre 2 et 40 caractères.</p><br>";
+
+        if ((strlen($confirmation) < 2) or (strlen($confirmation) > 40))
+            $data["error"]['confirmation-length'] = "<p>Le mot de passe de vérification doit être compris entre 2 et 40 caractères.</p><br>";
+
+        if ($confirmation != $password)
+            $data["error"]['pass-conf'] = "<p>Les mot de passe doivent être identiques.</p><br>";
+
+        if ((strlen($email) < 5) or (strlen($email) > 70))
+            $data["error"]['mail-length'] = "<p>La taille de l'email est incorrecte.</p><br>";
+
+        if (strlen($day) > 2)
+            $data["error"]['birth-day'] = "<p>Le jour de naissance doit être de la forme JJ.</p><br>";
+
+        if (strlen($month) > 2)
+            $data["error"]['birth-month'] = "<p>Le mois de naissance doit être de la forme MM.</p><br>";
+
+        if (strlen($year) > 4)
+            $data["error"]['birth-year'] = "<p>L'année de naissance doit être de la forme AAAA.</p><br>";
+
+        if ((strlen($cp) < 3) or (strlen($cp) > 5))
+            $data["error"]['cp-length'] = "<p>La taille du code postal est incorrecte.</p><br>";
+
+        if (!preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $email))
+            $data["error"]['mail-format'] = "<p>L'email n'est pas au format valide.</p><br>";
+
+        if (($day < 1) or ($day > 31))
+            $data["error"]['day-length'] = "<p>Le jour de naissance doit être un nombre.</p><br>";
+
+        if (($month < 1) or ($month > 12))
+            $data["error"]['month-length'] = "<p>Le mois de naissance doit être un nombre.</p><br>";
+
+        if (($year < 1880) or ($year > 2300))
+            $data["error"]['year-length'] = "<p>L'année de naissance doit être un nombre.</p><br>";
+
+        if (($cp < 1) or ($cp > 99999))
+            $data["error"]['cp-format'] = "<p>Le code postal doit être un nombre.</p><br>";
+
+        if (!empty($day) && (!empty($month)) && (!empty($year)))
+            $date_de_naissance = "$day/$month/$year";
+
+        $chiffre = explode('/', $date_de_naissance);
+        $time_naissance = mktime(0, 0, 0, $chiffre[1], $chiffre[0], $chiffre[2]);
+        $seconde_vecu = time() - $time_naissance;
+        $seconde_par_an = (1461 * 24 * 60 * 60) / 4;
+        $age = floor(($seconde_vecu / $seconde_par_an) + 1);
+
+        if ($age < 16)
+            $data["error"]['age'] = "<p>Il faut être majeur pour accéder au site.</p><br>";
+
+        if ($sexe == 'Homme')
+            $sexe = homme;
+
+        if ($sexe == 'Femme')
+            $sexe = femmme;
+
+        $query = mysql_query("SELECT pseudo_member from member WHERE pseudo_member = '$pseudo'") or die("Impossible de sélectionner le pseudo : " . mysql_error());
+
+        if (mysql_num_rows($query) == 1) {
+            $row = mysql_fetch_assoc($query);
+            $result1 = $row;
+
+            if (!empty($result1['pseudo_member']))
+                $data["error"]['pseudo-verif'] = "<p>Votre pseudo est déjà utilisé, veuillez en choisir un autre.</p><br>";
+        }
+
+        $query2 = mysql_query("SELECT email_member from member WHERE email_member = '$email'") or die("Impossible de sélectionner l'email : " . mysql_error());
+
+        if (mysql_num_rows($query2) == 1) {
+            $row = mysql_fetch_assoc($query2);
+            $result2 = $row;
+
+            if (!empty($result2['email_member']))
+                $data["error"]['mail-verif'] = "<p>Votre email est déjà enregistré, veuillez en choisir un autre.</p><br>";
+        }
+
+        if (empty($data['error'])) {
+            mysql_query("INSERT INTO member (pseudo_member, password_member, email_member, birth_member, inscription_date_member, ip_member, zipcode_member, city_member, sex_member, country_member) VALUES ('$pseudo', '$password', '$email', '$date', NOW(), '$ip', '$cp', '$ville', '$sexe','$pays')");
+            $lastid = mysql_insert_id();
+            mysql_query("INSERT INTO member_details (id_member) VALUES ('$lastid')");
+
+            // Email sending
+            $c = rand(10000000, 99999999);
+            $code = md5($c);
+            $l = "meetoparty/account/confirmationregistration/code/$code/pseudo/$pseudo";
+            $lien = "<a href='$l'>Validation de votre inscription</a>";
+            mysql_query("UPDATE member SET code_member = '$code' WHERE email_member = '$email'") or die(mysql_error());
+
+            // To, from et reply en array
+            $to = array('', $email);
+            $sujet = "Inscription sur Meetoparty";
+            $messtxt = "<p>Bonjour, <br> Vous êtes actuellement en train de vous inscrire sur Meetoparty. <br> Nous vous remercions des intérêts que vous portez à nos services.<br> Afin que votre inscription soit complète, merci de cliquer sur le lien ci-dessous pour la valider : <br></p>";
+            $messtxt .= "$lien<br><br>";
+            $messtxt .= "Merci,<br> A bientôt sur notre site <br> L'équipe de Meetoparty";
+            $messhtml = '<p>' . $messtxt . '</p>';
+            $from = array('Meetoparty', "contact@meetoparty.fr");
+
+            $this->reg->user->postMail($messtxt, $messhtml, $sujet, $to, $from, $reply = "");
+
+           mkdir("Dossiermembre/" . hash('crc32', crc32(PREFIXE) . $lastid . crc32(SUFFIXE)) . ",0777");
+            
+           $data["result"] = "<p>Vous allez bientôt recevoir un mail de validation pour activer vore compte.</p><br>";
+           $data["result"] .= "<p>Vous allez être redirigé automatiquement dans 5 secondes vers l'accueil du site.</p>";
+            header('Refresh: 7; url=index.php');
+        } else
+            $data["error"]['result'] = "<p>Erreur lors de l'inscription</p><br>";
     }
 
 }
