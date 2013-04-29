@@ -49,14 +49,23 @@ class controllers_account extends Controller {
 
     // Validation of the registration 
     function validationregistrationAction() {
-        
-        // Redirection if the mmeber does not come from the Registration POP-UP
-        
+
         $indexM = $this->loadModel("account");
         $index = $indexM->validationregistration();
-        
+
         $this->loadView("header", "");
         $this->loadView("validationregistration", $index);
+        $this->loadView("footer", "");
+    }
+
+    // For the confirmation of registration with email
+    function confirmationregistrationAction() {
+        
+        $indexM = $this->loadModel("account");
+        $index = $indexM->confirmationregistration();
+
+        $this->loadView("header", "");
+        $this->loadView("confirmationregistration", $index);
         $this->loadView("footer", "");
     }
 
