@@ -4,13 +4,26 @@
 session_start();
 
 // debuging disable when not needed
-error_reporting(2047);
-ini_set("display_errors", 1);
+$debug = FALSE;
+//$debug = TRUE;
+
+
+if ($debug) {
+
+    error_reporting(2047);
+    ini_set("display_errors", 1);
+}
+else
+    ini_set("display_errors", 0);
 
 // end of debuging code
 function debug($status) {
+    global $debug;
 //    DEBUG FUNCTION -------------------------------<<<<<
- //   print_r($status) ; echo "<br/>\n";
+    if ($debug) {
+        print_r($status);
+        echo "<br/>\n";
+    }
 }
 
 spl_autoload_register('my_autoloader');
@@ -31,7 +44,6 @@ require_once(COREDIR . 'Model.php');
 require_once(COREDIR . 'View.php');
 debug("main Controller/Model/View  ...included");
 ## end of critical includes
-
 ## enter custom code here it is not recomended to edit below this block
 #######################################################################
 ## load app config
@@ -40,7 +52,6 @@ $reg->appconf = $appconf;
 debug("app config  ...ok");
 #######################################################################
 ## end of custom code block 
-
 ## DataStore for url params
 $_URL = array();
 

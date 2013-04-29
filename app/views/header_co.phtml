@@ -44,23 +44,23 @@ echo $data ? " - $data" : "";
                     <div id="header-left-in1">
                         <div id="header-left-in2">
                             <ul class="menu">
-                                <li><a href="#">
+                                <li><a href="/evenement">
                                         <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-fav.png" alt="" /></span>
                                         <span class="menu-text">Evenement</span>
                                     </a></li>
-                                <li><a href="#">
+                                <li><a href="/chat">
                                         <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-messages.png" alt="" /></span>
                                         <span class="menu-text">Discussion</span>
                                     </a></li>
-                                <li><a href="index.php?page=listecontact">
+                                <li><a href="/Contact">
                                         <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-users.png" alt="" /></span>
                                         <span class="menu-text">Contact</span>
                                     </a></li>
-                                <li><a href="index.php?page=voirprofil">
+                                <li><a href="/profil">
                                         <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-user.png" alt="" /></span>
                                         <span class="menu-text">Profil</span>
                                     </a></li>
-                                <li class="nom"><a href="index.php">
+                                <li class="nom"><a href="/index">
                                         <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-home.png" alt="" /></span>
                                         <span class="menu-text">Accueil</span>
                                     </a></li>
@@ -72,11 +72,11 @@ echo $data ? " - $data" : "";
                     <div id="header-right-in1">
                         <div id="header-right-in2">
                             <ul class="menu">
-                                <li><a href="index.php?page=messagerie">
+                                <li><a href="/message">
                                         <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-email.png" alt="" /></span>
                                         <span class="menu-text">Message</span>
                                     </a></li>
-                                <li class="nom"><a href="#">
+                                <li class="nom"><a href="/news">
                                         <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-news.png" alt="" /></span>
                                         <span class="menu-text">News</span>
                                     </a></li>
@@ -120,7 +120,7 @@ echo $data ? " - $data" : "";
                     </div> <!-- .bl-right -->
                 </div> <!-- .beta-left -->
                 <div class="beta-right">
-                   <?php $contr->loadvWidget("news"); 
+                   <?php if(isset($contr))$contr->loadvWidget("news"); 
                    ?>
                     
                 </div> <!-- .beta-right -->

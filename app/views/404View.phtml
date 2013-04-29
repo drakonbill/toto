@@ -1,6 +1,44 @@
-<title>File, Action Or Controll Not Found</title>
-<h1>Error 404</h1>
-<p>Sorry the page your looking for dose not exsits or has been moved<br />
+
+<div id="connexion-bar"></div>
+<div id="connexion-box">
+    <div id="connexion-box-in">
+        <h3 class="cbox-title blue">ERROR - File, Action Or Controller Not Found</h3>
+        <div class="connexion-shadow-1"></div>
+        <h1>File, Action Or Controller Not Found</h1>
+        <p>Error 404 Static</p>
+        <p>Sorry the page your looking for dose not exits or has been moved
+            <br />
             if you think you seeing this page in error please contact the site administrator
-            </p><hr />
-            <em><?php $_SERVER['SERVER_SOFTWARE']; ?> </em>
+            <br/>
+        </p>
+
+        <?php
+        echo $data;
+        ?>
+
+        <div class="contentainer-div-villy amins-div">
+            <a href="#"><img src="images/aide-inscription.png" width="179" height="179" alt="Inscription"></a>
+            <a href="#"><img src="images/aide-connexion.png" width="179" height="179" alt="Connexion"></a>
+            <a href="#"><img src="images/aide-profil.png" width="179" height="179" alt="Profil"></a>
+            <a href="#"><img src="images/aide-messagerie.png" width="179" height="179" alt="Messagerie"></a>
+            <a href="#"><img src="images/aide-evenements.png" width="179" height="179" alt="Evenements"></a>
+            <a href="#"><img src="images/aide-passions.png" width="179" height="179" alt="Passions"></a>
+            <a href="#"><img src="images/aide-tchat.png" width="179" height="179" alt="Tchat"></a>
+            <a href="#"><img src="images/aide-amins.png" width="179" height="179" alt="Amins"></a>
+            <a href="#"><img src="images/aide-contact.png" width="179" height="179" alt="Contact"></a>
+            <a href="#"><img src="images/aide-faq.png" width="179" height="179" alt="Faq"></a>
+        </div>
+
+
+        <div class="connexion-shadow-2"></div>
+        <div id="home-icons">
+            <img src="<?php echo $conf["url"]; ?>Images/icon-1.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-2.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-3.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-4.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-5.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-6.png" alt="" />
+        </div> <!-- #home-icons -->
+    </div> <!-- #connexion-box-in -->
+</div> <!-- #connexion-box -->
+
