@@ -69,6 +69,17 @@ class controllers_account extends Controller {
         $this->loadView("footer", "");
     }
 
+    function resendValidationEmail(){
+        
+        $indexM = $this->loadModel("account");
+        $index = $indexM->resendValidationEmail();
+        
+        $this->loadView("header", "");
+        $this->loadView("validationregistration", $index);
+        $this->loadView("footer", "");
+        
+         header('Refresh: 10; url=/index');
+    }
 }
 
 ?>

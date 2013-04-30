@@ -280,25 +280,9 @@ class models_account extends Model {
                         $lastid = mysql_insert_id();
                         mysql_query("INSERT INTO member_details (id_member) VALUES ('$lastid')");
 
-                        // Email sending
-                        $c = rand(10000000, 99999999);
-                        $code = md5($c);
-                        $l = "meetoparty/account/confirmationregistration/code/$code/pseudo/$pseudo";
-                        $lien = "<a href='$l'>Validation de votre inscription</a>";
-                        mysql_query("UPDATE member SET code_member = '$code' WHERE email_member = '$email'") or die(mysql_error());
+                        $this->reg->user->sendValidationMail($email); //this will be needed again, if user reguest for new validation
 
-                        // To, from et reply en array
-                        $to = array('', $email);
-                        $sujet = "Inscription sur Meetoparty";
-                        $messtxt = "<p>Bonjour, <br> Vous êtes actuellement en train de vous inscrire sur Meetoparty. <br> Nous vous remercions des intérêts que vous portez à nos services.<br> Afin que votre inscription soit complète, merci de cliquer sur le lien ci-dessous pour la valider : <br></p>";
-                        $messtxt .= "$lien<br><br>";
-                        $messtxt .= "Merci,<br> A bientôt sur notre site <br> L'équipe de Meetoparty";
-                        $messhtml = '<p>' . $messtxt . '</p>';
-                        $from = array('Meetoparty', "no-reply@meetoparty.fr");
-
-                        $this->reg->user->postMail($messtxt, $messhtml, $sujet, $to, $from, $reply = "");
-
-                        mkdir("memberdir/" . hash('crc32', crc32(PREFIXE) . $lastid . crc32(SUFFIXE)) . ",0777");
+                        mkdir("memberdir/" . hash('crc32', crc32(PREFIXE) . $lastid . crc32(SUFFIXE)) ,0777);
 
                         $data["result"] = "<p>Vous allez bientôt recevoir un mail de validation pour activer vore compte.</p><br>";
                         $data["result"] .= "<p>Vous allez être redirigé automatiquement dans 5 secondes vers l'accueil du site.</p>";
@@ -368,6 +352,16 @@ class models_account extends Model {
         }
         
         return $data;
+    }
+    
+    public function resendValidationEmail(){
+        
+        
+        $this->user->sendValidationMail($this->user->email_member);
+        $data["result"] = "<p>Vous allez bientôt recevoir un mail de validation pour activer vore compte.</p><br>";
+        $data["result"] .= "<p>Vous allez être redirigé automatiquement dans 5 secondes vers l'accueil du site.</p>";
+        return $data;               
+        
     }
 
 }
