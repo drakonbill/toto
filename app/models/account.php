@@ -282,7 +282,7 @@ class models_account extends Model {
 
                         $this->reg->user->sendValidationMail($email); //this will be needed again, if user reguest for new validation
 
-                        mkdir("memberdir/" . hash('crc32', crc32(PREFIXE) . $lastid . crc32(SUFFIXE)) ,0777);
+                        mkdir("memberdir/" . hash('crc32', crc32(PREFIXE) . $lastid . crc32(SUFFIXE)), 0777);
 
                         $data["result"] = "<p>Vous allez bientôt recevoir un mail de validation pour activer vore compte.</p><br>";
                         $data["result"] .= "<p>Vous allez être redirigé automatiquement dans 5 secondes vers l'accueil du site.</p>";
@@ -313,8 +313,8 @@ class models_account extends Model {
 
         $c = mysql_real_escape_string($_URL['code']);
         $p = mysql_real_escape_string($_URL['pseudo']);
-        
-        $pseudo= $p;
+
+        $pseudo = $p;
         $code = $c;
 
         if (empty($pseudo) or empty($code))
@@ -350,18 +350,20 @@ class models_account extends Model {
                 $data['error']['wrong'] = "Il y a eu un problème lors de votre inscription.<br> Veuillez contacter les webmaster du site";
             }
         }
-        
+
         return $data;
     }
-    
-    public function resendValidationEmail(){
-        
-        
-        $this->user->sendValidationMail($this->user->email_member);
-        $data["result"] = "<p>Vous allez bientôt recevoir un mail de validation pour activer vore compte.</p><br>";
-        $data["result"] .= "<p>Vous allez être redirigé automatiquement dans 5 secondes vers l'accueil du site.</p>";
-        return $data;               
-        
+
+    public function resendValidationEmail() {
+
+        if (isset($this->user->email_member)) {
+            $this->user->sendValidationMail($this->user->email_member);
+            $data["result"] = "<p>Vous allez bientôt recevoir un mail de validation pour activer vore compte.</p><br>";
+            $data["result"] .= "<p>Vous allez être redirigé automatiquement dans 5 secondes vers l'accueil du site.</p>";
+        }
+        else
+            $data["result"] = "<p>please login first</p>";
+        return $data;
     }
 
 }

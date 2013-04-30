@@ -69,7 +69,7 @@ class controllers_account extends Controller {
         $this->loadView("footer", "");
     }
 
-    function resendValidationEmail(){
+    function resendValidationEmailAction(){
         
         $indexM = $this->loadModel("account");
         $index = $indexM->resendValidationEmail();
