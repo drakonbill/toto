@@ -115,11 +115,11 @@ try {
     if (method_exists($control, $view)) {
         $control->$view();
     } else {
-        debug("ERRRRRRROR!!  ... method $view dont exists in $control");
+       
         $reg->error->f404Static("");
     }
 } catch (Exception $e) {
-    debug("ERRRRRRROR!!  ... someone is trow exception: $e");
+    
     $reg->error->f404Static($e);
 }
 
