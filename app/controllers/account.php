@@ -1,6 +1,10 @@
 <?php
 
 class controllers_account extends Controller {
+    
+     public function init() {
+        
+    }
 
 // No IndexAction
     function indexAction() {

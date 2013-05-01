@@ -9,12 +9,18 @@ abstract class Controller extends Core {
 
     public function __construct($option = array()) {
         parent::__construct($option);
+        $this->init();
+        $this->loadInit();
     }
 
-    ## owerride this function in Your controller
+    ## owerride this functions in Your controller
+    abstract public function init();
 
     abstract public function indexAction();
 
+    private function loadInit(){
+        
+    }
     ## make model object and add them in registry
 
     public function loadModel($name, $opt = "") {
