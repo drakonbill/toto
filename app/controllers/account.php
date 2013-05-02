@@ -24,7 +24,7 @@ class controllers_account extends Controller {
             $this->loadView("footer", "");
         }
         else
-            header('Location: /welcome');
+            header('Location: /actuality');
     }
 
 // Logout method 
