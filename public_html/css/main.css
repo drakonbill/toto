@@ -8,11 +8,11 @@ html{
 }
 
 html.htmlconnect{
-    background:url(../images/bgr.jpg) repeat-x 50% 0 #cee7fa;
+    background:url(../Images/bgr.jpg) repeat-x 50% 0 #cee7fa;
 }
 
 html.htmlnoconnect{
-    background:url(../images/bgr2.jpg) repeat 50% 0 #cee7fa;
+    background:url(../Images/bgr2.jpg) repeat 50% 0 #cee7fa;
 }
 
 body{
@@ -100,11 +100,11 @@ a.rev:hover{ text-decoration:underline; }
 #logo{
 	width:253px;
 	height:151px;
-	background:url(../images/logo.png);
+	background:url(../Images/logo.png);
 	overflow:hidden;
 }
 .logo-enterprise{
-	background:url(../images/logo-enterprise.png) !important;
+	background:url(../Images/logo-enterprise.png) !important;
 }
 #top-social-links{
 	margin-top: -15px;
@@ -119,10 +119,10 @@ a.rev:hover{ text-decoration:underline; }
     margin: 0 6px;
 }
 #top-facebook-link{
-	background-image: url(../images/icon-facebook.png);
+	background-image: url(../Images/icon-facebook.png);
 }
 #top-twitter-link{
-	background-image: url(../images/icon-twitter.png);
+	background-image: url(../Images/icon-twitter.png);
 }
 
 #header{
@@ -168,14 +168,14 @@ a.rev:hover{ text-decoration:underline; }
 #txt-inscription{
 	width:259px;
 	height:51px;
-	background:url(../images/inscription.png);
+	background:url(../Images/inscription.png);
 	overflow:hidden;
 	display: inline-block;
 }
 #register-link{
 	width:74px;
 	height:39px;
-	background:url(../images/button-cest-parti.png);
+	background:url(../Images/button-cest-parti.png);
 	overflow:hidden;
 	display: inline-block;
 	margin-left: 5px;
@@ -183,7 +183,7 @@ a.rev:hover{ text-decoration:underline; }
 #register-link-enterprise{
 	width:107px;
 	height:39px;
-	background:url(../images/btn-je-nous-inscris.png);
+	background:url(../Images/btn-je-nous-inscris.png);
 	overflow: hidden;
 	display: inline-block;
 	margin-right: 85px;
@@ -212,7 +212,7 @@ a.rev:hover{ text-decoration:underline; }
 }
 .text{
 	font-size: 11px;
-	background-image: url(../images/input-bgr.png);
+	background-image: url(../Images/input-bgr.png);
 	line-height: 14px;
 	padding: 2px;
 	border-width: 2px;
@@ -235,25 +235,25 @@ a.rev:hover{ text-decoration:underline; }
 	right: 8px;
 }
 .icon-password{
-	background-image: url(../images/icon-password.png);
+	background-image: url(../Images/icon-password.png);
 	width: 7px;
 	height: 7px;
 }
 .icon-username{
-	background-image: url(../images/icon-username.png);
+	background-image: url(../Images/icon-username.png);
 	width: 8px;
 	height: 7px;
 }
 #login-form .submit{
 	background-color: transparent;
-	background-image: url(../images/btn-connexion.png);
+	background-image: url(../Images/btn-connexion.png);
 	background-repeat: no-repeat;
 	border: none;
 	width: 75px;
 	height: 22px;
 }
 .cb-replace{
-	background-image: url(../images/checkbox.png);
+	background-image: url(../Images/checkbox.png);
 	background-position: 0 -14px;
 	width: 12px;
 	height: 14px;
@@ -293,12 +293,12 @@ a.rev:hover{ text-decoration:underline; }
 	vertical-align: middle;
 }
 .blue-box-top{
-	background-image: url(../images/blue-triangles.png);
+	background-image: url(../Images/blue-triangles.png);
 	background-position: 50% 0;
 	height: 20px;
 }
 .blue-box{
-	background-image: url(../images/blue-box.jpg);
+	background-image: url(../Images/blue-box.jpg);
 	background-position: 50% 0;
 	padding: 40px 0;
 }
@@ -309,7 +309,7 @@ a.rev:hover{ text-decoration:underline; }
 .blue-box-col{
 	font-size: 15px;
 	color: #fff;
-	background-image: url(../images/landing-text-bgr.png);
+	background-image: url(../Images/landing-text-bgr.png);
 	padding: 30px 15px;
 	width: 340px;
 	text-align: justify;
@@ -344,7 +344,7 @@ a.rev:hover{ text-decoration:underline; }
     font-style: italic;
 }
 #footer-logo{
-	background-image: url(../images/footer-logo.png);
+	background-image: url(../Images/footer-logo.png);
 	margin-left: -24px;
 	margin-top: -24px;
 	width: 48px;
@@ -360,7 +360,7 @@ a.rev:hover{ text-decoration:underline; }
 .designed-in{display: inline-block;}
 .designed-line{
 	display: inline-block;
-	background-image: url(../images/designed-line.gif);
+	background-image: url(../Images/designed-line.gif);
     background-repeat: repeat-x;
     background-position: 0 50%;
 }
@@ -398,7 +398,7 @@ a.rev:hover{ text-decoration:underline; }
 .popup-submit-cont .submit{
 	width:600px;
 	height:45px;
-	background:url(../images/je-minscris.png) 50% 50% no-repeat #47bae5;
+	background:url(../Images/je-minscris.png) 50% 50% no-repeat #47bae5;
 	overflow:hidden;
 	border: none;
 }
@@ -425,7 +425,7 @@ a.rev:hover{ text-decoration:underline; }
 	width:134px;
 }
 .popup-box .fancybox-close{
-	background-image: url(../images/popup-close.png);
+	background-image: url(../Images/popup-close.png);
 	width: 52px;
 	height: 52px;
 	right:5px;
@@ -438,11 +438,11 @@ a.rev:hover{ text-decoration:underline; }
 	padding-left: 13px;
 }
 .validation-error{
-	background-image: url(../images/icon-error.png);
+	background-image: url(../Images/icon-error.png);
 	color: #DD0B1D;
 }
 .validation-ok{
-	background-image: url(../images/icon-ok.png);
+	background-image: url(../Images/icon-ok.png);
 	color: green;
 }
 .register-form-part2{
@@ -452,7 +452,7 @@ a.rev:hover{ text-decoration:underline; }
 	margin-left: 15px;
 }
 #connexion-bar{
-	background-image: url(../images/connexion-strip.png);
+	background-image: url(../Images/connexion-strip.png);
 	background-repeat: repeat-x;
 	height: 31px;
 }
@@ -462,7 +462,7 @@ a.rev:hover{ text-decoration:underline; }
 	width: 626px;
 	padding-left: 26px;
     padding-right: 3px;
-	background-image: url(../images/connexion-box.png);
+	background-image: url(../Images/connexion-box.png);
 	background-position: 0 0;
     margin-left: auto;
     margin-right: auto;
@@ -484,14 +484,14 @@ a.rev:hover{ text-decoration:underline; }
 .connexion-shadow-1{
 	width:581px;
 	height:11px;
-	background:url(../images/connexion-shadow.png);
+	background:url(../Images/connexion-shadow.png);
 	overflow:hidden;
 	margin: 20px auto;
 }
 .connexion-shadow-2{
 	width:581px;
 	height:11px;
-	background:url(../images/connexion-shadow2.png);
+	background:url(../Images/connexion-shadow2.png);
 	overflow:hidden;
 	margin: 20px auto;
 }
@@ -509,7 +509,7 @@ a.rev:hover{ text-decoration:underline; }
 .connexion-submit-cont .submit{
 	width: 560px;
 	background-color: #47bae5;
-    background-image: url(../images/connexion.png);
+    background-image: url(../Images/connexion.png);
     background-repeat: no-repeat;
     background-position: 50% 50%;
     border: none;
@@ -530,7 +530,7 @@ a.rev:hover{ text-decoration:underline; }
 }
 .admin-spacer{ height: 50px; }
 .menu li{
-	background-image: url(../images/menu-highlight.png);
+	background-image: url(../Images/menu-highlight.png);
 	background-repeat: no-repeat;
 	background-position: 50% 100%;
 	width: 62px;
@@ -574,7 +574,7 @@ a.rev:hover{ text-decoration:underline; }
 	width: 174px;
 }
 .search-form{
-	background-image: url(../images/search-bgr.png);
+	background-image: url(../Images/search-bgr.png);
 	width: 174px;
 	height: 23px;
 	position: relative;
@@ -610,7 +610,7 @@ a.rev:hover{ text-decoration:underline; }
     margin-right: 10px;
     margin-bottom: 10px;
     background-color: #dddcdd;
-    background-image: url(../images/admin-box-bgr1.png);
+    background-image: url(../Images/admin-box-bgr1.png);
     background-repeat: repeat-x;
     background-position: top;
 }
@@ -622,7 +622,7 @@ a.rev:hover{ text-decoration:underline; }
 }
 .boxy-num{
 	background-color: #eaf5f9;
-	background-image: url(../images/admin-box-bgr2.png);
+	background-image: url(../Images/admin-box-bgr2.png);
 	background-repeat: repeat-x;
 	background-position: 0 0;
 	border-width: 1px;
@@ -683,7 +683,7 @@ a.rev:hover{ text-decoration:underline; }
     color:#97989a;
 }
 .white-tip{
-	background-image: url(../images/white-tip.png);
+	background-image: url(../Images/white-tip.png);
 	width: 11px;
 	height: 13px;
 	overflow: hidden;
@@ -703,8 +703,8 @@ a.rev:hover{ text-decoration:underline; }
 	right: 37px;
 	bottom: -14px;
 }
-.btn-partager{ background-image: url(../images/btn-partager.png); }
-.btn-gerer{ background-image: url(../images/btn-gerer.png); }
+.btn-partager{ background-image: url(../Images/btn-partager.png); }
+.btn-gerer{ background-image: url(../Images/btn-gerer.png); }
 .br-link img{
 	border-radius: 6px;
 	display: block;
@@ -724,7 +724,7 @@ a.rev:hover{ text-decoration:underline; }
 	float: right;
 }
 .black-quote{
-	background-image: url(../images/black-bgr.png);
+	background-image: url(../Images/black-bgr.png);
 	padding: 8px 12px;
 	border-radius: 5px;
 	position: relative;
@@ -749,14 +749,14 @@ a.rev:hover{ text-decoration:underline; }
 	height: 22px;
 	display: inline-block;
 	font-weight: bold;
-    background-image: url(../images/pagination-bgr.png);
+    background-image: url(../Images/pagination-bgr.png);
     background-repeat: no-repeat;
     color: #fff;
 }
 .pages .active, .pages a:hover{background-position: 0 -22px;}
 .pages-lbl{ line-height: 22px; }
 .black-tip{
-	background-image: url(../images/black-tip.png);
+	background-image: url(../Images/black-tip.png);
 	width: 7px;
 	height: 14px;
 	overflow: hidden;
@@ -766,7 +766,7 @@ a.rev:hover{ text-decoration:underline; }
 	margin-top: -7px;
 }
 .funny-quotes{
-	background-image: url(../images/funy-quotes.png);
+	background-image: url(../Images/funy-quotes.png);
 	width: 34px;
 	height: 24px;
 	position: absolute;
@@ -792,8 +792,8 @@ a.rev:hover{ text-decoration:underline; }
 	padding: 5px;
 	border-radius: 6px;
 }
-.bgr-blue{ background-image: url(../images/bgr-blue.png); }
-.bgr-pink{ background-image: url(../images/bgr-pink.png); }
+.bgr-blue{ background-image: url(../Images/bgr-blue.png); }
+.bgr-pink{ background-image: url(../Images/bgr-pink.png); }
 .bgr-grey{ background-color:#949496; }
 .bgr-pink2{ background-color:#f6bfdb; }
 .bgr-darkblue{ background-color:#155f72; }
@@ -803,7 +803,7 @@ a.rev:hover{ text-decoration:underline; }
 .bgr-blue3{ background-color:#0e72b5; }
 
 #inside-main{
-	background-image: url(../images/connexion-box.png);
+	background-image: url(../Images/connexion-box.png);
 	background-color: #e9ebec;
 	background-repeat: repeat-y;
 	background-position: 192px 0;
@@ -811,7 +811,7 @@ a.rev:hover{ text-decoration:underline; }
 	position: relative;
 }
 #inside-main-big {
-	background-image: url(../images/connexion-box-large.png);
+	background-image: url(../Images/connexion-box-large.png);
 	background-color: #e9ebec;
 	background-repeat: repeat-y;
 	background-position: 192px 0;
@@ -846,7 +846,7 @@ a.rev:hover{ text-decoration:underline; }
 }
 
 .sb-title{
-	background-image: url(../images/connexion-strip.png);
+	background-image: url(../Images/connexion-strip.png);
 	line-height: 31px;
 	height: 31px;
 	font-size: 12px;
@@ -856,7 +856,7 @@ a.rev:hover{ text-decoration:underline; }
 #sidebar-left .sb-title span{
 	float:right;
 	width:182px;
-	background-image:url(../images/sb-title-shadow.png);
+	background-image:url(../Images/sb-title-shadow.png);
 	background-repeat: repeat-y;
     background-position: 100% 0;
 }
@@ -913,15 +913,15 @@ a.rev:hover{ text-decoration:underline; }
 	top: 8px;
 	margin-right: 2px;
 }
-.status-online{background-image: url(../images/circle-green.png);}
-.status-offline{background-image: url(../images/circle-grey.png);}
+.status-online{background-image: url(../Images/circle-green.png);}
+.status-offline{background-image: url(../Images/circle-grey.png);}
 .action-block{
 	width: 9px;
 	height: 10px;
 	float: left;
 	position: relative;
 	top: 7px;
-	background-image: url(../images/icon-stop.png);
+	background-image: url(../Images/icon-stop.png);
 	margin-right: 2px;
 }
 .action-close{
@@ -930,7 +930,7 @@ a.rev:hover{ text-decoration:underline; }
 	float: left;
 	position: relative;
 	top: 8px;
-	background-image: url(../images/icon-x.png);
+	background-image: url(../Images/icon-x.png);
 	margin-right: 2px;
 }
 
@@ -956,7 +956,7 @@ a.rev:hover{ text-decoration:underline; }
 .user-popup-info{
 	position:absolute;
 	color: #fff;
-    background-image: url(../images/black-bgr.png);
+    background-image: url(../Images/black-bgr.png);
     padding: 10px;
     border-radius: 5px;
     left: 55px;
@@ -1045,10 +1045,10 @@ a.rev:hover{ text-decoration:underline; }
 }
 .chat-tip-left{left:-8px;}
 .chat-tip-right{left:100%;}
-.bgr-pink2 .chat-tip-left{background-image: url(../images/tip-pink-left.png); }
-.bgr-pink2 .chat-tip-right{background-image: url(../images/tip-pink-right.png); }
-.bgr-blue .chat-tip-left{ background-image: url(../images/tip-blue-left.png); }
-.bgr-blue .chat-tip-right{ background-image: url(../images/tip-blue-right.png); }
+.bgr-pink2 .chat-tip-left{background-image: url(../Images/tip-pink-left.png); }
+.bgr-pink2 .chat-tip-right{background-image: url(../Images/tip-pink-right.png); }
+.bgr-blue .chat-tip-left{ background-image: url(../Images/tip-blue-left.png); }
+.bgr-blue .chat-tip-right{ background-image: url(../Images/tip-blue-right.png); }
 .bgr-darkblue .chat-tip-left{ background-image: url(../Images/tip-darkblue-left.png); }
 .bgr-darkblue .chat-tip-right{ background-image: url(../Images/tip-darkblue-right.png); }
 .bgr-grey2 .chat-tip-left{ background-image: url(../Images/tip-grey2-left.png); }
@@ -1059,7 +1059,7 @@ a.rev:hover{ text-decoration:underline; }
 .bgr-grey .chat-tip-right{ background-image: url(../Images/tip-grey-right.png); }
 .chat-form .chat-tip{
 	left:-8px;
-	background-image: url(../images/tip-grey.png);
+	background-image: url(../Images/tip-grey.png);
 }
 .chat-form{
 	position: relative;
@@ -1075,7 +1075,7 @@ a.rev:hover{ text-decoration:underline; }
 .chat-form .submit{
 	position: absolute;
 	bottom: -15px;
-	background-image: url(../images/btn-envoyer.png);
+	background-image: url(../Images/btn-envoyer.png);
 	background-color: transparent;
     border: none;
     width: 81px;
@@ -1776,7 +1776,7 @@ h3.title_underline { border-left: 3px solid #FF99FF; padding: 5px; border-bottom
 
 /* For the lost password */
 .email-box {
-    background-image: url("../images/email.png");
+    background-image: url("../Images/email.png");
     background-repeat: no-repeat;
     background-size: contain;
     display: block;
