@@ -9,7 +9,7 @@ abstract class Controller extends Core {
 
     public function __construct($option = array()) {
         parent::__construct($option);
-        $this->init();
+        
         $this->loadInit();
     }
 
@@ -19,7 +19,7 @@ abstract class Controller extends Core {
     abstract public function indexAction();
 
     private function loadInit(){
-        
+        $this->init();
     }
     ## make model object and add them in registry
 
