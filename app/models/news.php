@@ -5,7 +5,7 @@
  * @author Miki
  */
 
-class models_welcome extends Model {
+class models_news extends Model {
 
     public function indexModel() {
 

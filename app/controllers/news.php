@@ -5,7 +5,7 @@
  *
  * @author Miki
  */
-class controllers_welcome extends Controller {
+class controllers_news extends Controller {
 
     public function init() {
         
@@ -14,11 +14,11 @@ class controllers_welcome extends Controller {
     function indexAction() {
         //load welcome model/view
         // echo " THIS IS WELCOME PAGE!!!! <br/> ";
-        $welcomeM = $this->loadModel("welcome");
+        $welcomeM = $this->loadModel("news");
         $welcome = $welcomeM->indexModel();
 
         $this->loadView("header_co", "");
-        $this->loadView("welcome", $welcome);
+        $this->loadView("news", $welcome);
         $this->loadView("footer", "");
     }
 
