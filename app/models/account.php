@@ -164,7 +164,8 @@ class models_account extends Model {
                     $month = $this->reg->clean->POST('register-mois');
                     $year = $this->reg->clean->POST('register-annee');
                     $date = "$year-$day-$month";
-                    $sexe = $this->reg->clean->POST('etes');
+                    $homme = $this->reg->clean->POST('register-etes-1');
+                    $femme = $this->reg->clean->POST('register-etes-2');
                     $pays = $this->reg->clean->POST('pays');
                     $cp = $this->reg->clean->POST('register-code-postal');
                     $ville = $this->reg->clean->POST('register-ville');
@@ -248,12 +249,13 @@ class models_account extends Model {
 
                     if ($age < 16)
                         $data["error"]['age'] = "<p>Il faut être majeur pour accéder au site.</p><br>";
+                    
+                    // SEX : 1 = Men, 2 = Women
+                    if (!empty($homme))
+                        $sexe = 1;
 
-                    if ($sexe == 'Homme')
-                        $sexe = homme;
-
-                    if ($sexe == 'Femme')
-                        $sexe = femmme;
+                    if (!empty($femme))
+                        $sexe = 2;
 
                     $query = mysql_query("SELECT pseudo_member from member WHERE pseudo_member = '$pseudo'") or die("Impossible de sélectionner le pseudo : " . mysql_error());
 
