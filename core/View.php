@@ -32,9 +32,7 @@ class View extends Core {
         include("../" . APPDIR . "views/" . $name . ".phtml");
     }
 
-//    function loadView($name, $data){
-//        $this->control->loadView($name, $data);
-//    }
+
 }
 
 ?>

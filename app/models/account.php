@@ -164,7 +164,8 @@ class models_account extends Model {
                     $month = $this->reg->clean->POST('register-mois');
                     $year = $this->reg->clean->POST('register-annee');
                     $date = "$year-$day-$month";
-                    $sexe = $this->reg->clean->POST('etes');
+                    $homme = $this->reg->clean->POST('register-etes-1');
+                    $femme = $this->reg->clean->POST('register-etes-2');
                     $pays = $this->reg->clean->POST('pays');
                     $cp = $this->reg->clean->POST('register-code-postal');
                     $ville = $this->reg->clean->POST('register-ville');
@@ -248,12 +249,13 @@ class models_account extends Model {
 
                     if ($age < 16)
                         $data["error"]['age'] = "<p>Il faut être majeur pour accéder au site.</p><br>";
+                    
+                    // SEX : 1 = Men, 2 = Women
+                    if (!empty($homme))
+                        $sexe = 1;
 
-                    if ($sexe == 'Homme')
-                        $sexe = homme;
-
-                    if ($sexe == 'Femme')
-                        $sexe = femmme;
+                    if (!empty($femme))
+                        $sexe = 2;
 
                     $query = mysql_query("SELECT pseudo_member from member WHERE pseudo_member = '$pseudo'") or die("Impossible de sélectionner le pseudo : " . mysql_error());
 
@@ -280,25 +282,9 @@ class models_account extends Model {
                         $lastid = mysql_insert_id();
                         mysql_query("INSERT INTO member_details (id_member) VALUES ('$lastid')");
 
-                        // Email sending
-                        $c = rand(10000000, 99999999);
-                        $code = md5($c);
-                        $l = "meetoparty/account/confirmationregistration/code/$code/pseudo/$pseudo";
-                        $lien = "<a href='$l'>Validation de votre inscription</a>";
-                        mysql_query("UPDATE member SET code_member = '$code' WHERE email_member = '$email'") or die(mysql_error());
+                        $this->reg->user->sendValidationMail($email); //this will be needed again, if user reguest for new validation
 
-                        // To, from et reply en array
-                        $to = array('', $email);
-                        $sujet = "Inscription sur Meetoparty";
-                        $messtxt = "<p>Bonjour, <br> Vous êtes actuellement en train de vous inscrire sur Meetoparty. <br> Nous vous remercions des intérêts que vous portez à nos services.<br> Afin que votre inscription soit complète, merci de cliquer sur le lien ci-dessous pour la valider : <br></p>";
-                        $messtxt .= "$lien<br><br>";
-                        $messtxt .= "Merci,<br> A bientôt sur notre site <br> L'équipe de Meetoparty";
-                        $messhtml = '<p>' . $messtxt . '</p>';
-                        $from = array('Meetoparty', "no-reply@meetoparty.fr");
-
-                        $this->reg->user->postMail($messtxt, $messhtml, $sujet, $to, $from, $reply = "");
-
-                        mkdir("memberdir/" . hash('crc32', crc32(PREFIXE) . $lastid . crc32(SUFFIXE)) . ",0777");
+                        mkdir("memberdir/" . hash('crc32', crc32(PREFIXE) . $lastid . crc32(SUFFIXE)), 0777);
 
                         $data["result"] = "<p>Vous allez bientôt recevoir un mail de validation pour activer vore compte.</p><br>";
                         $data["result"] .= "<p>Vous allez être redirigé automatiquement dans 5 secondes vers l'accueil du site.</p>";
@@ -329,8 +315,8 @@ class models_account extends Model {
 
         $c = mysql_real_escape_string($_URL['code']);
         $p = mysql_real_escape_string($_URL['pseudo']);
-        
-        $pseudo= $p;
+
+        $pseudo = $p;
         $code = $c;
 
         if (empty($pseudo) or empty($code))
@@ -366,7 +352,19 @@ class models_account extends Model {
                 $data['error']['wrong'] = "Il y a eu un problème lors de votre inscription.<br> Veuillez contacter les webmaster du site";
             }
         }
-        
+
+        return $data;
+    }
+
+    public function resendValidationEmail() {
+
+        if (isset($this->user->email_member)) {
+            $this->user->sendValidationMail($this->user->email_member);
+            $data["result"] = "<p>Vous allez bientôt recevoir un mail de validation pour activer vore compte.</p><br>";
+            $data["result"] .= "<p>Vous allez être redirigé automatiquement dans 5 secondes vers l'accueil du site.</p>";
+        }
+        else
+            $data["result"] = "<p>please login first</p>";
         return $data;
     }
 

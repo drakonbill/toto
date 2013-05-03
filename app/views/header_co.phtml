@@ -27,7 +27,7 @@ echo $data ? " - $data" : "";
         <div id="wrap-outer">
             <div style="width: 1061px; margin: 0 auto; position: relative;">
             <div id="logo-block" class="logo-block-co">
-                <a href="index.php" id="logo" class="rep">MeetoParty</a>
+                <a href="/index" id="logo" class="rep">MeetoParty</a>
                 <div id="top-social-links">
                     <a href="http://www.facebook.com/Meetoparty" id="top-facebook-link" class="rep">Facebbok</a>
                     <a href="https://twitter.com/Meetoparty" id="top-twitter-link" class="rep">Twitter</a>
@@ -101,23 +101,8 @@ echo $data ? " - $data" : "";
 
             <div class="beta cfix">
                 <div class="beta-left">
-                    <div class="bl-photo">
-                        <strong><em><?php echo $user->pseudo_member; ?></em></strong>
-                        <br /><br />
-                        <a href="/#" class="bl-link bgr-blue"><img id="avatar-profil" width="101px" src="<?php echo $user->photoURL(); ?>" alt="" /></a>
-                    </div> <!-- .bl-photo -->
-                    <div class="bl-right">
-                        <div>
-                            Ne le <?php echo $user->birth_member; ?>
-                            <br />
-                            Travail chez xxxx
-                        </div>
-                        <div class="white-quote">
-                            <div class="white-tip"></div>
-                            Partagetr vos idees...!
-                            <a href="#" class="btn-partager rep">Partager</a>
-                        </div> <!-- .white-quote -->
-                    </div> <!-- .bl-right -->
+                     <?php if(isset($contr))$contr->loadvWidget("user"); 
+                   ?>
                 </div> <!-- .beta-left -->
                 <div class="beta-right">
                    <?php if(isset($contr))$contr->loadvWidget("news"); 
@@ -126,6 +111,6 @@ echo $data ? " - $data" : "";
                 </div> <!-- .beta-right -->
                 
                 
-        </div> <!-- .beta -->
+            </div> <!-- .beta -->
             
             

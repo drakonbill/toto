@@ -1,6 +1,10 @@
 <?php
 
 class controllers_account extends Controller {
+    
+     public function init() {
+        
+    }
 
 // No IndexAction
     function indexAction() {
@@ -20,7 +24,7 @@ class controllers_account extends Controller {
             $this->loadView("footer", "");
         }
         else
-            header('Location: /welcome');
+            header('Location: /actuality');
     }
 
 // Logout method 
@@ -69,6 +73,17 @@ class controllers_account extends Controller {
         $this->loadView("footer", "");
     }
 
+    function resendValidationEmailAction(){
+        
+        $indexM = $this->loadModel("account");
+        $index = $indexM->resendValidationEmail();
+        
+        $this->loadView("header", "");
+        $this->loadView("validationregistration", $index);
+        $this->loadView("footer", "");
+        
+         header('Refresh: 10; url=/index');
+    }
 }
 
 ?>

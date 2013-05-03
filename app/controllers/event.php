@@ -1,4 +1,4 @@
-  <?php
+<?php
 
 /*
  * To change this template, choose Tools | Templates
@@ -11,10 +11,14 @@
  * @author Deixonne
  */
 class controllers_event extends Controller {
-    
+
+    public function init() {
+        
+    }
+
     function addAction() {
 
-        if($this->user->loggedin()) {
+        if ($this->user->loggedin()) {
             $indexM = $this->loadModel("event");
             $index = $indexM->addEventModel();
 
@@ -22,15 +26,14 @@ class controllers_event extends Controller {
             $this->loadView("addevent", "");
             $this->loadView("footer", "");
         }
-        else 
-              $this->redirect ("index")->indexAction();
- 
+        else
+            $this->redirect("index")->indexAction();
     }
-    
+
     function displayAction() {
         global $_URL;
-        
-        if($this->user->loggedin()) {
+
+        if ($this->user->loggedin()) {
 
             $indexM = $this->loadModel("event");
             $index = $indexM->displayModel();
@@ -39,8 +42,8 @@ class controllers_event extends Controller {
             $this->loadView("displayevent", $index);
             $this->loadView("footer", "");
         }
-        else 
-              $this->redirect ("index")->indexAction();
+        else
+            $this->redirect("index")->indexAction();
     }
     
     function modifyAction() {
@@ -60,7 +63,7 @@ class controllers_event extends Controller {
     }
     
     function indexAction() {
-        
+
 //        $model = $this->loadModel("event");
 //        $allEvents =  $model->allUserEvents();
 //        
@@ -69,9 +72,8 @@ class controllers_event extends Controller {
 //             
 //        }
 //         $this->loadView("displayevent", $events); 
-    }   
-    
-    
+    }
+
 }
 
 ?>

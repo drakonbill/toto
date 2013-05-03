@@ -115,9 +115,11 @@ try {
     if (method_exists($control, $view)) {
         $control->$view();
     } else {
+       
         $reg->error->f404Static("");
     }
 } catch (Exception $e) {
+    
     $reg->error->f404Static($e);
 }
 

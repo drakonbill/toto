@@ -1,25 +1,21 @@
-<div id="connexion-bar"></div>
-<div id="lostpassword-box">
-    <div id="lostpassword-box-in">
-        <h3 class="cbox-title blue">Mot de passe oublié ?</h3>
-        <div class="connexion-shadow-1"></div>
-            <div class="email-box">
-                <form method="post" action="/account/validationlostpassword" class="email-form cfix">
-                    <div class="contact-col">
-                        <p class="email-bold"> Vous avez perdu votre mot de passe ?</p><br/>
 
-                        <p class="email-desc">Entrez ici l’adresse mail avec laquelle vous êtes inscrit, et nous
-                            vous renverrons instantannément un nouveau mot de passe.</p>
-                        <br/> <br/> 
-                        <div class="rech-fields">
-                            <label for="r3">Email</label>
-                            <input type="text" class="text" name="r3" id="r3" value="" />
-                        </div> <!-- .rech-fields -->
-                    </div> <!-- .recherche-col -->
-                    <label></label>
-                    <input type="submit" class="submit email-btn" value="Envoyer">
-                </form>
-            </div> <!-- end contact-box div -->
+<div id="connexion-bar"></div>
+<div id="connexion-box">
+    <div id="connexion-box-in">
+        <h3 class="cbox-title blue">Bienvenue sur la phase BETA</h3>
+        <div class="connexion-shadow-1"></div>
+        <?php
+        while ($news = mysql_fetch_assoc($loading->result)) {
+            $tmp = explode("-", $news['date']);
+            $date = $tmp[2] . "/" . $tmp[1] . "/" . $tmp[0];
+            echo $news['title'];
+            echo $news['news'];
+        }
+        ?>
+        <p><strong><em><?php echo $news['title']; ?></em></strong></p>
+        <p><?php echo $news['news']; ?></p>
+        <p>&laquo;<strong class="blue">Date : <?php echo $date; ?></strong>&raquo;</p>
+
         <div class="connexion-shadow-2"></div>
         <div id="home-icons">
             <img src="<?php echo $conf["url"]; ?>Images/icon-1.png" alt="" />
@@ -31,6 +27,7 @@
         </div> <!-- #home-icons -->
     </div> <!-- #connexion-box-in -->
 </div> <!-- #connexion-box -->
+
 <div class="blue-box-top blue-box-asdf"></div>
 <div class="blue-box">
     <div class="blue-box-in cfix equal-heights">
@@ -51,3 +48,7 @@
         </div> <!-- .blue-box-col -->
     </div> <!-- .blue-box-in -->
 </div> <!-- .blue-box -->
+
+
+<div style="display:none;">
+</div>
