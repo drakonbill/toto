@@ -114,6 +114,13 @@ class controllers_ajax extends Controller {
 
         $this->loadView("ajax", $return);
     }
+    
+    function modifyEventAction() {
+        $indexM = $this->loadModel("ajax_event");
+        $return = $indexM->modifyEvent();
+
+        $this->loadView("ajax", $return);
+    }
 
     function registerImageEventAction() {
         $indexM = $this->loadModel("ajax_event");
