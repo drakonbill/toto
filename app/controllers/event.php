@@ -43,6 +43,22 @@ class controllers_event extends Controller {
               $this->redirect ("index")->indexAction();
     }
     
+    function modifyAction() {
+        global $_URL;
+        
+        if($this->user->loggedin()) {
+
+            $indexM = $this->loadModel("event");
+            $index = $indexM->modifyModel();
+
+            $this->loadView("header_co", "");
+            $this->loadView("modifyevent", $index);
+            $this->loadView("footer", "");
+        }
+        else 
+              $this->redirect ("index")->indexAction();
+    }
+    
     function indexAction() {
         
 //        $model = $this->loadModel("event");

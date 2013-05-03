@@ -25,7 +25,7 @@ $(function(){
 	
 	$('a#modifAvatar').click(function(){
 		$("body").prepend("<div class='popup-avatar'></div>");
-        load($(".popup-avatar"));
+        
         centrer_mini_popup($(".popup-avatar"));
 		
 		$(window).resize(function() {

@@ -1,0 +1,248 @@
+
+<link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>css/jquery.listederoulante.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>css/jquery.autocomplete.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>js/popup/style-popup.css" />
+
+<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+
+
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.resize.js"></script>
+        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery-ui-1.8.8.custom.min.js"></script>
+        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/formulairedesign.js"></script>
+		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.autocomplete.js"></script>
+		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.text-shadow.js"></script>
+		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.border.js"></script>
+		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/tchat/jquery-position.js"></script>
+		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.listederoulante.js"></script>
+		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.upload.js"></script>
+		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/popup/popup.js"></script>
+
+<script type="text/javascript">
+        var eventdata_idevent="<?php echo $data->idevent;?>";
+	var eventdata_nomevenement="<?php echo $data->nomevenement;?>";
+	var eventdata_description="<?php echo $data->description;?>";
+	var eventdata_image="<?php echo $data->image;?>";
+	var eventdata_pays="<?php echo $data->pays;?>";
+	var eventdata_codepostal="<?php echo $data->codepostal;?>";
+	var eventdata_lieu="<?php echo $data->lieu;?>";
+	var eventdata_passion=<?php echo json_encode($data->data_passion);?>;
+	var eventdata_confidentialite="<?php echo $data->confidentialite;?>";
+	var eventdata_nb_participate="<?php echo $data->nb_participate;?>";
+	var eventdata_time_option_debut="<?php echo $data->time_option_debut;?>";
+	var eventdata_time_option_fin="<?php echo $data->time_option_fin;?>";
+	var eventdata_datedebut_hour="<?php echo $data->datedebut_hour;?>";
+	var eventdata_datedebut_minute="<?php echo $data->datedebut_minute;?>";
+	var eventdata_datedebut_day="<?php echo $data->datedebut_day;?>";
+	var eventdata_datedebut_month="<?php echo $data->datedebut_month;?>";
+	var eventdata_datedebut_year="<?php echo $data->datedebut_year;?>";
+	var eventdata_datefin_hour="<?php echo $data->datefin_hour;?>";
+	var eventdata_datefin_minute="<?php echo $data->datefin_minute;?>";
+	var eventdata_datefin_day="<?php echo $data->datefin_day;?>";
+	var eventdata_datefin_month="<?php echo $data->datefin_month;?>";
+	var eventdata_datefin_year="<?php echo $data->datefin_year;?>";
+</script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/evenement/modifierEvenement.js"></script>
+
+<div class="popup-other popup-othermini" style="display: none; "></div>
+
+	<div id="inside-main-big" class="cfix">
+	<div id="sidebar-left">
+          <div id="sidebar-left-in">
+            <h2 class="sb-title"><span>Amis en linge</span></h2>
+            <div class="cfix">
+              <div class="sb-block">
+                <ul class="users-list2 cfix">
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-blue"><img src="Images/clip-face3.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-blue"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face3.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-blue"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                  <li class="user">
+                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face3.jpg" alt="" width="42" /></a>
+                    <div class="user-popup-info">
+                      <strong><em>Marie Nguyen,</em></strong>
+                      <br /><br />
+                      Ne le 24/06/1991
+                      <br />
+                      Etudiante a l'Universite xxx Habite a Tours
+                      <div class="black-tip"></div>
+                    </div>
+                  </li>
+                </ul> <!-- .users-list2 -->
+                <p class="nom">
+                  <br />
+                  <a href="#" class="rev blue">Liste d'amis</a>
+                </p>
+              </div>
+            </div>
+			<?php 
+				/*************************************************** TCHAT ****************************************/
+				//include 'Modules/tchat/tchat-left.php';
+				/*************************************************** FINTCHAT ****************************************/
+			?>
+
+          </div> <!-- #sidebar-left-in -->
+        </div> <!-- #sidebar-left -->
+      
+        <!-- This is the main content area -->
+        <div id="inside-column-big">
+		  <hr class="top-bar"/>
+          <div id="inside-column-wrap">
+			<span class="title_eventorganise"><img src="<?php echo $conf["url"]; ?>Images/blue-man.png" alt="" class="vam blue-man" width="35" heigth="51" />Modifier un évènement</span>
+			<?php //include 'Modules/tchat/notifications.php'; ?>
+			  <hr class="clear"/>
+            
+			<div class="inside-column-sep"></div>
+			<?php if($data->ok):?>
+            <div class="inside-column-inside">
+              <div class="cfix">
+				<div class="conversation-left">
+                  <a href="#" class="user-avatar bgr-grey2"><img src="<?php echo $data->avatar;?>" alt="" width="42" /></a>
+                </div> <!-- .conversation-left -->
+                <div class="conversation-main-big">
+                  <div class="conversation-main-inside">
+                    <div class="chat-msg bgr-grey2">
+                      <?php echo $data->nomevenement;?>
+                      <div class="chat-tip-left"></div>
+                    </div> <!-- .chat-msg -->
+                  </div> <!-- .conversation-main-inside -->
+                </div> <!-- .conversation-main -->
+              </div> <!-- .cfix -->
+            </div> <!-- .inside-column-inside -->
+            <div id="event_organise" class="fun-block cfix">
+              <div class="fun-block-inside">
+                <div class="fun-block-inside2">
+                </div> <!-- .fun-block-inside2 -->
+              </div> <!-- .fun-block-inside -->
+              <ul class="fun-block-nav">
+              </ul> <!-- .fun-block-nav -->
+            </div> <!-- .fun-block -->
+			<?php else:?> 
+			 <div class="inside-column-inside">
+				Erreur
+			 </div>
+			<?php endif;?>
+          </div> <!-- #inside-column-wrap -->
+        </div> <!-- #inside-column -->
+
+        
+
+        
+
+        <div id="main-footer-big">
+          <div class="connexion-shadow-2"></div>
+          <div id="home-icons">
+            <img src="<?php echo $conf["url"]; ?>Images/icon-1.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-2.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-3.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-4.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-5.png" alt="" />
+            <img src="<?php echo $conf["url"]; ?>Images/icon-6.png" alt="" />
+          </div> <!-- #home-icons -->
+        </div> <!-- #main-footer -->
+      </div> <!-- .cfix -->
+
+	  
+<div class="blue-box-top blue-box-asdf"></div>
+<div class="blue-box">
+    <div class="blue-box-in cfix equal-heights">
+        <div class="blue-box-col ld">
+            <div class="equal">
+                <h2>Qu’est ce que Meetoparty ?</h2>
+                <p>Origine de vos futurs evenements, ce site est le cocktail parfait entre reseau social et site de rencontres. Cette revolution dont vous connaissez deja le principe, s’offre a vous comme etant un outil gratuit et simple d’utilisation. Meetoparty est le resultat final d’une etude sur l’evolution des relations sociales. Aujourd’hui, peu sont ceux qui osent aller vers une personne inconnue. Meetoparty a pour objectif de changer le court des choses.</p>
+                <p>Meetoparty vous propose un moyen ludique et attractif d’organiser des rencontres reelles avec des inconnus dans le cadre du partage de vos passions. A la cle ? Se creer de nouveaux liens d’amitie et plus si affinites.</p>
+            </div> <!-- .equal -->
+        </div> <!-- .blue-box-col -->
+        <div class="blue-box-col rd">
+            <div class="equal">
+                <h2>Faites des rencontres qui vous ressemblent !</h2>
+                <p>Marre des soirées ou sorties ou vous ne vous sentez pas à votre place ? Envie de nouvelles expériences ou de faire de nouvelles connaissance ? Meetoparty est fait pour vous !</p>
+                <p>Meetoparty vous accompagne et vous aide dans votre démarche en vous permettant de créer des centaines d’évènements, sorties ou soirées possibles en lien avec vos passions !</p>
+                <p>Déclencheur de rencontres, nous vous souhaitons de merveilleux moments.</p>
+            </div> <!-- .equal -->
+        </div> <!-- .blue-box-col -->
+    </div> <!-- .blue-box-in -->
+</div>

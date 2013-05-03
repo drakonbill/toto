@@ -164,6 +164,71 @@ class models_event extends Model {
         return $this;
     }
     
+    function modifyModel() {
+        
+        global $_URL;
+        
+        $this->ok=false;
+		
+        if(isset($_URL['id']) && is_numeric($_URL['id'])) {
+                $id_event = $_URL['id'];
+                $requete = "SELECT * FROM event inner join member on event.id_member=member.id_member WHERE id_event='".$id_event."' AND event.id_member='".$_SESSION['id_member']."'";
+                $resultat = mysql_query($requete) or die(mysql_error());
+                $data = mysql_fetch_array($resultat);	
+                $nb_data = mysql_num_rows($resultat);
+
+                if($nb_data == 1) {
+
+                        $this->passion = array();
+                        $requete_passion = "SELECT passion.icon_passion AS iconepassion, passion_category.icone AS iconecat, name_passion, name_category, passion.id_passion FROM event_passion inner join passion on event_passion.id_passion=passion.id_passion inner join passion_category on passion.id_category=passion_category.id_category WHERE id_event='".$id_event."'";
+                        $data_passion = mysql_query($requete_passion) or die(mysql_error());
+                        while($passion = mysql_fetch_array($data_passion))
+                                $this->data_passion[] = $passion;
+
+                        $this->idevent = $id_event;
+                        $this->nomevenement = $data['name_event'];
+                        $this->description = $data['description_event'];
+                        $this->image = $data['image_event'];
+                        $this->identreprise = $data['id_company'];
+                        $this->iddumembre = $data['id_member'];
+                        $this->auteur = $data['pseudo_member'];
+                        $this->avatar = $data['photo_member'];
+
+                        $this->lon = $data['longitude_event'];
+                        $this->lat = $data['latitude_event'];
+
+                        $Jour = array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi","Samedi");
+                        $Mois = array("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
+                        $this->Mois = $Mois;
+                        $this->time_option_debut = $data['time_option_start_event'];
+                        $this->time_option_fin = $data['time_option_end_event'];
+                        $this->datedebut_hour = date("H", strtotime($data['start_date_event']));
+                        $this->datedebut_minute = date("i", strtotime($data['start_date_event']));
+                        $this->datedebut_day = date("d", strtotime($data['start_date_event']));
+                        $this->datedebut_month = date("m", strtotime($data['start_date_event']));
+                        $this->datedebut_year = date("Y", strtotime($data['start_date_event']));
+                        $this->datefin_hour = date("H", strtotime($data['end_date_event']));
+                        $this->datefin_minute = date("i", strtotime($data['end_date_event']));
+                        $this->datefin_day = date("d", strtotime($data['end_date_event']));
+                        $this->datefin_month = date("m", strtotime($data['end_date_event']));
+                        $this->datefin_year = date("Y", strtotime($data['end_date_event']));
+
+                        $this->codepostal = $data['zipcode_event'];
+                        $this->ville = $data['city_event'];
+                        $this->pays = $data['country_event'];
+                        $this->lieu = $data['address_event'];
+                        $this->confidentialite = $data['confidentiality_event'];
+                        //$this->nb_participate = $data['nbparticipant'];
+
+                        $this->longitude = $data['longitude_event'];
+                        $this->latitude = $data['latitude_event'];
+                        $this->ok=true;
+                }
+        }
+        
+        return $this;
+    }
+    
 }
 
 ?>

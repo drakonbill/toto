@@ -85,8 +85,6 @@ $(document).ready(function(){
     });
     
     //$('.popup').resizable();
-    $('.popup').draggable( {
-        containment: '#background'
-      } );
+    
 
 });
