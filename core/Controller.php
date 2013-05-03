@@ -97,6 +97,13 @@ abstract class Controller extends Core {
         $this->reg->controler = $controller;
         return $controller;
     }
+    
+    public function loadHelper($name, $param){
+        
+        include "helper/".$name.".php";
+        return new $name($param);
+        
+    }
 
 }
 
