@@ -61,7 +61,7 @@ class controllers_event extends Controller {
         else 
               $this->redirect ("index")->indexAction();
     }
-    
+
     function indexAction() {
 
 //        $model = $this->loadModel("event");
