@@ -314,31 +314,6 @@ class models_ajax_event extends Model {
             
             if($nb_data == 1) {
                 
-                $ancienneconfidentialite = $data['confidentiality_event'];
-                
-                if($ancienneconfidentialite != $_POST['event_confidentialite_info']) {
-                    
-                    if($ancienneconfidentialite == 1) {
-                        if($_POST['event_confidentialite_info'] == 2) {
-                             $requete_check_confidentiality = "SELECT id_contact FROM member_contacts inner join event_participant on member_contacts.id_contact=event_participant.id_member WHERE id_event='".$id_event."' AND member_contacts.id_member='".$_SESSION['id_member']."'";
-                             $resultat_check_confidentiality = mysql_query($requete_check_confidentiality) or die(mysql_error());
-                             while($data_check_confidentiality = mysql_fetch_array($resultat_check_confidentiality)) {
-                                 
-                             }
-                        }
-                        else if($_POST['event_confidentialite_info'] == 0) {
-                            
-                        }
-                    }
-                    else if($ancienneconfidentialite == 0) {
-                        if($_POST['event_confidentialite_info'] == 2) {
-                            
-                            
-                        }
-                    }
-                    
-                }
-                
                 if(isset($_POST['image'])) {
                     if(isset($_POST['x1']) && isset($_POST['x2']) && isset($_POST['y1']) && isset($_POST['y2']) && isset($_POST['w']) && isset($_POST['h']) && isset($_POST['imageheight']) && isset($_POST['imagewidth'])) {
                             $x1 = intval($_POST['x1']);
@@ -418,7 +393,7 @@ class models_ajax_event extends Model {
                         $time_option_fin = 0;
 
                 if(!empty($erreur))
-                        echo "<h2>Erreur</h2>".$erreur;
+                        return json_encode(array('error',"<h2>Erreur</h2>".$erreur));
                 else {
                         if($event_confidentialite_info == 2) {
                                 $split_membre_confidentialite = explode(";",$membre_confidentialite);
@@ -454,54 +429,155 @@ class models_ajax_event extends Model {
                                 $erreur .= "- Vous devez ajouter 1 mot clef/passion valide au minimum<br/>";
 
                         if(!empty($erreur))
-                                return "<h2>Erreur</h2>".$erreur;	
+                                return json_encode(array('error',"<h2>Erreur</h2>".$erreur));
+                        
+                        /***********************************************************************************************************************
+                         * *************************************** CONFIDENTIALITE VERIF ****************************************************
+                         */
+                        $ancienneconfidentialite = $data['confidentiality_event'];
+                        if(isset($_POST['isConfirmParticipant']) && isset($_POST['deleteParticipant'])) {
+                            
+                            if($_POST['deleteParticipant'] != '')
+                                $delete_participant = explode(",", $_POST['deleteParticipant']);
+                            
+                            //return json_encode(array("error-participant",$delete_participant));
+                        }
+                        else if($ancienneconfidentialite != $_POST['event_confidentialite_info']) {
+
+                            $result_check_confidentiality = array();
+
+                                if(($ancienneconfidentialite == 2 || $ancienneconfidentialite == 1) && $_POST['event_confidentialite_info'] == 0) {
+                                     $requete_check_confidentiality = "SELECT * FROM event_participant inner join member on event_participant.id_member=member.id_member WHERE id_event='".$id_event."' AND event_participant.id_member NOT IN (SELECT id_contact FROM member_contacts WHERE id_member='".$_SESSION['id_member']."' AND condition_contact=1) AND status='accepte'";
+                                     $resultat_check_confidentiality = mysql_query($requete_check_confidentiality) or die(mysql_error());
+                                     $resultat_check_confidentiality_nb = mysql_num_rows($resultat_check_confidentiality);
+                                     while($data_check_confidentiality = mysql_fetch_array($resultat_check_confidentiality)) {
+                                         $result_check_confidentiality[] = $data_check_confidentiality;
+                                     }
+
+                                     if($resultat_check_confidentiality_nb > 0)
+                                         return json_encode(array('error-confidentialite',$result_check_confidentiality));
+                                }
+                                else if(($ancienneconfidentialite == 1 || $ancienneconfidentialite == 0) && $_POST['event_confidentialite_info'] == 2 && isset($_POST['membre_confidentialite'])) {
+
+                                     $membre_confidentialite = $_POST['membre_confidentialite'];
+                                     $split_membre_confidentialite = explode(";",$membre_confidentialite);
+
+                                     $nb_confidentialite=0;
+                                     $tab_membre_confidentialite = array();
+                                     foreach($split_membre_confidentialite as $t_split_membre_confidentialite)
+                                         if(is_numeric($t_split_membre_confidentialite) && !in_array($t_split_membre_confidentialite,$tab_membre_confidentialite)) { $nb_confidentialite++; $tab_membre_confidentialite[] = $t_split_membre_confidentialite; }
+
+                                     if(sizeof($tab_membre_confidentialite) > 0 && $nb_confidentialite > 0) {
+                                            $resultat_check_confidentiality = mysql_query("SELECT * FROM event_participant inner join member on event_participant.id_member=member.id_member WHERE status='accepte' AND id_event='".$id_event."' AND event_participant.id_member NOT IN (".implode(",", $tab_membre_confidentialite).",'".$_SESSION['id_member']."')");
+                                            $resultat_check_confidentiality_nb = mysql_num_rows($resultat_check_confidentiality);
+                                            while($data_check_confidentiality = mysql_fetch_array($resultat_check_confidentiality)) {
+                                                $result_check_confidentiality[] = $data_check_confidentiality;
+                                            }
+                                            
+                                            if($resultat_check_confidentiality_nb > 0)
+                                                return json_encode(array('error-confidentialite',$result_check_confidentiality));
+                                     }
+                                }
+                            }
+
+                        }
+                
+                
+                        /**********************************************************************************
+                         * ***************************** FIN CONFIDENTIALITE VERIF
+                         */
+                        if(isset($_POST['image'])) {
+                            //SUPPRIMER ANCIENNE IMAGE
+                            if(file_exists($data['image_event'])) unlink($data['image_event']);
+                            $extension = pathinfo(TARGET.$image, PATHINFO_EXTENSION);
+                            $nomImageFinal = md5(uniqid()) .'.'. $extension;
+                            $cropped = $this->resizeThumbnailImage(TARGET.$image, TARGET.$nomImageFinal,$w,$h,$x1,$y1,$imageheight,$imagewidth);
+                        }
+
+                        $requete_map = mysql_query("SELECT longitude, latitude FROM zip_code WHERE CP='".$cp."' AND ville='".$ville."'") or die(mysql_error());
+                        $data_map = mysql_fetch_array($requete_map);
+                        $nb_data_map = mysql_num_rows($requete_map);
+
+                        if($nb_data_map == 1) {
+                                $lat = $data_map['latitude'];
+                                $lon = $data_map['longitude'];
+                        }
                         else {
-                                if(isset($_POST['image'])) {
-                                    //SUPPRIMER ANCIENNE IMAGE
-                                    $extension = pathinfo(TARGET.$image, PATHINFO_EXTENSION);
-                                    $nomImageFinal = md5(uniqid()) .'.'. $extension;
-                                    $cropped = $this->resizeThumbnailImage(TARGET.$image, TARGET.$nomImageFinal,$w,$h,$x1,$y1,$imageheight,$imagewidth);
-                                }
+                                $lat = "";
+                                $lon = "";
+                        }
 
-                                $requete_map = mysql_query("SELECT longitude, latitude FROM zip_code WHERE CP='".$cp."' AND ville='".$ville."'") or die(mysql_error());
-                                $data_map = mysql_fetch_array($requete_map);
-                                $nb_data_map = mysql_num_rows($requete_map);
+                       // mysql_query("INSERT INTO event VALUES (default,'".$subject."','".$content_happends."','".TARGET.$nomImageFinal."',0,".$_SESSION['id_member'].",'".date("Y-m-j H:i:s",ceil($date_debut/1000))."','".date("Y-m-j H:i:s",ceil($date_fin/1000))."',".$cp.",'".$ville."','".$pays."','".$lieu."',".$event_confidentialite_info.",'".$lon."','".$lat."',".$time_option_debut.",".$time_option_fin.")") or die(mysql_error());
+                        
+                        $modif_request = array();
+                        if($subject != $data['name_event'])
+                            $modif_request[] = "name_event='".$subject."'";
+                        if($content_happends != $data['description_event'])
+                            $modif_request[] = "description_event='".$content_happends."'";
+                        if(isset($_POST['image']))
+                            $modif_request[] = "image_event='".TARGET.$nomImageFinal."'";
+                        if(date("Y-m-j H:i:s",ceil($date_debut/1000)) != $data['start_date_event'])
+                            $modif_request[] = "start_date_event='".date("Y-m-j H:i:s",ceil($date_debut/1000))."'";
+                        if(date("Y-m-j H:i:s",ceil($date_fin/1000)) != $data['end_date_event'])
+                            $modif_request[] = "end_date_event='".date("Y-m-j H:i:s",ceil($date_fin/1000))."'";
+                        if($cp != $data['zipcode_event'])
+                            $modif_request[] = "zipcode_event='".$cp."'";
+                        if($ville != $data['city_event'])
+                            $modif_request[] = "city_event='".$ville."'";
+                        if($cp != $data['zipcode_event'])
+                            $modif_request[] = "zipcode_event='".$cp."'";
+                        if($pays != $data['country_event'])
+                            $modif_request[] = "country_event='".$pays."'";
+                        if($lieu != $data['address_event'])
+                            $modif_request[] = "address_event='".$lieu."'";
+                        if($ancienneconfidentialite != $event_confidentialite_info)
+                            $modif_request[] = "confidentiality_event='".$event_confidentialite_info."'";
+                        if($lon != $data['longitude_event'])
+                            $modif_request[] = "longitude_event='".$lon."'";
+                        if($lat != $data['latitude_event'])
+                            $modif_request[] = "latitude_event='".$lat."'";
+                        if($time_option_debut != $data['time_option_start_event'])
+                            $modif_request[] = "time_option_start_event='".$time_option_debut."'";
+                        if($time_option_fin != $data['time_option_end_event'])
+                            $modif_request[] = "time_option_end_event='".$time_option_fin."'";
 
-                                if($nb_data_map == 1) {
-                                        $lat = $data_map['latitude'];
-                                        $lon = $data_map['longitude'];
-                                }
-                                else {
-                                        $lat = "";
-                                        $lon = "";
-                                }
+                        if(count($modif_request) > 0)
+                            mysql_query("UPDATE event SET ".implode(",",$modif_request)." WHERE id_event='".$id_event."'") or(die(mysql_error()));
+                        
+                        if(isset($_POST['isConfirmParticipant']) && isset($delete_participant)) {
 
-                               // mysql_query("INSERT INTO event VALUES (default,'".$subject."','".$content_happends."','".TARGET.$nomImageFinal."',0,".$_SESSION['id_member'].",'".date("Y-m-j H:i:s",ceil($date_debut/1000))."','".date("Y-m-j H:i:s",ceil($date_fin/1000))."',".$cp.",'".$ville."','".$pays."','".$lieu."',".$event_confidentialite_info.",'".$lon."','".$lat."',".$time_option_debut.",".$time_option_fin.")") or die(mysql_error());
-                                $id_event = mysql_insert_id();
-
-                                if($event_confidentialite_info == 2) {
-                                        $values_insert_confidentialite="";
-                                        $cp=0;
-                                        foreach($tab_membre_confidentialite as $t_tab_membre_confidentialite) {
-                                                $values_insert_confidentialite .= ($cp>0?",":"")."(".$id_event.",".$t_tab_membre_confidentialite.")";
-                                                $cp++;
-                                        }
-                                       // mysql_query("INSERT INTO event_confidentiality VALUES ".$values_insert_confidentialite."") or die(mysql_error());
-                                }
-
-                                $values_insert_passion="";
+                            if(count($delete_participant) > 0)
+                                mysql_query("DELETE FROM event_participant WHERE status='accepte' AND id_event='".$id_event."' AND id_member IN (".implode(",",$delete_participant).")") or die(mysql_error());
+                        }
+                        
+                        if($event_confidentialite_info == 2) {
+                                $values_insert_confidentialite="";
                                 $cp=0;
-                                foreach($tab_passion as $t_tab_passion) {
-                                        $values_insert_passion .= ($cp>0?",":"")."(".$id_event.",".$t_tab_passion.")";
+                                foreach($tab_membre_confidentialite as $t_tab_membre_confidentialite) {
+                                        $values_insert_confidentialite .= ($cp>0?",":"")."(".$id_event.",".$t_tab_membre_confidentialite.")";
                                         $cp++;
                                 }
-
-                               // mysql_query("INSERT INTO event_passion VALUES ".$values_insert_passion."") or die(mysql_error());
+                               mysql_query("DELETE FROM event_confidentiality WHERE id_event='".$id_event."'") or(die(mysql_error()));
+                               mysql_query("INSERT INTO event_confidentiality VALUES ".$values_insert_confidentialite."") or die(mysql_error());
                         }
+
+                        $values_insert_passion="";
+                        $cp=0;
+                        foreach($tab_passion as $t_tab_passion) {
+                                $values_insert_passion .= ($cp>0?",":"")."(".$id_event.",".$t_tab_passion.")";
+                                $cp++;
+                        }
+                        
+                        mysql_query("DELETE FROM event_passion WHERE id_event='".$id_event."'");
+                       mysql_query("INSERT INTO event_passion VALUES ".$values_insert_passion."") or die(mysql_error());
+                       
+                       if($ancienneconfidentialite == 2 && $event_confidentialite_info != $ancienneconfidentialite)
+                            mysql_query("DELETE FROM event_confidentiality WHERE id_event='".$id_event."'") or(die(mysql_error()));
+                        return json_encode(array("ok"));
                 }
             }
-        }    
-    }
+    }    
+    
     
     private function resizeThumbnailImage($image, $thumb_image_name, $w, $h, $start_width, $start_height, $imageheight, $imagewidth){
 

@@ -27,6 +27,9 @@
 	var eventdata_lieu="<?php echo $data->lieu;?>";
 	var eventdata_passion=<?php echo json_encode($data->data_passion);?>;
 	var eventdata_confidentialite="<?php echo $data->confidentialite;?>";
+        <?php if(count($data->participant) > 0):?>
+        var eventdata_participant=<?php echo json_encode($data->participant);?>;
+        <?php endif;?>
 	var eventdata_nb_participate="<?php echo $data->nb_participate;?>";
 	var eventdata_time_option_debut="<?php echo $data->time_option_debut;?>";
 	var eventdata_time_option_fin="<?php echo $data->time_option_fin;?>";

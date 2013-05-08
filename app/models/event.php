@@ -184,6 +184,7 @@ class models_event extends Model {
                         $data_passion = mysql_query($requete_passion) or die(mysql_error());
                         while($passion = mysql_fetch_array($data_passion))
                                 $this->data_passion[] = $passion;
+                        
 
                         $this->idevent = $id_event;
                         $this->nomevenement = $data['name_event'];
@@ -219,6 +220,14 @@ class models_event extends Model {
                         $this->lieu = $data['address_event'];
                         $this->confidentialite = $data['confidentiality_event'];
                         //$this->nb_participate = $data['nbparticipant'];
+                        
+                        $this->participant = array();
+                        if($this->confidentialite == 2) {
+                            $requete_participant = "SELECT * FROM event_confidentiality inner join member on event_confidentiality.id_member=member.id_member WHERE id_event='".$id_event."'";
+                            $data_participant = mysql_query($requete_participant) or die(mysql_error());
+                            while($participant = mysql_fetch_array($data_participant))
+                                    $this->participant[] = $participant;
+                        }
 
                         $this->longitude = $data['longitude_event'];
                         $this->latitude = $data['latitude_event'];
