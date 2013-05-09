@@ -2,9 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" class="htmlconnect">
     <head>
         <meta charset="utf-8" />
-        <title><?php echo $conf["title"];
-echo $data ? " - $data" : "";
-?></title>
+        <title><?php
+            echo $conf["title"];
+            echo $data ? " - $data" : "";
+            ?></title>
         <meta name="description" content="" />
         <meta name="keywords" content="" />
 
@@ -17,94 +18,102 @@ echo $data ? " - $data" : "";
         <![endif]-->
 
        <!-- <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/jquery.js"></script>-->
-         <script type="text/javascript" src="/js/files/jquery-1.7.0.min.js"></script>
+        <script type="text/javascript" src="/js/files/jquery-1.7.0.min.js"></script>
         <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/fancybox/jquery.fancybox.js"></script>
         <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/jquery.equalheights.js"></script>
         <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/slider.js"></script>
         <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/bind.js"></script>
+        <?php
+        global $controller;
+        if ($controller == "controllers_profil") {
+            if (isset($contr))
+                $contr->loadvWidget("profil_js_include");
+        }
+        ?>
+
     </head>
     <body class="bodyconnect">
         <div id="wrap-outer">
             <div style="width: 1061px; margin: 0 auto; position: relative;">
-            <div id="logo-block" class="logo-block-co">
-                <a href="/index" id="logo" class="rep">MeetoParty</a>
-                <div id="top-social-links">
-                    <a href="http://www.facebook.com/Meetoparty" id="top-facebook-link" class="rep">Facebbok</a>
-                    <a href="https://twitter.com/Meetoparty" id="top-twitter-link" class="rep">Twitter</a>
-                </div> <!-- #top-social-links -->
-                <div id="top-small-title">
-                    Associez vos <span class="blue">envies</span>
-                    <br />
-                    au rythme de vos <span class="blue">hobbies!</span>
-                </div> <!-- #top-small-title -->
-            </div> <!-- #logo-block -->
+                <div id="logo-block" class="logo-block-co">
+                    <a href="/index" id="logo" class="rep">MeetoParty</a>
+                    <div id="top-social-links">
+                        <a href="http://www.facebook.com/Meetoparty" id="top-facebook-link" class="rep">Facebbok</a>
+                        <a href="https://twitter.com/Meetoparty" id="top-twitter-link" class="rep">Twitter</a>
+                    </div> <!-- #top-social-links -->
+                    <div id="top-small-title">
+                        Associez vos <span class="blue">envies</span>
+                        <br />
+                        au rythme de vos <span class="blue">hobbies!</span>
+                    </div> <!-- #top-small-title -->
+                </div> <!-- #logo-block -->
 
-            <div id="header" class="cfix">
-                <div id="header-left">
-                    <div id="header-left-in1">
-                        <div id="header-left-in2">
-                            <ul class="menu">
-                                <li><a href="/evenement">
-                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-fav.png" alt="" /></span>
-                                        <span class="menu-text">Evenement</span>
-                                    </a></li>
-                                <li><a href="/chat">
-                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-messages.png" alt="" /></span>
-                                        <span class="menu-text">Discussion</span>
-                                    </a></li>
-                                <li><a href="/Contact">
-                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-users.png" alt="" /></span>
-                                        <span class="menu-text">Contact</span>
-                                    </a></li>
-                                <?php $pseudo_member = $this->reg->user->pseudo_member; ?>
-                                <li><a href="/profil/seeProfil/pseudo/<?php echo $pseudo_member; ?>">
-                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-user.png" alt="" /></span>
-                                        <span class="menu-text">Profil</span>
-                                    </a></li>
-                                <li class="nom"><a href="/index">
-                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-home.png" alt="" /></span>
-                                        <span class="menu-text">Accueil</span>
-                                    </a></li>
-                            </ul>
-                        </div> <!-- #header-left-in2 -->
-                    </div> <!-- #header-left-in1 -->
-                </div> <!-- #header-left -->
-                <div id="header-right">
-                    <div id="header-right-in1">
-                        <div id="header-right-in2">
-                            <ul class="menu">
-                                <li><a href="/message">
-                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-email.png" alt="" /></span>
-                                        <span class="menu-text">Message</span>
-                                    </a></li>
-                                <li class="nom"><a href="/news">
-                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-news.png" alt="" /></span>
-                                        <span class="menu-text">News</span>
-                                    </a></li>
-                            </ul>
+                <div id="header" class="cfix">
+                    <div id="header-left">
+                        <div id="header-left-in1">
+                            <div id="header-left-in2">
+                                <ul class="menu">
+                                    <li><a href="/evenement">
+                                            <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-fav.png" alt="" /></span>
+                                            <span class="menu-text">Evenement</span>
+                                        </a></li>
+                                    <li><a href="/chat">
+                                            <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-messages.png" alt="" /></span>
+                                            <span class="menu-text">Discussion</span>
+                                        </a></li>
+                                    <li><a href="/Contact">
+                                            <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-users.png" alt="" /></span>
+                                            <span class="menu-text">Contact</span>
+                                        </a></li>
+<?php $pseudo_member = $this->reg->user->pseudo_member; ?>
+                                    <li><a href="/profil/seeProfil/pseudo/<?php echo $pseudo_member; ?>">
+                                            <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-user.png" alt="" /></span>
+                                            <span class="menu-text">Profil</span>
+                                        </a></li>
+                                    <li class="nom"><a href="/index">
+                                            <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-home.png" alt="" /></span>
+                                            <span class="menu-text">Accueil</span>
+                                        </a></li>
+                                </ul>
+                            </div> <!-- #header-left-in2 -->
+                        </div> <!-- #header-left-in1 -->
+                    </div> <!-- #header-left -->
+                    <div id="header-right">
+                        <div id="header-right-in1">
+                            <div id="header-right-in2">
+                                <ul class="menu">
+                                    <li><a href="/message">
+                                            <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-email.png" alt="" /></span>
+                                            <span class="menu-text">Message</span>
+                                        </a></li>
+                                    <li class="nom"><a href="/news">
+                                            <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-news.png" alt="" /></span>
+                                            <span class="menu-text">News</span>
+                                        </a></li>
+                                </ul>
 
-                            <div id="recherche-box">
-                                <div class="cfix">
-                                    <a href="#" class="ld"><img src="<?php echo $conf["url"]; ?>Images/btn-recherche.png" alt="" /></a>
-                                    <a href="/account/logout" class="rd"><img src="<?php echo $conf["url"]; ?>Images/btn-decon.png" alt="" /></a>
-                                </div> <!-- .cfix -->
-                                <form method="get" action="#" class="search-form">
-                                    <fieldset>
-                                        <input type="text" class="text" name="search" id="search" value="" />
-                                        <input type="submit" class="submit" value="" title="Submit data" />
-                                    </fieldset>
-                                </form>
-                            </div> <!-- #recherche-box -->
-                        </div> <!-- #header-right-in2 -->
-                    </div> <!-- #header-right-in1 -->
-                </div> <!-- #header-right-->
-            </div> <!-- #header -->
+                                <div id="recherche-box">
+                                    <div class="cfix">
+                                        <a href="#" class="ld"><img src="<?php echo $conf["url"]; ?>Images/btn-recherche.png" alt="" /></a>
+                                        <a href="/account/logout" class="rd"><img src="<?php echo $conf["url"]; ?>Images/btn-decon.png" alt="" /></a>
+                                    </div> <!-- .cfix -->
+                                    <form method="get" action="#" class="search-form">
+                                        <fieldset>
+                                            <input type="text" class="text" name="search" id="search" value="" />
+                                            <input type="submit" class="submit" value="" title="Submit data" />
+                                        </fieldset>
+                                    </form>
+                                </div> <!-- #recherche-box -->
+                            </div> <!-- #header-right-in2 -->
+                        </div> <!-- #header-right-in1 -->
+                    </div> <!-- #header-right-->
+                </div> <!-- #header -->
 
-            <div class="beta cfix">
-                <div class="beta-left">
-                     <?php if(isset($contr))$contr->loadvWidget("user"); ?>
-                </div> <!-- .beta-left -->
-                <div class="beta-right">
-                   <?php if(isset($contr))$contr->loadvWidget("news"); ?>    
-                </div> <!-- .beta-right -->
-            </div> <!-- .beta -->
+                <div class="beta cfix">
+                    <div class="beta-left">
+<?php if (isset($contr)) $contr->loadvWidget("user"); ?>
+                    </div> <!-- .beta-left -->
+                    <div class="beta-right">
+<?php if (isset($contr)) $contr->loadvWidget("news"); ?>    
+                    </div> <!-- .beta-right -->
+                </div> <!-- .beta -->
