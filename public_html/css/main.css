@@ -1687,7 +1687,7 @@ div#tchat-onetoone, div#tchat-groupe { display: none; }
 .event_content_other .event_carte_info { display: block; position: absolute; left: 125px; font-size: 11px; top: 5px; }
 .event_content_other .event_map{ width: 350px; height: 210px; position: absolute; top: 15px; left: 255px; }
 
-span.title_event_header { font-family: 'Arial'; font-size: 20px; margin-top: 11px; display: block; }
+span.title_event_header { font-family: 'Lobster'; font-size: 20px; margin-top: 11px; display: block; }
 span.title_event { font-family: 'Lobster', cursive; font-size: 21px; }
 span.nb_fan { font-size: 17px; color: #1980c1; }
 a.event_reponse { display: block; width: 100%; text-align: center; bottom: 0; position: absolute; margin-left: -25px; }
