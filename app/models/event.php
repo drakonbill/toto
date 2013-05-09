@@ -238,6 +238,22 @@ class models_event extends Model {
         return $this;
     }
     
+    function searchModel() {
+        
+        mysql_query("SET NAMES UTF8");
+        $this->departments = array();
+        $this->departments_content = array();
+        $request_department = mysql_query("SELECT * FROM departements");
+        while($data_department = mysql_fetch_array($request_department)) {
+                $this->departments[strtolower($data_department['numero'])] = $data_department['nom'];
+                $this->departments_content[] = $data_department['numero'];
+        }
+        
+        $request_departmentcontent = mysql_query("SELECT * FROM event");
+        
+        return $this;
+    }
+    
 }
 
 ?>
