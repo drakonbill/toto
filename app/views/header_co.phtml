@@ -48,49 +48,49 @@
                     </div> <!-- #top-small-title -->
                 </div> <!-- #logo-block -->
 
-                <div id="header" class="cfix">
-                    <div id="header-left">
-                        <div id="header-left-in1">
-                            <div id="header-left-in2">
-                                <ul class="menu">
-                                    <li><a href="/evenement">
-                                            <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-fav.png" alt="" /></span>
-                                            <span class="menu-text">Evenement</span>
-                                        </a></li>
-                                    <li><a href="/chat">
-                                            <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-messages.png" alt="" /></span>
-                                            <span class="menu-text">Discussion</span>
-                                        </a></li>
-                                    <li><a href="/Contact">
-                                            <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-users.png" alt="" /></span>
-                                            <span class="menu-text">Contact</span>
-                                        </a></li>
-<?php $pseudo_member = $this->reg->user->pseudo_member; ?>
-                                    <li><a href="/profil/seeProfil/pseudo/<?php echo $pseudo_member; ?>">
-                                            <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-user.png" alt="" /></span>
-                                            <span class="menu-text">Profil</span>
-                                        </a></li>
-                                    <li class="nom"><a href="/index">
-                                            <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-home.png" alt="" /></span>
-                                            <span class="menu-text">Accueil</span>
-                                        </a></li>
-                                </ul>
-                            </div> <!-- #header-left-in2 -->
-                        </div> <!-- #header-left-in1 -->
-                    </div> <!-- #header-left -->
-                    <div id="header-right">
-                        <div id="header-right-in1">
-                            <div id="header-right-in2">
-                                <ul class="menu">
-                                    <li><a href="/message">
-                                            <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-email.png" alt="" /></span>
-                                            <span class="menu-text">Message</span>
-                                        </a></li>
-                                    <li class="nom"><a href="/news">
-                                            <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-news.png" alt="" /></span>
-                                            <span class="menu-text">News</span>
-                                        </a></li>
-                                </ul>
+            <div id="header" class="cfix">
+                <div id="header-left">
+                    <div id="header-left-in1">
+                        <div id="header-left-in2">
+                            <ul class="menu">
+                                <li><a href="/evenement">
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-fav.png" alt="" /></span>
+                                        <span class="menu-text">Evenement</span>
+                                    </a></li>
+                                <li><a href="/chat">
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-messages.png" alt="" /></span>
+                                        <span class="menu-text">Discussion</span>
+                                    </a></li>
+                                <li><a href="/Contact">
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-users.png" alt="" /></span>
+                                        <span class="menu-text">Contact</span>
+                                    </a></li>
+                               
+                                <li><a href="/profil/id/<?php echo $this->reg->user->id_member; ?>">
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-user.png" alt="" /></span>
+                                        <span class="menu-text">Profil</span>
+                                    </a></li>
+                                <li class="nom"><a href="/index">
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-home.png" alt="" /></span>
+                                        <span class="menu-text">Accueil</span>
+                                    </a></li>
+                            </ul>
+                        </div> <!-- #header-left-in2 -->
+                    </div> <!-- #header-left-in1 -->
+                </div> <!-- #header-left -->
+                <div id="header-right">
+                    <div id="header-right-in1">
+                        <div id="header-right-in2">
+                            <ul class="menu">
+                                <li><a href="/message">
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-email.png" alt="" /></span>
+                                        <span class="menu-text">Message</span>
+                                    </a></li>
+                                <li class="nom"><a href="/news">
+                                        <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-news.png" alt="" /></span>
+                                        <span class="menu-text">News</span>
+                                    </a></li>
+                            </ul>
 
                                 <div id="recherche-box">
                                     <div class="cfix">
