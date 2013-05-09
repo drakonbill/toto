@@ -20,6 +20,10 @@ abstract class Controller extends Core {
 
     private function loadInit(){
         $this->init();
+        
+//        if($this->reg->roles->isRole($this)) {
+//            
+//        }
     }
     ## make model object and add them in registry
 

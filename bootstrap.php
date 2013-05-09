@@ -5,7 +5,7 @@ session_start();
 
 // debuging disable when not needed
 $debug = FALSE;
-//$debug = TRUE;
+$debug = TRUE;
 
 
 if ($debug) {
@@ -125,4 +125,5 @@ try {
 
 debug($reg);
 debug($_SESSION);
+debug($_URL);
 ?>
