@@ -3,8 +3,6 @@ var resizeimg, resizeimg_photo;
 var x1, x2, y1, y2, w, h;
 var x1_photo, x2_photo, y1_photo, y2_photo, w_photo, h_photo;
 var image_width, image_height;
-var event_confidentialite_info = 1;
-var event_confidentialite_invit = 1;
 var event_confidentialite = new Array();
 
 function loadInputValue() {
@@ -275,7 +273,7 @@ function calendrier(idcalendrier, title)
 					sem=0;
 			}
 	}
-	content_calendrier += '</tbody><tfoot><tr><td colspan="7"><div class="time_recover"></div><input checked="checked" class="time_option" type="checkbox" name="time_option'+idcalendrier+'" id="time_option'+idcalendrier+'"/>Heures : <select>'+heure((time_option?hour:date.getHours()))+'</select> Minutes : <select>'+minute((time_option?min:date.getMinutes()))+'</select></td></tr></tfoot>';
+	content_calendrier += '</tbody><tfoot><tr><td colspan="7"><div class="time_recover"></div><input '+(time_option==1?'checked="checked"':'')+' class="time_option" type="checkbox" name="time_option'+idcalendrier+'" id="time_option'+idcalendrier+'"/>Heures : <select>'+heure((time_option==1?hour:date.getHours()))+'</select> Minutes : <select>'+minute((time_option==1?min:date.getMinutes()))+'</select></td></tr></tfoot>';
 	content_calendrier += '</table>';
 	
 	$("table#"+idcalendrier+" tfoot input#time_option"+idcalendrier).live('change', function() {
@@ -303,7 +301,7 @@ function addPrivate() {
 		$("div.error_privee").html("Chargement...");
 		$.ajax({
 			type: 'POST',
-			url: 'js/Ajax-PHP/evenement/addEvent_verifmembre.php',
+			url: '/ajax/verifMember',
 			data: "pseudomembre="+pseudo_membre,
 			success:
 				function(result) {
@@ -332,6 +330,170 @@ function addPrivate() {
 		});
 	}
 }
+var isConfirmParticipant = false;
+function addEvent() {
+    $("div#event_organise div.fun-block-inside2 div#addThisEvent").html("Chargement...");
+			
+    membre_confidentialite="";
+    if(event_confidentialite_info == 2) {
+            $("div#event_organise div.fun-block-inside2 div#event_organise_whose div#info_whose ul#private_contacts li").each(function() {
+                    membre_confidentialite += $(this).attr('id')+";";
+            });
+    }
+
+    nb_participate=0;
+
+    passion="";
+    cpt_passion=0;
+    $("div#event_organise div.fun-block-inside2 div#event_organise_passion ul#liste_passion li").each(function() {
+            passion += new String($(this).attr('class')).replace("passion","")+";";
+            cpt_passion++;
+    });
+
+    ajout_date_calendrier1 = new String($('div#event_organise table#calendrier2 tbody tr th.dateaujourdhui').attr('class')).replace("dateaujourdhui date","");
+    heure_calendrier1 = $('div#event_organise table#calendrier2 tfoot td select:first').val();
+    minute_calendrier1 = $('div#event_organise table#calendrier2 tfoot td select:last').val();
+    time_option1 = $("div#event_organise table#calendrier2 tfoot input#time_optioncalendrier2").attr('checked');
+    if(time_option1 != 'checked') {
+            heure_calendrier1 = 0;
+            minute_calendrier1 = 0;
+    }
+
+    ajout_date_calendrier2 = new String($('div#event_organise table#calendrier3 tbody tr th.dateaujourdhui').attr('class')).replace("dateaujourdhui date","");
+    heure_calendrier2 = $('div#event_organise table#calendrier3 tfoot td select:first').val();
+    minute_calendrier2 = $('div#event_organise table#calendrier3 tfoot td select:last').val();
+    time_option2 = $("div#event_organise table#calendrier3 tfoot input#time_optioncalendrier3").attr('checked');
+    if(time_option2 != 'checked') {
+            heure_calendrier2 = 0;
+            minute_calendrier2 = 0;
+    }
+
+    pays = $('div#event_organise div#listepays').val();
+    cp = $('div#event_organise input#cp').val();
+    ville = $('div#event_organise select#ville').val();
+    lieu = $('div#event_organise input#adresse').val();
+
+    subject = $('div#event_organise input#subject').val();
+    content_happends = $('div#event_organise textarea#content_happends').val();
+
+
+    var erreur="";
+    if(subject == "" || subject == "Saisissez le nom de l'évènement")
+            erreur += "- Veuillez saisir le nom de l'évènement<br/>";
+
+    if(content_happends == "" || content_happends == "Description...")
+            erreur += "- Veuillez saisir une description<br/>";
+
+    ajout_date_calendrier1 = ajout_date_calendrier1.split("-");
+    ajout_date_calendrier2 = ajout_date_calendrier2.split("-");
+
+    var date_debut = new Date(ajout_date_calendrier2[2]+","+(parseInt(ajout_date_calendrier2[1])+parseInt(1))+","+ajout_date_calendrier2[0]);
+    date_debut.setHours(heure_calendrier2);
+    date_debut.setMinutes(minute_calendrier2);
+    var date_fin = new Date(ajout_date_calendrier1[2]+","+(parseInt(ajout_date_calendrier1[1])+parseInt(1))+","+ajout_date_calendrier1[0]);
+    date_fin.setHours(heure_calendrier1);
+    date_fin.setMinutes(minute_calendrier1);
+
+    if(date_fin - date_debut < 0)
+            erreur += "- Veuillez saisir une date de début antérieure à le date de fin";
+
+    if(typeof($('div#event_organise_photo img#photo_event')) != "undefined" && $('div#event_organise_photo img#photo_event').length != 0) {
+        if(!(typeof(x1_photo) != "undefined" && typeof(y1_photo) != "undefined" && typeof(x2_photo) != "undefined" && typeof(y2_photo) != "undefined" && typeof(w_photo) != "undefined" && typeof(h_photo) != "undefined" && parseInt(x1_photo) == x1_photo && parseInt(x2_photo) == x2_photo && parseInt(y1_photo) == y1_photo && parseInt(y2_photo) == y2_photo && parseInt(w_photo) == w_photo && parseInt(h_photo) == h_photo && parseInt($('div#event_organise_photo img#photo_event').height()) == $('div#event_organise_photo img#photo_event').height() && parseInt($('div#event_organise_photo img#photo_event').width()) == $('div#event_organise_photo img#photo_event').width()))
+                erreur += "- Veuillez choisir une image de couverture et la redimensionner<br/>";
+    }
+
+    if(pays == "")
+            erreur += "- Veuillez sélectionner un pays<br/>";
+
+    if(cp == "" || ville == "" || cp == "Saisissez un code postal")
+            erreur += "- Veuillez saisir un code postal<br/>";
+
+    if(lieu == "" || lieu == "Saisissez une adresse ou un lieu")
+            erreur += "- Veuillez saisir un lieu<br/>";
+
+    if(event_confidentialite_info == 2 && membre_confidentialite == "")
+            erreur += "- Vous devez ajouter les contacts autorisés à voir votre évènement privé<br/>";
+
+    if(cpt_passion < 1 || passion == "")
+            erreur += "- Vous devez lier 1 mot clef/passion minimum<br/>";
+
+    if(erreur != "")
+            $("div#event_organise div.fun-block-inside2 div#addThisEvent").html("<h2>Erreur</h2>"+erreur);
+    else {
+
+            var data_request = "";
+            if(typeof($('div#event_organise_photo img#photo_event')) != "undefined" && $('div#event_organise_photo img#photo_event').length != 0)
+                data_request = "id="+eventdata_idevent+"&x1="+x1_photo+"&x2="+x2_photo+"&y1="+y1_photo+"&y2="+y2_photo+"&w="+w_photo+"&h="+h_photo+"&image="+image_photo[2]+"&imagewidth="+image_width_photo+"&imageheight="+image_height_photo+"&subject="+subject+"&content_happends="+content_happends+"&pays="+pays+"&cp="+cp+"&ville="+ville+"&lieu="+lieu+"&event_confidentialite_info="+event_confidentialite_info+"&nb_participate="+nb_participate+"&membre_confidentialite="+membre_confidentialite+"&passion="+passion+"&date_debut="+date_debut.getTime()+"&date_fin="+date_fin.getTime()+"&time_option1="+time_option1+"&time_option2="+time_option2;
+            else
+                data_request = "id="+eventdata_idevent+"&subject="+subject+"&content_happends="+content_happends+"&pays="+pays+"&cp="+cp+"&ville="+ville+"&lieu="+lieu+"&event_confidentialite_info="+event_confidentialite_info+"&nb_participate="+nb_participate+"&membre_confidentialite="+membre_confidentialite+"&passion="+passion+"&date_debut="+date_debut.getTime()+"&date_fin="+date_fin.getTime()+"&time_option1="+time_option1+"&time_option2="+time_option2;
+            
+            if(isConfirmParticipant) {
+                var deleteParticipant = new Array();
+                $("input[name=deleteParticipant]").each(function() {
+                    if($(this).attr('checked') == "checked")
+                    deleteParticipant.push($(this).val());
+                });
+                data_request += "&isConfirmParticipant="+isConfirmParticipant+"&deleteParticipant="+deleteParticipant;
+            }
+            $.ajax({
+                        type: 'POST',
+                        url: '/ajax/modifyEvent',
+                        data: data_request,
+                        success:
+                                function(result) {
+
+                                        result = $.parseJSON(result);
+                                        
+                                        if($("div.popup-othermini").length > 0) $("div.popup-othermini").hide();
+                                        if($(".background-mini").length > 0) $(".background-mini").remove();
+                                        
+                                        if(result[0] == "ok") {
+                                            location.reload();
+                                        }
+                                        else if(result[0] == "error") {
+                                            isConfirmParticipant=false;
+                                            $("div#event_organise div.fun-block-inside2 div#addThisEvent").html(result[1]);
+                                        }
+                                        else if(result[0] == "error-participant") {
+                                            isConfirmParticipant=false;
+                                            for(key in result[1]) {
+                                                $("div#event_organise div.fun-block-inside2 div#addThisEvent").append(result[1][key]);
+                                            }
+                                        }
+                                        else if(result[0] == "error-confidentialite") {
+                                                isConfirmParticipant=false;
+                                                $("div#event_organise div.fun-block-inside2 div#addThisEvent").html("");
+                                                
+                                                popup_deletefriend = $("div.popup-othermini");
+                                                popup_deletefriend.html("<div class='contentdetail'><h2>Voulez-vous supprimer un membre ?</h2><span class='information'>Un ou plusieurs membres ne correspondent pas au critères de confidentialité, vous pouvez désinscrire les membres que vous souhaitez ou poursuivre (Les membres seront alors toujours inscris malgré les nouveaux paramètres de confidentialité).</span></div><div class='contentdetail'><ul id='liste_participant_error'></ul><a href='javascript:void()' id='confirmErrorParticipant'>Poursuivre</a></div>");
+                                                for(key in result[1])
+                                                    $("ul#liste_participant_error").append("<li><img src='"+result[1][key]['photo_member']+"' />"+result[1][key]['pseudo_member']+"<input type='checkbox' name='deleteParticipant' value='"+result[1][key]['id_member']+"' /></li>");
+                                                $("body").prepend("<div class='background-mini'></div>");
+                                                $('.background-mini').css({
+                                                        "opacity" : "0.6"
+                                                }).show();
+                                                centrer(popup_deletefriend);
+                                                $(popup_deletefriend).show();
+                                                
+                                                $("a#confirmErrorParticipant").live('click', function() {
+                                                    isConfirmParticipant=true;
+                                                    addEvent();
+                                                });
+                                                
+                                                $('.background-mini').live('click', function() {
+                                                        $(popup_deletefriend).hide();
+                                                        $(".background-mini").remove();
+                                                });
+
+                                                $(window).resize(function(){ 
+                                                        centrer($(popup_deletefriend));
+                                                }); 
+
+                                        }
+                                }
+                });
+    }
+}
 
 var event_organise = new Array();
 
@@ -354,7 +516,7 @@ $(document).ready(function() {
 			$("div#event_organise div.fun-block-inside2 div#event_organise_photo div").show();
                 });
 	
-                $("div#event_organise ul.fun-block-nav").html('<li><a href="javascript:void();" class="active" id="event_organise_whathappens">Qu\'est ce qu\'il ce passe ?</a></li><li><a href="javascript:void();" id="event_organise_when">Quand ?</a></li><li><a href="javascript:void();" id="event_organise_where">Ou ?</a></li><li><a href="javascript:void();" id="event_organise_whose">Confidentialite</a></li><li><a href="javascript:void();" id="event_organise_passion">Mots clefs / Passions</a></li><li><a href="javascript:void();" id="event_organise_photo">Image de couverture</a></li><li><a href="javascript:void();" id="addThisEvent">Ajouter cet evenement</a></li>');
+                $("div#event_organise ul.fun-block-nav").html('<li><a href="javascript:void();" class="active" id="event_organise_whathappens">Qu\'est ce qu\'il ce passe ?</a></li><li><a href="javascript:void();" id="event_organise_when">Quand ?</a></li><li><a href="javascript:void();" id="event_organise_where">Ou ?</a></li><li><a href="javascript:void();" id="event_organise_whose">Confidentialite</a></li><li><a href="javascript:void();" id="event_organise_passion">Mots clefs / Passions</a></li><li><a href="javascript:void();" id="event_organise_photo">Image de couverture</a></li><li><a href="javascript:void();" id="addThisEvent">Modifier cet evenement</a></li>');
                 
 		$("div#event_organise div.fun-block-inside2").append("<div class='etape_event' id='event_organise_whathappens'></div><div class='etape_event' id='event_organise_when'></div><div class='etape_event' id='event_organise_where'></div><div class='etape_event' id='event_organise_whose'></div><div class='etape_event' id='event_organise_passion'></div><div class='etape_event' id='event_organise_photo'></div><div class='etape_event' id='addThisEvent'></div>");
 		
@@ -362,7 +524,7 @@ $(document).ready(function() {
 		
 		$("div#event_organise div.fun-block-inside2 div#event_organise_where").append("<ul id='listepays'><li value='1'>France</li><li value='2'>Belgique</li></ul><input class='contentinput' type='text' name='cp' id='cp' value='Saisissez un code postal' /><div class='error-input'></div><br/><select class='hidefirst' id='ville' name='ville'></select><br id='ville'/><input class='contentinput' type='text' name='adresse' id='adresse' value='Saisissez une adresse ou un lieu' /><hr class='clear'/><div class='inside-column-sep'></div>");
 		
-		$("div#event_organise div.fun-block-inside2 div#event_organise_photo").append("<img src='/"+eventdata_image+"'/><h4>Votre image ne doit pas dépassée 5 Mo.<br/>Les images sont recadrés au format 16:9.</h4><input type='file' name='photo' id='photo' /><div class='loading'></div>");
+		$("div#event_organise div.fun-block-inside2 div#event_organise_photo").append("<img src='/"+eventdata_image+"'/><h4>Votre image ne doit pas dépassée 5 Mo.<br/>Les images sont recadrés au format 16:9.</h4><input type='file' name='photo' id='photo' /><div class='loading'></div><div class='error'></div>");
 		
 		$("div#event_organise div.fun-block-inside2 div#event_organise_passion").append("<input type='text' class='contentinput' name='passionvalue' id='passionvalue' value=\"Saisissez le nom de la passion\" /><input type='hidden' id='categorievalue' name='categorievalue' value='' /><a id='contentvalid' class='contentvalid' href='javascript:void()' onclick='lierPassion()'>Lier cette passion</a><ul id='liste_passion'></ul><hr class='clear'/><div class='inside-column-sep'></div>");
 		
@@ -375,25 +537,6 @@ $(document).ready(function() {
 		$("input#cp").attr({'value':eventdata_codepostal});
 		$("input#adresse").attr({'value':eventdata_lieu});
                 
-                /*******/
-                popup_deletefriend = $("div.popup-othermini");
-		popup_deletefriend.html("<div class='contentdetail'><h2>Ajout d'une passion</h2><span class='information'>La passion n'est pour l'instant pas présente, vous pouvez utiliser le formulaire ci-dessous pour l'ajouter.</span></div>");
-                $("body").prepend("<div class='background-mini'></div>");
-                $('.background-mini').css({
-                        "opacity" : "0.6"
-                }).show();
-                centrer(popup_deletefriend);
-                $(popup_deletefriend).show();
-
-                $('.background-mini').live('click', function() {
-                        $(popup_deletefriend).hide();
-                        $(".background-mini").remove();
-                });
-
-                $(window).resize(function(){ 
-                        centrer($(popup_deletefriend));
-                }); 
-		/****/
                 
 		for(key in eventdata_passion) {
 			$("ul#liste_passion").append("<li class='passion"+eventdata_passion[key]['id_passion']+"'>"+eventdata_passion[key]['name_category']+" : "+eventdata_passion[key]['name_passion']+"<img src='/"+eventdata_passion[key]['iconepassion']+"' alt='passion'/><a class='retirer_passion' href='javascript:void()'>Retirer</a></li>");
@@ -501,13 +644,25 @@ $(document).ready(function() {
 		
 		
 		if(eventdata_confidentialite == 1) {
+                        event_confidentialite_info=1;
 			$("input#whose_public1").attr({'checked':'checked'});
+                        $("div#event_organise div.fun-block-inside2 div#event_organise_whose div#info_whose").html("L'évènement est ouvert et visible pour n'importe qui.");
 		}
 		else if(eventdata_confidentialite == 0) {
+                        event_confidentialite_info=0;
 			$("input#whose_public2").attr({'checked':'checked'});
+                        $("div#event_organise div.fun-block-inside2 div#event_organise_whose div#info_whose").html("L'évènement est ouvert et visible pour vos amis.");
 		}
 		else if(eventdata_confidentialite == 2) {
+                        event_confidentialite_info=2;
 			$("input#whose_public3").attr({'checked':'checked'});
+                        $("div#event_organise div.fun-block-inside2 div#event_organise_whose div#info_whose").html("L'évènement est fermée et seulement visible par des contacts précis.<br/><input type='text' class='contentinput' name='contactvalue' id='contactvalue' value=\"Saisissez le nom du contact\" /><a id='contentvalid' class='contentvalid' href='javascript:void()' onclick='addPrivate()'>Ajouter un contact</a><div class='error_privee'></div><ul id='private_contacts'></ul>");
+                        for(key in eventdata_participant)
+                            $("ul#private_contacts").append("<li id='"+eventdata_participant[key]['id_member']+"'>"+eventdata_participant[key]['pseudo_member']+" - <a href='javascript:void()'>Retirer</a></li>");
+                        
+                        $("div#event_organise div.fun-block-inside2 div#event_organise_whose div#info_whose ul#private_contacts li a").live('click', function() {
+                                $(this).parent().remove();
+                        });
 		}
 		
 		$("div#event_organise div.fun-block-inside2 div#event_organise_whose input[name=whose_public]").live('change', function() {
@@ -522,6 +677,12 @@ $(document).ready(function() {
 			else if($(this).val() == 'privee') {
 				event_confidentialite_info = 2;
 				$("div#event_organise div.fun-block-inside2 div#event_organise_whose div#info_whose").html("L'évènement est fermée et seulement visible par des contacts précis.<br/><input type='text' class='contentinput' name='contactvalue' id='contactvalue' value=\"Saisissez le nom du contact\" /><a id='contentvalid' class='contentvalid' href='javascript:void()' onclick='addPrivate()'>Ajouter un contact</a><div class='error_privee'></div><ul id='private_contacts'></ul>");
+                                 for(key in eventdata_participant)
+                                $("ul#private_contacts").append("<li id='"+eventdata_participant[key]['id_member']+"'>"+eventdata_participant[key]['pseudo_member']+" - <a href='javascript:void()'>Retirer</a></li>");
+
+                                $("div#event_organise div.fun-block-inside2 div#event_organise_whose div#info_whose ul#private_contacts li a").live('click', function() {
+                                        $(this).parent().remove();
+                                });
 			}
 		});
 		
@@ -743,8 +904,8 @@ $(document).ready(function() {
 				resizeimg_photo.cancelSelection();
 			
 			$("div#event_organise div.fun-block-inside2  div#event_organise_photo div.loading").show();			
-			$("div#event_organise div.fun-block-inside2  div.loading").html("<img src='css/images/loader-autocomplete.gif'/>");
-			$(this).upload('js/Ajax-PHP/evenement/enregistrericoneevent.php', function(res) {
+			$("div#event_organise div.fun-block-inside2  div.loading").html("<img src='/css/images/loader-autocomplete.gif'/>");
+			$(this).upload('/ajax/registerImageEvent', function(res) {
 				if(res.substring(0,2) == "1;")
 				{
 					image_photo = res.split(";");
@@ -784,7 +945,7 @@ $(document).ready(function() {
 				else
 				{
 					$("div#event_organise div.fun-block-inside2  div#event_organise_photo div.error").fadeIn().html(res);
-					$("div#event_organise div.fun-block-inside2  div#event_organise_photo div.loading_loading").empty();
+					$("div#event_organise div.fun-block-inside2  div#event_organise_photo div.loading").empty();
 				}
 			}, 'php');
 		});
@@ -810,114 +971,7 @@ $(document).ready(function() {
 		
 		$("div#event_organise a#addThisEvent").live('click', function(){
 			
-			$("div#event_organise div.fun-block-inside2 div#addThisEvent").html("Chargement...");
-			
-			membre_confidentialite="";
-			if(event_confidentialite_info == 2) {
-				$("div#event_organise div.fun-block-inside2 div#event_organise_whose div#info_whose ul#private_contacts li").each(function() {
-					membre_confidentialite += $(this).attr('id')+";";
-				});
-			}
-			
-			nb_participate=0;
-			
-			passion="";
-			cpt_passion=0;
-			$("div#event_organise div.fun-block-inside2 div#event_organise_passion ul#liste_passion li").each(function() {
-				passion += new String($(this).attr('class')).replace("passion","")+";";
-				cpt_passion++;
-			});
-			
-			ajout_date_calendrier1 = new String($('div#event_organise table#calendrier2 tbody tr th.dateaujourdhui').attr('class')).replace("dateaujourdhui date","");
-			heure_calendrier1 = $('div#event_organise table#calendrier2 tfoot td select:first').val();
-			minute_calendrier1 = $('div#event_organise table#calendrier2 tfoot td select:last').val();
-			time_option1 = $("div#event_organise table#calendrier2 tfoot input#time_optioncalendrier2").attr('checked');
-			if(time_option1 != 'checked') {
-				heure_calendrier1 = 0;
-				minute_calendrier1 = 0;
-			}
-			
-			ajout_date_calendrier2 = new String($('div#event_organise table#calendrier3 tbody tr th.dateaujourdhui').attr('class')).replace("dateaujourdhui date","");
-			heure_calendrier2 = $('div#event_organise table#calendrier3 tfoot td select:first').val();
-			minute_calendrier2 = $('div#event_organise table#calendrier3 tfoot td select:last').val();
-			time_option2 = $("div#event_organise table#calendrier3 tfoot input#time_optioncalendrier3").attr('checked');
-			if(time_option2 != 'checked') {
-				heure_calendrier2 = 0;
-				minute_calendrier2 = 0;
-			}
-			
-			pays = $('div#event_organise div#listepays').val();
-			cp = $('div#event_organise input#cp').val();
-			ville = $('div#event_organise select#ville').val();
-			lieu = $('div#event_organise input#adresse').val();
-			
-			subject = $('div#event_organise input#subject').val();
-			content_happends = $('div#event_organise textarea#content_happends').val();
-			
-			
-			var erreur="";
-			if(subject == "" || subject == "Saisissez le nom de l'évènement")
-				erreur += "- Veuillez saisir le nom de l'évènement<br/>";
-			
-			if(content_happends == "" || content_happends == "Description...")
-				erreur += "- Veuillez saisir une description<br/>";
-			
-			ajout_date_calendrier1 = ajout_date_calendrier1.split("-");
-			ajout_date_calendrier2 = ajout_date_calendrier2.split("-");
-			
-			var date_debut = new Date(ajout_date_calendrier2[2]+","+(parseInt(ajout_date_calendrier2[1])+parseInt(1))+","+ajout_date_calendrier2[0]);
-			date_debut.setHours(heure_calendrier2);
-			date_debut.setMinutes(minute_calendrier2);
-			var date_fin = new Date(ajout_date_calendrier1[2]+","+(parseInt(ajout_date_calendrier1[1])+parseInt(1))+","+ajout_date_calendrier1[0]);
-			date_fin.setHours(heure_calendrier1);
-			date_fin.setMinutes(minute_calendrier1);
-			
-			if(date_fin - date_debut < 0)
-				erreur += "- Veuillez saisir une date de début antérieure à le date de fin";
-			
-                        if(typeof($('div#event_organise_photo img#photo_event')) != "undefined" && $('div#event_organise_photo img#photo_event').length != 0) {
-                            if(!(typeof(x1_photo) != "undefined" && typeof(y1_photo) != "undefined" && typeof(x2_photo) != "undefined" && typeof(y2_photo) != "undefined" && typeof(w_photo) != "undefined" && typeof(h_photo) != "undefined" && parseInt(x1_photo) == x1_photo && parseInt(x2_photo) == x2_photo && parseInt(y1_photo) == y1_photo && parseInt(y2_photo) == y2_photo && parseInt(w_photo) == w_photo && parseInt(h_photo) == h_photo && parseInt($('div#event_organise_photo img#photo_event').height()) == $('div#event_organise_photo img#photo_event').height() && parseInt($('div#event_organise_photo img#photo_event').width()) == $('div#event_organise_photo img#photo_event').width()))
-                                    erreur += "- Veuillez choisir une image de couverture et la redimensionner<br/>";
-                        }
-
-			if(pays == "")
-				erreur += "- Veuillez sélectionner un pays<br/>";
-			
-			if(cp == "" || ville == "" || cp == "Saisissez un code postal")
-				erreur += "- Veuillez saisir un code postal<br/>";
-			
-			if(lieu == "" || lieu == "Saisissez une adresse ou un lieu")
-				erreur += "- Veuillez saisir un lieu<br/>";
-			
-			if(event_confidentialite_info == 2 && membre_confidentialite == "")
-				erreur += "- Vous devez ajouter les contacts autorisés à voir votre évènement privé<br/>";
-			
-			if(cpt_passion < 1 || passion == "")
-				erreur += "- Vous devez lier 1 mot clef/passion minimum<br/>";
-
-			if(erreur != "")
-				$("div#event_organise div.fun-block-inside2 div#addThisEvent").html("<h2>Erreur</h2>"+erreur);
-			else {
-                                var data_request = "";
-                                if(typeof($('div#event_organise_photo img#photo_event')) != "undefined" && $('div#event_organise_photo img#photo_event').length != 0)
-                                    data_request = "id="+eventdata_idevent+"&x1="+x1_photo+"&x2="+x2_photo+"&y1="+y1_photo+"&y2="+y2_photo+"&w="+w_photo+"&h="+h_photo+"&image="+image_photo[2]+"&imagewidth="+image_width_photo+"&imageheight="+image_height_photo+"&subject="+subject+"&content_happends="+content_happends+"&pays="+pays+"&cp="+cp+"&ville="+ville+"&lieu="+lieu+"&event_confidentialite_info="+event_confidentialite_info+"&nb_participate="+nb_participate+"&membre_confidentialite="+membre_confidentialite+"&passion="+passion+"&date_debut="+date_debut.getTime()+"&date_fin="+date_fin.getTime()+"&time_option1="+time_option1+"&time_option2="+time_option2;
-				else
-                                    data_request = "id="+eventdata_idevent+"&subject="+subject+"&content_happends="+content_happends+"&pays="+pays+"&cp="+cp+"&ville="+ville+"&lieu="+lieu+"&event_confidentialite_info="+event_confidentialite_info+"&nb_participate="+nb_participate+"&membre_confidentialite="+membre_confidentialite+"&passion="+passion+"&date_debut="+date_debut.getTime()+"&date_fin="+date_fin.getTime()+"&time_option1="+time_option1+"&time_option2="+time_option2;
-                                $.ajax({
-                                            type: 'POST',
-                                            url: '/ajax/modifyEvent',
-                                            data: data_request,
-                                            success:
-                                                    function(result) {
-                                                            if(result == "3") {
-
-                                                            }
-                                                            else {
-                                                                    $("div#event_organise div.fun-block-inside2 div#addThisEvent").html(result);
-                                                            }
-                                                    }
-                                    });
-			}
+			addEvent();
 		});
 		
 });
