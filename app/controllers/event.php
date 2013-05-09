@@ -64,14 +64,17 @@ class controllers_event extends Controller {
 
     function indexAction() {
 
-//        $model = $this->loadModel("event");
-//        $allEvents =  $model->allUserEvents();
-//        
-//        foreach ($allEvents as $idEvent) {
-//            $events[$idEvent] = $model ->displayModel($idEvent);
-//             
-//        }
-//         $this->loadView("displayevent", $events); 
+        if($this->user->loggedin()) {
+
+            $indexM = $this->loadModel("event");
+            $index = $indexM->searchModel();
+
+            $this->loadView("header_co", "");
+            $this->loadView("searchevent", $index);
+            $this->loadView("footer", "");
+        }
+        else 
+              $this->redirect ("index")->indexAction();
     }
 
 }
