@@ -2,7 +2,6 @@
 
 <div class="popup-other popup-othermini" style="display: none; "></div>
 
-
 <div id="inside-main" class="cfix">
     <div id="sidebar-left">
         <div id="sidebar-left-in">
@@ -14,17 +13,16 @@
             //include 'Modules/tchat/tchat-left.php';
             /*             * ************************************************* FINTCHAT *************************************** */
             ?>
+
             <?php if (isset($contr)) $contr->loadvWidget("statistics"); ?>
         </div> <!-- #sidebar-left-in -->
     </div> <!-- #sidebar-left -->
 
     <div id="sidebar-right">
         <div id="sidebar-right-in">
-        <div id="sidebar-right-in">
             <?php if (isset($contr)) $contr->loadvWidget("events_my"); ?>
             <?php if (isset($contr)) $contr->loadvWidget("events_sugest"); ?>
             <?php if (isset($contr)) $contr->loadvWidget("sponsoring"); ?>
-        </div> <!-- #sidebar-right-in -->
         </div> <!-- #sidebar-right-in -->
     </div> <!-- #sidebar-right -->
 
@@ -40,14 +38,14 @@
                 <div class="conversation-main">
                     <div class="conversation-main-inside cfix">
                         <div class="ld user-titlro">
-                            <strong><em><?php echo ucfirst($data->profile_pseudo); ?></em></strong>
+                            <strong><em><?php echo ucfirst($data->profil_pseudo); ?></em></strong>
                             <br /><br />
-                            <strong><em><a href="#" class="rev blue">Resume</a></em></strong>
+                            <strong><em><a href="#" class="rev blue">Profil</a></em></strong>
                         </div> <!-- .user-titlro -->
                         <ul class="user-iconies cfix">
                             <li><a href="#">
                                     <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-resume.png" alt="" /></span>
-                                    <span class="user-iconies-2">Resume</span>
+                                    <span class="user-iconies-2">Profil</span>
                                 </a></li>
                             <li><a href="#">
                                     <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-photos.png" alt="" /></span>
@@ -59,66 +57,64 @@
                                 </a></li>
                             <li><a href="#">
                                     <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-contact.png" alt="" /></span>
-                                    <span class="user-iconies-2">Contact</span>
+                                    <span class="user-iconies-2">Contacts</span>
                                 </a></li>
                             <li><a href="#">
                                     <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-parameter.png" alt="" /></span>
-                                    <span class="user-iconies-2">Parametres</span>
+                                    <span class="user-iconies-2">Paramètres</span>
                                 </a></li>
                         </ul> <!-- .user-iconies -->
                     </div> <!-- .conversation-main-inside -->
                 </div>
                 <div class="conversation-left">
-                    <a href="#" class="user-avatar bgr-blue"><img src="/<?php echo $data->profile_maphoto; ?>" alt="" width="42" /></a>
+                    <a href="#" class="user-avatar bgr-blue"><img src="/<?php echo $data->profil_photo; ?>" alt="" width="42" /></a>
                     <a href="javascript:void()" id="modifAvatar">Modifier ma photo</a>
                 </div> <!-- .conversation-left -->
             </div> <!-- .cfix -->
         </div>
         <div class="inside-column-sep"></div>
         <div class="inside-column-inside">
-            <div id="contentprofil">
-                <?php
-                if (empty($data->error['profil'])) {
-                    ?>
-
-                    <h2 class="title_underline">Ajouter des Passions</h2>
-                    <input class="contentinput ac_input" type="text" name="passionvalue" id="passionvalue" value="Saisissez le nom d&#39;une de vos passions" autocomplete="off">
-                    <input type="hidden" name="categorievalue" id="categorievalue" value="">
-                    <a href="javascript:void();" id="contentvalid" class="contentvalid">Ajouter à mes passions</a><br /><br />
-                    <hr class="clear"/>
-                    <h2 class="title_underline">Passions</h2>
-
-                    <?php
-                    if (count($data->profile_passion) == 0)
-                        echo "<div id='content_passion'>Aucune passion liée pour le moment</div>";
-                    else {
-                        echo "<div id='content_passion'>";
-                        foreach ($data->profile_passion as $key => $t_categorie_passion) {
-                            echo "<h3 class='title_underline'>" . ucfirst($data->profile_passioncat[$key]) . "</h3><ul class='listepassions cat" . $key . "'>";
-                            foreach ($t_categorie_passion as $t_passion) {
-                                echo "<li id='passion" . $t_passion['id_passion'] . "'><img src='/" . ($t_passion['icone'] != "" ? $t_passion['icone'] : $t_passion['icone_cat']) . "' alt='" . $t_passion['name_passion'] . "' />" . ucfirst($t_passion['name_passion']) . "<br/><a href='javascript:void()' onclick='delete_passion(" . $t_passion['id_passion'] . ")'>Supprimer</a></li>";
-                            }
-                            echo "</ul>";
-                        }
-                        echo "</div>";
-                    }
-                    ?>
-                </div>
-
-                <?php
-            } else {
-                echo $data->error['profil'];
-            }
-            ?>
+            <div class="big-main">
+                <strong><em>Informations generales</em></strong>
+                <br /><br />
+                <p>Pseudo : <?php echo $data->profil_pseudo ?></p>
+                Age : 
+                <br />
+                Date d'anniversaire :
+                <br />
+                Sexe :
+                <br /><br />
+                <strong><em>Details</em></strong>
+                <br /><br />
+                Prenom : 
+                <br />
+                Ville : 
+                <br />
+                Pays : 
+                <br />
+                Situation : 
+                <br />
+                Interesse par :
+                <br />
+                Etudes :
+                <br /><br />
+                <strong><em>A propos de vous</em></strong>
+                <br /><br />
+                <strong><em>Informations supplementaries</em></strong>
+                <br /><br />
+                Adresse msn :
+                <br />
+                Pseudo skype :
+                <br />
+                Lien facebook :
+            </div> <!-- .big-main -->
         </div>
     </div>
-
-
 </div> <!-- #inside-column -->
 <div id="main-footer">
     <div class="connexion-shadow-2 nom"></div>
     <?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
 </div> <!-- #main-footer -->
 </div> <!-- .cfix -->
-
 <?php if (isset($contr)) $contr->loadvWidget("footer_quotation"); ?>
+<div style="display:none;"></div>
