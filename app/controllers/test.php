@@ -9,7 +9,7 @@ class controllers_test extends Controller {
     function indexAction() {
 
       
-        $memcache = new Memcache();
+        $memcache = new Memcached();
         $memcache->connect('localhost', 11211) or die("Could not connect");
 
         $version = $memcache->getVersion();
