@@ -15,6 +15,21 @@ class controllers_profil extends Controller {
         $this->seeProfilAction();
     }
 
+     function idAction(){
+        
+        global $_URL;
+        $pseudo = array_keys($_URL);
+
+        $indexM = $this->loadModel("profil");
+
+        
+        $return = $indexM->seeProfilID($pseudo[0]);
+       
+
+        $this->loadView("header_co", "");
+        $this->loadView("profil", $return);
+        $this->loadView("footer", "");
+    }
 
 // Fonction to see profile of member or of another member
     function seeProfilAction() {

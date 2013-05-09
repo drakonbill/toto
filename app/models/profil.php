@@ -29,6 +29,18 @@ class models_profil extends Model {
         
         return $pseudoData;
     }
+     function seeProfilID($id) {
+
+        if ($id == "") {
+            $pseudoData = $this->reg->user;
+        } else {
+            
+           $pseudoData = new libs_user($id);
+            if(!$pseudoData->id_member) $pseudoData->error = "Ce contact n'existe pas." ;
+        }
+        
+        return $pseudoData;
+    }
 
     private function ageDatenaissance($age_datenaissance) {
         $age_datenaissance = explode('-', $age_datenaissance);
