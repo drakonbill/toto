@@ -141,37 +141,45 @@ class libs_user {
         $message .= "Content-Transfer-Encoding: quoted-printable\n\n";
         $message .= str_replace("=", "=3D", $messhtml);
         $message .= "\n\n";
-        debug($destinataire. $sujet. $message. $entete);
+        debug($destinataire . $sujet . $message . $entete);
         return mail($destinataire, $sujet, $message, $entete);
     }
 
-    function sendValidationMail($email){
-        
-        
+    function sendValidationMail($email) {
+
+
         // Email sending
-                        $c = rand(10000000, 99999999);
-                        $code = md5($c);
-                        $l = "meetoparty/account/confirmationregistration/code/$code/pseudo/$pseudo";
-                        $lien = "<a href='$l'>Validation de votre inscription</a>";
-                        mysql_query("UPDATE member SET code_member = '$code' WHERE email_member = '$email'") or die(mysql_error());
+        $c = rand(10000000, 99999999);
+        $code = md5($c);
+        $l = "meetoparty/account/confirmationregistration/code/$code/pseudo/$pseudo";
+        $lien = "<a href='$l'>Validation de votre inscription</a>";
+        mysql_query("UPDATE member SET code_member = '$code' WHERE email_member = '$email'") or die(mysql_error());
 
-                        // To, from et reply en array
-                        $to = array('', $email);
-                        $sujet = "Inscription sur Meetoparty";
-                        $messtxt = "<p>Bonjour, <br> Vous êtes actuellement en train de vous inscrire sur Meetoparty. <br> Nous vous remercions des intérêts que vous portez à nos services.<br> Afin que votre inscription soit complète, merci de cliquer sur le lien ci-dessous pour la valider : <br></p>";
-                        $messtxt .= "$lien<br><br>";
-                        $messtxt .= "Merci,<br> A bientôt sur notre site <br> L'équipe de Meetoparty";
-                        $messhtml = '<p>' . $messtxt . '</p>';
-                        $from = array('Meetoparty', "no-reply@meetoparty.fr");
+        // To, from et reply en array
+        $to = array('', $email);
+        $sujet = "Inscription sur Meetoparty";
+        $messtxt = "<p>Bonjour, <br> Vous êtes actuellement en train de vous inscrire sur Meetoparty. <br> Nous vous remercions des intérêts que vous portez à nos services.<br> Afin que votre inscription soit complète, merci de cliquer sur le lien ci-dessous pour la valider : <br></p>";
+        $messtxt .= "$lien<br><br>";
+        $messtxt .= "Merci,<br> A bientôt sur notre site <br> L'équipe de Meetoparty";
+        $messhtml = '<p>' . $messtxt . '</p>';
+        $from = array('Meetoparty', "no-reply@meetoparty.fr");
 
-                        $this->postMail($messtxt, $messhtml, $sujet, $to, $from, $reply = "");
-        
+        $this->postMail($messtxt, $messhtml, $sujet, $to, $from, $reply = "");
     }
-    
-    
+
     //Function to get the IP of the member
     function get_ip() {
         return (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
+    }
+
+    public static function getID($pseudo) {
+        $requete = mysql_query("SELECT * FROM member WHERE pseudo_member='$pseudo'");
+        if (mysql_num_rows($requete) == 1) {
+            $id = mysql_fetch_array($requete);
+            return $id['id_member'];
+        }
+        else
+            return false;
     }
 
 }

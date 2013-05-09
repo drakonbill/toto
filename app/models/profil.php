@@ -19,36 +19,15 @@ class models_profil extends Model {
 
     function seeProfil($pseudo) {
 
-        $pseudo_session = $this->reg->user->pseudo_member;
-
-        if ($pseudo != $pseudo_session) {
-            $requete = mysql_query("SELECT * FROM member natural join member_details WHERE pseudo_member='$pseudo'");
-            
-            while ($row = mysql_fetch_assoc($requete)) {
-                foreach ($row as $key => $value) {
-                    $data[$key] = $value;
-                }
-            }
-        }
-
-        if ($pseudo != $pseudo_session) {
-            if (!empty($data['id_member'])) {
-
-                $this->profil_id = $data['id_member'];
-                $this->profil_pseudo = $data['pseudo_member'];
-                $this->profil_city = $data['city_member'];
-                $this->profil_photo = $ata['photo_member'];
-            } else {
-                $this->error['profil'] = "Ce contact n'existe pas.";
-            }
+        if ($pseudo == "") {
+            $pseudoData = $this->reg->user;
         } else {
-            $this->profil_id = $this->reg->user->id_member;
-            $this->profil_pseudo = $this->reg->user->pseudo_member;
-            $this->profil_city = $this->reg->user->city_member;
-            $this->profil_photo = $this->reg->user->photo_member;
+            $id = libs_user::getID($pseudo);
+            if($id) $pseudoData = new libs_user($id);
+            else $pseudoData->error = "Ce contact n'existe pas." ;
         }
-
-        return $this;
+        
+        return $pseudoData;
     }
 
     private function ageDatenaissance($age_datenaissance) {
