@@ -57,6 +57,13 @@ class controllers_ajax extends Controller {
 
         $this->loadView("ajax", $return);
     }
+    
+    function addContactProfilAction() {
+        $indexM = $this->loadModel("ajax_member");
+        $return = $indexM->addContact();
+
+        $this->loadView("ajax", $return);
+    }
 
     /* *******************************************************************
      *  Passion

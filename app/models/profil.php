@@ -38,6 +38,8 @@ class models_profil extends Model {
            $pseudoData = new libs_user($id);
             if(!$pseudoData->id_member) $pseudoData->error = "Ce contact n'existe pas." ;
         }
+
+        $pseudoData->addcontact = $this->ajouterContact($pseudoData->id_member);
         
         return $pseudoData;
     }
@@ -63,20 +65,23 @@ class models_profil extends Model {
             $requete = mysql_query("SELECT * FROM member_contacts WHERE id_member=" . $_SESSION['id_member'] . " AND id_contact=" . $id . " OR id_member=" . $id . " AND id_contact=" . $_SESSION['id_member'] . "");
 
             $etat = array();
+            $msg='';
             while ($data = mysql_fetch_array($requete)) {
-                $etat[$data['id_member']] = $data['etat'];
+                $etat[$data['id_member']] = $data['condition_contact'];
             }
 
             if (empty($etat)) {
-                $this->msg['ajoutercontact'] = "<a href='#ajouterContact' id='ajouterContact'>Ajouter ce contact</a>";
+                $msg = "<a href='javascript:void()' id='ajouterContact'>Ajouter ce contact</a>";
             } else {
                 if ($etat[$_SESSION['id_member']] == 0 && $etat[$id] == 1)
-                    $this->msg['ajoutercontact'] = "<a href='#ajouterContact' id='ajouterContact'>Accepter ce contact</a> | <a href='#refuserContact' id='refuserContact'>Ne pas accepter</a>";
+                    $msg = "<a href='javascript:void()' id='ajouterContact'>Accepter ce contact</a> | <a href='#refuserContact' id='refuserContact'>Ne pas accepter</a>";
                 else if ($etat[$_SESSION['id_member']] == 1 && $etat[$id] == 0)
-                    $this->msg['ajoutercontact'] = "En attente de confirmation";
+                    $msg = "En attente de confirmation - <a href='javascript:void()' id='cancelContact'>Annuler ma demande</a>";
                 else if ($etat[$_SESSION['id_member']] == 1 && $etat[$id] == 1)
-                    $this->msg['ajoutercontact'] = "<a href='#ajouterContact' id='retirerContact'>Retirer de mes contacts</a>";
+                    $msg = "<a href='javascript:void()' id='retirerContact'>Retirer de mes contacts</a>";
             }
+            
+            return $msg;
         }
     }
 

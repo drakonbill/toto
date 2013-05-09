@@ -284,6 +284,96 @@ class models_ajax_member extends Model {
 
         }
     }
+    
+    function addContact() {
+        $iddumembre = $_POST['iddumembre'];
+        $idmoi = $_SESSION['id_member'];
+        $action = $_POST['action'];
+
+        if(!empty($iddumembre) && !empty($idmoi) && is_numeric($iddumembre) && is_numeric($idmoi))
+        {
+
+                        $resultat = mysql_query("SELECT * FROM member_contacts WHERE id_contact=".$iddumembre." AND id_member=".$idmoi." OR id_contact=".$idmoi." AND id_member=".$iddumembre."");
+
+                        while($data = mysql_fetch_assoc($resultat))
+                        {
+                                $etat[$data['id_member']] = $data['condition_contact'];
+                        }
+
+                        if(empty($etat) && $action == 1)
+                        {
+                                mysql_query("INSERT INTO member_contacts VALUES (".$iddumembre.",".$idmoi.",default,default)") or die(mysql_error());
+                                mysql_query("INSERT INTO member_contacts VALUES (".$idmoi.",".$iddumembre.",default,1)") or die(mysql_error());
+                                return "1";
+                        }
+                        else if($etat[$idmoi] == 0 && $etat[$iddumembre] == 1 && $action == 1)
+                        {
+                                /*try {
+                                        $con = new Mongo();
+                                        $db = $con->bdd;
+
+                                        $Collection_friends = $db->friends;
+
+                                        $new_friend = array(	'pseudo'=>$etat[$iddumembre]['pseudo'],
+                                                                                        'avatar'=>$etat[$iddumembre]['avatar'],
+                                                                                        'date'=>(int)time(),
+                                                                                        'idmembre'=>$_SESSION['iddumembre'],
+                                                                                        'idfriend'=>$iddumembre,
+                                                                                        'autre'=>false,
+                                                                                        'status'=>1
+                                                                                );
+
+                                        $new_friend2 = array(	'pseudo'=>$etat[$iddumembre]['pseudo'],
+                                                                                        'avatar'=>$etat[$iddumembre]['avatar'],
+                                                                                        'date'=>(int)time(),
+                                                                                        'idmembre'=>$iddumembre,
+                                                                                        'idfriend'=>$_SESSION['iddumembre'],
+                                                                                        'autre'=>false,
+                                                                                        'status'=>1
+                                                                                );
+
+                                        $Collection_friends->insert($new_friend, array('fsync' => true));
+                                        $Collection_friends->insert($new_friend2, array('fsync' => true));
+                                }
+                                catch(Exception $e) {
+                                        $error_mongodb = "Erreur de chargement";
+                                }*/
+
+                                mysql_query("UPDATE member_contacts SET condition_contact=1 WHERE id_contact=".$iddumembre." AND id_member=".$idmoi."");
+                                return "2";
+                        }
+                        else if($etat[$idmoi] == 1 && $etat[$iddumembre] == 1 && $action == 2)
+                        {
+                                /*try {
+                                        $con = new Mongo();
+                                        $db = $con->bdd;
+
+                                        $Collection_friends = $db->friends;
+
+                                        $friends = $Collection_friends->find(array('$or'=>array(0=>array('idmembre'=>$idmoi,'idfriend'=>$iddumembre),1=>array('idmembre'=>$iddumembre,'idfriend'=>$idmoi))));
+
+                                        if($friends->count() == 2)
+                                                $Collection_friends->remove(array('$or'=>array(0=>array('idmembre'=>$idmoi,'idfriend'=>$iddumembre),1=>array('idmembre'=>$iddumembre,'idfriend'=>$idmoi))));
+                                }
+                                catch(Exception $e) {
+                                        $error_mongodb = "Erreur de chargement";
+                                }*/
+
+                                mysql_query("DELETE FROM member_contacts WHERE id_contact=".$iddumembre." AND id_member=".$idmoi." OR id_contact=".$idmoi." AND id_member=".$iddumembre."");
+                                return "2";
+                        }
+                        else if($etat[$idmoi] == 1 && $etat[$iddumembre] == 0 && $action == 3)
+                        {
+                                mysql_query("DELETE FROM member_contacts WHERE id_contact=".$iddumembre." AND id_member=".$idmoi." OR id_contact=".$idmoi." AND id_member=".$iddumembre."");
+                                return "3";
+                        }
+                        else if($etat[$idmoi] == 0 && $etat[$iddumembre] == 1 && $action == 4)
+                        {
+                                mysql_query("DELETE FROM member_contacts WHERE id_contact=".$iddumembre." AND id_member=".$idmoi." OR id_contact=".$idmoi." AND id_member=".$iddumembre."");
+                                return "4";
+                        }
+        }
+    }
      
      
 }
