@@ -8,7 +8,8 @@ class controllers_test extends Controller {
 
     function indexAction() {
 
-        $memcache = new Memcache;
+      
+        $memcache = new Memcache();
         $memcache->connect('localhost', 11211) or die("Could not connect");
 
         $version = $memcache->getVersion();
@@ -27,7 +28,10 @@ class controllers_test extends Controller {
         echo "Data from the cache:<br/>\n";
 
         var_dump($get_result);
+        
     }
+    
+    function phpinfoAction(){phpinfo();}
 
 }
 
