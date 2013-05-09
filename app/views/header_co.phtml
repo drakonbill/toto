@@ -56,8 +56,8 @@ echo $data ? " - $data" : "";
                                         <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-users.png" alt="" /></span>
                                         <span class="menu-text">Contact</span>
                                     </a></li>
-                                <?php $pseudo_member = $this->reg->user->pseudo_member; ?>
-                                <li><a href="/profil/seeProfil/pseudo/<?php echo $pseudo_member; ?>">
+                                <?php $id_member = $this->reg->user->id_member; ?>
+                                <li><a href="/profil/id/<?php echo $id_member; ?>">
                                         <span class="menu-icon"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-user.png" alt="" /></span>
                                         <span class="menu-text">Profil</span>
                                     </a></li>
