@@ -249,7 +249,7 @@ class models_account extends Model {
 
                     if ($age < 16)
                         $data["error"]['age'] = "<p>Il faut être majeur pour accéder au site.</p><br>";
-                    
+
                     // SEX : 1 = Men, 2 = Women
                     if (!empty($homme))
                         $sexe = 1;
