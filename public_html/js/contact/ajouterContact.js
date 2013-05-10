@@ -8,9 +8,9 @@ $(function(){
         success:
         function(result) {
             if(result=="1")
-                 $("#addcontact").html("<a href='javascript:void()' id='cancelContact'>Annuler ma demande</a>");
+                 $("#addcontact").html("<a href='javascript:void()' id='cancelContact' class='details-btn'>Annuler ma demande</a>");
             else if(result=="2")
-                 $("#addcontact").html("<a href='javascript:void()' id='retirerContact'>Retirer de mes contacts</a>");
+                 $("#addcontact").html("<a href='javascript:void()' id='retirerContact' class='details-btn'>Retirer de mes contacts</a>");
         }
     });
     });
@@ -23,7 +23,7 @@ $(function(){
         success:
         function(result) {
 			if(result=="2")
-			 $("#addcontact").html("<a href='javascript:void()' id='ajouterContact'>Ajouter ce contact</a>");
+			 $("#addcontact").html("<a href='javascript:void()' id='ajouterContact' class='details-btn'>Ajouter comme ami</a>");
 
         }
     });
@@ -37,7 +37,7 @@ $(function(){
         success:
         function(result) {
 			if(result=="3")
-			 $("#addcontact").html("<a href='javascript:void()' id='ajouterContact'>Ajouter ce contact</a>");
+			 $("#addcontact").html("<a href='javascript:void()' id='ajouterContact' class='details-btn'>Ajouter comme ami</a>");
 
         }
     });
@@ -51,7 +51,7 @@ $(function(){
         success:
         function(result) {
             if(result=="4")
-			 $("#addcontact").html("<a href='javascript:void()' id='ajouterContact'>Ajouter ce contact</a>");
+			 $("#addcontact").html("<a href='javascript:void()' id='ajouterContact' class='details-btn'>Ajouter comme ami</a>");
         }
     });
     });

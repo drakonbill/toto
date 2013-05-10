@@ -1967,7 +1967,7 @@ ul#details-menu {
 .jspCap {
     display: block;
     background-color: #f0f0f0;
-    height: 30px;
+    height: 21px;
 }
 
 .jspHorizontalBar .jspCap
@@ -1980,7 +1980,7 @@ ul#details-menu {
     background-repeat: no-repeat;
     background-color: #f0f0f0;
     background-position: 50%;
-    background-size: 80% 100%;
+   
     position: relative;
 }
 
@@ -1991,7 +1991,7 @@ ul#details-menu {
     position: relative;
     top: 0;
     left: 0;
-    background-size: 94%;
+    
     cursor: pointer;
 }
 
@@ -2044,6 +2044,20 @@ ul#details-menu {
 * html .jspCorner
 {
     margin: 0 -3px 0 0;
+}
+
+.scroll-content-all {
+    position: relative;
+    background: #f8f8f8;
+    margin-left: 5px;
+}
+
+.scroll-content-all .connexion-shadow-1 {
+    position: absolute; top: -20px; z-index: 5; left: 50%; margin-left: -290px;
+}
+
+.scroll-content-all .connexion-shadow-2 {
+    position: absolute; bottom: -20px; z-index: 5; left: 50%; margin-left: -290px;
 }
 
 .scroll-pane {

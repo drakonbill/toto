@@ -71,7 +71,7 @@ class models_profil extends Model {
             }
 
             if (empty($etat)) {
-                $msg = "<a href='javascript:void()' id='ajouterContact' class='details-btn'>Ajouter ce contact</a>";
+                $msg = "<a href='javascript:void()' id='ajouterContact' class='details-btn'>Ajouter comme ami</a>";
             } else {
                 if ($etat[$_SESSION['id_member']] == 0 && $etat[$id] == 1)
                     $msg = "<a href='javascript:void()' id='ajouterContact' class='details-btn'>Accepter ce contact</a> | <a class='details-btn' href='#refuserContact' id='refuserContact'>Ne pas accepter</a>";
