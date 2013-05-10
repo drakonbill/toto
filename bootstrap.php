@@ -5,7 +5,7 @@ session_start();
 
 // debuging disable when not needed
 $debug = FALSE;
-$debug = TRUE;
+//$debug = TRUE;
 
 
 if ($debug) {
