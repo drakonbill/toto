@@ -71,14 +71,14 @@ class models_profil extends Model {
             }
 
             if (empty($etat)) {
-                $msg = "<a href='javascript:void()' id='ajouterContact'>Ajouter ce contact</a>";
+                $msg = "<a href='javascript:void()' id='ajouterContact' class='details-btn'>Ajouter ce contact</a>";
             } else {
                 if ($etat[$_SESSION['id_member']] == 0 && $etat[$id] == 1)
-                    $msg = "<a href='javascript:void()' id='ajouterContact'>Accepter ce contact</a> | <a href='#refuserContact' id='refuserContact'>Ne pas accepter</a>";
+                    $msg = "<a href='javascript:void()' id='ajouterContact' class='details-btn'>Accepter ce contact</a> | <a class='details-btn' href='#refuserContact' id='refuserContact'>Ne pas accepter</a>";
                 else if ($etat[$_SESSION['id_member']] == 1 && $etat[$id] == 0)
-                    $msg = "En attente de confirmation - <a href='javascript:void()' id='cancelContact'>Annuler ma demande</a>";
+                    $msg = "<a href='javascript:void()' id='cancelContact' class='details-btn'>Annuler ma demande</a>";
                 else if ($etat[$_SESSION['id_member']] == 1 && $etat[$id] == 1)
-                    $msg = "<a href='javascript:void()' id='retirerContact'>Retirer de mes contacts</a>";
+                    $msg = "<a href='javascript:void()' id='retirerContact' class='details-btn'>Retirer de mes contacts</a>";
             }
             
             return $msg;

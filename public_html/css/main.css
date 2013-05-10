@@ -1313,14 +1313,18 @@ a.rev:hover{ text-decoration:underline; }
 .user-titlro{
     width:110px;
 }
+.user-titlro strong {
+    margin-bottom: 5px;
+    display: block;
+}
 .user-iconies{
     float:left;
-    width:365px;
+    width:455px;
     margin-right:-365px;
 }
 .user-iconies li{
     float: left;
-    width: 63px;
+    width: 73px;
 }
 .user-iconies a{
     color: #aaa;
@@ -1331,7 +1335,7 @@ a.rev:hover{ text-decoration:underline; }
     text-align: center;
     display: block;
     line-height: 41px;
-    height: 41px;
+    height: 50px;
     margin-bottom: 5px;
 }
 .user-iconies-1 img{
@@ -1872,28 +1876,42 @@ h3.title_underline { border-left: 3px solid #FF99FF; padding: 5px; border-bottom
 }
 
 /* details page css */
-#details-menu {
-    z-index: 0;
+ul#details-menu {
+    position: relative;
     margin-top: 0px;
+    padding-left: 25px;
+    overflow: hidden;
+}
+#details-menu li {
+    line-height: 54px;
+    float: left;
+    height: 54px;
+    text-align: center;
+}
+#details-menu li h4 {
+    width: 90px;
+    font-style: italic;
+    text-align: left;
+    margin-left: 15px;
 }
 #details-map {float:right;}
-#details {font-size:13px; color:#666; margin-left:80px;}
+.details {font-size:13px; color:#666; margin-left:90px;}
 #details strong {color:#000;}
 .details-title {color:#49B8E4; padding:10px 0;}
-.details-btn { background-image:url(../Images/details_btn.png); background-size:contain; background-repeat:no-repeat; width:170px; height:40px; text-align:center; line-height:40px; color:#FFF; font-size:16px; display:inline-block; text-decoration:none;}
+.details-btn { background-image:url(../Images/details_btn.png); background-size:contain; background-repeat:no-repeat; width:150px; height:35px; text-align:center; line-height:35px; color:#FFF; font-size:12px; font-weight: bold; display:inline-block; text-decoration:none;}
 
-.details-btn2 { background-image:url(../Images/details_btn.png); background-size:100% 100%; background-repeat:no-repeat; width:100px; height:40px; text-align:center; line-height:40px; color:#FFF; font-size:16px; display:inline-block; text-decoration:none;}
+.details-btn2 { background-image:url(../Images/details_btn.png); background-size:100% 100%; background-repeat:no-repeat; width:100px; height:35px; text-align:center; line-height:35px; color:#FFF; font-size:12px; font-weight: bold; display:inline-block; text-decoration:none;}
 
 .details-btn2:hover, .details-btn:hover {text-decoration:none; color:#666; background-image:url(../Images/details_btn_h.png);}
 
-.details-user-box { width:160px; height:80px; padding:10px; position:relative; float:left;}
+.details-user-box { width:160px; height:55px; padding:10px; position:relative; float:left;}
 .details-user-box span { display:inline-block; position: absolute;
                          bottom: 10px; }
 .details-user-box a {padding: 4px;
                      border-radius: 5px;
                      float: left;
                      box-shadow: 3px 3px 3px #666;
-                     height:70px;
+                     height:50px;
                      background-color:#4298c9;
                      margin-right:10px;
 }
@@ -1902,7 +1920,7 @@ h3.title_underline { border-left: 3px solid #FF99FF; padding: 5px; border-bottom
                            border-radius: 5px;
                            float: left;
                            box-shadow: 3px 3px 3px #666;
-                           height:70px;
+                           height:50px;
                            background-color:#65c0e1;
 }
 

@@ -8,7 +8,7 @@ $(function(){
         success:
         function(result) {
             if(result=="1")
-                 $("#addcontact").html("En attente de confirmation - <a href='javascript:void()' id='cancelContact'>Annuler ma demande</a>");
+                 $("#addcontact").html("<a href='javascript:void()' id='cancelContact'>Annuler ma demande</a>");
             else if(result=="2")
                  $("#addcontact").html("<a href='javascript:void()' id='retirerContact'>Retirer de mes contacts</a>");
         }

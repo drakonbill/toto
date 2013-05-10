@@ -1,6 +1,5 @@
 
-<script type="text/javascript">var iddumembre=<?php echo $data->id_member; ?>;</script>
-<?php if (isset($contr)) $contr->loadvWidget("profil_js_include"); ?>
+
 
 <div class="popup-other popup-othermini" style="display: none; "></div>
 
@@ -37,29 +36,35 @@
         <div class="inside-column-sep"></div>
         <div class="inside-column-inside">
             <div class="cfix">
+                 <div class="conversation-left">
+                    <a href="#" class="user-avatar bgr-blue"><img src="/<?php echo $data->photo_member; ?>" alt="" width="42" /></a>
+                    <a href="javascript:void()" id="modifAvatar">Modifier ma photo</a>
+                </div> <!-- .conversation-left -->
                 <div class="conversation-main">
                     <div class="conversation-main-inside cfix">
                         <div class="ld user-titlro">
-                            <div id="addcontact"><?php if ($data->addcontact != "") echo $data->addcontact; ?></div>
                             <strong><em><?php echo $data->error ? $data->error : ucfirst($data->pseudo_member); ?></em></strong>
-                            <br /><br />
                             <strong><em><a href="#" class="rev blue">Profil</a></em></strong>
                         </div> <!-- .user-titlro -->
                         <ul class="user-iconies cfix">
                             <li><a href="#">
-                                    <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-resume.png" alt="" /></span>
-                                    <span class="user-iconies-2">Profil</span>
+                                    <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-actuality.png" alt="" /></span>
+                                    <span class="user-iconies-2">Actualités</span>
                                 </a></li>
                             <li><a href="#">
                                     <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-photos.png" alt="" /></span>
                                     <span class="user-iconies-2">Photos</span>
                                 </a></li>
                             <li><a href="#">
-                                    <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-passions.png" alt="" /></span>
-                                    <span class="user-iconies-2">Passions</span>
+                                    <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-details.png" alt="" /></span>
+                                    <span class="user-iconies-2">Détails</span>
                                 </a></li>
                             <li><a href="#">
-                                    <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-contact.png" alt="" /></span>
+                                    <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-event.png" alt="" /></span>
+                                    <span class="user-iconies-2">Evènements</span>
+                                </a></li>
+                            <li><a href="#">
+                                    <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-contacts.png" alt="" /></span>
                                     <span class="user-iconies-2">Contacts</span>
                                 </a></li>
                             <li><a href="#">
@@ -69,33 +74,19 @@
                         </ul> <!-- .user-iconies -->
                     </div> <!-- .conversation-main-inside -->
                 </div>
-                <div class="conversation-left">
-                    <a href="#" class="user-avatar bgr-blue"><img src="/<?php echo $data->photo_member; ?>" alt="" width="42" /></a>
-                    <a href="javascript:void()" id="modifAvatar">Modifier ma photo</a>
-                </div> <!-- .conversation-left -->
             </div> <!-- .cfix -->
         </div>
         <div class="inside-column-sep"></div>
-        <div id="details-menu">
-            <table width="650" border="0">
-                <tr>
-                    <th width="81" scope="col"><img style="opacity:0.7;" src="<?php echo $conf["url"]; ?>Images/details_glass.png" width="80" height="80" alt="Photos"></th>
-                    <th width="118" scope="col" style="font-size:14px;">Détails<br></th>
-                    <th width="76"><a href="#" class="details-btn">Ajouter comme ami
-                        </a></th>
-                    <th width="153"><a href="#" class="details-btn">Ecrire un message
+        <ul id="details-menu">
+            <li><img style="opacity:0.7;" src="<?php echo $conf["url"]; ?>Images/details_glass.png" alt="Photos"/></li>
+            <li><h4>Détails</h4></li>
+            <li><div id="addcontact"><?php if ($data->addcontact != "") echo $data->addcontact; ?></div></li>
+            <li><a href="#" class="details-btn">Ecrire un message</a></li>
+            <li><a href="#" class="details-btn2">Tchater</a></li>
+        </ul>
 
-                        </a></th>
-                    <th width="50"><a href="#" class="details-btn2">Tchater
-                        </a></th>
-                </tr>
-            </table>
-        </div>
-        <br/>
-        <div class="page-hr"><hr/></div>
 
-        <div id="details">
-            <br>
+        <div class="details">
             <img id="details-map" src="<?php echo $conf["url"]; ?>Images/details_map.png" width="360" height="380" alt="Map">
             <h3 class="details-title">Informations générales</h3>
             <strong>Pseudo</strong> : Nicolas DUPOND<br>
@@ -117,11 +108,10 @@
             <strong>Informations supplémentaires</strong><br>
             <strong>Pseudo skype</strong> : Jean jacques<br>
             <strong>Lien facebook</strong> : xxxxxxxxxxxx
-
-            <br clear="all"/>
-            <div class="page-hr"><hr/></div>
-            <br>
-
+            <hr class="clear"/>
+        </div>
+        <div class="inside-column-sep"></div>
+        <div class="details">
             <strong> Passions</strong><br>
 
             Tourisme / Sport / <span class="blue">Musique</span> / Cinéma / Cuisine / Xxxxx / Xxxxx / Xxxxx / Xxxxx / Xxxxx
@@ -135,7 +125,7 @@
             <div id="scroll-content">
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -143,7 +133,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -151,7 +141,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -159,7 +149,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -167,7 +157,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -175,7 +165,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -183,7 +173,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -191,7 +181,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -199,7 +189,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -207,7 +197,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -215,7 +205,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -223,7 +213,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -231,7 +221,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -239,7 +229,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -247,7 +237,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -255,7 +245,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -263,7 +253,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -271,7 +261,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -279,7 +269,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -287,7 +277,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -295,7 +285,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -303,7 +293,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -311,7 +301,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -319,7 +309,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -327,7 +317,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx
@@ -335,7 +325,7 @@
                 </div>
 
                 <div class="details-user-box">
-                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="70"></a>
+                    <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
                     <span>
                         <strong>Stupeflip</strong><br>
                         Album xxxxxxx

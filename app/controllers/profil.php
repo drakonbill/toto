@@ -26,7 +26,7 @@ class controllers_profil extends Controller {
         $return = $indexM->seeProfilID($pseudo[0]);
        
 
-        $this->loadView("header_co", "");
+        $this->loadView("header_co", $return->id_member);
         $this->loadView("profil", $return);
         $this->loadView("footer", "");
     }

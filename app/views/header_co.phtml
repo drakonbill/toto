@@ -26,6 +26,8 @@
         <?php
         global $controller;
         if ($controller == "controllers_profil") {
+            
+            echo'<script type="text/javascript">var iddumembre='.$data.';</script>';
             if (isset($contr))
                 $contr->loadvWidget("profil_js_include");
         }
