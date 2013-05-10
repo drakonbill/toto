@@ -7,7 +7,7 @@ class controllers_profil extends Controller {
     }
     
     function indexAction() {
-        
+        $this->seeProfilAction();
     }
     
     function pseudoAction(){
@@ -40,7 +40,7 @@ class controllers_profil extends Controller {
         $indexM = $this->loadModel("profil");
 
         
-        $return = $indexM->seeProfil($pseudo[0]);
+        $return = $indexM->seeProfil(@$pseudo[0]);
        
 
         $this->loadView("header_co", "");
