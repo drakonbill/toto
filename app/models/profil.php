@@ -29,7 +29,8 @@ class models_profil extends Model {
         
         return $pseudoData;
     }
-     function seeProfilID($id) {
+    
+    function seeProfilID($id) {
 
         if ($id == "") {
             $pseudoData = $this->reg->user;
