@@ -195,6 +195,45 @@ class libs_user {
         return date('Y') - $y;
     }
 
+    public function month($m) {
+        if ($m == "01") {
+            return $result = "Janvier";
+        }
+        if ($m == "02") {
+            return $result = "Février";
+        }
+        if ($m == "03") {
+            return $result = "Mars";
+        }
+        if ($m == "04") {
+            return $result = "Avril";
+        }
+        if ($m == "05") {
+            return $result = "Mai";
+        }
+        if ($m == "06") {
+            return $result = "Juin";
+        }
+        if ($m == "07") {
+            return $result = "Juillet";
+        }
+        if ($m == "08") {
+            return $result = "Août";
+        }
+        if ($m == "09") {
+            return $result = "Septembre";
+        }
+        if ($m == "10") {
+            return $result = "Octobre";
+        }
+        if ($m == "11") {
+            return $result = "Novembre";
+        }
+        if ($m == "12") {
+            return $result = "Décembre";
+        }
+    }
+
 }
 
 ?>
