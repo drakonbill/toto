@@ -1,3 +1,11 @@
+<?php
+if ($data->id_member != $_SESSION['id_member']) {
+    $own = false;
+} else {
+    $own = true;
+}
+?>
+
 <div class="popup-other popup-othermini" style="display: none; "></div>
 <!-- the jScroll script -->
 <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/scroll.js"></script>
@@ -36,14 +44,21 @@
     <!-- This is the main content area -->
     <div id="inside-column">
         <hr class="top-bar"/>
-        <?php //include 'Modules/tchat/notifications.php'; ?>
-        <span class="title_event_header"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-fav.png" alt="" class="vam blue-man" width="27" />Mon profil</span>
+        <?php //include 'Modules/tchat/notifications.php';  ?>
+        <?php
+        if ($own == true) {
+            $message_profil = "Mon profil";
+        } else {
+            $message_profil = "Profil de $data->pseudo_member";
+        }
+        ?>
+        <span class="title_event_header"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-fav.png" alt="" class="vam blue-man" width="27" /><?php echo $message_profil; ?></span>
         <hr class="clear"/>
         <div class="inside-column-sep"></div>
         <div class="inside-column-inside">
             <div class="cfix">
                 <div class="conversation-left">
-                    <a href="#" class="user-avatar bgr-blue"><img src="/<?php echo $data->photo_member; ?>" alt="" width="42" /></a>
+                    <a href="#" class="user-avatar bgr-blue"><img src="/<?php echo $data->error ? $data->error : $data->photo_member; ?>" alt="" width="42" /></a>
                     <a href="javascript:void()" id="modifAvatar">Modifier ma photo</a>
                 </div> <!-- .conversation-left -->
                 <div class="conversation-main">
@@ -90,21 +105,25 @@
             <li><a href="#" class="details-btn">Ecrire un message</a></li>
             <li><a href="#" class="details-btn2">Tchater</a></li>
         </ul>
-
-
+<?php
+if ($data->sex_member == "1") {
+    $sexe = "Homme";
+} else {
+    $sexe = "Femme";
+}
+?>
         <div class="details">
             <img id="details-map" src="<?php echo $conf["url"]; ?>Images/details_map.png" width="360" height="380" alt="Map">
             <h3 class="details-title">Informations générales</h3>
-            <strong>Pseudo</strong> : Nicolas DUPOND<br>
-            <strong>Age</strong> : 22 ans<br>
+            <strong>Pseudo</strong> : <?php echo $data->error ? $data->error : ucfirst($data->pseudo_member); ?><br>
+            <strong>Age</strong> : <?php echo $data->ageDatenaissance($data->birth_member); ?> ans<br>
             <strong>Date d'anniversaire</strong> : le 30 janvier<br>
-            <strong>Sexe</strong> : homme<br>
+            <strong>Sexe</strong> : <?php echo $sexe; ?><br>
             <br>
 
             <h3 class="details-title">Détails</h3>
-            <strong>Prénom</strong> : Nicolas<br>
-            <strong>Ville</strong> : Tours<br>
-            <strong>Pays</strong> : France<br>
+            <strong>Ville</strong> : <?php echo $data->city_member; ?><br>
+            <strong>Pays</strong> : <?php echo $data->country_member; ?><br>
             <strong>Situation</strong> : célibataire<br>
             <strong>Intéressé par</strong> : Femme<br>
             <strong>Etudes</strong> : bac +1<br>
@@ -125,7 +144,7 @@
 
         </div>
         <br>
-        
+
         <div class="scroll-content-all">
             <div class="connexion-shadow-1"></div>
             <div class="scroll-pane">
@@ -349,8 +368,8 @@
 </div>
 </div> <!-- #inside-column -->
 <div id="main-footer">
-    <?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
+<?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
 </div> <!-- #main-footer -->
 </div> <!-- .cfix -->
-<?php if (isset($contr)) $contr->loadvWidget("footer_quotation"); ?>
+    <?php if (isset($contr)) $contr->loadvWidget("footer_quotation"); ?>
 <div style="display:none;"></div>

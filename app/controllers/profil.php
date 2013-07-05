@@ -5,26 +5,24 @@ class controllers_profil extends Controller {
     public function init() {
         
     }
-    
+
     function indexAction() {
         $this->seeProfilAction();
     }
-    
-    function pseudoAction(){
-        
+
+    function pseudoAction() {
+
         $this->seeProfilAction();
     }
 
-     function idAction(){
-        
+    function idAction() {
+
         global $_URL;
         $pseudo = array_keys($_URL);
 
         $indexM = $this->loadModel("profil");
 
-        
         $return = $indexM->seeProfilID($pseudo[0]);
-       
 
         $this->loadView("header_co", $return->id_member);
         $this->loadView("profil", $return);
@@ -39,9 +37,7 @@ class controllers_profil extends Controller {
 
         $indexM = $this->loadModel("profil");
 
-        
         $return = $indexM->seeProfil(@$pseudo[0]);
-       
 
         $this->loadView("header_co", "");
         $this->loadView("profil", $return);
@@ -65,5 +61,4 @@ class controllers_profil extends Controller {
     }
 
 }
-
 ?>
