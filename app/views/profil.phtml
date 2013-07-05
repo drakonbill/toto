@@ -17,6 +17,16 @@ if ($data->id_member != $_SESSION['id_member']) {
 		
     });
 </script>
+
+<!-- -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.scroll-pane').jScrollPane({
+            verticalDragMaxHeight: 42
+        });
+		
+    });
+</script>
 <div id="inside-main" class="cfix">
     <div id="sidebar-left">
         <div id="sidebar-left-in">
@@ -105,15 +115,17 @@ if ($data->id_member != $_SESSION['id_member']) {
             <li><a href="#" class="details-btn">Ecrire un message</a></li>
             <li><a href="#" class="details-btn2">Tchater</a></li>
         </ul>
-<?php
-if ($data->sex_member == "1") {
-    $sexe = "Homme";
-} else {
-    $sexe = "Femme";
-}
-?>
+        <?php
+        if ($data->sex_member == "1") {
+            $sexe = "Homme";
+        } else {
+            $sexe = "Femme";
+        }
+        ?>
         <div class="details">
-            <img id="details-map" src="<?php echo $conf["url"]; ?>Images/details_map.png" width="360" height="380" alt="Map">
+            <div id="map">
+                <img id="details-map" src="<?php echo $conf["url"]; ?>Images/country-map/france/france-depart.png" width="360" height="380" alt="Map">
+            </div>
             <h3 class="details-title">Informations générales</h3>
             <strong>Pseudo</strong> : <?php echo $data->error ? $data->error : ucfirst($data->pseudo_member); ?><br>
             <strong>Age</strong> : <?php echo $data->ageDatenaissance($data->birth_member); ?> ans<br>
@@ -368,8 +380,8 @@ if ($data->sex_member == "1") {
 </div>
 </div> <!-- #inside-column -->
 <div id="main-footer">
-<?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
+    <?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
 </div> <!-- #main-footer -->
 </div> <!-- .cfix -->
-    <?php if (isset($contr)) $contr->loadvWidget("footer_quotation"); ?>
+<?php if (isset($contr)) $contr->loadvWidget("footer_quotation"); ?>
 <div style="display:none;"></div>
