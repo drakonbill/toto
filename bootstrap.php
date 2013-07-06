@@ -106,18 +106,29 @@ if (empty($controller)) {
 
 debug("find controller class - got $controller, $view  ...  done");
 
+## initialize roles
+$roles = new stdClass();
+foreach ($roleList as $roleLevel => $role) {
+    $roles->$role['name'] = new rolesLib($role['name'], $roleLevel);
+}
+$reg->roles = $roles;
+
+
+
 ## fly to sky
 try {
-    $control = new $controller(); //this will do __autoload call
+    $control = new $controller(); //this isnt abstract class, netbeans wrong
     $reg->controller = $control; //register for after access
-    //$control->action = $action;
-    //$control->controller = $controller;
-    if (method_exists($control, $view)) {
-        $control->$view();
-    } else {
-       
-        $reg->error->f404Static("");
-    }
+    
+    // pack controller in Secure Box for automatic role menagment
+    $userRole = $reg->user->getRole();
+    require_once (COREDIR . 'SecureBox.php');
+    $control = new SecureBox($control, $reg->roles->$userRole);
+    
+    // pass controller call to SecureBox check
+    $control->$view();
+    
+    
 } catch (Exception $e) {
     
     $reg->error->f404Static($e);
