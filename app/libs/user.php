@@ -182,17 +182,22 @@ class libs_user {
             return false;
     }
 
-    public function ageDatenaissance($dob) {
+    public function Age($naiss) {
 
-        list($y, $d, $m) = explode('-', $dob);
-
-        if (($m = (date('m') - $m)) < 0) {
-            $y++;
-        } elseif ($m == 0 && date('d') - $d < 0) {
-            $y++;
+        list($annee, $mois, $jour) = split('[-.]', $naiss);
+        $today['mois'] = date('n');
+        $today['jour'] = date('j');
+        $today['annee'] = date('Y');
+        $annees = $today['annee'] - $annee;
+        if ($today['mois'] <= $mois) {
+            if ($mois == $today['mois']) {
+                if ($jour > $today['jour'])
+                    $annees--;
+            }
+            else
+                $annees--;
         }
-
-        return date('Y') - $y;
+        return $annees;
     }
 
     public function month($m) {
