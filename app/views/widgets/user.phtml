@@ -1,17 +1,25 @@
-                    <div class="bl-photo">
-                        <strong><em><?php echo $user->pseudo_member; ?></em></strong>
-                        <br /><br />
-                        <a href="/#" class="bl-link bgr-blue"><img id="avatar-profil" width="101px" src="<?php echo $user->photoURL(); ?>" alt="" /></a>
-                    </div> <!-- .bl-photo -->
-                    <div class="bl-right">
-                        <div>
-                            Ne le <?php echo $user->birth_member; ?>
-                            <br />
-                            Travail chez xxxx
-                        </div>
-                        <div class="white-quote">
-                            <div class="white-tip"></div>
-                            Partagetr vos idees...!
-                            <a href="#" class="btn-partager rep">Partager</a>
-                        </div> <!-- .white-quote -->
-                    </div> <!-- .bl-right -->
+<?php
+if($user->sex_member == 1) {
+    $born = "Né";
+}
+else {
+    $born = "Née";
+}
+?>
+<div class="bl-photo">
+    <strong><em><?php echo $user->pseudo_member; ?></em></strong>
+    <br /><br />
+    <a href="/#" class="bl-link bgr-blue"><img id="avatar-profil" width="101px" src="<?php echo $user->photoURL(); ?>" alt="" /></a>
+</div> <!-- .bl-photo -->
+<div class="bl-right">
+    <div>
+        <?php echo $born ?> le <?php echo $user->birth_member; ?>
+        <br />
+        Travail chez xxxx
+    </div>
+    <div class="white-quote">
+        <div class="white-tip"></div>
+        Partagetr vos idees...!
+        <a href="#" class="btn-partager rep">Partager</a>
+    </div> <!-- .white-quote -->
+</div> <!-- .bl-right -->
