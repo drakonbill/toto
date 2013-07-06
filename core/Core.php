@@ -19,6 +19,7 @@ class Core {
     protected $validate;
     protected $user;
     protected $conf;
+    protected $role;
 
     public function __construct($option) {
 
@@ -29,6 +30,7 @@ class Core {
         $this->validate = $reg->validate;
         $this->user = $reg->user;
         $this->conf = $reg->conf;
+        $this->role = $reg->roles;
     }
 
     public function addData($add) {

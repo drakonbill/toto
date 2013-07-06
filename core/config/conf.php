@@ -12,14 +12,16 @@ require_once('../' . COREDIR . 'lib/cleanData.php');
 require_once('../' . COREDIR . 'lib/libMySQL.php');
 require_once('../' . COREDIR . 'lib/roles.php');
 
-## create site roles
-$roles["admin"] = new roles("Admin");
-$roles["conn"] = new roles("Conn");
-$roles["decon"] = new roles("Decon");
+## create startup site roles, rewrited in appconf
+$roleList = array(
+    // 'Role_Level' => "RoleName",
 
-##add to Registry
-$reg->roles = $roles;
-$reg->clean = new cleanData(); //this lib dont have extra setings, and can be loaded
+    '0' => array("name" => "Guest", "dContr" => "account", "dAction" => "login"),
+    '1' => array("name" => "Member", "dContr" => "account", "dAction" => "login")
+);
+
+## add to Registry
+$reg->clean = new cleanData();
 $reg->error = new error();
 $reg->urlParse = new urlParse();
 $reg->validate = new validate();

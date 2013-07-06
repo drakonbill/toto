@@ -1,19 +1,22 @@
 <?php
 
-class roles {
+class rolesLib {
 
-    private $roleName, $pages = array();
+    private $roleName, $roleLevel;
+    private $class;
 
-    function __construct($name) {
+    function __construct($name, $level) {
         $this->roleName = $name;
+        $this->roleLevel = $level;
+        $this->class = new stdClass();
     }
 
-    function addPage($page) {
-        $this->pages[$page] = $page;
+    function add($class, $action) {
+        $this->class->$class[$action] = $action;
     }
-    
-    function isRole($page){
-        return in_array($page, $this->pages);
+
+    function inRole($class, $action) {
+        return $action == $this->class->$class[$action];
     }
 
 }

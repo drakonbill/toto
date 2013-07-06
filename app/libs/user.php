@@ -55,6 +55,13 @@ class libs_user {
         return isset($_SESSION['id_member']);
     }
 
+    function getRole(){
+        global $roleList;
+        
+        return isset($this->level_member)?$roleList[$this->level_member]['name']:$roleList['-1'];
+        
+    }
+            
     function photoURL($id = '') {
         global $reg;
 

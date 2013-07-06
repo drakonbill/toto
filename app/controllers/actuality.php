@@ -8,7 +8,8 @@
 class controllers_actuality extends Controller {
 
     public function init() {
-        
+        // $this->setLevel('indexAction', 1);
+         $this->role->UnVerif->add('indexAction');
     }
 
     function indexAction() {

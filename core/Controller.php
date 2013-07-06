@@ -6,6 +6,8 @@
  * @author Miki
  */
 abstract class Controller extends Core {
+    
+   // protected $actionLevel;
 
     public function __construct($option = array()) {
         parent::__construct($option);
@@ -108,7 +110,19 @@ abstract class Controller extends Core {
         return new $name($param);
         
     }
+//     function getRole($action){
+//        global $roleList;
+//        
+//        return isset($this->actionLevel[$action])?$roleList[$this->actionLevel[$action]]:$roleList['-1'];
+//        
+//    }
+//    
+//     public function setLevel($action, $level) {
+//        
+//         $this->actionLevel[$action] = $level;
+//    }
 
+    
 }
 
 ?>
