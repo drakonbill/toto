@@ -1,18 +1,15 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of event
- *
- * @author Deixonne
+ * Model : Profil : all functions relatives to the profil of the member
+ * @author Nicolas D, Quentin L
+ * @todo : Clean functions
  */
+
 class models_profil extends Model {
 
-    // Empty function for the moment 
+    /*
+     * No using for the moment, because default function in controller is using another function in the model.
+     */
     function indexModel() {
         
     }
