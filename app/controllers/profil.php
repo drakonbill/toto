@@ -1,30 +1,50 @@
 <?php
 
+/**
+ * Controller : Profil : all functions relatives to the profil of the member
+ * @author Nicolas D, Quentin L
+ * @todo 
+ */
 class controllers_profil extends Controller {
+    /*
+     * Function of initialisation 
+     * @todo : Checking the using of this function ?
+     */
 
     public function init() {
         
     }
-    
+
+    /*
+     * Default function when you go : http://meetoparty/profil/
+     * @default : Go to see the profil of the member connected
+     */
+
     function indexAction() {
         $this->seeProfilAction();
     }
-    
-    function pseudoAction(){
-        
+
+    /*
+     * Function : Checking profil depending of the pseudo : http://meetoparty/profil/pseudo/powereborn
+     */
+
+    function pseudoAction() {
+
         $this->seeProfilAction();
     }
 
-     function idAction(){
-        
+    /*
+     * Function : Checking profil depending of the id of the member : http://meetoparty/profil/id/63
+     */
+
+    function idAction() {
+
         global $_URL;
         $pseudo = array_keys($_URL);
 
         $indexM = $this->loadModel("profil");
 
-        
         $return = $indexM->seeProfilID($pseudo[0]);
-       
 
         $this->loadView("header_co", $return->id_member);
         $this->loadView("profil", $return);
@@ -39,9 +59,7 @@ class controllers_profil extends Controller {
 
         $indexM = $this->loadModel("profil");
 
-        
         $return = $indexM->seeProfil(@$pseudo[0]);
-       
 
         $this->loadView("header_co", "");
         $this->loadView("profil", $return);
@@ -65,5 +83,4 @@ class controllers_profil extends Controller {
     }
 
 }
-
 ?>
