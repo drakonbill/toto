@@ -1,15 +1,38 @@
-<div id="connexion-bar"></div>
-<div id="connexion-box">
-    <div id="connexion-box-in">
-        <h3 class="cbox-title blue">Bienvenue !</h3>
-        <div class="connexion-shadow-1"></div>
-        <p>Page d'actualité</p>
 
-        <div class="connexion-shadow-2"></div>
-        <?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
-    </div> <!-- #connexion-box-in -->
-</div> <!-- #connexion-box -->
+<div id="inside-main" class="cfix">
+    <div id="sidebar-left">
+        <div id="sidebar-left-in">
+            <?php if (isset($contr)) $contr->loadvWidget("friends_online"); ?>
+        </div> <!-- #sidebar-left-in -->
+    </div> <!-- #sidebar-left -->
 
+    <div id="sidebar-right">
+        <div id="sidebar-right-in">
+            <?php if (isset($contr)) $contr->loadvWidget("events_my"); ?>
+            <?php if (isset($contr)) $contr->loadvWidget("events_sugest"); ?>
+            <?php if (isset($contr)) $contr->loadvWidget("sponsoring"); ?>
+        </div> <!-- #sidebar-right-in -->
+    </div> <!-- #sidebar-right -->
+
+    <!-- This is the main content area -->
+    <div id="inside-column">
+        <hr class="top-bar"/>
+        <?php //include 'Modules/tchat/notifications.php';  ?>
+        <span class="title_event_header"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-fav.png" alt="" class="vam blue-man" width="27" />Actualités</span>
+        <hr class="clear"/>
+        <div class="inside-column-sep"></div>
+        <div class="inside-column-inside">
+            <div class="cfix">
+
+            </div> <!-- .cfix -->
+        </div>
+    </div>
+
+</div>
+</div> <!-- #inside-column -->
+<div id="main-footer">
+    <?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
+</div> <!-- #main-footer -->
+</div> <!-- .cfix -->
 <?php if (isset($contr)) $contr->loadvWidget("footer_quotation"); ?>
-
 <div style="display:none;"></div>
