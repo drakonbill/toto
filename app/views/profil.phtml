@@ -39,6 +39,7 @@ if ($data->id_member != $_SESSION['id_member']) {
             ?>
 
             <?php if (isset($contr)) $contr->loadvWidget("statistics"); ?>
+            <?php if (isset($contr)) $contr->loadvWidget("friends_online"); ?>
         </div> <!-- #sidebar-left-in -->
     </div> <!-- #sidebar-left -->
 
