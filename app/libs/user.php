@@ -200,6 +200,30 @@ class libs_user {
         return $annees;
     }
 
+    /*
+     * Funcion to have the day of the birth with the birth date in the database
+     * @return : 03 for example if you are born the third of a month
+     */
+
+    public function Daydate($naiss) {
+
+        list($annee, $mois, $jour) = split('[-.]', $naiss);
+
+        return $jour;
+    }
+
+    /*
+     * Funcion to have the day of the birth with the birth date in the database
+     * @return : July for example if you are born this month
+     */
+
+    public function Monthdate($naiss) {
+
+        list($annee, $mois, $jour) = split('[-.]', $naiss);
+
+        return month($jour);
+    }
+
     public function month($m) {
         if ($m == "01") {
             return $result = "Janvier";
