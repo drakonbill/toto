@@ -201,7 +201,7 @@ class libs_user {
     }
 
     /*
-     * Funcion to have the day of the birth with the birth date in the database
+     * Funcion to have the day with a date formated in the database YYYY-MM-DD
      * @return : 03 for example if you are born the third of a month
      */
 
@@ -213,7 +213,7 @@ class libs_user {
     }
 
     /*
-     * Funcion to have the day of the birth with the birth date in the database
+     * Funcion to have the month with a date formated in the database YYYY-MM-DD
      * @return : July for example if you are born this month
      */
 
@@ -221,9 +221,22 @@ class libs_user {
 
         list($annee, $mois, $jour) = split('[-.]', $naiss);
 
-        return month($jour);
+        return $mois;
     }
 
+    
+       /*
+     * Funcion to have the year with a date formated in the database YYYY-MM-DD
+     * @return : 2015 for example 
+     */
+
+    public function Yeardate($naiss) {
+
+        list($annee, $mois, $jour) = split('[-.]', $naiss);
+
+        return $annee;
+    }
+    
     public function month($m) {
         if ($m == "01") {
             return $result = "Janvier";
