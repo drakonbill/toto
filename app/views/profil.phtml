@@ -15,16 +15,16 @@ if ($data->id_member != $_SESSION['id_member']) {
             verticalDragMaxHeight: 42
         });
 		
-    });
+});
 </script>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('.scroll-pane').jScrollPane({
-            verticalDragMaxHeight: 42
-        });
-		
+$(document).ready(function() {
+    $('.scroll-pane').jScrollPane({
+        verticalDragMaxHeight: 42
     });
+		
+});
 </script>
 <div id="inside-main" class="cfix">
     <div id="sidebar-left">
@@ -39,6 +39,7 @@ if ($data->id_member != $_SESSION['id_member']) {
             ?>
 
             <?php if (isset($contr)) $contr->loadvWidget("statistics"); ?>
+            <?php if (isset($contr)) $contr->loadvWidget("friends_online"); ?>
         </div> <!-- #sidebar-left-in -->
     </div> <!-- #sidebar-left -->
 
@@ -129,21 +130,36 @@ if ($data->id_member != $_SESSION['id_member']) {
         ?>
         <div class="details">
             <div id="map">
-                <img id="details-map" src="<?php echo $conf["url"]; ?>Images/country-map/france/france-depart.png" width="360" height="380" alt="Map">
+                <img id="details-map" src="<?php echo $conf["url"]; ?>Images/details_map.png" width="360" height="380" alt="Map">
             </div>
             <h3 class="details-title">Informations générales</h3>
-            <strong>Pseudo</strong> : <?php echo $data->error ? $data->error : ucfirst($data->pseudo_member); ?><br>
-            <strong>Age</strong> : <?php echo $data->Age($data->birth_member); ?> ans<br>
-            <strong>Date d'anniversaire</strong> : le 30 janvier<br>
-            <strong>Sexe</strong> : <?php echo $sexe; ?><br>
-            <br>
+            <strong>Pseudo</strong> : <?php echo $data->error ? $data->error : ucfirst($data->pseudo_member); ?><br/>
+            <strong>Age</strong> : <?php echo $data->Age($data->birth_member); ?> ans<br/>
+            <?php
+            // For the month of birth
+            $mon = $data->Monthdate($data->birth_member);
+            $month = $data->month($mon);
+            ?>
+            <strong>Anniversaire</strong> : Le <?php echo $data->Daydate($data->birth_member);
+            echo " $month"; ?><br/>
+            <strong>Sexe</strong> : <?php echo $sexe; ?><br/>
+            <strong>Ville</strong> : <?php echo $data->city_member; ?><br/>
+            <strong>Pays</strong> : <?php echo $data->country_member; ?><br/>
+            <?php
+            $day2 = $data->Daydate($data->inscription_date_member);
+            $mon2 = $data->Monthdate($data->inscription_date_member);
+            $month2 = $data->month($mon2);
+            $year2 = $data->Yeardate($data->inscription_date_member);
+            ?>
+            <strong>Date d'inscription</strong> : <?php echo "Le $day2 $month2 $year2" ?><br/>
+            <br/>
 
             <h3 class="details-title">Détails</h3>
-            <strong>Ville</strong> : <?php echo $data->city_member; ?><br>
-            <strong>Pays</strong> : <?php echo $data->country_member; ?><br>
-            <strong>Situation</strong> : célibataire<br>
-            <strong>Intéressé par</strong> : Femme<br>
-            <strong>Etudes</strong> : bac +1<br>
+            <strong>Ville</strong> : <?php echo $data->city_member; ?><br/>
+            <strong>Pays</strong> : <?php echo $data->country_member; ?><br/>
+            <strong>Situation</strong> : célibataire<br/>
+            <strong>Intéressé par</strong> : Femme<br/>
+            <strong>Etudes</strong> : bac +1<br/>
             <br>
 
             <h3 class="details-title">A propos de vous</h3>
@@ -385,7 +401,7 @@ if ($data->id_member != $_SESSION['id_member']) {
 </div>
 </div> <!-- #inside-column -->
 <div id="main-footer">
-    <?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
+<?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
 </div> <!-- #main-footer -->
 </div> <!-- .cfix -->
 <?php if (isset($contr)) $contr->loadvWidget("footer_quotation"); ?>
