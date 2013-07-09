@@ -130,7 +130,11 @@ if ($data->id_member != $_SESSION['id_member']) {
         ?>
         <div class="details">
             <div id="map">
-                <img id="details-map" src="<?php echo $conf["url"]; ?>Images/details_map.png" width="360" height="380" alt="Map">
+                <?php
+                // MAP and region detection with a function in the user library
+                $idregion = $data->CodeRegionId($data->zipcode_member);
+                ?>
+                <img id="details-map" src="<?php echo $conf["url"]; ?>Images/region-map/<?php echo $idregion; ?>.png" width="360" height="380" alt="Map">
             </div>
             <h3 class="details-title">Informations générales</h3>
             <strong>Pseudo</strong> : <?php echo $data->error ? $data->error : ucfirst($data->pseudo_member); ?><br/>
