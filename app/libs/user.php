@@ -280,11 +280,31 @@ class libs_user {
      * @return : The name of the region : Example : Postal code 37300, Region : Centre.
      */
 
-    public function CodeRegion($postalcode) {
+    public function CodeRegionName($postalcode) {
 
         $cp = substr($postalcode, 0, 2);
 
         $requete = mysql_query("SELECT R.nom FROM regions R, departements D WHERE R.region_id = D.region_id AND D.numero='$cp'");
+
+        if (mysql_num_rows($requete) == 1) {
+            $region = mysql_fetch_array($requete);
+            return $region['nom'];
+        } else {
+            $region = "Région non trouvée";
+            return $region;
+        }
+    }
+    
+        /*
+     * Funcion to have the region with the postal code in param
+     * @return : The id of the region : Example : Postal code 37300, Region : 3
+     */
+
+    public function CodeRegionId($postalcode) {
+
+        $cp = substr($postalcode, 0, 2);
+
+        $requete = mysql_query("SELECT R.region_id FROM regions R, departements D WHERE R.region_id = D.region_id AND D.numero='$cp'");
 
         if (mysql_num_rows($requete) == 1) {
             $region = mysql_fetch_array($requete);
