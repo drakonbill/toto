@@ -228,7 +228,7 @@ class libs_user {
        /*
      * Funcion to have the year with a date formated in the database YYYY-MM-DD
      * @return : 2015 for example 
-     */
+     */1
 
     public function Yeardate($naiss) {
 
