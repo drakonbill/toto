@@ -122,7 +122,7 @@ if ($data->id_member != $_SESSION['id_member']) {
             ?>
         </ul>
         <?php
-        if ($data->sex_member == "1") {
+        if ($data->sex_member == HOMME) {
             $sexe = "Homme";
         } else {
             $sexe = "Femme";
@@ -145,6 +145,10 @@ if ($data->id_member != $_SESSION['id_member']) {
             echo " $month";
             ?><br/>
             <strong>Sexe</strong> : <?php echo $sexe; ?><br/>
+            
+            <?php
+            // To put the name of the city in lowercase
+            ?>
             <strong>Ville</strong> : <?php echo $data->city_member; ?><br/>
             <strong>Pays</strong> : <?php echo $data->country_member; ?><br/>
             <?php
@@ -159,16 +163,16 @@ if ($data->id_member != $_SESSION['id_member']) {
             <h3 class="details-title">Détails</h3>
             <?php
             if ($data->statut_member == NULL) {
-                $data->statut_member = "Non communiquée";
+                $data->statut_member = NCE;
             } else if ($data->statut_member == 1) {
-                $data->statut_member = "Célibataire";
+                $data->statut_member = SINGLE;
             } else if ($data->statut_member == 2) {
-                $data->statut_member = "En couple";
+                $data->statut_member = COUPLE;
             } else if ($data->statut_member == 3) {
                 if ($sexe == "Femme") {
-                    $data->statut_member = "Mariée";
+                    $data->statut_member = BRIDE;
                 } else {
-                    $data->statut_member = "Marié";
+                    $data->statut_member = MARIED;
                 }
             }
             ?>
@@ -179,61 +183,55 @@ if ($data->id_member != $_SESSION['id_member']) {
                 $interest = "Intéressée par";
             }
             if ($data->preference_member == NULL) {
-                $preference = "Non communiqué";
-            } else if ($data->preference_member == 1) {
+                $preference = NC;
+            } else if ($data->preference_member == P_M) {
                 $preference = "Homme";
-            } else if ($data->preference_member == 2) {
+            } else if ($data->preference_member == P_W) {
                 $preference = "Femme";
-            } else if ($data->preference_member == 3) {
+            } else if ($data->preference_member == P_B) {
                 $preference = "Homme et Femme";
             }
             ?>
             <strong><?php echo $interest; ?></strong> : <?php echo $preference; ?><br/>
             <?php
-            if ($data->study_member == 1) {
+            if ($data->study_member == COLLEGE) {
                 $study = "Collège";
-            }
-            else if ($data->study_member == 2) {
+            } else if ($data->study_member == LYCEE) {
                 $study = "Lycée";
-            }
-            else if ($data->study_member == 3) {
+            } else if ($data->study_member == BAC1) {
                 $study = "BAC + 1";
-            }
-            else if ($data->study_member == 4) {
+            } else if ($data->study_member == BAC2) {
                 $study = "BAC + 2";
-            }
-            else if ($data->study_member == 5) {
+            } else if ($data->study_member == BAC3) {
                 $study = "BAC + 3";
-            }
-            else if ($data->study_member == 6) {
+            } else if ($data->study_member == BAC4) {
                 $study = "BAC + 4";
-            }
-            else if ($data->study_member == 7) {
+            } else if ($data->study_member == BAC5) {
                 $study = "BAC + 5";
-            }
-            else if ($data->study_member == 8) {
+            } else if ($data->study_member == BAC6) {
                 $study = " > BAC + 5";
-            }
-            else if ($data->study_member == 9) {
+            } else if ($data->study_member == JOBLOOKING) {
                 $study = "En recherche d'emploi";
-            }
-            else if ($data->study_member == 10) {
+            } else if ($data->study_member == EMPLOYEE) {
                 $study = "Salarié";
-            }
-            else if ($data->study_member == 11) {
+            } else if ($data->study_member == FREELANCE) {
                 $study = "Freelance";
-            }
-            else if ($data->study_member == NULL) {
+            } else if ($data->study_member == NCE) {
                 $study = "Non communiquée";
             }
             ?>
             <strong>Situation professionnelle</strong> : <?php echo $study; ?><br/>
-            
+
             <br/>
 
             <h3 class="details-title">A propos de vous</h3>
-            <strong>Informations supplémentaires</strong><br>
-            <strong>Pseudo skype</strong> : Jean jacques<br>
+            <?php
+            if ($data->first_name_member == NULL) {
+                $data->first_name_member = NC;
+            }
+            ?>
+            <strong>Prénom</strong> : <?php echo $data->first_name_member; ?><br/>
+            <strong>Pseudo skype</strong> : <?php echo $data->first_name_member; ?><br>
             <strong>Lien facebook</strong> : xxxxxxxxxxxx
             <hr class="clear"/>
         </div>
@@ -473,5 +471,5 @@ if ($data->id_member != $_SESSION['id_member']) {
 <?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
 </div> <!-- #main-footer -->
 </div> <!-- .cfix -->
-    <?php if (isset($contr)) $contr->loadvWidget("footer_quotation"); ?>
+<?php if (isset($contr)) $contr->loadvWidget("footer_quotation"); ?>
 <div style="display:none;"></div>
