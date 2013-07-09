@@ -308,7 +308,7 @@ class libs_user {
 
         if (mysql_num_rows($requete) == 1) {
             $region = mysql_fetch_array($requete);
-            return $region['nom'];
+            return $region['region_id'];
         } else {
             $region = "Région non trouvée";
             return $region;
