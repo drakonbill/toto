@@ -149,11 +149,11 @@ if ($data->id_member != $_SESSION['id_member']) {
             echo " $month";
             ?><br/>
             <strong>Sexe</strong> : <?php echo $sexe; ?><br/>
-            
+
             <?php
             // To put the name of the city in lowercase
             ?>
-            <strong>Ville</strong> : <?php echo $data->city_member; ?><br/>
+            <strong>Ville</strong> : <?php echo ucfirst(strtolower($data->city_member)); ?><br/>
             <strong>Pays</strong> : <?php echo $data->country_member; ?><br/>
             <?php
             $day2 = $data->Daydate($data->inscription_date_member);
@@ -224,7 +224,8 @@ if ($data->id_member != $_SESSION['id_member']) {
                 $study = "Non communiquée";
             }
             ?>
-            <strong>Situation professionnelle</strong> : <?php echo $study; ?><br/>
+            <strong>Situation professionnelle</strong> : <br/>
+            <?php echo $study; ?><br/>
 
             <br/>
 
@@ -235,8 +236,66 @@ if ($data->id_member != $_SESSION['id_member']) {
             }
             ?>
             <strong>Prénom</strong> : <?php echo $data->first_name_member; ?><br/>
-            <strong>Pseudo skype</strong> : <?php echo $data->first_name_member; ?><br>
-            <strong>Lien facebook</strong> : xxxxxxxxxxxx
+            <?php
+            if ($data->skype_member == NULL) {
+                $data->skype_member = NC;
+            }
+            ?>
+            <strong>Pseudo skype</strong> : <?php echo $data->skype_member; ?><br/>
+            <?php
+            if ($data->facebook_member == NULL) {
+                $data->facebook_member = NC;
+                ?>
+                <strong>Lien Facebook</strong> : <?php echo $data->facebook_member; ?><br/>
+                <?php
+            } else {
+                ?>
+                <a href="<?php echo $data->facebook_member; ?>"><img src="<?php echo $conf["url"]; ?>/Images/facebook-logo.jpg" width="10%" alt="Profil Facebook" /></a><br/>
+                <?php
+            }
+            ?>
+
+            <?php
+            if ($data->twitter_member == NULL) {
+                $data->twitter_member = NC;
+                ?>
+                <strong>Lien Twitter</strong> : <?php echo $data->twitter_member; ?><br/>
+                <?php
+            } else {
+                ?>
+                <a href="<?php echo $data->facebook_member; ?>"><img src="<?php echo $conf["url"]; ?>/Images/twitter-logo.jpg" width="10%" alt="Profil Facebook" /></a>
+                <?php
+            }
+            ?>
+            <?php
+            if ($data->extra_email_member == NULL) {
+                $data->extra_email_member = NC;
+            }
+            ?>
+            <strong>Email</strong> : <?php echo $data->extra_email_member; ?><br/>    
+
+            <?php
+            if ($data->cellular_member == NULL) {
+                $data->cellular_member = NC;
+            }
+            ?>
+            <strong>Portable</strong> : <?php echo $data->cellular_member; ?><br/>
+
+            <br/>
+            <h3 class="details-title">Description</h3>
+            <?php
+            if ($data->description_member == NULL) {
+                $data->description_member = NCE;
+            }
+            ?>
+            <strong>Description du membre</strong> : <?php echo $data->description_member; ?><br/>
+
+            <?php
+            if ($data->description_research_member == NULL) {
+                $data->description_research_member = NCE;
+            }
+            ?>
+            <strong>A la recherche</strong> : <?php echo $data->description_research_member; ?><br/>
             <hr class="clear"/>
         </div>
         <div class="inside-column-sep"></div>
@@ -472,7 +531,7 @@ if ($data->id_member != $_SESSION['id_member']) {
 </div>
 </div> <!-- #inside-column -->
 <div id="main-footer">
-<?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
+    <?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
 </div> <!-- #main-footer -->
 </div> <!-- .cfix -->
 <?php if (isset($contr)) $contr->loadvWidget("footer_quotation"); ?>
