@@ -109,7 +109,7 @@ $(document).ready(function(){
 			url: '/ajax/registerPassionProfil',
 			data: "passion="+$("input#passionvalue").val()+"&categorie="+$("input#categorievalue").val(),
 			success:
-				function(result) {
+				function(result) {alert(result);
                                         result = JSON.parse(result);
 					if(result[0] == "1") {
 						popup = $("div.popup-othermini");
