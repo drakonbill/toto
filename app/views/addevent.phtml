@@ -7,205 +7,209 @@
 
 
 <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.resize.js"></script>
-        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery-ui-1.8.8.custom.min.js"></script>
-        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/formulairedesign.js"></script>
-		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.autocomplete.js"></script>
-		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.text-shadow.js"></script>
-		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.border.js"></script>
-		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/tchat/jquery-position.js"></script>
-		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.listederoulante.js"></script>
-		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.upload.js"></script>
-		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/popup/popup.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery-ui-1.8.8.custom.min.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/formulairedesign.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.text-shadow.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.border.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/tchat/jquery-position.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.listederoulante.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.upload.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/popup/popup.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 
+<script>
+    var geocoder;
+    var map;
+</script>
 <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/evenement/ajouterEvenement.js"></script>
-
 <div class="popup-other popup-othermini" style="display: none; "></div>
 
 
-     <div id="inside-main-big" class="cfix">
-	<div id="sidebar-left">
-          <div id="sidebar-left-in">
+<div id="inside-main-big" class="cfix">
+    <div id="sidebar-left">
+        <div id="sidebar-left-in">
             <h2 class="sb-title"><span>Amis en linge</span></h2>
             <div class="cfix">
-              <div class="sb-block">
-                <ul class="users-list2 cfix">
-                  <li class="user">
-                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
-                    <div class="user-popup-info">
-                      <strong><em>Marie Nguyen,</em></strong>
-                      <br /><br />
-                      Ne le 24/06/1991
-                      <br />
-                      Etudiante a l'Universite xxx Habite a Tours
-                      <div class="black-tip"></div>
-                    </div>
-                  </li>
-                  <li class="user">
-                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
-                    <div class="user-popup-info">
-                      <strong><em>Marie Nguyen,</em></strong>
-                      <br /><br />
-                      Ne le 24/06/1991
-                      <br />
-                      Etudiante a l'Universite xxx Habite a Tours
-                      <div class="black-tip"></div>
-                    </div>
-                  </li>
-                  <li class="user">
-                    <a href="#" class="user-photo bgr-blue"><img src="Images/clip-face3.jpg" alt="" width="42" /></a>
-                    <div class="user-popup-info">
-                      <strong><em>Marie Nguyen,</em></strong>
-                      <br /><br />
-                      Ne le 24/06/1991
-                      <br />
-                      Etudiante a l'Universite xxx Habite a Tours
-                      <div class="black-tip"></div>
-                    </div>
-                  </li>
-                  <li class="user">
-                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
-                    <div class="user-popup-info">
-                      <strong><em>Marie Nguyen,</em></strong>
-                      <br /><br />
-                      Ne le 24/06/1991
-                      <br />
-                      Etudiante a l'Universite xxx Habite a Tours
-                      <div class="black-tip"></div>
-                    </div>
-                  </li>
-                  <li class="user">
-                    <a href="#" class="user-photo bgr-blue"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
-                    <div class="user-popup-info">
-                      <strong><em>Marie Nguyen,</em></strong>
-                      <br /><br />
-                      Ne le 24/06/1991
-                      <br />
-                      Etudiante a l'Universite xxx Habite a Tours
-                      <div class="black-tip"></div>
-                    </div>
-                  </li>
-                  <li class="user">
-                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face3.jpg" alt="" width="42" /></a>
-                    <div class="user-popup-info">
-                      <strong><em>Marie Nguyen,</em></strong>
-                      <br /><br />
-                      Ne le 24/06/1991
-                      <br />
-                      Etudiante a l'Universite xxx Habite a Tours
-                      <div class="black-tip"></div>
-                    </div>
-                  </li>
-                  <li class="user">
-                    <a href="#" class="user-photo bgr-blue"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
-                    <div class="user-popup-info">
-                      <strong><em>Marie Nguyen,</em></strong>
-                      <br /><br />
-                      Ne le 24/06/1991
-                      <br />
-                      Etudiante a l'Universite xxx Habite a Tours
-                      <div class="black-tip"></div>
-                    </div>
-                  </li>
-                  <li class="user">
-                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
-                    <div class="user-popup-info">
-                      <strong><em>Marie Nguyen,</em></strong>
-                      <br /><br />
-                      Ne le 24/06/1991
-                      <br />
-                      Etudiante a l'Universite xxx Habite a Tours
-                      <div class="black-tip"></div>
-                    </div>
-                  </li>
-                  <li class="user">
-                    <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face3.jpg" alt="" width="42" /></a>
-                    <div class="user-popup-info">
-                      <strong><em>Marie Nguyen,</em></strong>
-                      <br /><br />
-                      Ne le 24/06/1991
-                      <br />
-                      Etudiante a l'Universite xxx Habite a Tours
-                      <div class="black-tip"></div>
-                    </div>
-                  </li>
-                </ul> <!-- .users-list2 -->
-                <p class="nom">
-                  <br />
-                  <a href="#" class="rev blue">Liste d'amis</a>
-                </p>
-              </div>
+                <div class="sb-block">
+                    <ul class="users-list2 cfix">
+                        <li class="user">
+                            <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
+                            <div class="user-popup-info">
+                                <strong><em>Marie Nguyen,</em></strong>
+                                <br /><br />
+                                Ne le 24/06/1991
+                                <br />
+                                Etudiante a l'Universite xxx Habite a Tours
+                                <div class="black-tip"></div>
+                            </div>
+                        </li>
+                        <li class="user">
+                            <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
+                            <div class="user-popup-info">
+                                <strong><em>Marie Nguyen,</em></strong>
+                                <br /><br />
+                                Ne le 24/06/1991
+                                <br />
+                                Etudiante a l'Universite xxx Habite a Tours
+                                <div class="black-tip"></div>
+                            </div>
+                        </li>
+                        <li class="user">
+                            <a href="#" class="user-photo bgr-blue"><img src="Images/clip-face3.jpg" alt="" width="42" /></a>
+                            <div class="user-popup-info">
+                                <strong><em>Marie Nguyen,</em></strong>
+                                <br /><br />
+                                Ne le 24/06/1991
+                                <br />
+                                Etudiante a l'Universite xxx Habite a Tours
+                                <div class="black-tip"></div>
+                            </div>
+                        </li>
+                        <li class="user">
+                            <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
+                            <div class="user-popup-info">
+                                <strong><em>Marie Nguyen,</em></strong>
+                                <br /><br />
+                                Ne le 24/06/1991
+                                <br />
+                                Etudiante a l'Universite xxx Habite a Tours
+                                <div class="black-tip"></div>
+                            </div>
+                        </li>
+                        <li class="user">
+                            <a href="#" class="user-photo bgr-blue"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
+                            <div class="user-popup-info">
+                                <strong><em>Marie Nguyen,</em></strong>
+                                <br /><br />
+                                Ne le 24/06/1991
+                                <br />
+                                Etudiante a l'Universite xxx Habite a Tours
+                                <div class="black-tip"></div>
+                            </div>
+                        </li>
+                        <li class="user">
+                            <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face3.jpg" alt="" width="42" /></a>
+                            <div class="user-popup-info">
+                                <strong><em>Marie Nguyen,</em></strong>
+                                <br /><br />
+                                Ne le 24/06/1991
+                                <br />
+                                Etudiante a l'Universite xxx Habite a Tours
+                                <div class="black-tip"></div>
+                            </div>
+                        </li>
+                        <li class="user">
+                            <a href="#" class="user-photo bgr-blue"><img src="Images/clip-face1.jpg" alt="" width="42" /></a>
+                            <div class="user-popup-info">
+                                <strong><em>Marie Nguyen,</em></strong>
+                                <br /><br />
+                                Ne le 24/06/1991
+                                <br />
+                                Etudiante a l'Universite xxx Habite a Tours
+                                <div class="black-tip"></div>
+                            </div>
+                        </li>
+                        <li class="user">
+                            <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
+                            <div class="user-popup-info">
+                                <strong><em>Marie Nguyen,</em></strong>
+                                <br /><br />
+                                Ne le 24/06/1991
+                                <br />
+                                Etudiante a l'Universite xxx Habite a Tours
+                                <div class="black-tip"></div>
+                            </div>
+                        </li>
+                        <li class="user">
+                            <a href="#" class="user-photo bgr-pink"><img src="Images/clip-face3.jpg" alt="" width="42" /></a>
+                            <div class="user-popup-info">
+                                <strong><em>Marie Nguyen,</em></strong>
+                                <br /><br />
+                                Ne le 24/06/1991
+                                <br />
+                                Etudiante a l'Universite xxx Habite a Tours
+                                <div class="black-tip"></div>
+                            </div>
+                        </li>
+                    </ul> <!-- .users-list2 -->
+                    <p class="nom">
+                        <br />
+                        <a href="#" class="rev blue">Liste d'amis</a>
+                    </p>
+                </div>
             </div>
-			<?php 
-				/*************************************************** TCHAT ****************************************/
-				//include 'Modules/tchat/tchat-left.php';
-				/*************************************************** FINTCHAT ****************************************/
-			?>
+            <?php
+            /*             * ************************************************* TCHAT *************************************** */
+            //include 'Modules/tchat/tchat-left.php';
+            /*             * ************************************************* FINTCHAT *************************************** */
+            ?>
 
-          </div> <!-- #sidebar-left-in -->
-        </div> <!-- #sidebar-left -->
-      
-        <!-- This is the main content area -->
-        <div id="inside-column-big">
-		  <hr class="top-bar"/>
-          <div id="inside-column-wrap">
-			<span class="title_eventorganise"><img src="<?php echo $conf["url"]; ?>Images/blue-man.png" alt="" class="vam blue-man" width="35" heigth="51" />Evènement organisé</span>
-			<?php //include 'Modules/tchat/notifications.php'; ?>
-			  <hr class="clear"/>
-              
+        </div> <!-- #sidebar-left-in -->
+    </div> <!-- #sidebar-left -->
+
+    <!-- This is the main content area -->
+    <div id="inside-column-big">
+        <hr class="top-bar"/>
+        <div id="inside-column-wrap">
+            <span class="title_eventorganise"><img src="<?php echo $conf["url"]; ?>Images/blue-man.png" alt="" class="vam blue-man" width="35" heigth="51" />Evènement organisé</span>
+            <?php //include 'Modules/tchat/notifications.php'; ?>
+            <hr class="clear"/>
+
 
             <div class="inside-column-sep"></div>
             <div class="inside-column-inside">
-              <div class="cfix">
-				<div class="conversation-left">
-                  <a href="#" class="user-avatar bgr-grey2"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
-                </div> <!-- .conversation-left -->
-                <div class="conversation-main-big">
-                  <div class="conversation-main-inside">
-                    <div class="chat-msg bgr-grey2">
-                      Evènement très utile lorsque vous souhaitez que d'autres personnes y participent. Vous pouvez le rendre public ou privé. A la différence des mini events, l'évènement organisé peut être un évènement long et doit être lié à certaines passions afin qu'il puisse être découvert par des gens partageant ces mêmes passions.
-                      <div class="chat-tip-left"></div>
-                    </div> <!-- .chat-msg -->
-                  </div> <!-- .conversation-main-inside -->
-                </div> <!-- .conversation-main -->
-              </div> <!-- .cfix -->
+                <div class="cfix">
+                    <div class="conversation-left">
+                        <a href="#" class="user-avatar bgr-grey2"><img src="Images/clip-face2.jpg" alt="" width="42" /></a>
+                    </div> <!-- .conversation-left -->
+                    <div class="conversation-main-big">
+                        <div class="conversation-main-inside">
+                            <div class="chat-msg bgr-grey2">
+                                Evènement très utile lorsque vous souhaitez que d'autres personnes y participent. Vous pouvez le rendre public ou privé. A la différence des mini events, l'évènement organisé peut être un évènement long et doit être lié à certaines passions afin qu'il puisse être découvert par des gens partageant ces mêmes passions.
+                                <div class="chat-tip-left"></div>
+                            </div> <!-- .chat-msg -->
+                        </div> <!-- .conversation-main-inside -->
+                    </div> <!-- .conversation-main -->
+                </div> <!-- .cfix -->
             </div> <!-- .inside-column-inside -->
             <div id="event_organise" class="fun-block cfix">
-              <div class="fun-block-inside">
-                <div class="fun-block-inside2">
-                </div> <!-- .fun-block-inside2 -->
-              </div> <!-- .fun-block-inside -->
-              <ul class="fun-block-nav">
-              </ul> <!-- .fun-block-nav -->
+                <div class="fun-block-inside">
+                    <div class="fun-block-inside2">
+                    </div> <!-- .fun-block-inside2 -->
+                </div> <!-- .fun-block-inside -->
+                <ul class="fun-block-nav">
+                </ul> <!-- .fun-block-nav -->
             </div> <!-- .fun-block -->
-			 <div id="event_mini" class="fun-block cfix" style="display:none;">
-              <div class="fun-block-inside">
-                <div class="fun-block-inside2">
-                </div> <!-- .fun-block-inside2 -->
-              </div> <!-- .fun-block-inside -->
-              <ul class="fun-block-nav">
-              </ul> <!-- .fun-block-nav -->
+            <div id="event_mini" class="fun-block cfix" style="display:none;">
+                <div class="fun-block-inside">
+                    <div class="fun-block-inside2">
+                    </div> <!-- .fun-block-inside2 -->
+                </div> <!-- .fun-block-inside -->
+                <ul class="fun-block-nav">
+                </ul> <!-- .fun-block-nav -->
             </div> <!-- .fun-block -->
-          </div> <!-- #inside-column-wrap -->
-        </div> <!-- #inside-column -->
+        </div> <!-- #inside-column-wrap -->
+    </div> <!-- #inside-column -->
 
-        
 
-        
 
-        <div id="main-footer-big">
-          <div class="connexion-shadow-2"></div>
-          <div id="home-icons">
+
+
+    <div id="main-footer-big">
+        <div class="connexion-shadow-2"></div>
+        <div id="home-icons">
             <img src="<?php echo $conf["url"]; ?>Images/icon-1.png" alt="" />
             <img src="<?php echo $conf["url"]; ?>Images/icon-2.png" alt="" />
             <img src="<?php echo $conf["url"]; ?>Images/icon-3.png" alt="" />
             <img src="<?php echo $conf["url"]; ?>Images/icon-4.png" alt="" />
             <img src="<?php echo $conf["url"]; ?>Images/icon-5.png" alt="" />
             <img src="<?php echo $conf["url"]; ?>Images/icon-6.png" alt="" />
-          </div> <!-- #home-icons -->
-        </div> <!-- #main-footer -->
-      </div> <!-- .cfix -->
+        </div> <!-- #home-icons -->
+    </div> <!-- #main-footer -->
+</div> <!-- .cfix -->
 
-	  
+
 <div class="blue-box-top blue-box-asdf"></div>
 <div class="blue-box">
     <div class="blue-box-in cfix equal-heights">

@@ -608,8 +608,8 @@ class models_ajax_event extends Model {
                 $start_width = ($tAttribut[0]/$imagewidth)*$start_width;
                 $start_height = ($tAttribut[1]/$imageheight)*$start_height;
 
-                $scale_w = 275/$w;  		
-                $scale_h = 137/$h;
+                $scale_w = 294/$w;  		
+                $scale_h = 294/$h;
 
                 $newImageWidth = ceil($w * $scale_w);
                 $newImageHeight = ceil($h * $scale_h);
