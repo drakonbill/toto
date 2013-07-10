@@ -252,10 +252,19 @@ class models_account extends Model {
                     // SEX : 1 = Men, 2 = Women
                     if ($sexe == "homme") {
                         $sexe = 1;
+                    } else {
+                        $sexe = 2;
                     }
-                    else {
-                         $sexe = 2;
-                    }
+
+                    // Geocalisation du membre
+                    $lien = "http://maps.google.com/maps/api/geocode/json?address=$cp+$pays&sensor=false";
+                    $geocode = file_get_contents("$lien");
+
+                    $output = json_decode($geocode);
+
+                    $lat = $output->results[0]->geometry->location->lat;
+                    $long = $output->results[0]->geometry->location->lng;
+
 
                     $query = mysql_query("SELECT pseudo_member from member WHERE pseudo_member = '$pseudo'") or die("Impossible de sélectionner le pseudo : " . mysql_error());
 
@@ -278,7 +287,7 @@ class models_account extends Model {
                     }
 
                     if (empty($data['error'])) {
-                        mysql_query("INSERT INTO member (pseudo_member, password_member, email_member, birth_member, inscription_date_member, ip_member, zipcode_member, city_member, sex_member, country_member) VALUES ('$pseudo', '$password', '$email', '$date', NOW(), '$ip', '$cp', '$ville', '$sexe','$pays')");
+                        mysql_query("INSERT INTO member (pseudo_member, password_member, email_member, birth_member, inscription_date_member, ip_member, zipcode_member, city_member, sex_member, country_member, long_member, lati_member) VALUES ('$pseudo', '$password', '$email', '$date', NOW(), '$ip', '$cp', '$ville', '$sexe','$pays','$long','$lat')");
                         $lastid = mysql_insert_id();
                         mysql_query("INSERT INTO member_details (id_member) VALUES ('$lastid')");
 
