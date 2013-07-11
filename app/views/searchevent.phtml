@@ -1,244 +1,151 @@
 
-	<link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>css/jquery.listederoulante.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>css/jquery.listederoulante.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>css/jquery.autocomplete.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $conf["url"]; ?>js/popup/style-popup.css" />
 
 <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 
-	
-	<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.resize.js"></script>
-        <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery-ui-1.8.8.custom.min.js"></script>
-		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.autocomplete.js"></script>
-		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.text-shadow.js"></script>
-		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.border.js"></script>
 
-		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.listederoulante.js"></script>
-		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/popup/popup.js"></script>
-		
-		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.resize.js"></script>
-		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery-ui-1.8.8.custom.min.js"></script>
-		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.border.js"></script>
-		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.upload.js"></script>
-		<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/popup/popup.js"></script>
-                <script type="text/javascript">var searchevent_dep = <?php echo json_encode($data->departments);?></script>
-                <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/evenement/searchEvent.js"></script>
-	
-	<div class="popup-other popup-othermini" style="display: none; "></div>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.resize.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery-ui-1.8.8.custom.min.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.text-shadow.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.border.js"></script>
+
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.listederoulante.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/popup/popup.js"></script>
+
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.resize.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery-ui-1.8.8.custom.min.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.border.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.upload.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/popup/popup.js"></script>
+<script type="text/javascript">var searchevent_dep = <?php echo json_encode($data->departments); ?></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/evenement/searchEvent.js"></script>
+<link href="/maps/documentation/javascript/examples/default.css" rel="stylesheet">
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script>
+    var geocoder;
+    var map;
+    
+    function handleNoGeolocation(errorFlag) {
+        if (errorFlag) {
+            var content = 'Error: The Geolocation service failed.';
+        } else {
+            var content = 'Error: Your browser doesn\'t support geolocation.';
+        }
+
+        var options = {
+            map: map,
+            position: new google.maps.LatLng(60, 105),
+            content: content
+        };
+
+        var infowindow = new google.maps.InfoWindow(options);
+        map.setCenter(options.position);
+    }
+
+    function initialize() {
+        geocoder = new google.maps.Geocoder();
+        var myLatlng = new google.maps.LatLng(-25.363882, 131.044922);
+        var mapOptions = {
+            zoom: 4,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var pos = new google.maps.LatLng(position.coords.latitude,
+                        position.coords.longitude);
+
+                var infowindow = new google.maps.InfoWindow({
+                    map: map,
+                    position: pos,
+                    content: 'Je suis ici actuellement.'
+                });
+
+                map.setCenter(pos);
+            }, function() {
+                handleNoGeolocation(true);
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleNoGeolocation(false);
+        }
+
+        var contentString = 'ii';
+
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString,
+            maxWidth: 200
+        });
+
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: 'Uluru (Ayers Rock)'
+        });
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map, marker);
+        });
+    }
+
+    function codeAddress() {
+        var address = document.getElementById('address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+<div class="popup-other popup-othermini" style="display: none; "></div>
 
 
-<div id="inside-main" class="cfix">
-	<div id="sidebar-left">
-            <div id="sidebar-left-in">
-			<?php
-			//include 'Modules/amis/listeamis.php';
-			?>
-			<?php 
-				/*************************************************** TCHAT ****************************************/
-				//include 'Modules/tchat/tchat-left.php';
-				/*************************************************** FINTCHAT ****************************************/
-			?>
-			<h2 class="sb-title"><span>Recapitulatif</span></h2>
-			<div class="cfix">
-				<div class="sb-block">
-					0 nouveaux messages
-					<br />
-					<strong>5 visites</strong> <a href="#" class="rev blue"> Voir statistiques</a>
-					<br />
-					<strong>5 evenements</strong> en cours
-					<br />
-					<strong>15 contacts</strong>
-					<br />
-					<strong>26 begins</strong> sur vous
-					<br />
-					<strong>40 photos</strong> de vos activites
-				</div> <!-- .sb-block -->
-			</div> <!-- .cfix -->
+<div id="inside-main-max" class="cfix">
 
-		</div> <!-- #sidebar-left-in -->
-	</div> <!-- #sidebar-left -->
 
-	<div id="sidebar-right">
-          <div id="sidebar-right-in">
-            <h2 class="sb-title"><span>Mes evenements</span></h2>
-            <div class="sb-block">
-              <div class="event-caption cfix">
-                
-                <a href="#" class="rd user-avatar bgr-darkblue"><img src="<?php echo $conf["url"]; ?>images/clip-face1.jpg" alt="" width="32" /></a>
-                <strong><em>Nuit de films,</em></strong>
-                <br />
-                <small>venderdi 12 Decembre</small>
-              </div> <!-- .cfix -->
-              <p>Cet evenement est l'occasion de xxxx x x xxx xxxx xxx x x x xxxxxxxxx x x xx !</p>
-              <p>
-                <br />
-                <strong class="blue">A venir</strong>
-              </p>
-              <ul class="events-list">
-                <li>
-                  <strong><em>Nuit de films,</em></strong>
-                  <br />
-                  <small>venderdi 12 Decembre</small>
-                </li>
-                <li>
-                  <strong><em>First fraday,</em></strong>
-                  <br />
-                  <small>lundi 15 Decembre</small>
-                </li>
-              </ul>
-            </div> <!-- .sb-block -->
-            <h2 class="sb-title"><span>Evenements Conseilles</span></h2>
-            <div class="sb-block">
-              <div class="event-caption cfix">
-				<img width="155px" src="http://localhost/meetoparty/Dossiermembre/ff53e449/2ba2e609461fab2a0a2ff6712af675ee.jpg" />
-                <br />
-                <strong><em>Nuit de films,</em></strong>
-                <br />
-                <small>venderdi 12 Decembre</small>
-              </div> <!-- .cfix -->
-              <p>Cet evenement est l'occasion de xxxx x x xxx xxxx xxx x x x xxxxxxxxx x x xx !</p>
-            </div> <!-- .sb-block -->
-            <h2 class="sb-title"><span>Sponsorisé</span></h2>
-            <div class="sb-block">
-              <a href="#"><img src="<?php echo $conf["url"]; ?>images/clip-cola.jpg" alt="" width="175" />5 évènements crées, 5000 fans, Voir ses évènements</a>
-            </div> <!-- .advertisement -->
-          </div> <!-- #sidebar-right-in -->
-        </div> <!-- #sidebar-right -->
-	
     <!-- This is the main content area -->
-    <div id="inside-column">
-			<hr class="top-bar"/>
-			<?php //include 'Modules/tchat/notifications.php'; ?>
-			  <span class="title_event_header"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-fav.png" alt="" class="vam blue-man" width="27" />Rechercher un évènement</span>
-			  <hr class="clear"/>
-			  <div class="inside-column-sep"></div>
-<br/><br/><br/><br/>
-			<div class="inside-column-sep"></div>
-			<div class="inside-column-inside">
+    <div id="inside-column-max">
+        <hr class="top-bar"/>
+        <?php //include 'Modules/tchat/notifications.php'; ?>
+        <span class="title_event_header"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-fav.png" alt="" class="vam blue-man" width="27" />Rechercher un évènement</span>
+        <hr class="clear"/>
+        <div class="inside-column-sep"></div>
+        <br/><br/><br/><br/>
+        <div class="inside-column-sep"></div>
+        <div id="panel">
+            <input id="address" type="textbox" value="Sydney, NSW">
+            <input type="button" value="Geocode" onclick="codeAddress()">
+        </div>
+        <div style="height: 800px;" id="map-canvas"></div>
+    </div>
 
-                            <div id="background-map">
-			<img id="background-map-img" src="/Images/country-map/france/transparent.png" width="579" height="557" border="0" usemap="#carte" />
-		<map name="carte">
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('29')" shape="poly" coords="55,148,48,146,46,150,42,148,41,144,29,148,27,146,8,153,7,166,23,163,21,166,27,169,23,170,14,168,15,176,19,173,26,176,26,179,26,182,21,181,7,183,7,185,16,187,19,189,21,195,21,200,29,200,30,197,37,198,38,194,43,202,56,205,56,202,61,199,61,193,52,191,49,182,58,178,56,160,58,157,54,153,54,148" href="region29" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('22')" shape="poly" coords="78,138,64,141,62,140,58,141,58,148,54,148,54,153,58,157,56,160,58,178,69,183,76,180,93,186,93,191,94,191,100,184,103,183,106,187,109,186,113,179,123,177,125,161,118,160,116,157,113,158,109,153,103,154,94,162,77,138" href="region22" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('56')" shape="poly" coords="76,180,68,183,58,178,49,182,52,191,61,193,61,199,56,202,56,205,58,209,65,209,71,218,79,218,86,216,88,218,88,220,80,220,83,223,97,223,99,228,113,224,114,216,113,212,117,206,114,196,109,194,109,190,109,186,106,187,103,183,100,183,95,190,93,191,92,187,75,180" href="region56" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('35')" shape="poly" coords="116,157,119,161,125,162,122,177,114,179,109,186,110,190,108,193,114,196,116,206,113,211,114,216,123,213,134,213,135,210,143,207,150,210,155,197,160,197,158,179,159,177,159,165,152,163,147,167,142,166,140,157,131,158,127,156,127,153,128,151,123,152,121,155,116,155,116,157" href="region35" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('50')" shape="poly" coords="140,157,142,165,146,168,152,163,160,165,168,166,172,160,172,156,169,150,161,148,156,145,168,134,168,126,159,118,159,112,153,101,153,99,155,96,155,92,149,91,143,94,128,89,127,92,130,93,131,108,139,121,140,133,141,136,139,142,140,150,147,156,146,157,139,157" href="region50" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('14')" shape="poly" coords="159,113,159,118,168,125,169,134,157,145,159,148,169,151,184,144,199,147,208,140,221,140,222,136,219,135,221,130,217,111,211,111,204,117,196,119,193,119,189,116,171,114,166,111,162,111,159,113" href="region14" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('61')" shape="poly" coords="184,145,168,150,172,155,172,161,168,166,171,170,195,164,198,170,201,170,201,175,205,174,213,169,219,171,219,178,226,184,230,183,234,187,237,187,235,179,242,175,242,166,236,158,234,152,228,146,220,143,220,140,208,140,199,147,184,144" href="region61" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('27')" shape="poly" coords="217,111,220,130,219,134,222,136,220,143,227,146,234,153,235,158,249,152,259,152,259,148,265,142,263,135,270,132,273,122,276,121,273,113,262,109,246,122,240,117,242,115,237,112,230,111,225,107,220,110,216,110" href="region27" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('76')" shape="poly" coords="215,110,221,109,226,107,230,112,238,112,242,115,240,117,246,122,261,109,274,113,275,108,274,95,276,90,274,83,261,72,253,79,235,84,230,84,213,93,208,106,214,109,217,110" href="region76" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('80')" shape="poly" coords="262,72,274,84,276,91,280,95,296,95,312,102,322,95,330,94,329,87,332,76,329,74,316,73,316,70,302,68,305,62,291,63,277,53,273,55,269,53,267,59,273,65,270,65,267,64,265,66,265,68,262,71" href="region80" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('60')" shape="poly" coords="276,91,274,95,275,105,274,114,276,121,274,123,275,127,282,127,288,126,299,128,310,132,317,133,331,131,325,117,329,115,330,94,321,95,312,102,296,95,280,95,276,91" href="region60" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('62')" shape="poly" coords="269,53,273,56,277,53,292,64,305,62,302,67,316,70,316,73,329,74,331,62,324,51,328,49,325,45,317,43,320,36,317,35,315,38,304,37,299,31,302,28,295,27,290,14,276,17,273,21,270,22,270,26,270,29,268,32,269,38,269,53" href="region62" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('59')" shape="poly" coords="307,9,290,14,295,27,301,29,301,28,299,31,304,37,315,38,317,35,320,36,318,43,324,45,328,49,325,52,331,62,330,73,332,75,354,72,371,77,372,73,374,71,371,65,373,60,365,54,351,55,351,48,344,44,341,46,336,43,335,33,330,27,323,30,321,33,317,31,314,26,310,26,309,17,307,9" href="region59" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('02')" shape="poly" coords="325,118,334,139,345,147,353,136,349,135,351,128,355,128,351,119,363,112,368,115,368,99,375,91,374,77,355,73,332,75,328,87,330,95,329,114,325,118" href="region02" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('08')" shape="poly" coords="374,78,375,91,368,99,368,112,373,113,385,120,389,119,391,121,405,121,409,119,408,115,410,112,408,106,411,99,416,102,421,98,405,88,400,87,399,79,396,77,400,66,397,65,392,70,392,75,384,79,374,78" href="region08" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('51')" shape="poly" coords="345,148,343,152,348,162,353,166,360,167,371,155,375,155,376,154,381,154,380,161,384,164,398,165,400,165,398,162,402,160,400,157,407,155,408,153,404,148,404,142,407,139,405,121,391,122,390,119,384,119,373,113,368,112,367,115,363,112,351,119,355,128,351,129,349,135,353,136,345,148" href="region51" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('77')" shape="poly" coords="310,132,308,137,310,141,309,145,310,149,309,158,306,163,306,175,301,179,306,187,304,192,324,189,328,185,328,177,343,176,343,170,348,162,343,152,345,147,333,138,330,131,316,133,309,132" href="region77" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('91')" shape="poly" coords="302,179,285,182,282,172,288,156,294,152,298,155,306,155,309,158,307,163,306,175,302,180" href="region91" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('78')" shape="poly" coords="282,173,278,173,269,157,268,146,265,143,263,135,270,131,274,135,277,133,285,138,289,137,293,142,291,145,291,149,294,152,288,155,282,173" href="region78" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('95')" shape="poly" coords="275,122,273,123,270,131,274,135,277,133,285,138,289,137,293,142,300,140,303,140,308,137,309,132,298,128,286,126,276,127,274,125,274,122" href="region95" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('55')" shape="poly" coords="407,153,404,149,404,142,408,139,405,121,408,119,408,115,411,111,408,105,411,99,417,102,421,98,425,104,426,111,432,109,436,113,437,127,441,131,440,138,438,140,439,145,438,150,437,153,440,166,427,171,408,159,407,152" href="region55" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('54')" shape="poly" coords="437,101,425,104,425,112,432,109,436,113,437,128,441,132,440,138,438,140,439,145,439,148,437,149,440,166,444,166,444,171,447,172,447,175,475,167,483,170,493,162,489,157,478,154,471,149,461,146,460,139,451,137,444,128,447,127,447,119,443,104,437,101" href="region54" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('57')" shape="poly" coords="493,161,488,157,478,154,471,149,461,146,460,139,451,137,444,128,447,127,447,119,443,105,448,106,454,103,466,105,477,123,481,123,481,119,489,120,489,124,500,124,504,120,514,128,511,134,499,134,493,132,491,128,487,138,491,141,491,145,496,142,501,145,500,158,496,161,492,161" href="region57" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('67')" shape="poly" coords="511,134,501,134,493,132,491,128,487,138,491,141,491,145,496,143,501,144,500,157,496,161,493,161,494,173,498,173,515,184,521,171,523,153,532,142,537,132,526,127,514,127,511,134" href="region67" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('68')" shape="poly" coords="499,174,489,197,488,203,485,205,494,210,495,213,495,217,500,225,501,228,510,228,518,217,514,213,516,197,518,193,515,191,515,185,499,174" href="region68" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('88')" shape="poly" coords="486,206,475,199,471,202,466,197,459,199,455,194,446,201,435,190,438,184,425,174,427,171,444,166,444,171,447,171,447,174,476,167,483,170,494,161,494,173,499,174,489,197,488,204,485,205,486,205" href="region88" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('90')" shape="poly" coords="485,206,482,209,485,222,490,222,492,229,496,225,500,225,495,218,495,210,485,206" href="region90" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('70')" shape="poly" coords="485,221,480,222,475,226,467,225,462,231,440,243,432,241,427,229,431,226,429,221,426,221,427,216,438,216,438,209,446,200,456,194,459,199,467,197,471,201,475,199,486,205,482,209,485,222" href="region70" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('52')" shape="poly" coords="426,222,420,222,408,216,407,212,409,209,400,198,396,197,396,191,402,191,402,179,393,170,394,165,400,165,399,162,402,160,400,157,408,155,408,160,427,171,425,174,438,184,435,191,446,201,439,208,437,216,427,216,426,221" href="region52" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('10')" shape="poly" coords="396,197,391,197,390,200,379,202,365,203,357,189,354,190,348,178,342,175,342,169,348,162,353,166,360,167,371,155,381,154,380,160,385,164,395,165,393,170,402,179,402,191,396,191,396,197" href="region10" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('28')" shape="poly" coords="285,182,281,193,265,197,265,200,254,202,245,192,238,192,237,187,235,180,242,175,242,166,236,158,249,152,259,152,259,148,265,141,268,146,269,158,278,172,282,173,285,182" href="region28" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('53')" shape="poly" coords="151,209,155,197,160,197,157,179,159,177,159,165,168,166,172,170,195,164,197,170,201,170,201,175,197,175,197,185,193,188,193,194,189,194,190,201,185,202,186,206,184,209,185,211,175,213,151,209" href="region53" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('72')" shape="poly" coords="236,193,236,204,227,217,216,224,212,223,207,223,193,219,193,216,187,215,185,211,184,209,187,205,185,203,186,201,190,201,188,196,192,193,193,188,196,185,197,176,201,175,205,174,214,169,219,170,219,178,226,184,230,183,233,187,237,187,239,192,237,192,237,194" href="region72" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('44')" shape="poly" coords="99,229,94,231,96,235,94,237,99,239,101,237,105,241,112,237,116,237,115,239,110,239,110,245,107,247,113,250,128,264,136,265,135,257,138,255,139,262,143,261,143,256,149,252,152,246,146,238,152,236,162,235,160,228,154,228,153,223,160,223,154,219,150,210,143,207,135,210,133,213,122,213,114,216,113,224,99,227" href="region44" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('49')" shape="poly" coords="149,252,152,247,146,237,151,236,162,235,160,228,153,228,153,223,159,223,153,220,150,210,151,209,175,214,184,211,187,215,192,216,193,219,207,223,212,223,203,249,196,255,192,253,178,255,176,259,163,259,152,256,149,253" href="region49" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('41')" shape="poly" coords="227,217,237,219,238,223,245,223,249,243,253,243,257,250,269,244,280,248,284,245,291,244,289,235,295,235,291,225,295,222,294,220,274,220,272,217,267,215,265,210,267,207,264,200,254,202,245,192,237,193,236,204,227,217" href="region41" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('45')" shape="poly" coords="265,200,267,207,265,210,267,215,273,216,274,220,294,220,295,223,308,226,314,231,325,226,321,214,327,213,327,205,331,201,327,191,323,190,304,192,306,187,301,179,285,182,281,193,265,197,264,200" href="region45" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('89')" shape="poly" coords="321,215,325,226,330,226,340,232,348,229,358,236,366,237,369,241,373,240,371,234,381,212,380,202,365,203,357,189,354,190,348,178,342,175,340,176,328,177,328,184,324,189,327,191,331,201,327,205,326,213,321,215" href="region89" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('21')" shape="poly" coords="378,251,373,240,371,234,381,212,379,202,389,200,391,197,399,197,409,209,407,212,408,216,421,221,429,222,431,226,427,230,432,241,430,249,422,261,408,262,399,265,378,251" href="region21" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('25')" shape="poly" coords="459,284,456,282,462,271,454,265,452,260,443,256,445,249,440,243,462,231,467,225,474,225,481,222,489,222,492,229,489,234,495,232,496,234,480,256,473,260,472,271,459,283" href="region25" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('39')" shape="poly" coords="434,304,424,293,431,291,427,287,430,281,426,270,430,269,422,261,429,250,432,241,440,243,445,249,443,256,452,260,453,264,462,271,456,282,461,285,458,294,449,303,443,303,440,299,434,303" href="region39" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('71')" shape="poly" coords="424,293,419,289,416,290,410,289,403,310,401,310,399,303,387,305,386,309,366,311,366,305,369,302,369,293,359,289,358,285,353,276,359,276,362,279,371,273,371,253,378,251,400,266,408,262,422,261,430,269,426,270,430,281,427,287,431,291,424,293" href="region71" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('58')" shape="poly" coords="353,276,348,282,344,278,335,280,328,273,330,270,330,259,326,245,321,240,324,234,321,228,326,226,331,226,339,232,348,228,358,236,366,237,369,241,373,240,378,250,371,253,371,273,362,279,359,276,354,276" href="region58" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('18')" shape="poly" coords="278,248,276,252,276,254,281,255,284,253,289,262,288,265,291,267,287,272,289,275,288,277,292,283,292,296,296,296,300,290,310,290,310,282,328,273,330,270,330,259,326,244,321,240,324,234,321,228,313,231,308,226,294,223,291,225,295,235,289,235,291,244,283,244,279,248" href="region18" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('36')" shape="poly" coords="292,297,274,295,273,298,263,297,261,300,257,298,249,298,248,292,238,285,237,277,242,275,246,259,254,259,258,253,257,250,270,244,279,247,276,253,281,255,285,253,289,262,288,265,291,267,287,271,289,275,288,277,292,283,292,296" href="region36" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('37')" shape="poly" coords="228,262,238,277,242,276,246,259,254,259,258,253,253,243,248,243,245,223,238,223,237,219,228,217,216,224,212,223,203,250,213,258,214,264,228,262" href="region37" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('85')" shape="poly" coords="117,254,109,263,110,267,121,280,123,288,130,293,135,294,136,297,141,298,147,301,149,299,158,298,167,301,177,298,173,295,173,277,164,259,152,256,148,252,143,256,143,260,139,262,138,255,135,257,136,265,127,264,117,254" href="region85" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('79')" shape="poly" coords="167,302,176,298,173,295,173,277,164,259,175,259,179,254,193,253,196,255,200,264,200,278,197,282,200,285,198,292,201,302,206,300,204,309,208,312,208,316,202,316,195,323,190,318,171,310,167,301" href="region79" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('86')" shape="poly" coords="207,316,207,312,204,309,206,300,201,302,198,291,200,284,197,282,200,278,200,263,196,255,203,250,213,259,213,264,229,262,238,277,238,285,249,293,249,299,233,308,234,313,223,317,219,314,219,318,206,316" href="region86" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('17')" shape="poly" coords="150,300,151,303,147,309,135,302,132,303,133,307,137,307,142,311,146,310,151,312,154,319,152,320,152,326,149,328,146,325,145,319,143,320,138,315,139,322,144,327,145,337,162,350,167,362,179,365,180,371,190,377,195,375,198,369,186,362,186,351,181,342,180,334,186,333,191,334,194,323,191,318,171,310,167,301,156,298,151,300" href="region17" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('16')" shape="poly" coords="197,369,186,362,186,351,181,343,180,334,186,332,190,334,194,323,202,316,207,316,218,318,219,314,223,316,234,313,234,320,239,322,237,326,234,326,234,332,225,340,218,351,209,358,209,364,204,370,198,370" href="region16" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('87')" shape="poly" coords="226,340,233,332,234,326,237,326,239,321,233,320,234,313,233,308,249,298,258,298,260,300,258,310,263,314,268,331,279,335,279,341,252,356,240,346,231,348,231,341,225,340" href="region87" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('23')" shape="poly" coords="279,342,279,335,267,331,262,314,258,310,261,300,263,297,273,298,274,295,292,297,296,296,298,302,305,305,309,315,310,325,302,334,305,339,297,343,286,338,280,341" href="region23" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('03')" shape="poly" coords="309,315,305,306,298,302,296,297,300,290,309,290,310,281,329,273,328,276,336,280,343,278,348,281,354,276,358,285,358,289,369,293,369,302,361,306,362,323,357,325,352,321,326,316,323,307,316,309,312,315,309,315" href="region03" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('01')" shape="poly" coords="454,310,454,305,459,304,462,296,458,294,450,303,444,303,440,299,434,304,419,289,416,291,410,289,404,310,403,315,402,324,409,328,411,333,418,332,425,334,428,327,432,329,433,333,441,344,445,337,447,337,449,324,448,314,454,311" href="region01" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('74')" shape="poly" coords="458,335,452,329,450,324,448,314,454,311,461,310,468,304,466,301,467,297,469,295,472,297,477,293,487,292,489,293,488,296,492,300,489,308,493,309,501,321,487,334,478,324,471,336,466,337,463,334,458,334" href="region74" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('69')" shape="poly" coords="404,354,400,353,399,348,392,348,387,343,387,332,382,319,386,310,387,305,399,303,401,310,404,310,404,313,402,315,403,325,410,328,411,333,418,332,418,336,420,338,415,344,405,346,408,351,404,354" href="region69" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('42')" shape="poly" coords="403,360,404,354,400,352,399,348,392,348,386,342,386,331,382,319,386,309,366,310,366,305,361,306,362,323,357,325,360,329,358,336,370,352,367,361,374,362,380,359,387,362,387,366,394,369,397,367,399,362,403,361" href="region42" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('63')" shape="poly" coords="366,361,370,352,358,335,360,329,352,320,326,316,323,308,316,309,312,315,309,315,310,325,301,334,305,339,306,355,324,361,325,365,332,366,332,363,340,359,351,358,354,362,366,361" href="region63" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('19')" shape="poly" coords="306,360,305,339,297,343,285,338,252,356,254,361,251,365,251,374,258,376,259,382,268,382,274,388,290,385,289,380,293,375,292,370,301,359,306,361,306,360" href="region19" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('24')" shape="poly" coords="244,409,259,391,259,383,257,377,251,374,251,365,254,361,252,356,240,346,231,348,231,341,225,340,218,350,208,358,208,364,204,370,198,371,195,375,200,376,196,392,205,394,209,391,209,398,213,404,232,403,233,408,239,405,244,408" href="region24" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('33')" shape="poly" coords="166,362,179,365,180,371,191,377,195,375,200,376,196,391,205,394,210,391,209,398,200,400,204,405,195,413,196,421,191,423,194,427,190,430,185,427,185,432,177,431,177,426,166,416,151,416,151,411,141,414,140,409,144,402,152,402,146,394,141,400,148,358,148,351,151,345,152,350,163,359,166,376,168,377,167,362" href="region33" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('47')" shape="poly" coords="190,430,194,427,191,423,196,421,195,412,204,405,201,400,209,398,213,404,232,403,233,408,239,405,244,408,240,412,242,422,236,422,234,425,236,428,234,437,230,437,227,441,225,443,222,441,198,445,200,436,189,435,189,430" href="region47" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('46')" shape="poly" coords="242,422,240,412,244,409,259,391,259,382,268,382,274,388,288,386,291,396,290,402,292,405,292,409,277,416,280,424,255,431,243,423" href="region46" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('15')" shape="poly" coords="292,405,290,403,291,397,287,385,290,385,290,383,289,380,293,375,292,371,301,359,306,360,306,355,324,361,324,365,337,367,344,386,336,392,333,390,328,405,327,405,322,391,318,391,317,388,311,393,305,405,292,406" href="region15" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('43')" shape="poly" coords="344,386,349,396,357,391,366,400,374,391,379,391,394,367,387,366,386,362,379,359,374,362,366,361,354,362,351,359,341,359,332,363,331,366,337,367,344,386" href="region43" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('73')" shape="poly" coords="491,331,488,334,478,323,471,336,466,337,462,334,458,334,449,324,446,337,441,343,446,354,452,356,455,350,467,356,464,366,469,372,477,375,487,372,496,370,507,362,509,353,501,347,500,340,493,336,491,331" href="region73" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('38')" shape="poly" coords="469,372,464,366,467,356,455,350,452,356,446,354,441,343,432,333,432,330,428,327,424,334,417,332,417,335,420,337,415,345,406,346,408,350,404,354,404,360,407,364,416,362,423,367,423,377,433,379,436,376,437,394,451,399,453,396,466,388,474,388,472,380,467,380,469,373" href="region38" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('26')" shape="poly" coords="417,426,423,426,424,430,433,430,439,436,444,431,448,431,444,424,436,420,437,413,443,413,445,411,442,409,445,403,449,402,451,399,436,394,436,376,432,379,423,377,422,367,415,362,406,364,406,375,410,388,405,397,406,404,402,410,401,424,408,424,409,430,414,427,411,421,416,417,419,420,417,425" href="region26" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('05')" shape="poly" coords="486,373,477,375,469,372,467,379,472,381,474,380,474,388,465,388,453,396,449,402,445,403,442,408,445,411,443,414,437,413,436,420,444,424,448,431,456,429,454,426,459,417,466,412,469,416,477,409,481,413,488,413,490,408,501,398,506,397,503,388,495,387,486,373" href="region05" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('07')" shape="poly" coords="401,427,401,423,402,409,406,403,405,397,410,387,406,374,406,363,403,360,400,362,397,368,392,369,379,391,374,391,366,400,375,422,384,428,387,424,395,424,401,427" href="region07" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('48')" shape="poly" coords="372,417,368,421,371,431,367,438,357,434,356,437,348,438,347,436,334,430,334,414,327,406,333,390,336,391,344,386,349,395,357,392,366,399,373,417,372,417" href="region48" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('12')" shape="poly" coords="344,435,334,430,333,414,327,405,321,392,318,392,317,388,311,393,305,405,293,406,292,409,277,416,279,424,277,425,281,429,280,436,290,434,305,443,310,456,314,461,324,461,325,465,331,464,331,457,338,457,348,444,341,440,344,435" href="region12" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('82')" shape="poly" coords="280,436,281,429,277,425,255,431,241,422,236,422,233,425,237,428,233,437,230,437,227,441,232,443,229,449,234,451,236,458,246,457,249,459,255,457,255,453,264,451,270,443,270,438,280,437" href="region82" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('40')" shape="poly" coords="197,450,198,445,200,437,190,435,189,430,185,427,185,431,177,431,177,426,166,416,151,416,151,411,140,414,137,437,130,462,126,470,132,473,141,470,144,473,158,470,183,470,186,448,192,445,198,451" href="region40" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('32')" shape="poly" coords="183,470,186,448,192,445,198,450,198,445,222,441,225,443,229,440,232,444,229,449,234,451,236,458,248,471,242,475,238,484,229,480,222,487,202,483,200,476,192,468,190,469,183,469" href="region32" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('81')" shape="poly" coords="264,451,269,444,270,439,290,434,304,443,310,457,315,462,324,462,325,465,319,469,312,467,313,479,309,482,294,480,294,483,284,482,284,479,272,470,264,452" href="region81" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('04')" shape="poly" coords="501,399,491,408,488,413,481,413,476,410,470,416,466,412,458,418,454,426,456,430,447,431,443,432,439,436,441,440,440,446,444,448,442,453,447,454,452,459,461,458,463,462,473,454,479,457,482,454,492,453,493,452,493,448,499,446,504,446,495,439,492,429,500,417,501,412,498,407,502,402,502,401,501,399" href="region04" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('06')" shape="poly" coords="500,417,492,429,494,438,503,446,499,446,493,448,493,452,491,453,497,458,497,461,503,465,502,470,505,472,507,467,511,468,513,466,514,460,530,452,529,446,538,435,535,427,523,431,506,425,501,417" href="region06" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('84')" shape="poly" coords="451,459,448,453,443,453,442,452,444,449,440,446,441,440,433,430,424,430,423,427,416,426,419,421,415,418,411,422,415,426,409,430,407,424,401,424,401,428,405,433,405,438,411,444,406,449,413,450,420,455,420,456,427,460,430,459,439,463,447,464,451,459" href="region84" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('30')" shape="poly" coords="406,450,411,444,404,437,404,433,401,428,395,424,387,424,384,428,375,423,372,417,368,421,371,431,366,437,356,434,356,437,348,437,344,435,341,440,348,444,344,450,352,453,362,447,365,449,364,452,369,453,381,463,382,468,378,472,380,474,380,477,384,478,385,475,395,469,393,467,396,461,401,463,402,458,403,452,406,450" href="region30" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('64')" shape="poly" coords="126,470,132,473,141,470,145,473,156,470,182,470,183,469,191,469,194,483,190,494,180,506,179,516,168,518,158,508,133,498,132,502,127,499,132,488,124,484,122,487,113,480,122,476,127,469" href="region64" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('65')" shape="poly" coords="222,488,201,483,200,477,192,468,190,470,194,483,189,495,180,506,179,515,192,525,200,523,214,524,214,514,218,515,222,508,214,498,222,487" href="region65" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('31')" shape="poly" coords="214,524,214,514,218,514,222,507,214,498,229,480,238,483,242,474,248,471,236,458,246,457,249,459,255,457,256,453,263,451,272,470,284,479,284,481,277,481,270,491,261,491,260,493,254,487,252,489,255,494,249,496,252,499,249,502,244,498,238,501,238,507,231,512,231,517,223,515,223,525,213,525" href="region31" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('09')" shape="poly" coords="231,517,230,512,238,508,239,501,245,498,250,501,252,500,249,497,254,494,252,490,255,488,260,494,261,491,270,491,271,496,281,501,283,515,278,517,281,524,287,523,291,527,273,534,262,529,259,532,254,524,244,524,243,521,231,517" href="region09" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('11')" shape="poly" coords="309,482,294,480,293,483,278,481,270,491,271,496,282,501,282,515,277,517,282,524,287,523,291,527,300,524,299,517,317,517,323,512,330,517,332,506,338,494,323,486,319,491,308,487,308,482" href="region11" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('66')" shape="poly" coords="330,517,322,513,317,516,317,517,299,517,300,524,273,533,271,537,281,542,284,547,296,542,307,547,314,547,314,544,330,539,333,542,337,542,335,537,331,535,331,516" href="region66" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('34')" shape="poly" coords="379,471,382,467,381,463,370,453,364,453,364,450,362,447,352,453,343,450,338,457,331,457,331,464,326,465,319,469,312,467,313,479,309,482,308,487,319,491,322,485,339,495,346,490,352,489,357,484,365,480,368,476,372,472,379,472" href="region34" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('13')" shape="poly" coords="384,478,384,476,394,469,393,467,396,462,401,463,401,459,402,458,402,452,407,449,412,450,420,454,420,457,426,460,430,459,439,464,445,464,453,460,454,462,449,466,451,475,454,479,450,480,450,483,453,487,451,489,449,493,446,493,435,491,435,489,435,485,432,482,429,485,420,485,418,481,425,480,429,476,428,474,426,476,423,473,419,472,418,474,419,476,421,477,421,479,417,480,415,479,412,481,413,484,410,485,408,483,402,484,399,484,400,480,398,479,384,478" href="region13" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('83')" shape="poly" coords="505,472,502,469,503,465,497,462,496,458,491,453,482,454,478,457,473,454,463,462,460,458,452,459,454,462,449,465,451,470,450,475,454,479,450,480,450,483,453,486,450,489,450,493,455,497,456,500,460,500,460,497,472,498,474,496,477,496,481,497,481,494,490,491,493,491,495,485,491,485,495,481,497,476,501,476,504,474,505,472" href="region83" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('2a')" shape="poly" coords="558,548,553,547,554,543,539,537,539,533,544,529,533,525,538,519,539,514,531,515,530,512,536,506,535,503,529,500,528,494,534,493,528,487,530,485,544,491,552,499,557,508,559,507,560,520,566,517,567,528,559,548" href="region2a" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('2b')" shape="poly" coords="530,486,541,489,551,497,556,508,559,507,560,519,567,518,568,511,575,502,573,473,569,468,571,460,569,448,564,447,564,454,563,458,564,464,562,467,560,465,555,464,551,466,551,469,536,474,531,485" href="region2b" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('75')" shape="poly" coords="61,32,52,36,51,40,62,46,67,46,72,44,78,45,78,43,76,42,73,42,72,38,70,33,62,31" href="region75" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('92')" shape="poly" coords="62,47,51,40,52,36,62,32,61,29,64,28,62,25,59,23,44,33,42,44,51,54,57,56,57,60,61,60,63,47" href="region92" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('94')" shape="poly" coords="62,58,63,46,67,46,72,44,78,46,78,43,72,42,72,39,81,39,92,47,93,57,88,66,86,66,81,60,67,62,67,59,62,58" href="region94" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('93')" shape="poly" coords="91,47,81,39,72,39,70,33,61,31,61,29,63,27,59,23,68,19,72,23,78,22,86,13,89,13,90,18,89,19,92,26,89,35,92,46" href="region93" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('75')" shape="poly" coords="299,143,302,143,303,147,301,150,298,150,294,147,298,144" href="region75_f" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('92')" shape="poly" coords="298,143,298,140,293,142,291,145,291,149,294,153,298,155,299,149,294,147,295,145,299,143,298,143" href="region92_f" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('94')" shape="poly" coords="299,155,298,150,301,150,303,147,306,146,309,149,309,157,306,156,299,155" href="region94_f" />
-		<area onmouseout="nonsurvolregion()" onmouseover="survolregion('93')" shape="poly" coords="309,149,305,147,302,147,302,145,299,143,298,140,304,140,308,137,310,141,309,145,309,149" href="region93_f" />
-		</map>
 
-		</div>
-					
-
-	</div>
-	</div>
-
-			
-    </div> <!-- #inside-column -->
+</div> <!-- #inside-column -->
 <div id="main-footer">
-				<div class="connexion-shadow-2 nom"></div>
-				<div id="home-icons">
-					<img src="<?php echo $conf["url"]; ?>Images/icon-1.png" alt="" />
-					<img src="<?php echo $conf["url"]; ?>Images/icon-2.png" alt="" />
-					<img src="<?php echo $conf["url"]; ?>Images/icon-3.png" alt="" />
-					<img src="<?php echo $conf["url"]; ?>Images/icon-4.png" alt="" />
-					<img src="<?php echo $conf["url"]; ?>Images/icon-5.png" alt="" />
-					<img src="<?php echo $conf["url"]; ?>Images/icon-6.png" alt="" />
-				</div> <!-- #home-icons -->
-			</div> <!-- #main-footer -->
+    <div class="connexion-shadow-2 nom"></div>
+    <div id="home-icons">
+        <img src="<?php echo $conf["url"]; ?>Images/icon-1.png" alt="" />
+        <img src="<?php echo $conf["url"]; ?>Images/icon-2.png" alt="" />
+        <img src="<?php echo $conf["url"]; ?>Images/icon-3.png" alt="" />
+        <img src="<?php echo $conf["url"]; ?>Images/icon-4.png" alt="" />
+        <img src="<?php echo $conf["url"]; ?>Images/icon-5.png" alt="" />
+        <img src="<?php echo $conf["url"]; ?>Images/icon-6.png" alt="" />
+    </div> <!-- #home-icons -->
+</div> <!-- #main-footer -->
 </div> <!-- .cfix -->
 
 <div class="blue-box-top blue-box-asdf"></div>

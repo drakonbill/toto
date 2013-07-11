@@ -5,6 +5,9 @@ $appconf["title"] = "Meetoparty";
 $appconf["url"] = 'http://' . $_SERVER['SERVER_NAME'] . '/';
 $appconf['memberdir'] = "memberdir/";
 
+// Include the constants.php file
+include 'constants.php';
+
 ## add other config files if use
 $dbcon = new config_mysql();
 $reg->dbcon = $dbcon->getConnection(); //register it

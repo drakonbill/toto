@@ -11,389 +11,346 @@
  * @author Deixonne
  */
 class models_ajax_passion extends Model {
-    
+
     function choicePassion() {
-        
+
         global $reg;
-         
+
         $q = $reg->clean->GET('q');
         $result = "";
-        
-        if(!empty($q)) {
-            $resultat = mysql_query("SELECT id_passion,name_passion,icon_passion AS icone,passion_category.icone AS icone_categorie,name_category from passion inner join passion_category on passion.id_category=passion_category.id_category WHERE name_passion LIKE '%".$q."%' LIMIT 11") or die(mysql_error());
+
+        if (!empty($q)) {
+            $resultat = mysql_query("SELECT id_passion,name_passion,icon_passion AS icone,passion_category.icone AS icone_categorie,name_category from passion inner join passion_category on passion.id_category=passion_category.id_category WHERE name_passion LIKE '%" . $q . "%' LIMIT 11") or die(mysql_error());
             while ($donnees = mysql_fetch_assoc($resultat)) {
-                        $result .= ucfirst($donnees['name_passion'])."|".ucfirst($donnees['name_category'])."|/".(!empty($donnees['icone'])?$donnees['icone']:$donnees['icone_categorie'])."\n";
+                $result .= ucfirst($donnees['name_passion']) . "|" . ucfirst($donnees['name_category']) . "|/" . (!empty($donnees['icone']) ? $donnees['icone'] : $donnees['icone_categorie']) . "\n";
             }
 
-            if(mysql_num_rows($resultat) == 0) {
-                    $result = "Aucun résultat | |\n";
+            if (mysql_num_rows($resultat) == 0) {
+                $result = "Aucun résultat | |\n";
             }
         }
-        
+
         return $result;
     }
-    
+
     function categoryPassion() {
 
-        if(isset($_GET['mode']) && $_GET['mode'] == "categorie") {
-                $requete = mysql_query("SELECT name_category,id_category,icone FROM passion_category ORDER BY name_category ASC") or die(mysql_error());
-                
-                $result = "";
-                while($data = mysql_fetch_array($requete)) 
-                        $result .= "<li value='".$data['id_category']."'><img src='/".$data['icone']."' alt='".$data['name_category']."' />".ucfirst($data['name_category'])."</li>";
-                
-                return $result;
+        if (isset($_GET['mode']) && $_GET['mode'] == "categorie") {
+            $requete = mysql_query("SELECT name_category,id_category,icone FROM passion_category ORDER BY name_category ASC") or die(mysql_error());
+
+            $result = "";
+            while ($data = mysql_fetch_array($requete))
+                $result .= "<li value='" . $data['id_category'] . "'><img src='/" . $data['icone'] . "' alt='" . $data['name_category'] . "' />" . ucfirst($data['name_category']) . "</li>";
+
+            return $result;
         }
     }
-    
+
     function registerImage() {
-        
-        if(isset($_SESSION['id_member']))
-        {
-                global $reg;
-                
-                // Constantes
-                define('MAX_SIZE', 2000000);    // Taille max en octets du fichier
-                define('WIDTH_MAX', 2000);    // Largeur max de l'image en pixels
-                define('HEIGHT_MAX', 2000);    // Hauteur max de l'image en pixels
 
-                // Tableaux de donnees
-                $tabExt = array('jpg','gif','png','jpeg');    // Extensions autorisees
-                $infosImg = array();
+        if (isset($_SESSION['id_member'])) {
+            global $reg;
 
-                // Variables
-                $extension = '';
-                $message = '';
-                $nomImage = '';
+            // Constantes
+            define('MAX_SIZE', 2000000);    // Taille max en octets du fichier
+            define('WIDTH_MAX', 2000);    // Largeur max de l'image en pixels
+            define('HEIGHT_MAX', 2000);    // Hauteur max de l'image en pixels
+            // Tableaux de donnees
+            $tabExt = array('jpg', 'gif', 'png', 'jpeg');    // Extensions autorisees
+            $infosImg = array();
 
-                /************************************************************
-                 * Creation du repertoire cible si inexistant
-                 *************************************************************/
-                if( !is_dir(TARGET) ) {
-                  if( !mkdir(TARGET, 0777) ) { // Doute sur nom dossier
-                        return ('Erreur : le répertoire cible ne peut-être créé ! Vérifiez que vous diposiez des droits suffisants pour le faire ou créez le manuellement !');
-                  }
+            // Variables
+            $extension = '';
+            $message = '';
+            $nomImage = '';
+
+            /*             * **********************************************************
+             * Creation du repertoire cible si inexistant
+             * *********************************************************** */
+            if (!is_dir(TARGET)) {
+                if (!mkdir(TARGET, 0777)) { // Doute sur nom dossier
+                    return ('Erreur : le répertoire cible ne peut-être créé ! Vérifiez que vous diposiez des droits suffisants pour le faire ou créez le manuellement !');
                 }
+            }
 
-                  // On verifie si le champ est rempli
-                  if( !empty($_FILES['filepassion']['name']) )
-                  {
-                        // Recuperation de l'extension du fichier
-                        $extension  = pathinfo($_FILES['filepassion']['name'], PATHINFO_EXTENSION);
+            // On verifie si le champ est rempli
+            if (!empty($_FILES['filepassion']['name'])) {
+                // Recuperation de l'extension du fichier
+                $extension = pathinfo($_FILES['filepassion']['name'], PATHINFO_EXTENSION);
 
-                        // On verifie l'extension du fichier
-                        if(in_array(strtolower($extension),$tabExt))
-                        {
-                           switch ($_FILES["filepassion"]["error"])
-                            {
+                // On verifie l'extension du fichier
+                if (in_array(strtolower($extension), $tabExt)) {
+                    switch ($_FILES["filepassion"]["error"]) {
 
-                                    case 1 : return ("<p>Erreur : la taille du fichier dépasse le maximum autorisé ".ini_get('upload_max_filesize')."</p>\n");
+                        case 1 : return ("<p>Erreur : la taille du fichier dépasse le maximum autorisé " . ini_get('upload_max_filesize') . "</p>\n");
 
-                                    break;
+                            break;
 
-                                    case 2 : return ("<p>Erreur : la taille du fichier dépasse celle définie dans le formulaire (30Ko).</p>\n");
+                        case 2 : return ("<p>Erreur : la taille du fichier dépasse celle définie dans le formulaire (30Ko).</p>\n");
 
-                                    break;
+                            break;
 
-                                    case 3 : return ("<p>Erreur : Le fichier n'a été que partiellement transmis.</p>\n");
+                        case 3 : return ("<p>Erreur : Le fichier n'a été que partiellement transmis.</p>\n");
 
-                                    break;
+                            break;
 
-                                    case 4 : return ("<p>Erreur : La transmission n'a pas eu lieu</p>\n");
+                        case 4 : return ("<p>Erreur : La transmission n'a pas eu lieu</p>\n");
 
-                                    break;
+                            break;
+                    }
+
+                    // On recupere les dimensions du fichier
+                    $infosImg = getimagesize($_FILES['filepassion']['tmp_name']);
+
+
+                    // On verifie le type de l'image
+                    if ($infosImg[2] >= 1 && $infosImg[2] <= 14) {
+                        // On verifie les dimensions et taille de l'image
+                        if (($infosImg[0] <= WIDTH_MAX) && ($infosImg[1] <= HEIGHT_MAX) && (filesize($_FILES['filepassion']['tmp_name']) <= MAX_SIZE)) {
+                            // Parcours du tableau d'erreurs
+                            if (isset($_FILES['filepassion']['error']) && UPLOAD_ERR_OK === $_FILES['filepassion']['error']) {
+                                // On renomme le fichier
+                                $nomImage = 'temp_iconegout.' . $extension;
+
+                                // Si c'est OK, on teste l'upload
+                                if (move_uploaded_file($_FILES['filepassion']['tmp_name'], TARGET . $nomImage)) {
+                                    $message = '1;';
+                                    $message .= "/" . MEMDIR . hash('crc32', crc32(PREFIXE) . $_SESSION['id_member'] . crc32(SUFFIXE)) . "/" . $nomImage;
+                                    $message .= ";" . $nomImage;
+                                } else {
+                                    // Sinon on affiche une erreur systeme
+                                    $message = 'Problème lors de l\'upload !';
+                                }
+                            } else {
+                                $message = 'Une erreur interne a empêché l\'uplaod de l\'image';
                             }
-                            
-                          // On recupere les dimensions du fichier
-                          $infosImg = getimagesize($_FILES['filepassion']['tmp_name']);
-
-
-                          // On verifie le type de l'image
-                          if($infosImg[2] >= 1 && $infosImg[2] <= 14)
-                          {
-                                // On verifie les dimensions et taille de l'image
-                                if(($infosImg[0] <= WIDTH_MAX) && ($infosImg[1] <= HEIGHT_MAX) && (filesize($_FILES['filepassion']['tmp_name']) <= MAX_SIZE))
-                                {
-                                  // Parcours du tableau d'erreurs
-                                  if(isset($_FILES['filepassion']['error']) 
-                                        && UPLOAD_ERR_OK === $_FILES['filepassion']['error'])
-                                  {
-                                        // On renomme le fichier
-                                        $nomImage = 'temp_iconegout.'. $extension;
-
-                                        // Si c'est OK, on teste l'upload
-                                        if(move_uploaded_file($_FILES['filepassion']['tmp_name'], TARGET.$nomImage))
-                                        {
-                                          $message = '1;';
-                                          $message .= "/".MEMDIR.hash('crc32',crc32(PREFIXE).$_SESSION['id_member'].crc32(SUFFIXE))."/".$nomImage;
-                                          $message .= ";".$nomImage;
-                                        }
-                                        else
-                                        {
-                                          // Sinon on affiche une erreur systeme
-                                          $message = 'Problème lors de l\'upload !';
-                                        }
-                                  }
-                                  else
-                                  {
-                                        $message = 'Une erreur interne a empêché l\'uplaod de l\'image';
-                                  }
-                                }
-                                else
-                                {
-                                  // Sinon erreur sur les dimensions et taille de l'image
-                                  $message = 'Erreur dans les dimensions de l\'image !';
-                                }
-                          }
-                          else
-                          {
-                                // Sinon erreur sur le type de l'image
-                                $message = 'Le fichier à uploader n\'est pas une image !';
-                          }
+                        } else {
+                            // Sinon erreur sur les dimensions et taille de l'image
+                            $message = 'Erreur dans les dimensions de l\'image !';
                         }
-                        else
-                        {
-                          // Sinon on affiche une erreur pour l'extension
-                          $message = 'L\'extension du fichier est incorrecte !';
-                        }
-                  }
-                  else
-                  {
-                        // Sinon on affiche une erreur pour le champ vide
-                        $message = 'Veuillez remplir le formulaire svp !';
-                  }
+                    } else {
+                        // Sinon erreur sur le type de l'image
+                        $message = 'Le fichier à uploader n\'est pas une image !';
+                    }
+                } else {
+                    // Sinon on affiche une erreur pour l'extension
+                    $message = 'L\'extension du fichier est incorrecte !';
+                }
+            } else {
+                // Sinon on affiche une erreur pour le champ vide
+                $message = 'Veuillez remplir le formulaire svp !';
+            }
 
-                return $message;
-        }
-        else
-        {
-                return "Vous n'êtes pas connecté";
+            return $message;
+        } else {
+            return "Vous n'êtes pas connecté";
         }
     }
-    
+
     function registerPassion() {
-        
+
         global $reg;
-        
+
         $result = "";
-        
-        if($_SESSION['id_member'] != "")
-        {
 
-                $passion = $reg->clean->POST('passion');
-                $categorie = intval($_POST['categorie']);
+        if ($_SESSION['id_member'] != "") {
 
-                if(isset($_POST['x1']) && isset($_POST['x2']) && isset($_POST['y1']) && isset($_POST['y2']) && isset($_POST['w']) && isset($_POST['h']) && isset($_POST['image']) && isset($_POST['imageheight']) && isset($_POST['imagewidth'])) {
-                        $x1 = intval($_POST['x1']);
-                        $y1 = intval($_POST['y1']);
-                        $x2 = intval($_POST['x2']);
-                        $y2 = intval($_POST['y2']);
-                        $w = intval($_POST['w']);
-                        $h = intval($_POST['h']);
-                        $image = $reg->clean->POST('image');
-                        $imageheight = intval($_POST['imageheight']);
-                        $imagewidth = intval($_POST['imagewidth']);
-                }
+            $passion = $reg->clean->POST('passion');
+            $categorie = intval($_POST['categorie']);
 
-                if(!empty($passion))
-                {
-                        $requete_verif_new = mysql_query("SELECT passion.id_passion,name_passion,name_category,passion_category.icone,passion.icon_passion AS icone_passion FROM passion inner join passion_category on passion.id_category=passion_category.id_category WHERE name_passion='".strtolower($passion)."' ") or die(mysql_error());
-                        $data_verif_new = mysql_num_rows($requete_verif_new);
+            if (isset($_POST['x1']) && isset($_POST['x2']) && isset($_POST['y1']) && isset($_POST['y2']) && isset($_POST['w']) && isset($_POST['h']) && isset($_POST['image']) && isset($_POST['imageheight']) && isset($_POST['imagewidth'])) {
+                $x1 = intval($_POST['x1']);
+                $y1 = intval($_POST['y1']);
+                $x2 = intval($_POST['x2']);
+                $y2 = intval($_POST['y2']);
+                $w = intval($_POST['w']);
+                $h = intval($_POST['h']);
+                $image = $reg->clean->POST('image');
+                $imageheight = intval($_POST['imageheight']);
+                $imagewidth = intval($_POST['imagewidth']);
+            }
 
-                        if($data_verif_new != 0 || isset($_POST['mode'])) {
+            if (!empty($passion)) {
+                $requete_verif_new = mysql_query("SELECT passion.id_passion,name_passion,name_category,passion_category.icone,passion.icon_passion AS icone_passion FROM passion inner join passion_category on passion.id_category=passion_category.id_category WHERE name_passion='" . strtolower($passion) . "' ") or die(mysql_error());
+                $data_verif_new = mysql_num_rows($requete_verif_new);
 
-                                        if(isset($_POST['mode']) && $_POST['mode'] == "enregistrericone" && !empty($categorie) && isset($x1) && isset($y1) && isset($x2) && isset($y2) && isset($w) && isset($h) && isset($image) && isset($imageheight) & isset($imagewidth) && $data_verif_new == 0) {
-                                                $requete_verif_categorie = mysql_query("SELECT name_category, icone FROM passion_category WHERE id_category='".$categorie."'") or die(mysql_error());
-                                                $data_verif_categorie = mysql_num_rows($requete_verif_categorie);
+                if ($data_verif_new != 0 || isset($_POST['mode'])) {
 
-                                                if($data_verif_categorie > 0) {
-                                                        $extension = pathinfo($image, PATHINFO_EXTENSION);
-                                                        $nomImageFinal = md5(uniqid()) .'.'. $extension;
-                                                        $cropped = $this->resizeThumbnailImage(TARGET.$image, "Images/iconespassion/".$nomImageFinal,$w,$h,$x1,$y1,$imageheight,$imagewidth);
+                    if (isset($_POST['mode']) && $_POST['mode'] == "enregistrericone" && !empty($categorie) && isset($x1) && isset($y1) && isset($x2) && isset($y2) && isset($w) && isset($h) && isset($image) && isset($imageheight) & isset($imagewidth) && $data_verif_new == 0) {
+                        $requete_verif_categorie = mysql_query("SELECT name_category, icone FROM passion_category WHERE id_category='" . $categorie . "'") or die(mysql_error());
+                        $data_verif_categorie = mysql_num_rows($requete_verif_categorie);
 
-                                                        mysql_query("INSERT INTO passion VALUES (default, '".$passion."', '".$categorie."', '".$_SESSION['id_member']."', '"."Images/iconespassion/".$nomImageFinal."')") or die(mysql_error());
-                                                        $result = "2;".$data_verif_categorie['name_category'].";".stripslashes($passion).";".mysql_insert_id().";/Images/iconespassion/".$nomImageFinal;
-                                                        return $result;
-                                                }
-                                        }
-                                        else if(isset($_POST['mode']) && $_POST['mode'] == "enregistrergout" && !empty($categorie) && $data_verif_new == 0) {
-                                                $requete_verif_categorie = mysql_query("SELECT name_category, icone FROM passion_category WHERE id_category='".$categorie."'") or die(mysql_error());
-                                                $data_verif_categorie = mysql_num_rows($requete_verif_categorie);
+                        if ($data_verif_categorie > 0) {
+                            $extension = pathinfo($image, PATHINFO_EXTENSION);
+                            $nomImageFinal = md5(uniqid()) . '.' . $extension;
+                            $cropped = $this->resizeThumbnailImage(TARGET . $image, "Images/iconespassion/" . $nomImageFinal, $w, $h, $x1, $y1, $imageheight, $imagewidth);
 
-                                                if($data_verif_categorie > 0) {
-                                                        mysql_query("INSERT INTO passion VALUES (default, '".$passion."', '".$categorie."', '".$_SESSION['id_member']."', default)") or die(mysql_error());
-                                                        $result = "2;".$data_verif_categorie['name_category'].";".stripslashes($passion).";".mysql_insert_id().";/".$data_verif_categorie['icone'];
-                                                        return $result;
-                                                }
-                                        }
-                                        else if($data_verif_new != 0) {
-                                                $idpassion = mysql_fetch_array($requete_verif_new);
-
-                                                $result = "2;".$idpassion['name_category'].";".stripslashes($passion).";".$idpassion['id_passion'].";/".($idpassion['icone_passion'] == NULL?$idpassion['icone']:$idpassion['icone_passion']);
-                                                return $result;
-                                        }
-
-
+                            mysql_query("INSERT INTO passion VALUES (default, '" . $passion . "', '" . $categorie . "', '" . $_SESSION['id_member'] . "', '" . "Images/iconespassion/" . $nomImageFinal . "')") or die(mysql_error());
+                            $result = "2;" . $data_verif_categorie['name_category'] . ";" . stripslashes($passion) . ";" . mysql_insert_id() . ";/Images/iconespassion/" . $nomImageFinal;
+                            return $result;
                         }
-                        else {
-                                return "1";
-                        }
+                    } else if (isset($_POST['mode']) && $_POST['mode'] == "enregistrergout" && !empty($categorie) && $data_verif_new == 0) {
+                        $requete_verif_categorie = mysql_query("SELECT name_category, icone FROM passion_category WHERE id_category='" . $categorie . "'") or die(mysql_error());
+                        $data_verif_categorie = mysql_num_rows($requete_verif_categorie);
 
+                        if ($data_verif_categorie > 0) {
+                            mysql_query("INSERT INTO passion VALUES (default, '" . $passion . "', '" . $categorie . "', '" . $_SESSION['id_member'] . "', default)") or die(mysql_error());
+                            $result = "2;" . $data_verif_categorie['name_category'] . ";" . stripslashes($passion) . ";" . mysql_insert_id() . ";/" . $data_verif_categorie['icone'];
+                            return $result;
+                        }
+                    } else if ($data_verif_new != 0) {
+                        $idpassion = mysql_fetch_array($requete_verif_new);
+
+                        $result = "2;" . $idpassion['name_category'] . ";" . stripslashes($passion) . ";" . $idpassion['id_passion'] . ";/" . ($idpassion['icone_passion'] == NULL ? $idpassion['icone'] : $idpassion['icone_passion']);
+                        return $result;
+                    }
+                } else {
+                    return "1";
                 }
+            }
         }
     }
-    
+
     function registerPassionProfil() {
         global $reg;
-        
+
         $result = "";
-        
-        if($_SESSION['id_member'] != "")
-        {
 
-                $passion = $reg->clean->POST('passion');
-                $categorie = intval($_POST['categorie']);
+        if ($_SESSION['id_member'] != "") {
 
-                if(isset($_POST['x1']) && isset($_POST['x2']) && isset($_POST['y1']) && isset($_POST['y2']) && isset($_POST['w']) && isset($_POST['h']) && isset($_POST['image']) && isset($_POST['imageheight']) && isset($_POST['imagewidth'])) {
-                        $x1 = intval($_POST['x1']);
-                        $y1 = intval($_POST['y1']);
-                        $x2 = intval($_POST['x2']);
-                        $y2 = intval($_POST['y2']);
-                        $w = intval($_POST['w']);
-                        $h = intval($_POST['h']);
-                        $image = $reg->clean->POST('image');
-                        $imageheight = intval($_POST['imageheight']);
-                        $imagewidth = intval($_POST['imagewidth']);
-                }
+            $passion = $reg->clean->POST('passion');
+            $categorie = intval($_POST['categorie']);
 
-                if(!empty($passion))
-                {
-                        $requete_verif_new = mysql_query("SELECT passion.id_passion,name_passion,name_category,passion_category.icone,passion.icon_passion AS icone_passion, passion.id_category FROM passion inner join passion_category on passion.id_category=passion_category.id_category WHERE name_passion='".strtolower($passion)."' ") or die(mysql_error());
-                        $data_verif_new = mysql_num_rows($requete_verif_new);
-                        
-                        $result = array();
-                        
-                        if($data_verif_new != 0 || isset($_POST['mode'])) {
-                                        $requete = mysql_query("SELECT member_passion.id_passion,id_category,name_passion FROM member_passion inner join passion on member_passion.id_passion=passion.id_passion WHERE member_passion.id_member='".$_SESSION['id_member']."' AND name_passion='".strtolower($passion)."'") or die(mysql_error());
-                                        $data = mysql_fetch_array($requete);
-                                        
-                                        if(empty($data['nompassion'])) {
-                                            if(isset($_POST['mode']) && $_POST['mode'] == "enregistrericone" && !empty($categorie) && isset($x1) && isset($y1) && isset($x2) && isset($y2) && isset($w) && isset($h) && isset($image) && isset($imageheight) & isset($imagewidth) && $data_verif_new == 0) {
-                                                    $requete_verif_categorie = mysql_query("SELECT name_category, icone FROM passion_category WHERE id_category='".$categorie."'") or die(mysql_error());
-                                                    $data_verif_categorie = mysql_num_rows($requete_verif_categorie);
+            if (isset($_POST['x1']) && isset($_POST['x2']) && isset($_POST['y1']) && isset($_POST['y2']) && isset($_POST['w']) && isset($_POST['h']) && isset($_POST['image']) && isset($_POST['imageheight']) && isset($_POST['imagewidth'])) {
+                $x1 = intval($_POST['x1']);
+                $y1 = intval($_POST['y1']);
+                $x2 = intval($_POST['x2']);
+                $y2 = intval($_POST['y2']);
+                $w = intval($_POST['w']);
+                $h = intval($_POST['h']);
+                $image = $reg->clean->POST('image');
+                $imageheight = intval($_POST['imageheight']);
+                $imagewidth = intval($_POST['imagewidth']);
+            }
 
-                                                    if($data_verif_categorie > 0) {
-                                                            $extension = pathinfo($image, PATHINFO_EXTENSION);
-                                                            $nomImageFinal = md5(uniqid()) .'.'. $extension;
-                                                            $cropped = $this->resizeThumbnailImage(TARGET.$image, "Images/iconespassion/".$nomImageFinal,$w,$h,$x1,$y1,$imageheight,$imagewidth);
+            if (!empty($passion)) {
+                $requete_verif_new = mysql_query("SELECT passion.id_passion,name_passion,name_category,passion_category.icone,passion.icon_passion AS icone_passion, passion.id_category FROM passion inner join passion_category on passion.id_category=passion_category.id_category WHERE name_passion='" . strtolower($passion) . "' ") or die(mysql_error());
+                $data_verif_new = mysql_num_rows($requete_verif_new);
 
-                                                            mysql_query("INSERT INTO passion VALUES (default, '".$passion."', '".$categorie."', '".$_SESSION['id_member']."', '"."Images/iconespassion/".$nomImageFinal."')") or die(mysql_error());
-                                                            mysql_query("INSERT INTO member_passion VALUES ('".$_SESSION['id_member']."', '".mysql_insert_id()."')") or die(mysql_error());
-                                                            $result[] = "ok";
-                                                            $result[] = $data_verif_categorie['name_category'].";".stripslashes($passion).";".mysql_insert_id().";/Images/iconespassion/".$nomImageFinal.";".$idpassion['id_category'];
-                                                            return json_encode($result);
-                                                    }
-                                            }
-                                            else if(isset($_POST['mode']) && $_POST['mode'] == "enregistrergout" && !empty($categorie) && $data_verif_new == 0) {
-                                                    $requete_verif_categorie = mysql_query("SELECT name_category, icone FROM passion_category WHERE id_category='".$categorie."'") or die(mysql_error());
-                                                    $data_verif_categorie = mysql_num_rows($requete_verif_categorie);
+                $result = array();
 
-                                                    if($data_verif_categorie > 0) {
-                                                            mysql_query("INSERT INTO passion VALUES (default, '".$passion."', '".$categorie."', '".$_SESSION['id_member']."', default)") or die(mysql_error());
-                                                            mysql_query("INSERT INTO member_passion VALUES ('".$_SESSION['id_member']."', '".mysql_insert_id()."')") or die(mysql_error());
-                                                            $result[] = "ok";
-                                                            $result[] = $data_verif_categorie['name_category'].";".stripslashes($passion).";".mysql_insert_id().";/".$data_verif_categorie['icone'].";".$idpassion['id_category'];
-                                                            return json_encode($result);
-                                                    }
-                                            }
-                                            else if($data_verif_new == 1) {
-                                                    $idpassion = mysql_fetch_array($requete_verif_new);
-                                                    
-                                                    mysql_query("INSERT INTO member_passion VALUES ('".$_SESSION['id_member']."', '".$idpassion['id_passion']."')") or die(mysql_error());
-                                                    $result[] = "ok";
-                                                    $result[] = $idpassion['name_category'].";".stripslashes($passion).";".$idpassion['id_passion'].";/".($idpassion['icone_passion'] == NULL?$idpassion['icone']:$idpassion['icone_passion']).";".$idpassion['id_category'];
-                                                    return json_encode($result);
-                                            }
-                                        }
-                                        else {
-                                                return json_encode(array("error","Passion déjà ajoutée"));
-                                        }
+                if ($data_verif_new != 0 || isset($_POST['mode'])) {
+                    $requete = mysql_query("SELECT member_passion.id_passion,id_category,name_passion FROM member_passion inner join passion on member_passion.id_passion=passion.id_passion WHERE member_passion.id_member='" . $_SESSION['id_member'] . "' AND name_passion='" . strtolower($passion) . "'") or die(mysql_error());
+                    $data = mysql_fetch_array($requete);
 
+                    if (empty($data['nompassion'])) {
+                        if (isset($_POST['mode']) && $_POST['mode'] == "enregistrericone" && !empty($categorie) && isset($x1) && isset($y1) && isset($x2) && isset($y2) && isset($w) && isset($h) && isset($image) && isset($imageheight) & isset($imagewidth) && $data_verif_new == 0) {
+                            $requete_verif_categorie = mysql_query("SELECT name_category, icone FROM passion_category WHERE id_category='" . $categorie . "'") or die(mysql_error());
+                            $data_verif_categorie = mysql_num_rows($requete_verif_categorie);
 
+                            if ($data_verif_categorie > 0) {
+                                $extension = pathinfo($image, PATHINFO_EXTENSION);
+                                $nomImageFinal = md5(uniqid()) . '.' . $extension;
+                                $cropped = $this->resizeThumbnailImage(TARGET . $image, "Images/iconespassion/" . $nomImageFinal, $w, $h, $x1, $y1, $imageheight, $imagewidth);
+
+                                mysql_query("INSERT INTO passion VALUES (default, '" . $passion . "', '" . $categorie . "', '" . $_SESSION['id_member'] . "', '" . "Images/iconespassion/" . $nomImageFinal . "')") or die(mysql_error());
+                                mysql_query("INSERT INTO member_passion VALUES ('" . $_SESSION['id_member'] . "', '" . mysql_insert_id() . "')") or die(mysql_error());
+                                $result[] = "ok";
+                                $result[] = $data_verif_categorie['name_category'] . ";" . stripslashes($passion) . ";" . mysql_insert_id() . ";/Images/iconespassion/" . $nomImageFinal . ";" . $idpassion['id_category'];
+                                return json_encode($result);
+                            }
+                        } else if (isset($_POST['mode']) && $_POST['mode'] == "enregistrergout" && !empty($categorie) && $data_verif_new == 0) {
+                            $requete_verif_categorie = mysql_query("SELECT name_category, icone FROM passion_category WHERE id_category='" . $categorie . "'") or die(mysql_error());
+                            $data_verif_categorie = mysql_num_rows($requete_verif_categorie);
+
+                            if ($data_verif_categorie > 0) {
+                                mysql_query("INSERT INTO passion VALUES (default, '" . $passion . "', '" . $categorie . "', '" . $_SESSION['id_member'] . "', default)") or die(mysql_error());
+                                mysql_query("INSERT INTO member_passion VALUES ('" . $_SESSION['id_member'] . "', '" . mysql_insert_id() . "')") or die(mysql_error());
+                                $result[] = "ok";
+                                $result[] = $data_verif_categorie['name_category'] . ";" . stripslashes($passion) . ";" . mysql_insert_id() . ";/" . $data_verif_categorie['icone'] . ";" . $idpassion['id_category'];
+                                return json_encode($result);
+                            }
+                        } else if ($data_verif_new == 1) {
+                            $idpassion = mysql_fetch_array($requete_verif_new);
+
+                            mysql_query("INSERT INTO member_passion VALUES ('" . $_SESSION['id_member'] . "', '" . $idpassion['id_passion'] . "')") or die(mysql_error());
+                            $result[] = "ok";
+                            $result[] = $idpassion['name_category'] . ";" . stripslashes($passion) . ";" . $idpassion['id_passion'] . ";/" . ($idpassion['icone_passion'] == NULL ? $idpassion['icone'] : $idpassion['icone_passion']) . ";" . $idpassion['id_category'];
+                            return json_encode($result);
                         }
-                        else {
-                                return json_encode(array("1"));
-                        }
-
+                    } else {
+                        return json_encode(array("error", "Passion déjà ajoutée"));
+                    }
+                } else {
+                    return json_encode(array("1"));
                 }
+            }
         }
     }
-    
-    private function resizeThumbnailImage($image, $thumb_image_name, $w, $h, $start_width, $start_height, $imageheight, $imagewidth){
 
-	$tAttribut = getimagesize($image);
-	$extension = strtolower(pathinfo(TARGET.$image, PATHINFO_EXTENSION));
-	
-	$width = $tAttribut[0];
-	$height = $tAttribut[1];
-	
-	switch($extension) 
-	{
-		case "jpg":
-			$source  = imagecreatefromjpeg($image);  
-		break;
-		case "jpeg":
-			$source  = imagecreatefromjpeg($image);  
-		break;
-		case "gif":
-			$source  = imagecreatefromgif($image);  
-		break;
-		case "png":
-			$source  = imagecreatefrompng($image);  
-		break;
-	} 
-	$w = ($tAttribut[0]/$imagewidth)*$w;
-	$h = ($tAttribut[1]/$imageheight)*$h;
-	$start_width = ($tAttribut[0]/$imagewidth)*$start_width;
-	$start_height = ($tAttribut[1]/$imageheight)*$start_height;
-	
-	$scale = 75/$w;  		
-	$newImageWidth = ceil($w * $scale);
-	$newImageHeight = ceil($h * $scale);
-	$newImage = imagecreatetruecolor($newImageWidth,$newImageHeight);
-	imagecopyresampled($newImage,$source,0,0,$start_width,$start_height,$newImageWidth,$newImageHeight,$w,$h);
-	
-	switch($extension) 
-	{
-		case "jpg":
-			imagejpeg($newImage,$thumb_image_name);  
-		break;
-		case "jpeg":
-			imagejpeg($newImage,$thumb_image_name);  
-		break;
-		case "gif":
-			imagegif($newImage,$thumb_image_name);  
-		break;
-		case "png":
-			imagepng($newImage,$thumb_image_name);  
-		break;
-	}
-	
-	chmod($thumb_image_name, 0777);
-	return $thumb_image_name;
+    private function resizeThumbnailImage($image, $thumb_image_name, $w, $h, $start_width, $start_height, $imageheight, $imagewidth) {
+
+        $tAttribut = getimagesize($image);
+        $extension = strtolower(pathinfo(TARGET . $image, PATHINFO_EXTENSION));
+
+        $width = $tAttribut[0];
+        $height = $tAttribut[1];
+
+        switch ($extension) {
+            case "jpg":
+                $source = imagecreatefromjpeg($image);
+                break;
+            case "jpeg":
+                $source = imagecreatefromjpeg($image);
+                break;
+            case "gif":
+                $source = imagecreatefromgif($image);
+                break;
+            case "png":
+                $source = imagecreatefrompng($image);
+                break;
+        }
+        $w = ($tAttribut[0] / $imagewidth) * $w;
+        $h = ($tAttribut[1] / $imageheight) * $h;
+        $start_width = ($tAttribut[0] / $imagewidth) * $start_width;
+        $start_height = ($tAttribut[1] / $imageheight) * $start_height;
+
+        $scale = 75 / $w;
+        $newImageWidth = ceil($w * $scale);
+        $newImageHeight = ceil($h * $scale);
+        $newImage = imagecreatetruecolor($newImageWidth, $newImageHeight);
+        imagecopyresampled($newImage, $source, 0, 0, $start_width, $start_height, $newImageWidth, $newImageHeight, $w, $h);
+
+        switch ($extension) {
+            case "jpg":
+                imagejpeg($newImage, $thumb_image_name);
+                break;
+            case "jpeg":
+                imagejpeg($newImage, $thumb_image_name);
+                break;
+            case "gif":
+                imagegif($newImage, $thumb_image_name);
+                break;
+            case "png":
+                imagepng($newImage, $thumb_image_name);
+                break;
+        }
+
+        chmod($thumb_image_name, 0777);
+        return $thumb_image_name;
     }
-    
+
     function deletePassion() {
         $idpassion = $_GET['idpassion'];
 
-        if(isset($_SESSION['id_member']) && is_numeric($_SESSION['id_member']) && is_numeric($idpassion))
-        {
+        if (isset($_SESSION['id_member']) && is_numeric($_SESSION['id_member']) && is_numeric($idpassion)) {
 
-                mysql_query("DELETE FROM member_passion WHERE id_member='".$_SESSION['id_member']."' && id_passion='".$idpassion."'") or die(mysql_error());
+            mysql_query("DELETE FROM member_passion WHERE id_member='" . $_SESSION['id_member'] . "' && id_passion='" . $idpassion . "'") or die(mysql_error());
 
-                echo "1;".$idpassion;
+            echo "1;" . $idpassion;
         }
     }
+
 }
 
 ?>
