@@ -235,7 +235,7 @@ if ($data->id_member != $_SESSION['id_member']) {
                 $data->first_name_member = NC;
             }
             ?>
-            <strong>Prénom</strong> : <?php echo $data->first_name_member; ?><br/>
+            <p><strong>Prénom</strong nowrap> : <span id="first-name"><?php echo $data->first_name_member; ?></span></p>
             <?php
             if ($data->skype_member == NULL) {
                 $data->skype_member = NC;
