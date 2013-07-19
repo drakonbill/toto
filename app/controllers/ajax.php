@@ -158,7 +158,7 @@ class controllers_ajax extends Controller {
     }
 
 /* FOR THE PROFILE PART */
-        function ModifyFirstName() {
+        function modifyFirstNameAction() {
         $indexM = $this->loadModel("ajax_profile");
         $return = $indexM->ModifyFirstName();
 

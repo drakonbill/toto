@@ -10,12 +10,11 @@ $( document ).ready(function() {
         
         $.ajax({
             type: 'POST',
-            url: 'ajax/ModifyFirstName/',
-            data: "register-pseudo="+$("#register-pseudo").val()+"&register-email="+$("#register-email").val(),
-            async: false,
+            url: '/ajax/modifyFirstName',
+            data: "first-name="+value,
             success:
             function(result) {
-
+             //  alert(result); 
             }
         });
     }, { 
