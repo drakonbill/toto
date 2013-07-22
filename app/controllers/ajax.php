@@ -157,12 +157,13 @@ class controllers_ajax extends Controller {
         $this->loadView("ajax", $return);
     }
 
-     /* *******************************************************************
-     *  Photo
-     * ***************************************************************** */
+/* FOR THE PROFILE PART */
+        function modifyFirstNameAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifyFirstName();
 
-    
-
+        $this->loadView("ajax", $return);
+    }
 }
 
 ?>
