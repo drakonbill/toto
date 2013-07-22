@@ -195,9 +195,6 @@ class models_event extends Model {
                         $this->auteur = $data['pseudo_member'];
                         $this->avatar = $data['photo_member'];
 
-                        $this->lon = $data['longitude_event'];
-                        $this->lat = $data['latitude_event'];
-
                         $Jour = array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi","Samedi");
                         $Mois = array("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
                         $this->Mois = $Mois;
@@ -214,8 +211,7 @@ class models_event extends Model {
                         $this->datefin_month = date("m", strtotime($data['end_date_event']));
                         $this->datefin_year = date("Y", strtotime($data['end_date_event']));
 
-                        $this->codepostal = $data['zipcode_event'];
-                        $this->ville = $data['city_event'];
+                        $this->area = $data['area_event'];
                         $this->pays = $data['country_event'];
                         $this->lieu = $data['address_event'];
                         $this->confidentialite = $data['confidentiality_event'];
@@ -228,7 +224,8 @@ class models_event extends Model {
                             while($participant = mysql_fetch_array($data_participant))
                                     $this->participant[] = $participant;
                         }
-
+                        
+                        $this->nblimit = $data['nblimit_event'];
                         $this->longitude = $data['longitude_event'];
                         $this->latitude = $data['latitude_event'];
                         $this->ok=true;
@@ -240,18 +237,17 @@ class models_event extends Model {
     
     function searchModel() {
         
-        mysql_query("SET NAMES UTF8");
-        $this->departments = array();
-        $this->departments_content = array();
-        $request_department = mysql_query("SELECT * FROM departements");
-        while($data_department = mysql_fetch_array($request_department)) {
-                $this->departments[strtolower($data_department['numero'])] = $data_department['nom'];
-                $this->departments_content[] = $data_department['numero'];
-        }
+        $data_search = array();
+        $data_search = (object)$data_search;
         
-        $request_departmentcontent = mysql_query("SELECT * FROM event");
+        $tab_passion = array();
+        $request_passion = "SELECT id_category,name_category,icone FROM passion_category";
+        $result_passion = mysql_query($request_passion) or die(mysql_error());
+        while($data_passion = mysql_fetch_array($result_passion)) $tab_passion[] = $data_passion;
         
-        return $this;
+        $data_search->passion_category = $tab_passion;
+        
+        return $data_search;
     }
     
 }

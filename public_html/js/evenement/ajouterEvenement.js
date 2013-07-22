@@ -5,6 +5,8 @@ var x1_photo, x2_photo, y1_photo, y2_photo, w_photo, h_photo;
 var image_width, image_height;
 var event_confidentialite_info = 0;
 var event_confidentialite = new Array();
+var lat = "";
+var lon = "";
 
 function loadInputValue() {
     var inputvalue = new Array();
@@ -318,26 +320,9 @@ function addPrivate() {
     }
 }
 
-function handleNoGeolocation(errorFlag) {
-    if (errorFlag) {
-        var content = 'Error: The Geolocation service failed.';
-    } else {
-        var content = 'Error: Your browser doesn\'t support geolocation.';
-    }
-
-    var options = {
-        map: map,
-        position: new google.maps.LatLng(60, 105),
-        content: content
-    };
-
-    var infowindow = new google.maps.InfoWindow(options);
-    map.setCenter(options.position);
-}
-
 function initialize() {
     geocoder = new google.maps.Geocoder();
-    var myLatlng = new google.maps.LatLng(-25.363882, 131.044922);
+    var myLatlng = new google.maps.LatLng(42, 2);
     var mapOptions = {
         zoom: 4,
         center: myLatlng,
@@ -346,41 +331,6 @@ function initialize() {
 
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = new google.maps.LatLng(position.coords.latitude,
-                    position.coords.longitude);
-
-            var infowindow = new google.maps.InfoWindow({
-                map: map,
-                position: pos,
-                content: 'Je suis ici actuellement.'
-            });
-
-            map.setCenter(pos);
-        }, function() {
-            handleNoGeolocation(true);
-        });
-    } else {
-        // Browser doesn't support Geolocation
-        handleNoGeolocation(false);
-    }
-
-    var contentString = 'ii';
-
-    var infowindow = new google.maps.InfoWindow({
-        content: contentString,
-        maxWidth: 200
-    });
-
-    var marker = new google.maps.Marker({
-        position: myLatlng,
-        map: map,
-        title: 'Uluru (Ayers Rock)'
-    });
-    google.maps.event.addListener(marker, 'click', function() {
-        infowindow.open(map, marker);
-    });
 }
 
 var markersArray = [];
@@ -392,20 +342,42 @@ function clearOverlays() {
     markersArray = [];
 }
 
+function searchInfo(tab) {
+    var returnInfo = new Array();
+    for (key in tab) {
+        if (tab[key]['types'][0] == 'country')
+            returnInfo.push(tab[key]['long_name']);
+        else if (tab[key]['types'][0] == 'administrative_area_level_1')
+            returnInfo.push(tab[key]['long_name']);
+    }
+    return returnInfo;
+}
+
 function codeAddress() {
     var address = 'fr+' + document.getElementById('address').value;
     geocoder.geocode({'address': address}, function(results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
-            map.setCenter(results[0].geometry.location);
+            infoMarker = searchInfo(results[0]['address_components']);
+            if(typeof(results[0]["formatted_address"]) != 'undefined')
+                infoMarker.push(results[0]["formatted_address"]);
+            if (infoMarker.length == 3) {
+                map.setZoom(7);
+                clearOverlays();
+                marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location,
+                    animation: google.maps.Animation.DROP
+                });
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+                markersArray.push(marker);
+                
+                map.setCenter(results[0].geometry.location);
+                lat = results[0].geometry.location.lat();
+                lon = results[0].geometry.location.lng();
+            }
+            else
+                alert("Veuillez saisir un lieu plus précis");
 
-            clearOverlays();
-            marker = new google.maps.Marker({
-                map: map,
-                position: results[0].geometry.location,
-                animation: google.maps.Animation.DROP
-            });
-            marker.setAnimation(google.maps.Animation.BOUNCE);
-            markersArray.push(marker);
         } else {
             alert('Geocode was not successful for the following reason: ' + status);
         }
@@ -415,6 +387,8 @@ function codeAddress() {
 var event_organise = new Array();
 
 $(document).ready(function() {
+    google.maps.event.addDomListener(window, 'load', initialize);
+
     $("div#event_organise ul.fun-block-nav li a").live('click', function() {
         $("div#event_organise ul.fun-block-nav li a").removeAttr('class');
         $(this).attr('class', 'active');
@@ -460,62 +434,19 @@ $(document).ready(function() {
 
     $("div#event_organise div.fun-block-inside2 div#event_organise_passion").append("<input type='text' class='contentinput' name='passionvalue' id='passionvalue' value=\"Saisissez le nom de la passion\" /><input type='hidden' id='categorievalue' name='categorievalue' value='' /><a id='contentvalid' class='contentvalid' href='javascript:void()' onclick='lierPassion()'>Lier cette passion</a><ul id='liste_passion'></ul>");
 
-    $("div#event_organise div.fun-block-inside2 div#event_organise_where").append("<div id='panel'><input id='address' type='textbox' value='Sydney, NSW'><input type='button' value='Geocode' onclick='codeAddress()'></div><div style='height: 250px;' id='map-canvas'></div>");
+    $("div#event_organise div.fun-block-inside2 div#event_organise_where").append("<div id='panel'><input id='address' type='textbox' value='Saisissez une adresse, un lieu'><input type='button' value='Positionner cet évènement' onclick='codeAddress()'></div><div style='height: 250px;' id='map-canvas'></div>");
 
-    google.maps.event.addDomListener(window, 'load', initialize);
+
 
     $("div#event_organise div.fun-block-inside2 div#event_organise_when").append(calendrier("calendrier2", "Au") + calendrier("calendrier3", "Du"));
 
-    $("div#event_organise div.fun-block-inside2 div#event_organise_whose").append("<label for='whose_public1'>Publique</label><input checked='checked' type='radio' name='whose_public' id='whose_public1' value='public' /><label for='whose_public2'>Amis</label><input type='radio' name='whose_public' id='whose_public2' value='amis' /><label for='whose_public3'>Privée</label><input type='radio' name='whose_public' id='whose_public3' value='privee' /><div id='info_whose'>L'évènement est ouvert et visible pour n'importe qui.</div>");
+    $("div#event_organise div.fun-block-inside2 div#event_organise_whose").append("<label for='whose_public1'>Publique</label><input checked='checked' type='radio' name='whose_public' id='whose_public1' value='public' /><label for='whose_public2'>Amis</label><input type='radio' name='whose_public' id='whose_public2' value='amis' /><label for='whose_public3'>Privée</label><input type='radio' name='whose_public' id='whose_public3' value='privee' /><div id='info_whose'>L'évènement est ouvert et visible pour n'importe qui.</div><br/><label for='nblimit'>Nombre de places (Laissez vide si illimité)</label><input type='text' name='nblimit' id='nblimit' value=''/>");
 
     $("div#event_organise div.fun-block-inside2 div#addThisEvent").html("");
 
     loadInputValue();
 
-    $("div#event_organise div.fun-block-inside2 div#event_organise_where #cp").keyup(function() {
-        if ($(this).val().length == 5) {
 
-            $(this).addClass("ac_loading");
-            $.ajax({
-                type: 'POST',
-                url: '/ajax/inscription2',
-                data: $(this).serialize(),
-                dataType: 'json',
-                success:
-                        function(json) {
-                            $("div#event_organise div.fun-block-inside2 div#event_organise_where #cp").removeClass("ac_loading");
-                            if (json != null) {
-                                $('div#event_organise div.fun-block-inside2 div#event_organise_where select[name="ville"]').fadeIn("slow");
-                                $("div#event_organise div.fun-block-inside2 div#event_organise_where #cp").next(".error-input").fadeOut();
-                                $("div#event_organise div.fun-block-inside2 div#event_organise_where br#ville").fadeIn("slow");
-
-                                var $selectVille = $('div#event_organise div.fun-block-inside2 div#event_organise_where select[name="ville"]');
-                                $selectVille.empty();
-
-                                for (var key in json) {
-                                    var ville = json[key];
-
-                                    $selectVille.append('<option value="' + ville + '">' + json[key] + '</option>');
-                                }
-                            }
-                            if (json == null) {
-                                $('div#event_organise div.fun-block-inside2 div#event_organise_where select[name="ville"]').fadeOut();
-                                $("div#event_organise div.fun-block-inside2 div#event_organise_where #cp").next(".error-input").fadeIn("slow").text("- Le code postal est inconnu.");
-                                $("div#event_organise div.fun-block-inside2 div#event_organise_where br#ville").hide();
-                            }
-                        }
-            });
-        }
-        else
-        {
-            $('label[for=ville]').fadeOut();
-            $('select[name="ville"]').fadeOut();
-            $("#cp").next(".error-input").fadeOut();
-            $("br#ville").hide();
-        }
-    });
-
-    $("ul#listepays").imgDropDown({title: "-- Sélectionner un pays --", id: "listepays"});
     $("div#event_organise div.fun-block-inside2 > div").hide();
     $("div#event_organise div.fun-block-inside2 div#event_organise_whathappens").show();
     $("div#event_organise div.fun-block-inside2 div#event_organise_whose input[name=whose_public]").live('change', function() {
@@ -856,14 +787,13 @@ $(document).ready(function() {
             minute_calendrier2 = 0;
         }
 
-        pays = $('div#event_organise div#listepays').val();
-        cp = $('div#event_organise input#cp').val();
-        ville = $('div#event_organise select#ville').val();
-        lieu = $('div#event_organise input#adresse').val();
-
         subject = $('div#event_organise input#subject').val();
         content_happends = $('div#event_organise textarea#content_happends').val();
-
+        
+        if(nblimit != "")
+            nblimit = $('div#event_organise input#nblimit').val();
+        else
+            nblimit = 0;
 
         var erreur = "";
         if (subject == "" || subject == "Saisissez le nom de l'évènement")
@@ -888,13 +818,7 @@ $(document).ready(function() {
         if (!(typeof(x1_photo) != "undefined" && typeof(y1_photo) != "undefined" && typeof(x2_photo) != "undefined" && typeof(y2_photo) != "undefined" && typeof(w_photo) != "undefined" && typeof(h_photo) != "undefined" && typeof($('div#event_organise_photo img#photo_event')) != "undefined" && parseInt(x1_photo) == x1_photo && parseInt(x2_photo) == x2_photo && parseInt(y1_photo) == y1_photo && parseInt(y2_photo) == y2_photo && parseInt(w_photo) == w_photo && parseInt(h_photo) == h_photo && parseInt($('div#event_organise_photo img#photo_event').height()) == $('div#event_organise_photo img#photo_event').height() && parseInt($('div#event_organise_photo img#photo_event').width()) == $('div#event_organise_photo img#photo_event').width()))
             erreur += "- Veuillez choisir une image de couverture et la redimensionner<br/>";
 
-        if (pays == "")
-            erreur += "- Veuillez sélectionner un pays<br/>";
-
-        if (cp == "" || ville == "" || cp == "Saisissez un code postal")
-            erreur += "- Veuillez saisir un code postal<br/>";
-
-        if (lieu == "" || lieu == "Saisissez une adresse ou un lieu")
+        if (lon == "" || lat == "")
             erreur += "- Veuillez saisir un lieu<br/>";
 
         if (event_confidentialite_info == 2 && membre_confidentialite == "")
@@ -909,7 +833,7 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 url: '/ajax/addEvent',
-                data: "x1=" + x1_photo + "&x2=" + x2_photo + "&y1=" + y1_photo + "&y2=" + y2_photo + "&w=" + w_photo + "&h=" + h_photo + "&image=" + image_photo[2] + "&imagewidth=" + image_width_photo + "&imageheight=" + image_height_photo + "&subject=" + subject + "&content_happends=" + content_happends + "&pays=" + pays + "&cp=" + cp + "&ville=" + ville + "&lieu=" + lieu + "&event_confidentialite_info=" + event_confidentialite_info + "&membre_confidentialite=" + membre_confidentialite + "&passion=" + passion + "&date_debut=" + date_debut.getTime() + "&date_fin=" + date_fin.getTime() + "&time_option1=" + time_option1 + "&time_option2=" + time_option2,
+                data: "x1=" + x1_photo + "&x2=" + x2_photo + "&y1=" + y1_photo + "&y2=" + y2_photo + "&w=" + w_photo + "&h=" + h_photo + "&image=" + image_photo[2] + "&imagewidth=" + image_width_photo + "&imageheight=" + image_height_photo + "&subject=" + subject + "&content_happends=" + content_happends + "&lat=" + lat + "&lon=" + lon + "&event_confidentialite_info=" + event_confidentialite_info + "&membre_confidentialite=" + membre_confidentialite + "&passion=" + passion + "&date_debut=" + date_debut.getTime() + "&date_fin=" + date_fin.getTime() + "&time_option1=" + time_option1 + "&time_option2=" + time_option2 + "&nblimit=" + nblimit,
                 success:
                         function(result) {
                             if (result == "3") {
@@ -924,37 +848,4 @@ $(document).ready(function() {
     });
 
 });
-pos_scroll = 0;
-$("#sidebar-right").live('click', function() {
-    alert(pos_scroll);
-    //alert($(window).height()+" "+$("#sidebar-left").height());
-//alert($(window).scrollTop() - ($(".blue-box-top.blue-box-asdf").offset().top - $("#sidebar-left").height()));
-});
-$(window).scroll(function() {
 
-    if ($(window).height() >= $("#sidebar-left").height()) {
-        position_left = $("#sidebar-left").offset();
-        position_right = $("#sidebar-right").offset();
-
-        if ($(window).scrollTop() - ($(".blue-box-top.blue-box-asdf").offset().top - $("#sidebar-left").height()) >= 0) {
-            if (pos_scroll != 2)
-                $("#sidebar-left").css({"position": "absolute", "bottom": "0", "left": "0", "margin-left": "0", "top": "", "z-index": ""});
-            pos_scroll = 2;
-        }
-        else if ($(window).scrollTop() - position_right.top >= 0) {
-            if (pos_scroll != 1)
-                $("#sidebar-left").css({"position": "fixed", "top": "0", "left": "0", "margin-left": "0", "bottom": "", "z-index": "15000"});
-            pos_scroll = 1;
-        }
-
-        // En attendant un repère je prends la div de droite comme repère
-        if ($(window).scrollTop() - position_right.top < 0) {
-            if (pos_scroll != 0)
-                $("#sidebar-left").css({"position": "relative", "margin-left": "-100%", "top": "", "bottom": "", "left": "", "z-index": ""});
-            pos_scroll = 0;
-        }
-    }
-    else if (pos_scroll != 0) {
-        $("#sidebar-left").css({"position": "relative", "margin-left": "-100%", "top": "", "bottom": "", "left": "", "z-index": ""});
-    }
-});

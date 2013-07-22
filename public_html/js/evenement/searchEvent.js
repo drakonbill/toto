@@ -1,47 +1,97 @@
+var geocoder;
+var map;
+var circle;
+var pos;
 
-function preload_image(_image) 
-{
-var image = new Image;
-image.src = _image;
-}
-function survolregion(nb)
-{
-                $("img#background-map-img").fadeIn();
-                $("img#background-map-img").attr({'src':'/Images/country-map/france/region_'+nb+'.png'});
-                $(".tooltip-map").html(nb);
-                $(".tooltip-map").append(searchevent_dep[''+nb+'']);
-
-}
-function nonsurvolregion()
-{
-        var cartefond=document.getElementById('background-map-img');
-        cartefond.src='/Images/country-map/france/transparent.png';
+function handleNoGeolocation(errorFlag) {
+    if (errorFlag) {
+        var content = 'Error: The Geolocation service failed.';
+    } else {
+        var content = 'Error: Your browser doesn\'t support geolocation.';
+    }
 }
 
-for(var i=1; i<=95; i++) {
-        if(i==20) {
-                preload_image("/Images/country-map/france/region_2a.png");
-                preload_image("/Images/country-map/france/region_2b.png");
+function initialize() {
+    geocoder = new google.maps.Geocoder();
+    var myLatlng = new google.maps.LatLng(-25.363882, 131.044922);
+    var mapOptions = {
+        zoom: 4,
+        center: myLatlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            pos = new google.maps.LatLng(position.coords.latitude,
+                    position.coords.longitude);
+
+            var infowindow = new google.maps.InfoWindow({
+                map: map,
+                position: pos,
+                content: 'Je suis ici actuellement.'
+            });
+
+            map.setCenter(pos);
+            
+            circle = new google.maps.Circle({
+            map: map,
+            center: pos,
+            fillColor: '#00FF00',
+            fillOpacity: 0.2,
+            strokeColor: '#00FF00',
+            strokeOpacity: 0.4,
+            strokeWeight: 2,
+            radius: 18362.55489862987
+            });
+            
+            $("#distance").slider({
+                from: 1,
+                to: 500,
+                heterogeneity: ['12.5/25', '50/100', '75/250'],
+                scale: [1, '|', 50, '|', '100', '|', 250, '|', 500],
+                step: 1,
+                dimension: '&nbsp;km',
+                onstatechange: function(value) {
+                    changeRadiusMap(value);
+                }
+            });
+        }, function() {
+            handleNoGeolocation(true);
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        handleNoGeolocation(false);
+    }
+
+    google.maps.event.addListener(marker, 'click', function() {
+
+    });
+}
+
+function codeAddress() {
+    var address = document.getElementById('address').value;
+    geocoder.geocode({'address': address}, function(results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location
+            });
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
         }
-        else if(i<10)
-                preload_image("/Images/country-map/france/region_0"+i+".png");
-        else
-                preload_image("/Images/country-map/france/region_"+i+".png");
+    });
 }
+
+function changeRadiusMap(distance) {
+    circle.setRadius(distance*1000);
+}
+
 
 $(function() {
-    $("body").prepend("<div class='tooltip-map'></div>");
-        $("area").mousemove(function(e) { 
-            $('.tooltip-map').stop(true, true).css('left', e.pageX + 10).css('top', e.pageY + 10);
 
-        });
-        
-        $("area").mouseover(function() {
-             $('.tooltip-map').stop(true, true).animate({opacity:'100'}).show();
-        });
-
-        $("area").mouseout(function() { 
-            $('.tooltip-map').fadeOut("slow");
-        });
+    google.maps.event.addDomListener(window, 'load', initialize);
 
 });
