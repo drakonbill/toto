@@ -2004,7 +2004,7 @@ ul#details-menu {
     background-repeat: no-repeat;
     background-color: #f0f0f0;
     background-position: 50%;
-   
+
     position: relative;
 }
 
@@ -2015,7 +2015,7 @@ ul#details-menu {
     position: relative;
     top: 0;
     left: 0;
-    
+
     cursor: pointer;
 }
 
@@ -2104,3 +2104,7 @@ ul#details-menu {
         left: 100px; 
 } 
 */
+
+.details-main-title {
+  
+}

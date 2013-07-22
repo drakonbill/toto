@@ -110,7 +110,7 @@ if ($data->id_member != $_SESSION['id_member']) {
         <div class="inside-column-sep"></div>
         <ul id="details-menu">
             <li><img style="opacity:0.7;" src="<?php echo $conf["url"]; ?>Images/details_glass.png" alt="Photos"/></li>
-            <li><h4>Détails</h4></li>
+            <li><h4 class="details-main-title">Détails</h4></li>
             <li><div id="addcontact"><?php if ($data->addcontact != "") echo $data->addcontact; ?></div></li>
             <?php
             if ($own == false) {
@@ -235,7 +235,7 @@ if ($data->id_member != $_SESSION['id_member']) {
                 $data->first_name_member = NC;
             }
             ?>
-            <strong>Prénom</strong> : <?php echo $data->first_name_member; ?><br/>
+            <p><strong>Prénom</strong nowrap> : <span id="first-name"><?php echo $data->first_name_member; ?></span></p>
             <?php
             if ($data->skype_member == NULL) {
                 $data->skype_member = NC;
