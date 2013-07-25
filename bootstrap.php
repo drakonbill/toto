@@ -123,7 +123,7 @@ try {
     // pack controller in Secure Box for automatic role menagment
     $userRole = $reg->user->getRole();
     require_once (COREDIR . 'SecureBox.php');
-    $control = new SecureBox($control, $reg->roles->$userRole);
+    //$control = new SecureBox($control, $reg->roles->$userRole);
     
     // pass controller call to SecureBox check
     $control->$view();
