@@ -23,7 +23,7 @@
 	var eventdata_description="<?php echo $data->description;?>";
 	var eventdata_image="<?php echo $data->image;?>";
 	var eventdata_pays="<?php echo $data->pays;?>";
-	var eventdata_codepostal="<?php echo $data->codepostal;?>";
+	var eventdata_area="<?php echo $data->area;?>";
 	var eventdata_lieu="<?php echo $data->lieu;?>";
 	var eventdata_passion=<?php echo json_encode($data->data_passion);?>;
 	var eventdata_confidentialite="<?php echo $data->confidentialite;?>";
@@ -43,7 +43,11 @@
 	var eventdata_datefin_day="<?php echo $data->datefin_day;?>";
 	var eventdata_datefin_month="<?php echo $data->datefin_month;?>";
 	var eventdata_datefin_year="<?php echo $data->datefin_year;?>";
+        var eventdata_lat=<?php echo $data->latitude;?>;
+        var eventdata_lon=<?php echo $data->longitude; ?>;
+        var eventdata_nblimit=<?php echo $data->nblimit;?>;
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/evenement/modifierEvenement.js"></script>
 
 <div class="popup-other popup-othermini" style="display: none; "></div>
