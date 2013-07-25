@@ -257,7 +257,7 @@ class models_ajax_event extends Model {
                 $nomImageFinal = md5(uniqid()) . '.' . $extension;
                 $cropped = $this->resizeThumbnailImage(TARGET . $image, TARGET . $nomImageFinal, $w, $h, $x1, $y1, $imageheight, $imagewidth);
 
-                mysql_query("INSERT INTO event VALUES (default,'" . $subject . "','" . $content_happends . "','" . TARGET . $nomImageFinal . "',0," . $_SESSION['id_member'] . ",'" . date("Y-m-j H:i:s", ceil($date_debut / 1000)) . "','" . date("Y-m-j H:i:s", ceil($date_fin / 1000)) . "','" . $area . "','" . $country . "','" . $address . "'," . $event_confidentialite_info . ",'" . $lat . "','" . $lon . "'," . $time_option_debut . "," . $time_option_fin . "," . $nblimit . ")") or die(mysql_error());
+                mysql_query("INSERT INTO event VALUES (default,'" . $subject . "','" . $content_happends . "','" . TARGET . $nomImageFinal . "',0," . $_SESSION['id_member'] . ",'" . date("Y-m-j H:i:s", ceil($date_debut / 1000)) . "','" . date("Y-m-j H:i:s", ceil($date_fin / 1000)) . "','" . addslashes($area) . "','" . addslashes($country) . "','" . addslashes($address) . "'," . $event_confidentialite_info . ",'" . $lat . "','" . $lon . "'," . $time_option_debut . "," . $time_option_fin . "," . $nblimit . ")") or die(mysql_error());
                 $id_event = mysql_insert_id();
 
                 if ($event_confidentialite_info == 2) {
@@ -529,11 +529,11 @@ class models_ajax_event extends Model {
                     $modif_request[] = "longitude_event='" . $lon . "'";
                     $modif_request[] = "latitude_event='" . $lat . "'";
                     if ($area != $data['area_event'])
-                        $modif_request[] = "area_event='" . $area . "'";
+                        $modif_request[] = "area_event='" . addslashes($area) . "'";
                     if ($country != $data['country_event'])
                         $modif_request[] = "country_event='" . $country . "'";
                     if ($address != $data['address_event'])
-                        $modif_request[] = "address_event='" . $address . "'";
+                        $modif_request[] = "address_event='" . addslashes($address) . "'";
                 }
                 if ($ancienneconfidentialite != $event_confidentialite_info)
                     $modif_request[] = "confidentiality_event='" . $event_confidentialite_info . "'";

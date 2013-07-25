@@ -16,6 +16,9 @@
 <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/jquery.slider.min.js"></script>
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script src="<?php echo $conf["url"]; ?>js/richmarker.js"></script>
+<script type="text/javascript">var lon = "<?php echo $data->coord_member['long_member'];?>"; var lat = "<?php echo $data->coord_member['lati_member'];?>";</script>
+<script type="text/javascript">var event_data = <?php echo json_encode($data->event);?>;</script>
 <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/evenement/searchEvent.js"></script>
 
 <div class="popup-other popup-othermini" style="display: none; "></div>
@@ -42,10 +45,12 @@
         </div>
         <h2>Recherche à proximité</h2>
         <label>A partir de : </label>
-        <select>
-            <option>De chez moi</option>
-            <option>Du lieu de mon choix</option>
+        <select name="from" id="from">
+            <option value="here">De chez moi</option>
+            <option value="other">Du lieu de mon choix</option>
         </select>
+        <div id="changepos">
+        </div>
         <br/><br/>
         <label>Distance :</label>
         <span style="display: inline-block; width: 400px; padding: 0 5px;"><input id="distance" type="slider" name="distance" value="25" /></span>
