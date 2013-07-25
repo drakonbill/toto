@@ -10,12 +10,12 @@ class controllers_ajax extends Controller {
     public function init() {
         
     }
-    
+
     public function indexAction() {
         //if you wish to call siteurl/ajax only
     }
 
-    /* *******************************************************************
+    /*     * ******************************************************************
      *  Inscription
      * ***************************************************************** */
 
@@ -33,7 +33,7 @@ class controllers_ajax extends Controller {
         $this->loadView("ajax", $return);
     }
 
-    /* *******************************************************************
+    /*     * ******************************************************************
      *  Member
      * ***************************************************************** */
 
@@ -57,7 +57,7 @@ class controllers_ajax extends Controller {
 
         $this->loadView("ajax", $return);
     }
-    
+
     function addContactProfilAction() {
         $indexM = $this->loadModel("ajax_member");
         $return = $indexM->addContact();
@@ -65,7 +65,7 @@ class controllers_ajax extends Controller {
         $this->loadView("ajax", $return);
     }
 
-    /* *******************************************************************
+    /*     * ******************************************************************
      *  Passion
      * ***************************************************************** */
 
@@ -111,7 +111,7 @@ class controllers_ajax extends Controller {
         $this->loadView("ajax", $return);
     }
 
-    /* *******************************************************************
+    /*     * ******************************************************************
      *  Event
      * ***************************************************************** */
 
@@ -121,7 +121,7 @@ class controllers_ajax extends Controller {
 
         $this->loadView("ajax", $return);
     }
-    
+
     function modifyEventAction() {
         $indexM = $this->loadModel("ajax_event");
         $return = $indexM->modifyEvent();
@@ -157,7 +157,35 @@ class controllers_ajax extends Controller {
         $this->loadView("ajax", $return);
     }
 
+    /* FOR THE PROFILE PART */
 
+    function modifyFirstNameAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifyFirstName();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifyPseudoAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifyPseudo();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifySituationAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifySituation();
+
+        $this->loadView("ajax", $return);
+    }
+    
+       function modifyPreferanceAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifyPreferance();
+
+        $this->loadView("ajax", $return);
+    }
 
 }
 

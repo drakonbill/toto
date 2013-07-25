@@ -4,6 +4,13 @@ if ($data->id_member != $_SESSION['id_member']) {
 } else {
     $own = true;
 }
+
+if ($own == true) {
+    ?>
+    <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jeditable.js"></script>
+    <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/profil/modify-profil.js"></script>
+    <?php
+}
 ?>
 
 <div class="popup-other popup-othermini" style="display: none; "></div>
@@ -54,7 +61,7 @@ if ($data->id_member != $_SESSION['id_member']) {
     <!-- This is the main content area -->
     <div id="inside-column">
         <hr class="top-bar"/>
-        <?php //include 'Modules/tchat/notifications.php';  ?>
+        <?php //include 'Modules/tchat/notifications.php';   ?>
         <?php
         if ($own == true) {
             $message_profil = "Mon profil";
@@ -110,7 +117,7 @@ if ($data->id_member != $_SESSION['id_member']) {
         <div class="inside-column-sep"></div>
         <ul id="details-menu">
             <li><img style="opacity:0.7;" src="<?php echo $conf["url"]; ?>Images/details_glass.png" alt="Photos"/></li>
-            <li><h4>Détails</h4></li>
+            <li><h4 class="details-main-title">Détails</h4></li>
             <li><div id="addcontact"><?php if ($data->addcontact != "") echo $data->addcontact; ?></div></li>
             <?php
             if ($own == false) {
@@ -137,7 +144,7 @@ if ($data->id_member != $_SESSION['id_member']) {
                 <img id="details-map" src="<?php echo $conf["url"]; ?>Images/region-map/<?php echo $idregion; ?>.png" width="360" height="380" alt="Map">
             </div>
             <h3 class="details-title">Informations générales</h3>
-            <strong>Pseudo</strong> : <?php echo $data->error ? $data->error : ucfirst($data->pseudo_member); ?><br/>
+            <p><strong>Pseudo</strong> : <span id="pseudo"><?php echo $data->error ? $data->error : ucfirst($data->pseudo_member); ?></span></p>
             <strong>Age</strong> : <?php echo $data->Age($data->birth_member); ?> ans<br/>
             <?php
             // For the month of birth
@@ -179,8 +186,14 @@ if ($data->id_member != $_SESSION['id_member']) {
                     $data->statut_member = MARIED;
                 }
             }
+
+            if ($sexe == "Femme") {
+                $situation_class = "2";
+            } else {
+                $situation_class = "1";
+            }
             ?>
-            <strong>Situation</strong> : <?php echo $data->statut_member; ?><br/>
+            <p><strong>Situation</strong> : <span id="situation<?php echo $situation_class; ?>"><?php echo $data->statut_member; ?></span></p>
             <?php
             $interest = "Intéréssé par";
             if ($sexe == "Femme") {
@@ -196,7 +209,7 @@ if ($data->id_member != $_SESSION['id_member']) {
                 $preference = "Homme et Femme";
             }
             ?>
-            <strong><?php echo $interest; ?></strong> : <?php echo $preference; ?><br/>
+            <p><strong><?php echo $interest; ?></strong> : <span id="preferance"><?php echo $preference; ?></span></p>
             <?php
             if ($data->study_member == COLLEGE) {
                 $study = "Collège";
@@ -230,12 +243,12 @@ if ($data->id_member != $_SESSION['id_member']) {
             <br/>
 
             <h3 class="details-title">A propos de vous</h3>
-            <?php
-            if ($data->first_name_member == NULL) {
-                $data->first_name_member = NC;
-            }
-            ?>
-            <strong>Prénom</strong> : <?php echo $data->first_name_member; ?><br/>
+<?php
+if ($data->first_name_member == NULL) {
+    $data->first_name_member = NC;
+}
+?>
+            <p><strong>Prénom</strong> : <span id="first-name"><?php echo $data->first_name_member; ?></span></p>
             <?php
             if ($data->skype_member == NULL) {
                 $data->skype_member = NC;
@@ -274,27 +287,27 @@ if ($data->id_member != $_SESSION['id_member']) {
             ?>
             <strong>Email</strong> : <?php echo $data->extra_email_member; ?><br/>    
 
-            <?php
-            if ($data->cellular_member == NULL) {
-                $data->cellular_member = NC;
-            }
-            ?>
+<?php
+if ($data->cellular_member == NULL) {
+    $data->cellular_member = NC;
+}
+?>
             <strong>Portable</strong> : <?php echo $data->cellular_member; ?><br/>
 
             <br/>
             <h3 class="details-title">Description</h3>
-            <?php
-            if ($data->description_member == NULL) {
-                $data->description_member = NCE;
-            }
-            ?>
+<?php
+if ($data->description_member == NULL) {
+    $data->description_member = NCE;
+}
+?>
             <strong>Description du membre</strong> : <?php echo $data->description_member; ?><br/>
 
-            <?php
-            if ($data->description_research_member == NULL) {
-                $data->description_research_member = NCE;
-            }
-            ?>
+<?php
+if ($data->description_research_member == NULL) {
+    $data->description_research_member = NCE;
+}
+?>
             <strong>A la recherche</strong> : <?php echo $data->description_research_member; ?><br/>
             <hr class="clear"/>
         </div>
@@ -531,7 +544,7 @@ if ($data->id_member != $_SESSION['id_member']) {
 </div>
 </div> <!-- #inside-column -->
 <div id="main-footer">
-    <?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
+<?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
 </div> <!-- #main-footer -->
 </div> <!-- .cfix -->
 <?php if (isset($contr)) $contr->loadvWidget("footer_quotation"); ?>
