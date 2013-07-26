@@ -4,11 +4,11 @@ $(function(){
     })
 
     $('input[type=checkbox]').each(function(){
-        $(this).after('<label class="cb-replace" for="' + $(this).attr('id') + '"></label>');
+        $(this).after('<label class="cb-replace '+(this.checked?'cb-active':'')+'" for="' + $(this).attr('id') + '"></label>');
         $(this).css({
             position:'absolute', 
             left : '-10000px'
-        })
+        });
     }).click(function(){
         $(this).next()[this.checked ? 'addClass' : 'removeClass']('cb-active');
     })
