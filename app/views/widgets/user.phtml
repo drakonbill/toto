@@ -1,21 +1,29 @@
 <?php
-if($user->sex_member == 1) {
+if ($user->sex_member == 1) {
     $born = "Né";
-}
-else {
+} else {
     $born = "Née";
 }
 ?>
 <div class="bl-photo">
     <strong><em><?php echo $user->pseudo_member; ?></em></strong>
     <br /><br />
-    <a href="/#" class="bl-link bgr-blue"><img id="avatar-profil" width="101px" src="<?php echo $user->photoURL(); ?>" alt="" /></a>
+    <a href="/profil/id/<?php echo $user->id_member; ?>" class="bl-link bgr-blue"><img id="avatar-profil" width="101px" src="<?php echo $user->photoURL(); ?>" alt="" /></a>
 </div> <!-- .bl-photo -->
 <div class="bl-right">
     <div>
-        <?php echo $born ?> le <?php echo $user->birth_member; ?>
+        <?php
+        $birth = $user->birth_member;
+        $year = $user->Yeardate($birth);
+        $m = $user->Monthdate($birth);
+        $day = $user->Daydate($birth);
+        $month = $user->month($m);
+
+        $age = $user->Age($birth);
+        ?>
+        <?php echo $user->city_member; ?>
         <br />
-        Travail chez xxxx
+        <?php echo $age; ?> Ans
     </div>
     <div class="white-quote">
         <div class="white-tip"></div>
