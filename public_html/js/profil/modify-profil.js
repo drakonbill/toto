@@ -18,6 +18,8 @@ $( document ).ready(function() {
         });
     }
     
+    
+    
     function pseudoajax(value, settings){
         
         console.log(this);
