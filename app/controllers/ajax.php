@@ -179,10 +179,17 @@ class controllers_ajax extends Controller {
 
         $this->loadView("ajax", $return);
     }
-    
-       function modifyPreferanceAction() {
+
+    function modifyPreferanceAction() {
         $indexM = $this->loadModel("ajax_profile");
         $return = $indexM->ModifyPreferance();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifySexeAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifySexe();
 
         $this->loadView("ajax", $return);
     }

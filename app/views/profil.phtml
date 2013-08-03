@@ -155,7 +155,7 @@ if ($own == true) {
             echo $data->Daydate($data->birth_member);
             echo " $month";
             ?><br/>
-            <strong>Sexe</strong> : <?php echo $sexe; ?><br/>
+            <p><strong>Sexe</strong> : <span id="sexe"><?php echo $sexe; ?></span></p>
 
             <?php
             // To put the name of the city in lowercase
@@ -169,8 +169,11 @@ if ($own == true) {
             $year2 = $data->Yeardate($data->inscription_date_member);
             ?>
             <strong>Date d'inscription</strong> : <?php echo "Le $day2 $month2 $year2" ?><br/>
+            
+            <p class="general-error" style="color:red; visibility:hidden"></p>
+            
             <br/>
-
+            
             <h3 class="details-title">Détails</h3>
             <?php
             if ($data->statut_member == NULL) {

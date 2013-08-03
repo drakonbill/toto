@@ -1,4 +1,6 @@
 $( document ).ready(function() {
+    
+    var errors = [], ok = [], i;
      
     function firstnameajax(value, settings){
         console.log(this);
@@ -17,6 +19,7 @@ $( document ).ready(function() {
     }
     
     function pseudoajax(value, settings){
+        
         console.log(this);
         console.log(value);
         console.log(settings);
@@ -30,6 +33,7 @@ $( document ).ready(function() {
             //  alert(result); 
             }
         });
+        
     }
     
     function situationajax(value, settings){
@@ -64,6 +68,22 @@ $( document ).ready(function() {
         });
     }
     
+    function sexeajax(value, settings){
+        console.log(this);
+        console.log(value);
+        console.log(settings);
+        
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/modifySexe',
+            data: "sexe="+value,
+            success:
+            function(result) {
+            //  alert(result); 
+            }
+        });
+    }
+    
     $('#first-name').editable(function(value, settings) { 
         firstnameajax(value, settings);
         return(value);
@@ -73,17 +93,22 @@ $( document ).ready(function() {
         cancel  : 'Annuler',
         width   : '200px',
     });
- 
-    $('#pseudo').editable(function(value, settings) { 
-        pseudoajax(value, settings);
-        return(value);
-    }, { 
-        type    : 'text',
-        submit  : 'Modifier',
-        cancel  : 'Annuler',
-        width   : '200px',
-    }); 
-
+    
+    if(value.length < 3){
+        errors.push(['.general-error', 'Pseudo trop court.']);
+    }
+    else {
+        $('#pseudo').editable(function(value, settings) { 
+            pseudoajax(value, settings);
+            return(value);
+        }, { 
+            type    : 'text',
+            submit  : 'Modifier',
+            cancel  : 'Annuler',
+            width   : '200px',
+        }); 
+    }
+        
     $('#situation1').editable(function(value, settings) { 
         situationajax(value, settings);
         return(value);
@@ -116,4 +141,16 @@ $( document ).ready(function() {
         cancel  : 'Annuler',
         width   : '200px',
     });
+    
+    $('#sexe').editable(function(value, settings) { 
+        sexeajax(value, settings);
+        return(value);
+    }, { 
+        data    : "{'Homme':'Homme', 'Femme':'Femme'}",
+        type    : 'select',
+        submit  : 'Modifier',
+        cancel  : 'Annuler',
+        width   : '200px',
+    });
+    
 });
