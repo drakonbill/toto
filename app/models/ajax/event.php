@@ -802,6 +802,26 @@ class models_ajax_event extends Model {
             // EVENEMENT TERMINE ET J'Y ETAIS
         }
     }
+    
+    function searchEvent() {
+        $latitude_member = $_POST['latitude_member'];
+        $longitude_member = $_POST['longitude_member'];
+        $distance = $_POST['distance'];
+        $tab_event = array();
+        if(sizeof($_POST['passions']) > 0 && is_numeric($distance) && !empty($latitude_member) && !empty($longitude_member)) {
+            $passions = implode(',', $_POST['passions']);
+            $request_event = "SELECT *, distance('km', ".$latitude_member.", ".$longitude_member.", latitude_event, longitude_event) AS distance_event FROM event E1 WHERE EXISTS (SELECT id_category FROM event_passion INNER JOIN passion ON event_passion.id_passion=passion.id_passion WHERE event_passion.id_event=E1.id_event AND id_category IN(".$passions.")) AND id_member=12 AND end_date_event > NOW() HAVING distance_event <= ".$distance." UNION
+            SELECT *, distance('km', ".$latitude_member.", ".$longitude_member.", latitude_event, longitude_event) AS distance_event FROM event E1 WHERE EXISTS (SELECT id_category FROM event_passion INNER JOIN passion ON event_passion.id_passion=passion.id_passion WHERE event_passion.id_event=E1.id_event AND id_category IN(".$passions.")) AND confidentiality_event = 0 AND id_member != 12 AND (id_member IN (SELECT id_contact FROM member_contacts WHERE condition_contact = 'accepte' AND id_member=12) OR EXISTS (SELECT * FROM event_participant WHERE id_member=12 AND status IN ('accepte','accepte_invite','invite') AND id_event=E1.id_event)) AND end_date_event > NOW() HAVING distance_event <= ".$distance." UNION
+            SELECT *, distance('km', ".$latitude_member.", ".$longitude_member.", latitude_event, longitude_event) AS distance_event FROM event E1 WHERE EXISTS (SELECT id_category FROM event_passion INNER JOIN passion ON event_passion.id_passion=passion.id_passion WHERE event_passion.id_event=E1.id_event AND id_category IN(".$passions.")) AND confidentiality_event = 1 AND id_member != 12 AND end_date_event > NOW() HAVING distance_event <= ".$distance." UNION
+            SELECT *, distance('km', ".$latitude_member.", ".$longitude_member.", latitude_event, longitude_event) AS distance_event FROM event E1 WHERE EXISTS (SELECT id_category FROM event_passion INNER JOIN passion ON event_passion.id_passion=passion.id_passion WHERE event_passion.id_event=E1.id_event AND id_category IN(".$passions.")) AND confidentiality_event = 2 AND id_member != 12 AND (EXISTS(SELECT id_member FROM event_confidentiality WHERE event_confidentiality.id_event=E1.id_event AND event_confidentiality.id_member=12) OR EXISTS (SELECT * FROM event_participant WHERE id_member=12 AND status IN ('accepte','accepte_invite','invite') AND id_event=E1.id_event)) AND end_date_event > NOW() HAVING distance_event <= ".$distance."
+            ORDER BY distance('km', ".$latitude_member.", ".$longitude_member.", latitude_event, longitude_event)";
+            $result_event = mysql_query($request_event) or die(mysql_error());
+            while ($data_event = mysql_fetch_array($result_event))
+                $tab_event[] = $data_event;
+        }
+        return json_encode($tab_event);
+        
+    }
 
 }
 

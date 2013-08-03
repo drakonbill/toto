@@ -156,6 +156,13 @@ class controllers_ajax extends Controller {
 
         $this->loadView("ajax", $return);
     }
+    
+    function searchEventAction() {
+        $indexM = $this->loadModel("ajax_event");
+        $return = $indexM->searchEvent();
+
+        $this->loadView("ajax", $return);
+    }
 
     /* FOR THE PROFILE PART */
 
