@@ -21,7 +21,7 @@ if ($own == true) {
         $('.scroll-pane').jScrollPane({
             verticalDragMaxHeight: 42
         });
-		
+
     });
 </script>
 
@@ -30,7 +30,7 @@ if ($own == true) {
         $('.scroll-pane').jScrollPane({
             verticalDragMaxHeight: 42
         });
-		
+
     });
 </script>
 <div id="inside-main" class="cfix">
@@ -155,7 +155,7 @@ if ($own == true) {
             echo $data->Daydate($data->birth_member);
             echo " $month";
             ?><br/>
-            <strong>Sexe</strong> : <?php echo $sexe; ?><br/>
+            <p><strong>Sexe</strong><span id="sexe"> : <?php echo $sexe; ?></span></p>
 
             <?php
             // To put the name of the city in lowercase
@@ -237,17 +237,16 @@ if ($own == true) {
                 $study = "Non communiquée";
             }
             ?>
-            <strong>Situation professionnelle</strong> : <br/>
-            <?php echo $study; ?><br/>
+            <p><strong>Situation professionnelle</strong> : <span id="situationpro"><?php echo $study; ?></span></p>
 
             <br/>
 
             <h3 class="details-title">A propos de vous</h3>
-<?php
-if ($data->first_name_member == NULL) {
-    $data->first_name_member = NC;
-}
-?>
+            <?php
+            if ($data->first_name_member == NULL) {
+                $data->first_name_member = NC;
+            }
+            ?>
             <p><strong>Prénom</strong> : <span id="first-name"><?php echo $data->first_name_member; ?></span></p>
             <?php
             if ($data->skype_member == NULL) {
@@ -287,27 +286,27 @@ if ($data->first_name_member == NULL) {
             ?>
             <strong>Email</strong> : <?php echo $data->extra_email_member; ?><br/>    
 
-<?php
-if ($data->cellular_member == NULL) {
-    $data->cellular_member = NC;
-}
-?>
+            <?php
+            if ($data->cellular_member == NULL) {
+                $data->cellular_member = NC;
+            }
+            ?>
             <strong>Portable</strong> : <?php echo $data->cellular_member; ?><br/>
 
             <br/>
             <h3 class="details-title">Description</h3>
-<?php
-if ($data->description_member == NULL) {
-    $data->description_member = NCE;
-}
-?>
+            <?php
+            if ($data->description_member == NULL) {
+                $data->description_member = NCE;
+            }
+            ?>
             <strong>Description du membre</strong> : <?php echo $data->description_member; ?><br/>
 
-<?php
-if ($data->description_research_member == NULL) {
-    $data->description_research_member = NCE;
-}
-?>
+            <?php
+            if ($data->description_research_member == NULL) {
+                $data->description_research_member = NCE;
+            }
+            ?>
             <strong>A la recherche</strong> : <?php echo $data->description_research_member; ?><br/>
             <hr class="clear"/>
         </div>
@@ -544,7 +543,7 @@ if ($data->description_research_member == NULL) {
 </div>
 </div> <!-- #inside-column -->
 <div id="main-footer">
-<?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
+    <?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
 </div> <!-- #main-footer -->
 </div> <!-- .cfix -->
 <?php if (isset($contr)) $contr->loadvWidget("footer_quotation"); ?>

@@ -63,12 +63,29 @@ class models_ajax_profile extends Model {
         } else if ($preferance == "Homme et Femme") {
             $situation = P_B;
         }
-        
+
         $idmember = $_SESSION['id_member'];
 
         mysql_query("UPDATE member SET preference_member = '$preferance' WHERE id_member = '$idmember'") or die(mysql_error());
 
         return $situation;
+    }
+
+    function ModifySexe() {
+
+        $sexe = $_POST['sexe'];
+
+        if ($sexe == "Homme") {
+            $sexe = HOMME;
+        } else if ($sexe == "Femme") {
+            $sexe = FEMME;
+        } 
+
+        $idmember = $_SESSION['id_member'];
+
+        mysql_query("UPDATE member SET sex_member = '$sexe' WHERE id_member = '$idmember'") or die(mysql_error());
+
+        return $sexe;
     }
 
 }
