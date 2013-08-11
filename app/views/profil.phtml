@@ -146,18 +146,22 @@ if ($own == true) {
                 <img id="details-map" src="<?php echo $conf["url"]; ?>Images/region-map/<?php echo $idregion; ?>.png" width="360" height="380" alt="Map">
             </div>
             <h3 class="details-title">Informations générales</h3>
+            
             <p><strong>Pseudo</strong> : <span id="pseudo"><?php echo $data->error ? $data->error : ucfirst($data->pseudo_member); ?></span></p>
-            <span class="form-validation-pseudo" style="color:red;"></span>
+            <span class="form-validation-pseudo" style="color:red;"></span
+            
             <strong>Age</strong> : <?php echo $data->Age($data->birth_member); ?> ans<br/>
             <?php
             // For the month of birth
             $mon = $data->Monthdate($data->birth_member);
             $month = $data->month($mon);
             ?>
-            <strong>Anniversaire</strong> : Le <?php
+            
+            <p><strong>Anniversaire</strong> : Le <span id="pseudo"><?php
             echo $data->Daydate($data->birth_member);
             echo " $month";
-            ?><br/>
+            ?></span></p>
+            
             <p><strong>Sexe</strong><span id="sexe"> : <?php echo $sexe; ?></span></p>
 
             <strong>Ville</strong> : <?php echo ucfirst(strtolower($data->city_member)); ?><br/>

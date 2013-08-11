@@ -16,15 +16,39 @@ class models_ajax_profile extends Model {
         $pseudo = $_POST['pseudo'];
         $idmember = $_SESSION['id_member'];
 
-        $requete_verif_pseudo = mysql_query("SELECT * FROM member WHERE pseudo_member ='" . $pseudo . "'") or die(mysql_error());
-        $data_verif_pseudo = mysql_fetch_array($requete_verif_pseudo);
+        if ((stripos($pseudo, 'Mister-') !== FALSE) OR (stripos($pseudo, 'Miss-') !== FALSE)) {
 
-        if (empty($data_verif_pseudo)) {
-            mysql_query("UPDATE member SET pseudo_member = '$pseudo' WHERE id_member = '$idmember'") or die(mysql_error());
-            return $pseudo;
+            $requete_verif_level = mysql_query("SELECT * FROM member WHERE id_member ='" . $idmember . "'") or die(mysql_error());
+            $data_verif_level = mysql_fetch_array($requete_verif_level);
+
+            if ($data_verif_level['level_member'] == 9) {
+                
+                $requete_verif_pseudo = mysql_query("SELECT * FROM member WHERE pseudo_member ='" . $pseudo . "'") or die(mysql_error());
+                $data_verif_pseudo = mysql_fetch_array($requete_verif_pseudo);
+
+                if (empty($data_verif_pseudo)) {
+                    mysql_query("UPDATE member SET pseudo_member = '$pseudo' WHERE id_member = '$idmember'") or die(mysql_error());
+                    return $pseudo;
+                } else {
+                    $error = "alreadytake";
+                    return $error;
+                }
+                
+            } else {
+                $error = "adminformat";
+                return $error;
+            }
         } else {
-            $error = "alreadytake";
-            return $error;
+            $requete_verif_pseudo = mysql_query("SELECT * FROM member WHERE pseudo_member ='" . $pseudo . "'") or die(mysql_error());
+            $data_verif_pseudo = mysql_fetch_array($requete_verif_pseudo);
+
+            if (empty($data_verif_pseudo)) {
+                mysql_query("UPDATE member SET pseudo_member = '$pseudo' WHERE id_member = '$idmember'") or die(mysql_error());
+                return $pseudo;
+            } else {
+                $error = "alreadytake";
+                return $error;
+            }
         }
     }
 
