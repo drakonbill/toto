@@ -38,6 +38,7 @@ $(document).ready(function() {
                         }
                     }
         });
+        
     }
 
     function situationajax(value, settings) {

@@ -1,6 +1,7 @@
 <?php
+  
 
-/**
+ /*
  * Description of ajax
  *
  * @author Miki
