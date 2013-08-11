@@ -1,6 +1,7 @@
 <?php
+  
 
-/**
+ /*
  * Description of ajax
  *
  * @author Miki
@@ -156,6 +157,13 @@ class controllers_ajax extends Controller {
 
         $this->loadView("ajax", $return);
     }
+    
+    function searchEventAction() {
+        $indexM = $this->loadModel("ajax_event");
+        $return = $indexM->searchEvent();
+
+        $this->loadView("ajax", $return);
+    }
 
     /* FOR THE PROFILE PART */
 
@@ -179,10 +187,17 @@ class controllers_ajax extends Controller {
 
         $this->loadView("ajax", $return);
     }
-    
-       function modifyPreferanceAction() {
+
+    function modifyPreferanceAction() {
         $indexM = $this->loadModel("ajax_profile");
         $return = $indexM->ModifyPreferance();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifySexeAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifySexe();
 
         $this->loadView("ajax", $return);
     }

@@ -116,7 +116,8 @@ function hideInfoevent() {
 }
 
 function initializeEvent() {
-    $("#map-canvas").append("<div id='infobulle_searchevent'></div><div id='queue'></div>");
+    if($("#infobulle_searchevent").length != 1)
+        $("#map-canvas").append("<div id='infobulle_searchevent'></div><div id='queue'>");
     for(key in event_data) {
         var div = '<div id="marker'+event_data[key]['id_event']+'" class="marker_searchevent"><img src="'+event_data[key]['image_event']+'" alt="'+event_data[key]['name_event']+'" />'+event_data[key]['name_event']+'</div>';
        
@@ -129,11 +130,7 @@ function initializeEvent() {
             // The anchor for this image is the base of the flagpole at 0,32.
             anchor: new google.maps.Point(18.5, 37)
           };*/
-         var marker = new google.maps.Marker({
-               position: new google.maps.LatLng(event_data[key]['latitude_event'], event_data[key]['longitude_event']),
-               map: map
-          });
-          
+
         markers.push(new RichMarker({
           map: map,
           position: new google.maps.LatLng(event_data[key]['latitude_event'], event_data[key]['longitude_event']),
@@ -142,7 +139,8 @@ function initializeEvent() {
           nameevent: event_data[key]['name_event'],
           idevent: event_data[key]['id_event'],
           imageevent: event_data[key]['image_event'],
-          descriptionevent: event_data[key]['description_event']
+          descriptionevent: event_data[key]['description_event'],
+          distanceevent: event_data[key]['distance_event']
         }));
 
     }
@@ -160,13 +158,14 @@ function initializeEvent() {
              var imageevent = this.get('imageevent');
              var nameevent = this.get('nameevent');
              var descriptionevent = this.get('descriptionevent');
+             var distanceevent = this.get('distanceevent');
               
                 if($("#infobulle_searchevent").is(':visible'))  
                     $("#infobulle_searchevent").animate({top:"-200px"}, 1000, "easeOutBounce", function() {
-                        $("#infobulle_searchevent").html("<img src='"+imageevent+"' alt='"+nameevent+"'/><h2>"+nameevent+"</h2>"+descriptionevent+"<a href='javascript:void();' onclick='hideInfoevent()'>Fermer</a>");
+                        $("#infobulle_searchevent").html("<img src='"+imageevent+"' alt='"+nameevent+"'/><h2>"+nameevent+"</h2>"+descriptionevent+"<a href='javascript:void();' onclick='hideInfoevent()'>Fermer</a>"+distanceevent);
                     });
                 else
-                    $("#infobulle_searchevent").html("<img src='"+imageevent+"' alt='"+nameevent+"'/><h2>"+nameevent+"</h2>"+descriptionevent+"<a href='javascript:void();' onclick='hideInfoevent()'>Fermer</a>");
+                    $("#infobulle_searchevent").html("<img src='"+imageevent+"' alt='"+nameevent+"'/><h2>"+nameevent+"</h2>"+descriptionevent+"<a href='javascript:void();' onclick='hideInfoevent()'>Fermer</a>"+distanceevent);
             
             
             $("#infobulle_searchevent").animate({top:"10px"}, 1000, "easeOutBounce");
@@ -174,6 +173,37 @@ function initializeEvent() {
     }
 }
 
+function refreshEvent(result) {
+    clearOverlays();
+    event_data = $.parseJSON(result);
+    initializeEvent();
+}
+
+function clearOverlays() {
+  for (var i = 0; i < markers.length; i++ ) {
+    markers[i].setMap(null);
+  }
+  markers = [];
+}
+
+function searchEvent() {
+    
+    var data_passion = new Array();
+    $("input[name=passion][type=checkbox]:checked").each(function() {
+        data_passion.push($(this).val());
+     });
+     var distance = $("#distance").val();
+     var data_request = {'passions[]':data_passion,'distance':distance,'latitude_member':pos.lat(),'longitude_member':pos.lng()};
+     $.ajax({
+        type: 'POST',
+        url: '/ajax/searchEvent',
+        data: data_request,
+        success:
+                function(result) {
+                    refreshEvent(result);
+                }
+    });
+}
 
 $(function() {
 

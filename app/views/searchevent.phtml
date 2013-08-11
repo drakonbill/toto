@@ -39,7 +39,7 @@
             <ul>
                 <?php
                     foreach($data->passion_category as $val)
-                        echo "<li><input type='checkbox' name='".$val['id_category']."' id='".$val['id_category']."' value='".$val['id_category']."' /><label for='".$val['id_category']."'>".$val['name_category']."</label></li>";
+                        echo "<li><input checked='checked' type='checkbox' name='passion' id='".$val['id_category']."' value='".$val['id_category']."' /><label for='".$val['id_category']."'>".$val['name_category']."</label></li>";
                 ?>
             </ul>
         </div>
@@ -57,10 +57,6 @@
         <hr class="clear" />
         <a href="javascript:void();" onclick="searchEvent()">Rechercher</a>
         <div class="inside-column-sep"></div>
-        <div id="panel">
-            <input id="address" type="textbox" value="Sydney, NSW">
-            <input type="button" value="Geocode" onclick="codeAddress()">
-        </div>
         <div style="height: 800px;" id="map-canvas"></div>
     </div>
 
