@@ -1,6 +1,5 @@
 <?php
 
-
 class models_ajax_profile extends Model {
 
     function ModifyFirstName() {
@@ -16,22 +15,16 @@ class models_ajax_profile extends Model {
 
         $pseudo = $_POST['pseudo'];
         $idmember = $_SESSION['id_member'];
-        $level = $_SESSION['level_member'];
 
-        if ((stripos($pseudo, 'Mister-') !== FALSE) OR (stripos($pseudo, 'Miss-') !== FALSE)) {
-            $error = "adminformat";
-            return $error;
+        $requete_verif_pseudo = mysql_query("SELECT * FROM member WHERE pseudo_member ='" . $pseudo . "'") or die(mysql_error());
+        $data_verif_pseudo = mysql_fetch_array($requete_verif_pseudo);
+
+        if (empty($data_verif_pseudo)) {
+            mysql_query("UPDATE member SET pseudo_member = '$pseudo' WHERE id_member = '$idmember'") or die(mysql_error());
+            return $pseudo;
         } else {
-            $requete_verif_pseudo = mysql_query("SELECT * FROM member WHERE pseudo_member ='" . $pseudo . "'") or die(mysql_error());
-            $data_verif_pseudo = mysql_fetch_array($requete_verif_pseudo);
-
-            if (empty($data_verif_pseudo)) {
-                mysql_query("UPDATE member SET pseudo_member = '$pseudo' WHERE id_member = '$idmember'") or die(mysql_error());
-                return $pseudo;
-            } else {
-                $error = "alreadytake";
-                return $error;
-            }
+            $error = "alreadytake";
+            return $error;
         }
     }
 
@@ -75,23 +68,6 @@ class models_ajax_profile extends Model {
 
         return $preferance;
     }
-    
-    function ModifySexe() {
-
-        $sexe = $_POST['sexe'];
-
-       if ($sexe == "Homme") {
-            $sexe= HOMME;
-        } else if ($sexe == "Femme") {
-            $sexe = FEMME;
-        }
-        
-        $idmember = $_SESSION['id_member'];
-
-        mysql_query("UPDATE member SET sex_member = '$sexe' WHERE id_member = '$idmember'") or die(mysql_error());
-
-        return $sexe;
-    }
 
     function ModifySexe() {
 
@@ -111,5 +87,4 @@ class models_ajax_profile extends Model {
     }
 
 }
-
 ?>
