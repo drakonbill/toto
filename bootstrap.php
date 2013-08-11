@@ -5,7 +5,7 @@ session_start();
 
 // debuging disable when not needed
 $debug = FALSE;
-//$debug = TRUE;
+$debug = TRUE;
 
 
 if ($debug) {
@@ -26,6 +26,14 @@ function debug($status) {
     }
 }
 
+function loadLibs($libList) {
+    global $reg;
+        foreach ($libList as $lib) {
+            require_once("core/lib/".$lib.".php");
+            $reg->$lib = new $lib();
+        }
+    }
+    
 spl_autoload_register('my_autoloader');
 
 ##load registry
@@ -36,6 +44,9 @@ debug("registry  ...ok");
 ## load core config
 require_once('core/config/conf.php');
 debug("config  ...ok");
+
+//$reg->loadLibs($main_core_libs);
+loadLibs($core_libs);
 
 ## these are the base classes so that any class can extend them
 require_once(COREDIR . 'Core.php');
@@ -51,14 +62,14 @@ require_once(APPDIR . 'config/appconf.php');
 $reg->appconf = $appconf;
 debug("app config  ...ok");
 #######################################################################
-## end of custom code block 
+## end of custom code block
 ## DataStore for url params
 $_URL = array();
 
 //create debug array in registry for bottom print
 $reg->debug = array();
 
-## autoloader 
+## autoloader
 /**
  *
  * @param string $class_name
@@ -106,12 +117,12 @@ if (empty($controller)) {
 
 debug("find controller class - got $controller, $view  ...  done");
 
-## initialize roles
-$roles = new stdClass();
-foreach ($roleList as $roleLevel => $role) {
-    $roles->$role['name'] = new rolesLib($role['name'], $roleLevel);
-}
-$reg->roles = $roles;
+## initialize access controll
+$access = new access($reg->user);
+//foreach ($roleList as $roleLevel => $role) {
+//    $roles->$role['name'] = new rolesLib($role['name'], $roleLevel);
+//}
+//$reg->roles = $roles;
 
 
 
@@ -119,18 +130,15 @@ $reg->roles = $roles;
 try {
     $control = new $controller(); //this isnt abstract class, netbeans wrong
     $reg->controller = $control; //register for after access
-    
     // pack controller in Secure Box for automatic role menagment
-    $userRole = $reg->user->getRole();
+    //$userRole = $reg->user->getRole();
     require_once (COREDIR . 'SecureBox.php');
-    //$control = new SecureBox($control, $reg->roles->$userRole);
-    
+    $control = new SecureBox($control, $access);
+
     // pass controller call to SecureBox check
     $control->$view();
-    
-    
 } catch (Exception $e) {
-    
+
     $reg->error->f404Static($e);
 }
 

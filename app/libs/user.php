@@ -13,6 +13,7 @@ define("SUFFIXE", "suffixeprotecparty");
 
 class libs_user extends user {
 
+/*
 // Informations of the user 
     private $userData;
 
@@ -61,7 +62,7 @@ class libs_user extends user {
         return isset($this->level_member)?$roleList[$this->level_member]['name']:$roleList['-1'];
         
     }
-            
+ */           
     function photoURL($id = '') {
         global $reg;
 

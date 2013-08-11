@@ -55,10 +55,9 @@ class user {
 
     function getRole() {
         global $roleList;
-
         return isset($this->level_member) ? $roleList[$this->level_member]['name'] : $roleList['-1'];
     }
-
+/*
     function photoURL($id = '') {
         global $reg;
 
@@ -203,11 +202,11 @@ class user {
         }
         return $annees;
     }
-
+*/
     /*
      * Funcion to have the day with a date formated in the database YYYY-MM-DD
      * @return : 03 for example if you are born the third of a month
-     */
+     /
 
     public function Daydate($naiss) {
 
@@ -219,7 +218,7 @@ class user {
     /*
      * Funcion to have the month with a date formated in the database YYYY-MM-DD
      * @return : July for example if you are born this month
-     */
+     /
 
     public function Monthdate($naiss) {
 
@@ -231,7 +230,7 @@ class user {
     /*
      * Funcion to have the year with a date formated in the database YYYY-MM-DD
      * @return : 2015 for example
-     */
+     /
 
     public function Yeardate($naiss) {
 
@@ -282,7 +281,7 @@ class user {
     /*
      * Funcion to have the region with the postal code in param
      * @return : The name of the region : Example : Postal code 37300, Region : Centre.
-     */
+     /
 
     public function CodeRegionName($postalcode) {
 
@@ -302,7 +301,7 @@ class user {
     /*
      * Funcion to have the region with the postal code in param
      * @return : The id of the region : Example : Postal code 37300, Region : 3
-     */
+     /
 
     public function CodeRegionId($postalcode) {
 
@@ -318,7 +317,7 @@ class user {
             return $region;
         }
     }
-
+*/
 }
 
 ?>

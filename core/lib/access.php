@@ -1,13 +1,13 @@
 <?php
 
-class rolesLib {
+class access {
 
-    private $roleName, $roleLevel;
     private $class;
 
-    function __construct($name, $level) {
-        $this->roleName = $name;
-        $this->roleLevel = $level;
+    function __construct($user) {
+        
+        //$this->name = $name;
+        //$this->roleLevel = $level;
         $this->class = new stdClass();
     }
 
@@ -16,7 +16,7 @@ class rolesLib {
     }
 
     function inRole($class, $action) {
-        return $action == $this->class->$class[$action];
+        return 1;//$action == $this->class->$class[$action];
     }
 
 }
