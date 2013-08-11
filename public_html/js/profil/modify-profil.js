@@ -31,6 +31,11 @@ $(document).ready(function() {
                             $(".form-validation-pseudo").html("Pseudo déjà pris. <br/>");
                             return result;
                         }
+
+                        if (result === "adminformat") {
+                            $(".form-validation-pseudo").html("Les pseudos : Mister- et Miss- sont réservés. <br/>");
+                            return result;
+                        }
                     }
         });
     }
@@ -98,7 +103,7 @@ $(document).ready(function() {
 // PSEUDO OF THE MEMBER
 
     pseudo = $("#pseudo").text();
-    
+
     $('#pseudo').editable(function(value, settings) {
 
         $(".form-validation-pseudo").html("");
@@ -112,9 +117,9 @@ $(document).ready(function() {
             return(pseudo);
         }
         else {
-            
+
             pseudoajax(value, settings);
-            
+
             pseudo = value;
             return(pseudo);
         }
