@@ -22,12 +22,20 @@ class models_ajax_profile extends Model {
     }
 
     function ModifyPseudo() {
+
         $pseudo = $_POST['pseudo'];
         $idmember = $_SESSION['id_member'];
 
-        mysql_query("UPDATE member SET pseudo_member = '$pseudo' WHERE id_member = '$idmember'") or die(mysql_error());
+        $requete_verif_pseudo = mysql_query("SELECT * FROM member WHERE pseudo_member ='" . $pseudo . "'") or die(mysql_error());
+        $data_verif_pseudo = mysql_fetch_array($requete_verif_pseudo);
 
-        return $pseudo;
+        if (empty($data_verif_pseudo)) {
+            mysql_query("UPDATE member SET pseudo_member = '$pseudo' WHERE id_member = '$idmember'") or die(mysql_error());
+            return $pseudo;
+        } else {
+            $error = "alreadytake";
+            return $error;
+        }
     }
 
     function ModifySituation() {
@@ -79,7 +87,7 @@ class models_ajax_profile extends Model {
             $sexe = HOMME;
         } else if ($sexe == "Femme") {
             $sexe = FEMME;
-        } 
+        }
 
         $idmember = $_SESSION['id_member'];
 

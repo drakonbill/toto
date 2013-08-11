@@ -27,7 +27,10 @@ $(document).ready(function() {
             data: "pseudo=" + value,
             success:
                     function(result) {
-                        //  alert(result); 
+                        if (result === "alreadytake") {
+                            $(".form-validation-pseudo").html("Pseudo déjà pris. <br/>");
+                            return result;
+                        }
                     }
         });
     }
@@ -65,9 +68,11 @@ $(document).ready(function() {
     }
 
     function sexeajax(value, settings) {
+
         console.log(this);
         console.log(value);
         console.log(settings);
+
 
         $.ajax({
             type: 'POST',
@@ -75,7 +80,7 @@ $(document).ready(function() {
             data: "sexe=" + value,
             success:
                     function(result) {
-                        //  alert(result); 
+                        // alert(result);
                     }
         });
     }
@@ -90,9 +95,29 @@ $(document).ready(function() {
         width: '200px',
     });
 
+// PSEUDO OF THE MEMBER
+
+    pseudo = $("#pseudo").text();
+    
     $('#pseudo').editable(function(value, settings) {
-        pseudoajax(value, settings);
-        return(value);
+
+        $(".form-validation-pseudo").html("");
+
+        if (value.length <= 3) {
+            $(".form-validation-pseudo").html("Pseudo trop court. <br/>");
+            return(pseudo);
+        }
+        else if (value.length > 45) {
+            $(".form-validation-pseudo").html("Pseudo trop long. <br/>");
+            return(pseudo);
+        }
+        else {
+            
+            pseudoajax(value, settings);
+            
+            pseudo = value;
+            return(pseudo);
+        }
     }, {
         type: 'text',
         submit: 'Modifier',
@@ -143,8 +168,8 @@ $(document).ready(function() {
         cancel: 'Annuler',
         width: '200px',
     });
-    
-        $('#situationpro').editable(function(value, settings) {
+
+    $('#situationpro').editable(function(value, settings) {
         situationproajax(value, settings);
         return(value);
     }, {

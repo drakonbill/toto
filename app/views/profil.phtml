@@ -145,6 +145,7 @@ if ($own == true) {
             </div>
             <h3 class="details-title">Informations générales</h3>
             <p><strong>Pseudo</strong> : <span id="pseudo"><?php echo $data->error ? $data->error : ucfirst($data->pseudo_member); ?></span></p>
+            <span class="form-validation-pseudo" style="color:red;"></span>
             <strong>Age</strong> : <?php echo $data->Age($data->birth_member); ?> ans<br/>
             <?php
             // For the month of birth
