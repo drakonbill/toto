@@ -13,12 +13,26 @@ class models_ajax_profile extends Model {
     }
 
     function ModifyPseudo() {
+
         $pseudo = $_POST['pseudo'];
         $idmember = $_SESSION['id_member'];
+        $level = $_SESSION['level_member'];
 
-        mysql_query("UPDATE member SET pseudo_member = '$pseudo' WHERE id_member = '$idmember'") or die(mysql_error());
+        if ((stripos($pseudo, 'Mister-') !== FALSE) OR (stripos($pseudo, 'Miss-') !== FALSE)) {
+            $error = "adminformat";
+            return $error;
+        } else {
+            $requete_verif_pseudo = mysql_query("SELECT * FROM member WHERE pseudo_member ='" . $pseudo . "'") or die(mysql_error());
+            $data_verif_pseudo = mysql_fetch_array($requete_verif_pseudo);
 
-        return $pseudo;
+            if (empty($data_verif_pseudo)) {
+                mysql_query("UPDATE member SET pseudo_member = '$pseudo' WHERE id_member = '$idmember'") or die(mysql_error());
+                return $pseudo;
+            } else {
+                $error = "alreadytake";
+                return $error;
+            }
+        }
     }
 
     function ModifySituation() {
@@ -54,7 +68,7 @@ class models_ajax_profile extends Model {
         } else if ($preferance == "Homme et Femme") {
             $situation = P_B;
         }
-        
+
         $idmember = $_SESSION['id_member'];
 
         mysql_query("UPDATE member SET preference_member = '$preferance' WHERE id_member = '$idmember'") or die(mysql_error());
@@ -72,6 +86,23 @@ class models_ajax_profile extends Model {
             $sexe = FEMME;
         }
         
+        $idmember = $_SESSION['id_member'];
+
+        mysql_query("UPDATE member SET sex_member = '$sexe' WHERE id_member = '$idmember'") or die(mysql_error());
+
+        return $sexe;
+    }
+
+    function ModifySexe() {
+
+        $sexe = $_POST['sexe'];
+
+        if ($sexe == "Homme") {
+            $sexe = HOMME;
+        } else if ($sexe == "Femme") {
+            $sexe = FEMME;
+        }
+
         $idmember = $_SESSION['id_member'];
 
         mysql_query("UPDATE member SET sex_member = '$sexe' WHERE id_member = '$idmember'") or die(mysql_error());
