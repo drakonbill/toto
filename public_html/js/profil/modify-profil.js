@@ -38,9 +38,33 @@ $(document).ready(function() {
                         }
                     }
         });
-        
-    }
 
+    }
+    
+        function birthajax(value, settings) {
+        console.log(this);
+        console.log(value);
+        console.log(settings);
+
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/modifyBirth',
+            data: "birth=" + value,
+            success:
+                    function(result) {
+                        if (result === "alreadytake") {
+                            $(".form-validation-pseudo").html("Pseudo déjà pris. <br/>");
+                            return result;
+                        }
+
+                        if (result === "adminformat") {
+                            $(".form-validation-pseudo").html("Les pseudos : Mister- et Miss- sont réservés. <br/>");
+                            return result;
+                        }
+                    }
+        });
+
+    }
     function situationajax(value, settings) {
         console.log(this);
         console.log(value);
@@ -130,6 +154,63 @@ $(document).ready(function() {
         cancel: 'Annuler',
         width: '200px',
     });
+
+// BIRTH OF THE MEMBER
+
+    birth = $("#birth").text();
+
+    $('#birth').editable(function(value, settings) {
+
+        $(".form-validation-birth").html("");
+        
+        var date = value.split("/"); 
+        var day = date[0];
+        var month = date[1];
+        var year = date[2];
+        
+        if (day === "00") {
+            $(".form-validation-birth").html("Le jour ne doit pas être nul. <br/>");
+            return(birth);
+        }
+        else if (month === "00") {
+            $(".form-validation-birth").html("Le mois ne doit pas être nul. <br/>");
+            return(birth);
+        }
+        else if (year === "0000") {
+            $(".form-validation-birth").html("L'année ne doit pas être nul. <br/>");
+            return(birth);
+        }
+        else if (day >= "31") {
+            $(".form-validation-birth").html("Le jour doit exister. <br/>");
+            return(birth);
+        }
+        else if (month >= "12") {
+            $(".form-validation-birth").html("Ce mois n'existe pas. Vous venez d'une autre planète ? <br/>");
+            return(birth);
+        }
+        else if (year >= "2000") {
+            $(".form-validation-birth").html("Désolé mais là, ça fait un peu jeune. <br/>");
+            return(birth);
+        }
+        else if (year <= "1900") {
+            $(".form-validation-birth").html("Désolé mais là, ... Bref. REFUS ! <br/>");
+            return(birth);
+        }
+        else {
+
+            birthajax(value, settings);
+
+            birth = value;
+            return(birth);
+        }
+    }, {
+        type: 'masked',
+        mask: "99/99/9999",
+        submit: 'Modifier',
+        cancel: 'Annuler',
+        width: '200px',
+    });
+
 
     $('#situation1').editable(function(value, settings) {
         situationajax(value, settings);

@@ -22,7 +22,7 @@ class models_ajax_profile extends Model {
             $data_verif_level = mysql_fetch_array($requete_verif_level);
 
             if ($data_verif_level['level_member'] == 9) {
-                
+
                 $requete_verif_pseudo = mysql_query("SELECT * FROM member WHERE pseudo_member ='" . $pseudo . "'") or die(mysql_error());
                 $data_verif_pseudo = mysql_fetch_array($requete_verif_pseudo);
 
@@ -33,7 +33,6 @@ class models_ajax_profile extends Model {
                     $error = "alreadytake";
                     return $error;
                 }
-                
             } else {
                 $error = "adminformat";
                 return $error;
@@ -50,6 +49,19 @@ class models_ajax_profile extends Model {
                 return $error;
             }
         }
+    }
+
+    function ModifyBirth() {
+
+        $birth = $_POST['birth'];
+
+        $idmember = $_SESSION['id_member'];
+        
+        list($jour, $mois, $annee) = split('[/.]', $birth);
+        $newbirth = "$annee-$mois-$jour";
+        mysql_query("UPDATE member SET birth_member = '$newbirth' WHERE id_member = '$idmember'") or die(mysql_error());
+
+        return $birth;
     }
 
     function ModifySituation() {
@@ -111,4 +123,5 @@ class models_ajax_profile extends Model {
     }
 
 }
+
 ?>
