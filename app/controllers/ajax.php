@@ -1,11 +1,11 @@
 <?php
-  
 
- /*
+/*
  * Description of ajax
  *
  * @author Miki
  */
+
 class controllers_ajax extends Controller {
 
     public function init() {
@@ -198,6 +198,13 @@ class controllers_ajax extends Controller {
     function modifySexeAction() {
         $indexM = $this->loadModel("ajax_profile");
         $return = $indexM->ModifySexe();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifyBirthAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifyBirth();
 
         $this->loadView("ajax", $return);
     }
