@@ -56,7 +56,7 @@ class models_ajax_profile extends Model {
         $birth = $_POST['birth'];
 
         $idmember = $_SESSION['id_member'];
-        
+
         list($jour, $mois, $annee) = split('[/.]', $birth);
         $newbirth = "$annee-$mois-$jour";
         mysql_query("UPDATE member SET birth_member = '$newbirth' WHERE id_member = '$idmember'") or die(mysql_error());
@@ -120,6 +120,42 @@ class models_ajax_profile extends Model {
         mysql_query("UPDATE member SET sex_member = '$sexe' WHERE id_member = '$idmember'") or die(mysql_error());
 
         return $sexe;
+    }
+
+    function ModifySituationpro() {
+
+        $situationpro = $_POST['situationpro'];
+
+        if ($situationpro == NCE) {
+            $situationpro = NULL;
+        } else if ($situationpro == "Collège") {
+            $situation = COLLEGE;
+        } else if ($situationpro == "Lycée") {
+            $situationpro = LYCEE;
+        } else if ($situationpro == "Bac+1") {
+            $situationpro = BAC1;
+        } else if ($situationpro == "Bac+2") {
+            $situationpro = BAC2;
+        } else if ($situationpro == "Bac+3") {
+            $situationpro = BAC3;
+        } else if ($situationpro == "Bac+4") {
+            $situationpro = BAC4;
+        } else if ($situationpro == "Bac+5") {
+            $situationpro = BAC5;
+        } else if ($situationpro == "Bac+6") {
+            $situationpro = BAC6;
+        } else if ($situationpro == "Employé") {
+            $situationpro = EMPLOYEE;
+        } else if ($situationpro == "Freelance") {
+            $situationpro = FREELANCE;
+        } else if ($situationpro == "Sans emploi") {
+            $situationpro = JOBLOOKING;
+        }
+        $idmember = $_SESSION['id_member'];
+
+        mysql_query("UPDATE member_details SET study_member = '$situationpro' WHERE id_member = '$idmember'") or die(mysql_error());
+
+        return $situation;
     }
 
 }

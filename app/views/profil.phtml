@@ -158,22 +158,22 @@ if ($own == true) {
             ?>
 
             <p><strong>Anniversaire</strong> : Le <span id="birth"><?php
-            echo $data->Daydate($data->birth_member);
-            echo " $month";
-            ?></span></p>
+                    echo $data->Daydate($data->birth_member);
+                    echo " $month";
+                    ?></span></p>
             <span class="form-validation-birth" style="color:red;"></span>
 
             <p><strong>Sexe</strong><span id="sexe"> : <?php echo $sexe; ?></span></p>
 
-            <strong>Ville</strong> : <?php echo ucfirst(strtolower($data->city_member)); ?><br/>
-            <strong>Pays</strong> : <?php echo $data->country_member; ?><br/>
             <?php
             $day2 = $data->Daydate($data->inscription_date_member);
             $mon2 = $data->Monthdate($data->inscription_date_member);
             $month2 = $data->month($mon2);
             $year2 = $data->Yeardate($data->inscription_date_member);
             ?>
-            <strong>Date d'inscription</strong> : <?php echo "Le $day2 $month2 $year2" ?><br/>
+          <!--  <strong>Date d'inscription</strong> : <?php // echo "Le $day2 $month2 $year2"  ?><br/> -->
+            <strong>Ville</strong> : <?php echo ucfirst(strtolower($data->city_member)); ?><br/>
+            <strong>Pays</strong> : <?php echo $data->country_member; ?><br/>
 
             <p class="general-error" style="color:red; visibility:hidden"></p>
 
@@ -245,7 +245,7 @@ if ($own == true) {
                 $study = "Non communiquée";
             }
             ?>
-            <p><strong>Situation professionnelle</strong> : <span id="situationpro"><?php echo $study; ?></span></p>
+            <p><strong>Situation professionnelle</strong> : <br/><span id="situationpro"><?php echo $study; ?></span></p>
 
             <br/>
 
@@ -256,6 +256,7 @@ if ($own == true) {
             }
             ?>
             <p><strong>Prénom</strong> : <span id="first-name"><?php echo $data->first_name_member; ?></span></p>
+            <span class="form-validation-firstname" style="color:red;"></span>
             <?php
             if ($data->skype_member == NULL) {
                 $data->skype_member = NC;

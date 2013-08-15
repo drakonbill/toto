@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    
+// AJAX FUNCTIONS
 
     function firstnameajax(value, settings) {
         console.log(this);
@@ -11,7 +13,7 @@ $(document).ready(function() {
             data: "first-name=" + value,
             success:
                     function(result) {
-                        // alert(result); 
+                        return result;
                     }
         });
     }
@@ -114,10 +116,48 @@ $(document).ready(function() {
                     }
         });
     }
+    
+        function situationproajax(value, settings) {
+        console.log(this);
+        console.log(value);
+        console.log(settings);
+
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/modifySituationpro',
+            data: "situationpro=" + value,
+            success:
+                    function(result) {
+                        //  alert(result); 
+                    }
+        });
+    }
+    
+// JEDITABLE PART
+
+// FIRST-NAME OF THE MEMBER
+
+    firstname = $("#first-name").text();
 
     $('#first-name').editable(function(value, settings) {
-        firstnameajax(value, settings);
-        return(value);
+
+        $(".form-validation-firstname").html("");
+
+        if (value.length < 3) {
+            $(".form-validation-firstname").html("Prénom trop court. <br/>");
+            return(firstname);
+        }
+        else if (value.length > 45) {
+            $(".form-validation-firstname").html("Prénom trop long. <br/>");
+            return(firstname);
+        }
+        else {
+
+            firstnameajax(value, settings);
+
+            firstname = value;
+            return(firstname);
+        }
     }, {
         type: 'text',
         submit: 'Modifier',
@@ -260,7 +300,7 @@ $(document).ready(function() {
         situationproajax(value, settings);
         return(value);
     }, {
-        data: "{'Non communiqué':'Non communiqué', 'Homme':'Homme', 'Femme':'Femme', 'Homme et Femme':'Homme et Femme' }",
+        data: "{'Non communiquée':'Non communiquée', 'Collège':'Collège', 'Lycée':'Lycée', 'Bac+1':'Bac+1', 'Bac+2':'Bac+2', 'Bac+3':'Bac+3', 'Bac+4':'Bac+4', 'Bac+5':'Bac+5', 'Bac+6':'Bac+6', 'Employé':'Employé', 'Freelance':'Freelance', 'Sans emploi':'Sans emploi'}",
         type: 'select',
         submit: 'Modifier',
         cancel: 'Annuler',

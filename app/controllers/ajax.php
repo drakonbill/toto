@@ -209,6 +209,13 @@ class controllers_ajax extends Controller {
         $this->loadView("ajax", $return);
     }
 
+    function modifySituationproAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifySituationpro();
+
+        $this->loadView("ajax", $return);
+    }
+
 }
 
 ?>
