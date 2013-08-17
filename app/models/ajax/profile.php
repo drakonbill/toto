@@ -132,17 +132,17 @@ class models_ajax_profile extends Model {
             $situation = COLLEGE;
         } else if ($situationpro == "Lycée") {
             $situationpro = LYCEE;
-        } else if ($situationpro == "Bac+1") {
+        } else if ($situationpro == "Bac 1") {
             $situationpro = BAC1;
-        } else if ($situationpro == "Bac+2") {
+        } else if ($situationpro == "Bac 2") {
             $situationpro = BAC2;
-        } else if ($situationpro == "Bac+3") {
+        } else if ($situationpro == "Bac 3") {
             $situationpro = BAC3;
-        } else if ($situationpro == "Bac+4") {
+        } else if ($situationpro == "Bac 4") {
             $situationpro = BAC4;
-        } else if ($situationpro == "Bac+5") {
+        } else if ($situationpro == "Bac 5") {
             $situationpro = BAC5;
-        } else if ($situationpro == "Bac+6") {
+        } else if ($situationpro == "Bac 6") {
             $situationpro = BAC6;
         } else if ($situationpro == "Employé") {
             $situationpro = EMPLOYEE;
@@ -156,6 +156,25 @@ class models_ajax_profile extends Model {
         mysql_query("UPDATE member_details SET study_member = '$situationpro' WHERE id_member = '$idmember'") or die(mysql_error());
 
         return $situation;
+    }
+
+    function ModifyCodepostal() {
+
+        $codepostal = $_POST['codepostal'];
+        $idmember = $_SESSION['id_member'];
+
+        $requete_verif_codepostal = mysql_query("SELECT * FROM zip_code WHERE CP ='" . $codepostal . "'") or die(mysql_error());
+        $data_verif_codepostal = mysql_fetch_array($requete_verif_codepostal);
+
+        if (!empty($data_verif_codepostal['CP'])) {
+
+            mysql_query("UPDATE member SET zipcode_member = '$codepostal' WHERE id_member = '$idmember'") or die(mysql_error());
+            return $codepostal;
+            
+        } else {
+            $error = "codeinconnu";
+            return $error;
+        }
     }
 
 }
