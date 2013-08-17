@@ -234,8 +234,7 @@ class models_ajax_profile extends Model {
             return $error;
         }
     }
-    
-    
+
     function ModifyPortable() {
 
         $portable = $_POST['portable'];
@@ -245,6 +244,61 @@ class models_ajax_profile extends Model {
         mysql_query("UPDATE member_details SET cellular_member = '$portable' WHERE id_member = '$idmember'") or die(mysql_error());
 
         return $portable;
+    }
+
+    function ModifyRecherche() {
+
+        $recherche = $_POST['recherche'];
+
+        $idmember = $_SESSION['id_member'];
+
+        mysql_query("UPDATE member_details SET description_research_member = '$recherche' WHERE id_member = '$idmember'") or die(mysql_error());
+
+        return $recherche;
+    }
+
+    function ModifyDescription() {
+
+        $description = $_POST['description'];
+
+        $idmember = $_SESSION['id_member'];
+
+        mysql_query("UPDATE member_details SET description_membre = '$description' WHERE id_member = '$idmember'") or die(mysql_error());
+
+        return $description;
+    }
+
+    function ModifyFacebook() {
+
+        $facebook = $_POST['facebook'];
+
+        $idmember = $_SESSION['id_member'];
+
+        mysql_query("UPDATE member_details SET facebook_member = '$facebook' WHERE id_member = '$idmember'") or die(mysql_error());
+
+        return $facebook;
+    }
+
+    function ModifyTwitter() {
+
+        $twitter = $_POST['twitter'];
+
+        $idmember = $_SESSION['id_member'];
+
+        mysql_query("UPDATE member_details SET twitter_member = '$twitter' WHERE id_member = '$idmember'") or die(mysql_error());
+
+        return $twitter;
+    }
+
+    function ModifySkype() {
+
+        $skype = $_POST['skype'];
+
+        $idmember = $_SESSION['id_member'];
+
+        mysql_query("UPDATE member_details SET skype_member = '$skype' WHERE id_member = '$idmember'") or die(mysql_error());
+
+        return $twitter;
     }
 
 }

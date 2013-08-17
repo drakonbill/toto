@@ -193,6 +193,85 @@ $(document).ready(function() {
         });
     }
 
+    function descriptionajax(value, settings) {
+        console.log(this);
+        console.log(value);
+        console.log(settings);
+
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/modifyDescription',
+            data: "description=" + value,
+            success:
+                    function(result) {
+                        //  alert(result); 
+                    }
+        });
+    }
+
+    function rechercheajax(value, settings) {
+        console.log(this);
+        console.log(value);
+        console.log(settings);
+
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/modifyRecherche',
+            data: "recherche=" + value,
+            success:
+                    function(result) {
+                        //  alert(result); 
+                    }
+        });
+    }
+    
+        function facebookajax(value, settings) {
+        console.log(this);
+        console.log(value);
+        console.log(settings);
+
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/modifyFacebook',
+            data: "facebook=" + value,
+            success:
+                    function(result) {
+                        //  alert(result); 
+                    }
+        });
+    }
+    
+        function twitterajax(value, settings) {
+        console.log(this);
+        console.log(value);
+        console.log(settings);
+
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/modifyTwitter',
+            data: "twitter=" + value,
+            success:
+                    function(result) {
+                        //  alert(result); 
+                    }
+        });
+    }
+    
+        function skypeajax(value, settings) {
+        console.log(this);
+        console.log(value);
+        console.log(settings);
+
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/modifySkype',
+            data: "skype=" + value,
+            success:
+                    function(result) {
+                        //  alert(result); 
+                    }
+        });
+    }
 // JEDITABLE PART
 
 // FIRST-NAME OF THE MEMBER
@@ -468,5 +547,62 @@ $(document).ready(function() {
         width: '200px',
     });
 
+// LOOKING FOR OF THE MEMBER
+
+    $('#recherche').editable(function(value, settings) {
+        rechercheajax(value, settings);
+        return(value);
+    }, {
+        type: 'textarea',
+        submit: 'Modifier',
+        cancel: 'Annuler',
+        width: '200px',
+        rows: '8',
+        cols: '40',
+    });
+
+    // DESCRIPTION FOR OF THE MEMBER
+
+    $('#description').editable(function(value, settings) {
+        descriptionajax(value, settings);
+        return(value);
+    }, {
+        type: 'textarea',
+        submit: 'Modifier',
+        cancel: 'Annuler',
+        width: '200px',
+        rows: '8',
+        cols: '40',
+    });
+
+    $('#facebook').editable(function(value, settings) {
+        facebookajax(value, settings);
+        return(value);
+    }, {
+        type: 'text',
+        submit: 'Modifier',
+        cancel: 'Annuler',
+        width: '200px',
+    });
+
+    $('#twitter').editable(function(value, settings) {
+        twitterajax(value, settings);
+        return(value);
+    }, {
+        type: 'text',
+        submit: 'Modifier',
+        cancel: 'Annuler',
+        width: '200px',
+    });
+
+    $('#skype').editable(function(value, settings) {
+        skypeajax(value, settings);
+        return(value);
+    }, {
+        type: 'text',
+        submit: 'Modifier',
+        cancel: 'Annuler',
+        width: '200px',
+    });
 
 });

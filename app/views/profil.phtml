@@ -171,13 +171,13 @@ if ($own == true) {
             $month2 = $data->month($mon2);
             $year2 = $data->Yeardate($data->inscription_date_member);
             ?>
-          <!--  <strong>Date d'inscription</strong> : <?php // echo "Le $day2 $month2 $year2"    ?><br/> -->
+          <!--  <strong>Date d'inscription</strong> : <?php // echo "Le $day2 $month2 $year2"      ?><br/> -->
             <strong>Pays</strong> : <?php echo $data->country_member; ?><br/>
             <p><strong>Ville</strong> : <span id="ville"><?php echo ucfirst(strtolower($data->city_member)); ?></span></p>
             <span class="form-validation-city" style="color:red;"></span>
             <p><strong>Code Postal</strong> : <span id="codepostal"><?php echo ucfirst(strtolower($data->zipcode_member)); ?></span></p>
             <span class="form-validation-codepostal" style="color:red;"></span>
-            
+
             <p class="general-error" style="color:red; visibility:hidden"></p>
 
             <br/>
@@ -265,16 +265,20 @@ if ($own == true) {
                 $data->skype_member = NC;
             }
             ?>
-            <strong>Pseudo skype</strong> : <?php echo $data->skype_member; ?><br/>
+            <p><strong>Pseudo skype</strong> : <span id="skype"><?php echo $data->skype_member; ?></span></p>
+            <span class="form-validation-skype" style="color:red;"></span>
             <?php
             if ($data->facebook_member == NULL) {
                 $data->facebook_member = NC;
                 ?>
-                <strong>Lien Facebook</strong> : <?php echo $data->facebook_member; ?><br/>
+                <p><strong>Lien Facebook</strong> : <span id="facebook"><?php echo $data->facebook_member; ?></span></p>
+                <span class="form-validation-portable" style="color:red;"></span>
                 <?php
             } else {
                 ?>
                 <a href="<?php echo $data->facebook_member; ?>"><img src="<?php echo $conf["url"]; ?>/Images/facebook-logo.jpg" width="10%" alt="Profil Facebook" /></a><br/>
+                <p><strong><span id="facebook">Editer le lien.</span></strong></p>
+                <span class="form-validation-facebook" style="color:red;"></span>
                 <?php
             }
             ?>
@@ -283,11 +287,14 @@ if ($own == true) {
             if ($data->twitter_member == NULL) {
                 $data->twitter_member = NC;
                 ?>
-                <strong>Lien Twitter</strong> : <?php echo $data->twitter_member; ?><br/>
+                <p><strong>Lien Twitter</strong> : <span id="twitter"><?php echo $data->twitter_member; ?></span></p>
+                <span class="form-validation-twitter" style="color:red;"></span>
                 <?php
             } else {
                 ?>
-                <a href="<?php echo $data->facebook_member; ?>"><img src="<?php echo $conf["url"]; ?>/Images/twitter-logo.jpg" width="10%" alt="Profil Facebook" /></a>
+                <a href="<?php echo $data->twitter_member; ?>"><img src="<?php echo $conf["url"]; ?>/Images/twitter-logo.jpg" width="10%" alt="Profil Facebook" /></a>
+                <p><strong><span id="twitter">Editer le lien.</span></strong></p>
+                <span class="form-validation-twitter" style="color:red;"></span>
                 <?php
             }
             ?>
@@ -296,7 +303,8 @@ if ($own == true) {
                 $data->extra_email_member = NC;
             }
             ?>
-            <strong>Email</strong> : <?php echo $data->extra_email_member; ?><br/>    
+            <p><strong>Email</strong> : <span id="email"><?php echo $data->extra_email_member; ?></span></p>    
+            <span class="form-validation-email" style="color:red;"></span>
 
             <?php
             if ($data->cellular_member == NULL) {
@@ -309,18 +317,21 @@ if ($own == true) {
             <br/>
             <h3 class="details-title">Description</h3>
             <?php
-            if ($data->description_member == NULL) {
-                $data->description_member = NCE;
+            if ($data->description_membre == NULL) {
+                $data->description_membre = NCE;
             }
             ?>
-            <strong>Description du membre</strong> : <?php echo $data->description_member; ?><br/>
+            <p><strong>Description du membre</strong> : <span id="description"><?php echo $data->description_membre; ?></span></p>
+            <span class="form-validation-description" style="color:red;"></span>
 
             <?php
             if ($data->description_research_member == NULL) {
                 $data->description_research_member = NCE;
             }
             ?>
-            <strong>A la recherche</strong> : <?php echo $data->description_research_member; ?><br/>
+            <p><strong>A la recherche</strong> : <span id="recherche"><?php echo $data->description_research_member; ?></span></p>
+            <span class="form-validation-recherche" style="color:red;"></span>
+
             <hr class="clear"/>
         </div>
         <div class="inside-column-sep"></div>
@@ -337,190 +348,6 @@ if ($own == true) {
             <div class="connexion-shadow-1"></div>
             <div class="scroll-pane">
                 <div id="scroll-content">
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
-
-                    <div class="details-user-box">
-                        <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                        <span>
-                            <strong>Stupeflip</strong><br>
-                            Album xxxxxxx
-                        </span>
-                    </div>
 
                     <div class="details-user-box">
                         <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>

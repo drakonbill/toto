@@ -237,6 +237,41 @@ class controllers_ajax extends Controller {
         $this->loadView("ajax", $return);
     }
 
+    function modifyRechercheAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifyRecherche();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifyDescriptionAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifyDescription();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifyFacebookAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifyFacebook();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifyTwitterAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifyTwitter();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifySkypeAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifySkype();
+
+        $this->loadView("ajax", $return);
+    }
+
 }
 
 ?>
