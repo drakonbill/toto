@@ -177,6 +177,22 @@ $(document).ready(function() {
 
     }
 
+    function portableajax(value, settings) {
+        console.log(this);
+        console.log(value);
+        console.log(settings);
+
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/modifyPortable',
+            data: "portable=" + value,
+            success:
+                    function(result) {
+                        //  alert(result); 
+                    }
+        });
+    }
+
 // JEDITABLE PART
 
 // FIRST-NAME OF THE MEMBER
@@ -420,5 +436,37 @@ $(document).ready(function() {
         cancel: 'Annuler',
         width: '200px',
     });
+
+    // CELLPHONE OF THE MEMBER
+
+    portable = $("#portable").text();
+
+    $('#portable').editable(function(value, settings) {
+
+        $(".form-validation-portable").html("");
+
+        if (portable < 0000000000) {
+            $(".form-validation-portable").html("Téléphone invalide. <br/>");
+            return(portable);
+        }
+        else if (portable > 9999999999) {
+            $(".form-validation-portable").html("Téléphone invalide. <br/>");
+            return(portable);
+        }
+        else {
+
+            portableajax(value, settings);
+
+            portable = value;
+            return(portable);
+        }
+    }, {
+        type: 'masked',
+        mask: "9999999999",
+        submit: 'Modifier',
+        cancel: 'Annuler',
+        width: '200px',
+    });
+
 
 });

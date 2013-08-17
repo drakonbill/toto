@@ -230,6 +230,13 @@ class controllers_ajax extends Controller {
         $this->loadView("ajax", $return);
     }
 
+    function modifyPortableAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifyPortable();
+
+        $this->loadView("ajax", $return);
+    }
+
 }
 
 ?>

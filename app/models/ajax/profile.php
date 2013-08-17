@@ -234,6 +234,18 @@ class models_ajax_profile extends Model {
             return $error;
         }
     }
+    
+    
+    function ModifyPortable() {
+
+        $portable = $_POST['portable'];
+
+        $idmember = $_SESSION['id_member'];
+
+        mysql_query("UPDATE member_details SET cellular_member = '$portable' WHERE id_member = '$idmember'") or die(mysql_error());
+
+        return $portable;
+    }
 
 }
 
