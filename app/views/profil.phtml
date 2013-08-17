@@ -158,165 +158,169 @@ if ($own == true) {
             ?>
 
             <p><strong>Anniversaire</strong> : Le <span id="birth"><?php
-            echo $data->Daydate($data->birth_member);
-            echo " $month";
-            ?></span></p>
+                    echo $data->Daydate($data->birth_member);
+                    echo " $month";
+                    ?></span></p>
             <span class="form-validation-birth" style="color:red;"></span>
 
             <p><strong>Sexe</strong><span id="sexe"> : <?php echo $sexe; ?></span></p>
 
-            <strong>Ville</strong> : <?php echo ucfirst(strtolower($data->city_member)); ?><br/>
-            <strong>Pays</strong> : <?php echo $data->country_member; ?><br/>
             <?php
             $day2 = $data->Daydate($data->inscription_date_member);
             $mon2 = $data->Monthdate($data->inscription_date_member);
             $month2 = $data->month($mon2);
             $year2 = $data->Yeardate($data->inscription_date_member);
             ?>
-            <strong>Date d'inscription</strong> : <?php echo "Le $day2 $month2 $year2" ?><br/>
+          <!--  <strong>Date d'inscription</strong> : <?php // echo "Le $day2 $month2 $year2"   ?><br/> -->
+            <strong>Pays</strong> : <?php echo $data->country_member; ?><br/>
+            <p><strong>Ville</strong> : <span id="ville"><?php echo ucfirst(strtolower($data->city_member)); ?></span></p>
+            <span class="form-validation-city" style="color:red;"></span>
+            <p><strong>Code Postal</strong> : <span id="codepostal"><?php echo ucfirst(strtolower($data->zipcode_member)); ?></span></p>
+            <span class="form-validation-codepostal" style="color:red;"></span>
 
-            <p class="general-error" style="color:red; visibility:hidden"></p>
+                <p class="general-error" style="color:red; visibility:hidden"></p>
 
-            <br/>
+                <br/>
 
-            <h3 class="details-title">Détails</h3>
-            <?php
-            if ($data->statut_member == NULL) {
-                $data->statut_member = NCE;
-            } else if ($data->statut_member == 1) {
-                $data->statut_member = SINGLE;
-            } else if ($data->statut_member == 2) {
-                $data->statut_member = COUPLE;
-            } else if ($data->statut_member == 3) {
-                if ($sexe == "Femme") {
-                    $data->statut_member = BRIDE;
-                } else {
-                    $data->statut_member = MARIED;
+                <h3 class="details-title">Détails</h3>
+                <?php
+                if ($data->statut_member == NULL) {
+                    $data->statut_member = NCE;
+                } else if ($data->statut_member == 1) {
+                    $data->statut_member = SINGLE;
+                } else if ($data->statut_member == 2) {
+                    $data->statut_member = COUPLE;
+                } else if ($data->statut_member == 3) {
+                    if ($sexe == "Femme") {
+                        $data->statut_member = BRIDE;
+                    } else {
+                        $data->statut_member = MARIED;
+                    }
                 }
-            }
 
-            if ($sexe == "Femme") {
-                $situation_class = "2";
-            } else {
-                $situation_class = "1";
-            }
-            ?>
-            <p><strong>Situation</strong> : <span id="situation<?php echo $situation_class; ?>"><?php echo $data->statut_member; ?></span></p>
-            <?php
-            $interest = "Intéréssé par";
-            if ($sexe == "Femme") {
-                $interest = "Intéressée par";
-            }
-            if ($data->preference_member == NULL) {
-                $preference = NC;
-            } else if ($data->preference_member == P_M) {
-                $preference = "Homme";
-            } else if ($data->preference_member == P_W) {
-                $preference = "Femme";
-            } else if ($data->preference_member == P_B) {
-                $preference = "Homme et Femme";
-            }
-            ?>
-            <p><strong><?php echo $interest; ?></strong> : <span id="preferance"><?php echo $preference; ?></span></p>
-            <?php
-            if ($data->study_member == COLLEGE) {
-                $study = "Collège";
-            } else if ($data->study_member == LYCEE) {
-                $study = "Lycée";
-            } else if ($data->study_member == BAC1) {
-                $study = "BAC + 1";
-            } else if ($data->study_member == BAC2) {
-                $study = "BAC + 2";
-            } else if ($data->study_member == BAC3) {
-                $study = "BAC + 3";
-            } else if ($data->study_member == BAC4) {
-                $study = "BAC + 4";
-            } else if ($data->study_member == BAC5) {
-                $study = "BAC + 5";
-            } else if ($data->study_member == BAC6) {
-                $study = " > BAC + 5";
-            } else if ($data->study_member == JOBLOOKING) {
-                $study = "En recherche d'emploi";
-            } else if ($data->study_member == EMPLOYEE) {
-                $study = "Salarié";
-            } else if ($data->study_member == FREELANCE) {
-                $study = "Freelance";
-            } else if ($data->study_member == NCE) {
-                $study = "Non communiquée";
-            }
-            ?>
-            <p><strong>Situation professionnelle</strong> : <span id="situationpro"><?php echo $study; ?></span></p>
-
-            <br/>
-
-            <h3 class="details-title">A propos de vous</h3>
-            <?php
-            if ($data->first_name_member == NULL) {
-                $data->first_name_member = NC;
-            }
-            ?>
-            <p><strong>Prénom</strong> : <span id="first-name"><?php echo $data->first_name_member; ?></span></p>
-            <?php
-            if ($data->skype_member == NULL) {
-                $data->skype_member = NC;
-            }
-            ?>
-            <strong>Pseudo skype</strong> : <?php echo $data->skype_member; ?><br/>
-            <?php
-            if ($data->facebook_member == NULL) {
-                $data->facebook_member = NC;
+                if ($sexe == "Femme") {
+                    $situation_class = "2";
+                } else {
+                    $situation_class = "1";
+                }
                 ?>
-                <strong>Lien Facebook</strong> : <?php echo $data->facebook_member; ?><br/>
+                <p><strong>Situation</strong> : <span id="situation<?php echo $situation_class; ?>"><?php echo $data->statut_member; ?></span></p>
                 <?php
-            } else {
+                $interest = "Intéréssé par";
+                if ($sexe == "Femme") {
+                    $interest = "Intéressée par";
+                }
+                if ($data->preference_member == NULL) {
+                    $preference = NC;
+                } else if ($data->preference_member == P_M) {
+                    $preference = "Homme";
+                } else if ($data->preference_member == P_W) {
+                    $preference = "Femme";
+                } else if ($data->preference_member == P_B) {
+                    $preference = "Homme et Femme";
+                }
                 ?>
-                <a href="<?php echo $data->facebook_member; ?>"><img src="<?php echo $conf["url"]; ?>/Images/facebook-logo.jpg" width="10%" alt="Profil Facebook" /></a><br/>
+                <p><strong><?php echo $interest; ?></strong> : <span id="preferance"><?php echo $preference; ?></span></p>
                 <?php
-            }
-            ?>
-
-            <?php
-            if ($data->twitter_member == NULL) {
-                $data->twitter_member = NC;
+                if ($data->study_member == COLLEGE) {
+                    $study = "Collège";
+                } else if ($data->study_member == LYCEE) {
+                    $study = "Lycée";
+                } else if ($data->study_member == BAC1) {
+                    $study = "BAC + 1";
+                } else if ($data->study_member == BAC2) {
+                    $study = "BAC + 2";
+                } else if ($data->study_member == BAC3) {
+                    $study = "BAC + 3";
+                } else if ($data->study_member == BAC4) {
+                    $study = "BAC + 4";
+                } else if ($data->study_member == BAC5) {
+                    $study = "BAC + 5";
+                } else if ($data->study_member == BAC6) {
+                    $study = " > BAC + 5";
+                } else if ($data->study_member == JOBLOOKING) {
+                    $study = "En recherche d'emploi";
+                } else if ($data->study_member == EMPLOYEE) {
+                    $study = "Salarié";
+                } else if ($data->study_member == FREELANCE) {
+                    $study = "Freelance";
+                } else if ($data->study_member == NCE) {
+                    $study = "Non communiquée";
+                }
                 ?>
-                <strong>Lien Twitter</strong> : <?php echo $data->twitter_member; ?><br/>
+                <p><strong>Situation professionnelle</strong> : <br/><span id="situationpro"><?php echo $study; ?></span></p>
+
+                <br/>
+
+                <h3 class="details-title">A propos de vous</h3>
                 <?php
-            } else {
+                if ($data->first_name_member == NULL) {
+                    $data->first_name_member = NC;
+                }
                 ?>
-                <a href="<?php echo $data->facebook_member; ?>"><img src="<?php echo $conf["url"]; ?>/Images/twitter-logo.jpg" width="10%" alt="Profil Facebook" /></a>
+                <p><strong>Prénom</strong> : <span id="first-name"><?php echo $data->first_name_member; ?></span></p>
+                <span class="form-validation-firstname" style="color:red;"></span>
                 <?php
-            }
-            ?>
-            <?php
-            if ($data->extra_email_member == NULL) {
-                $data->extra_email_member = NC;
-            }
-            ?>
-            <strong>Email</strong> : <?php echo $data->extra_email_member; ?><br/>    
+                if ($data->skype_member == NULL) {
+                    $data->skype_member = NC;
+                }
+                ?>
+                <strong>Pseudo skype</strong> : <?php echo $data->skype_member; ?><br/>
+                <?php
+                if ($data->facebook_member == NULL) {
+                    $data->facebook_member = NC;
+                    ?>
+                    <strong>Lien Facebook</strong> : <?php echo $data->facebook_member; ?><br/>
+                    <?php
+                } else {
+                    ?>
+                    <a href="<?php echo $data->facebook_member; ?>"><img src="<?php echo $conf["url"]; ?>/Images/facebook-logo.jpg" width="10%" alt="Profil Facebook" /></a><br/>
+                    <?php
+                }
+                ?>
 
-            <?php
-            if ($data->cellular_member == NULL) {
-                $data->cellular_member = NC;
-            }
-            ?>
-            <strong>Portable</strong> : <?php echo $data->cellular_member; ?><br/>
+                <?php
+                if ($data->twitter_member == NULL) {
+                    $data->twitter_member = NC;
+                    ?>
+                    <strong>Lien Twitter</strong> : <?php echo $data->twitter_member; ?><br/>
+                    <?php
+                } else {
+                    ?>
+                    <a href="<?php echo $data->facebook_member; ?>"><img src="<?php echo $conf["url"]; ?>/Images/twitter-logo.jpg" width="10%" alt="Profil Facebook" /></a>
+                    <?php
+                }
+                ?>
+                <?php
+                if ($data->extra_email_member == NULL) {
+                    $data->extra_email_member = NC;
+                }
+                ?>
+                <strong>Email</strong> : <?php echo $data->extra_email_member; ?><br/>    
 
-            <br/>
-            <h3 class="details-title">Description</h3>
-            <?php
-            if ($data->description_member == NULL) {
-                $data->description_member = NCE;
-            }
-            ?>
-            <strong>Description du membre</strong> : <?php echo $data->description_member; ?><br/>
+                <?php
+                if ($data->cellular_member == NULL) {
+                    $data->cellular_member = NC;
+                }
+                ?>
+                <strong>Portable</strong> : <?php echo $data->cellular_member; ?><br/>
 
-            <?php
-            if ($data->description_research_member == NULL) {
-                $data->description_research_member = NCE;
-            }
-            ?>
-            <strong>A la recherche</strong> : <?php echo $data->description_research_member; ?><br/>
-            <hr class="clear"/>
+                <br/>
+                <h3 class="details-title">Description</h3>
+                <?php
+                if ($data->description_member == NULL) {
+                    $data->description_member = NCE;
+                }
+                ?>
+                <strong>Description du membre</strong> : <?php echo $data->description_member; ?><br/>
+
+                <?php
+                if ($data->description_research_member == NULL) {
+                    $data->description_research_member = NCE;
+                }
+                ?>
+                <strong>A la recherche</strong> : <?php echo $data->description_research_member; ?><br/>
+                <hr class="clear"/>
         </div>
         <div class="inside-column-sep"></div>
         <div class="details">
