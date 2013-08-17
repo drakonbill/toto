@@ -174,6 +174,7 @@ if ($own == true) {
           <!--  <strong>Date d'inscription</strong> : <?php // echo "Le $day2 $month2 $year2"   ?><br/> -->
             <strong>Pays</strong> : <?php echo $data->country_member; ?><br/>
             <p><strong>Ville</strong> : <span id="ville"><?php echo ucfirst(strtolower($data->city_member)); ?></span></p>
+            <span class="form-validation-city" style="color:red;"></span>
             <p><strong>Code Postal</strong> : <span id="codepostal"><?php echo ucfirst(strtolower($data->zipcode_member)); ?></span></p>
             <span class="form-validation-codepostal" style="color:red;"></span>
 

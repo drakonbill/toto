@@ -132,8 +132,8 @@ $(document).ready(function() {
                     }
         });
     }
-    
-        function codepostalajax(value, settings) {
+
+    function codepostalajax(value, settings) {
         console.log(this);
         console.log(value);
         console.log(settings);
@@ -146,6 +146,30 @@ $(document).ready(function() {
                     function(result) {
                         if (result === "codeinconnu") {
                             $(".form-validation-codepostal").html("Code postal inconnu. <br/>");
+                            return result;
+                        }
+                    }
+        });
+
+    }
+
+    function villeajax(value, settings, codepostalcheck) {
+        console.log(this);
+        console.log(value);
+        console.log(settings);
+
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/modifyVille',
+            data: "ville=" + value + '&codepostal=' + codepostalcheck,
+            success:
+                    function(result) {
+                        if (result === "villeinconnue") {
+                            $(".form-validation-ville").html("Ville inconnue. <br/>");
+                            return result;
+                        }
+                        if (result === "codepostalerror") {
+                            $(".form-validation-ville").html("Le code postal ne correspond pas. Veuillez commencer par éditer le code postal avant la ville <br/>");
                             return result;
                         }
                     }
@@ -341,7 +365,7 @@ $(document).ready(function() {
     $('#codepostal').editable(function(value, settings) {
 
         $(".form-validation-codepostal").html("");
-        
+
         if (codepostal <= "00000") {
             $(".form-validation-codepostal").html("Code postal invalide. <br/>");
             return(codepostal);
@@ -360,6 +384,38 @@ $(document).ready(function() {
     }, {
         type: 'masked',
         mask: "99999",
+        submit: 'Modifier',
+        cancel: 'Annuler',
+        width: '200px',
+    });
+
+    // CITY OF THE MEMBER
+
+    ville = $("#ville").text();
+
+    $('#ville').editable(function(value, settings) {
+
+        codepostalcheck = $("#codepostal").text();
+
+        $(".form-validation-ville").html("");
+
+        if (value.length < 3) {
+            $(".form-validation-ville").html("Nom trop court. <br/>");
+            return(ville);
+        }
+        else if (value.length > 100) {
+            $(".form-validation-ville").html("Nom trop long. <br/>");
+            return(ville);
+        }
+        else {
+
+            villeajax(value, settings, codepostalcheck);
+
+            ville = value;
+            return(ville);
+        }
+    }, {
+        type: 'text',
         submit: 'Modifier',
         cancel: 'Annuler',
         width: '200px',

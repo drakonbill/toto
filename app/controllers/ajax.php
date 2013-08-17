@@ -215,10 +215,17 @@ class controllers_ajax extends Controller {
 
         $this->loadView("ajax", $return);
     }
-    
-        function modifyCodepostalAction() {
+
+    function modifyCodepostalAction() {
         $indexM = $this->loadModel("ajax_profile");
-            $return = $indexM->ModifyCodepostal();
+        $return = $indexM->ModifyCodepostal();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifyVilleAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifyVille();
 
         $this->loadView("ajax", $return);
     }
