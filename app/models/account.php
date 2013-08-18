@@ -9,7 +9,7 @@ class models_account extends Model {
 
 // Login Model
     public function login() {
-
+        print_r($_POST);
 // Variable definition : Email, Password, and Token
         $loginEmail = $this->reg->clean->POST('email');
 // I want to include the hacher function in the user lib ... But don't know how to do that 

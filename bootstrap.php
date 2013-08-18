@@ -3,7 +3,7 @@
 ## start the sessions
 session_start();
 
-// debuging disable when not needed
+// debuging (disable when not needed)
 $debug = FALSE;
 $debug = TRUE;
 
@@ -17,9 +17,10 @@ else
     ini_set("display_errors", 0);
 
 // end of debuging code
+// DEBUG FUNCTION -------------------------------<<<<<
 function debug($status) {
     global $debug;
-//    DEBUG FUNCTION -------------------------------<<<<<
+
     if ($debug) {
         print_r($status);
         echo "<br/>\n";
@@ -28,12 +29,12 @@ function debug($status) {
 
 function loadLibs($libList) {
     global $reg;
-        foreach ($libList as $lib) {
-            require_once("core/lib/".$lib.".php");
-            $reg->$lib = new $lib();
-        }
+    foreach ($libList as $lib) {
+        require_once("core/lib/" . $lib . ".php");
+        $reg->$lib = new $lib();
     }
-    
+}
+
 spl_autoload_register('my_autoloader');
 
 ##load registry
@@ -43,10 +44,13 @@ debug("registry  ...ok");
 
 ## load core config
 require_once('core/config/conf.php');
-debug("config  ...ok");
+debug("core config loaded.... OK");
 
-//$reg->loadLibs($main_core_libs);
+## load libs
 loadLibs($core_libs);
+loadLibs(array("urlParse"));
+debug("load libs  ...ok");
+$reg->clean = $reg->cleanData; // fix this name problem NOW!!
 
 ## these are the base classes so that any class can extend them
 require_once(COREDIR . 'Core.php');
@@ -55,6 +59,7 @@ require_once(COREDIR . 'Model.php');
 require_once(COREDIR . 'View.php');
 debug("main Controller/Model/View  ...included");
 ## end of critical includes
+
 ## enter custom code here it is not recomended to edit below this block
 #######################################################################
 ## load app config
@@ -63,6 +68,7 @@ $reg->appconf = $appconf;
 debug("app config  ...ok");
 #######################################################################
 ## end of custom code block
+
 ## DataStore for url params
 $_URL = array();
 
@@ -117,14 +123,9 @@ if (empty($controller)) {
 
 debug("find controller class - got $controller, $view  ...  done");
 
-## initialize access controll
-$access = new access($reg->user);
-//foreach ($roleList as $roleLevel => $role) {
-//    $roles->$role['name'] = new rolesLib($role['name'], $roleLevel);
-//}
-//$reg->roles = $roles;
-
-
+## fill access list for user
+$acl = new access($reg->user);
+$reg->acl = $acl;
 
 ## fly to sky
 try {
@@ -133,7 +134,7 @@ try {
     // pack controller in Secure Box for automatic role menagment
     //$userRole = $reg->user->getRole();
     require_once (COREDIR . 'SecureBox.php');
-    $control = new SecureBox($control, $access);
+    $control = new SecureBox($control, $acl);
 
     // pass controller call to SecureBox check
     $control->$view();
@@ -145,4 +146,5 @@ try {
 debug($reg);
 debug($_SESSION);
 debug($_URL);
+debug($acl);
 ?>

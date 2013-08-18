@@ -6,27 +6,29 @@
  * @author Miki
  */
 abstract class Controller extends Core {
-    
-   // protected $actionLevel;
+
+    // protected $actionLevel;
 
     public function __construct($option = array()) {
         parent::__construct($option);
-        
+
         $this->loadInit();
     }
 
     ## owerride this functions in Your controller
+
     abstract public function init();
 
     abstract public function indexAction();
 
-    private function loadInit(){
+    private function loadInit() {
         $this->init();
-        
+
 //        if($this->reg->roles->isRole($this)) {
 //            
 //        }
     }
+
     ## make model object and add them in registry
 
     public function loadModel($name, $opt = "") {
@@ -45,14 +47,14 @@ abstract class Controller extends Core {
 
     public function loadHView($name, $data) {
 
-       
+
 
         if ($user->loggedin()) {
             $this->loadmWidgets(array("news"));
             $this->loadView("header-co", "");
         } else {
-            
-            $this->loadView("header","");
+
+            $this->loadView("header", "");
         }
 
         $this->loadView($name, $data);
@@ -76,15 +78,18 @@ abstract class Controller extends Core {
         return array("mWidget" => $mWidget);
     }
 
-    public function loadvWidget($name) {
+    public function loadvWidget($name, $function = "") {
 
 
-        @$mWidget = $this->reg->mWidget;
-        if (isset($mWidget[$name]))
-            $data = $mWidget[$name];
-        else
-            $data = "";
-
+        if ($function == "")
+            $data = "---1---";
+        else {
+            $wm = $this->loadModel("widgets_" . $name);
+            if (method_exists($wm, $function))
+                $data = $wm->$function();
+            else
+                $data = "---3---";
+        }
         $options = array('name' => "widgets/" . $name, 'data' => $data);
         return new View($options);
     }
@@ -103,13 +108,13 @@ abstract class Controller extends Core {
         $this->reg->controler = $controller;
         return $controller;
     }
-    
-    public function loadHelper($name, $param){
-        
-        include "helper/".$name.".php";
+
+    public function loadHelper($name, $param) {
+
+        include "helper/" . $name . ".php";
         return new $name($param);
-        
     }
+
 //     function getRole($action){
 //        global $roleList;
 //        
@@ -121,8 +126,6 @@ abstract class Controller extends Core {
 //        
 //         $this->actionLevel[$action] = $level;
 //    }
-
-    
 }
 
 ?>

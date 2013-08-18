@@ -6,9 +6,9 @@
  *
  * @author Miki
  */
-class models_widgets_profil extends Model {
+class models_widgets_profilPassion extends Model {
     
-     public function init() {
+     public function test() {
          
          $test = "test";
         

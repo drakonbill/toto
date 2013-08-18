@@ -20,6 +20,7 @@ class Core {
     protected $user;
     protected $conf;
     protected $role;
+    protected $aclLevel = array();
 
     public function __construct($option) {
 
@@ -38,7 +39,12 @@ class Core {
         $data[] = $add;
         $reg->data = $data;
     }
-
+    public function setLevel($action, $level) {
+        $this->aclLevel[$action]=$level;
+    }
+    public function getLevel($action) {
+        return isset($this->aclLevel[$action])?$this->aclLevel[$action]:5;
+    }
 }
 
 ?>

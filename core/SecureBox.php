@@ -24,13 +24,13 @@ class SecureBox {
     public function __call($method, $arguments) {
         global $reg;
          
-        if (method_exists($this->target, $method) && $this->role->inRole(get_class($this->target), $method)) {
+        if (method_exists($this->target, $method) && $this->role->inRole(get_class($this->target), $this->target->getlevel($method))) {
 
             return call_user_func_array(array($this->target, $method), $arguments);
         }
         else {
        
-        return $reg->error->f404Static("");
+        return $reg->error->f403Static("");
         
         }
     }
