@@ -366,8 +366,8 @@ class models_ajax_passion extends Model {
         if (!empty($passion)) {
             return json_encode($passion);
         } else {
-            $errormessage = "nopassion";
-            return $errormessage;
+            $passion = "";
+            return $passion;
         }
     }
 

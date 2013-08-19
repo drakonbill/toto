@@ -14,28 +14,8 @@
                     data: "idcategory=" + id,
                     dataType: 'json',
                     success:
-                            function(json) {
-                                console.log("this");
-                                alert(json);
-                                if (json !== null) { 
-                                    alert("Non vide.");
-                                    // $('#scroll-content').val("");
-
-                                    alert(json);
-                                    /*
-                                     var $selectVille = $('select[name="register-ville"]');
-                                     $selectVille.empty();
-                                     
-                                     for (var key in json) {
-                                     var ville = json[key];
-                                     
-                                     }
-                                     */
-                                }
-                                if (json === "nopassion") {
-                                    alert("Vide");
-                                   // $('#scroll-content').val("Pas de passion dans cette catégorie.");
-                                }
+                            function(passion) {
+                                alert(passion);
                             }
                 });
 
