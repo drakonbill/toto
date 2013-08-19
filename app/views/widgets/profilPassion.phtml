@@ -7,15 +7,35 @@
 
                 var id = this.id;
                 console.log(this);
-                
+
                 $.ajax({
                     type: 'POST',
-                    url: 'ajax/refreshPassion',
+                    url: '/ajax/refreshPassion',
                     data: "idcategory=" + id,
                     dataType: 'json',
                     success:
-                            function(passion) {
-                                alert(passion);
+                            function(json) {
+
+                                if (json != null) {
+
+                                    $('#scroll-content').html("");
+
+                                    for (var key in json) {
+
+                                        var category = json[key]["category_passion"];
+                                        var name = json[key]["name_passion"];
+                                        var icone = json[key]["icone"];
+                                        
+                                        if(icone === "") {
+                                            icone = "Images/popup-close.png";
+                                        }
+                                       
+                                        $('#scroll-content').append("<div class='details-user-box'><a href='#'><img src='"+icone+"' alt='' width='50'></a><span><strong>" + category + "</strong><br>" + name + "</span></div> ");
+                                    }
+                                }
+                                if (json == null) {
+                                    $('#scroll-content').html("<br/><span class='blue'>Pas de passion dans cette catégorie.</span>");
+                                }
                             }
                 });
 
