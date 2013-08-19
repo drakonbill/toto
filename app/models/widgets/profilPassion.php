@@ -1,19 +1,34 @@
 <?php
 
-
 /**
- * Description of news
+ * Widget for viewing all passion of the member
  *
- * @author Miki
+ * @author Quentin.L
  */
 class models_widgets_profilPassion extends Model {
-    
-     public function test() {
-         
-         $test = "test";
+
+    public function passionCategory() {
+
+        $requete_passion = mysql_query("SELECT * FROM passion_category");
+
+        while ($result = mysql_fetch_assoc($requete_passion)) {
+            $data[$result['id_category']] = $result;
+        }
+
+        $idmember = $_SESSION['id_member'];
+
+        $requete_memberpassion = mysql_query("SELECT * FROM passion_category C, member_passion M, passion P WHERE M.id_member = ".$idmember." AND P.id_passion = M.id_passion AND P.id_category = C.id_category");
         
-         return $test;
+        $i = 0;
+        
+        while ($result2 = mysql_fetch_assoc($requete_memberpassion)) {
+            $data["datamember"][$i] = $result2;
+            $i++;
+        }
+
+        return $data;
     }
+
 }
 
 ?>

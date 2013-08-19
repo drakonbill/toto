@@ -1,14 +1,63 @@
 <div class="details">
     <strong>Passions</strong><br/><br/>
-    
-    <?php 
-        echo $data;
-        //print_r($data);
-    ?>
+    <script type="text/javascript">
+        $(document).ready(function() {
 
-    Tourisme / Sport / <span class="blue">Musique</span> / Cinéma / Cuisine / Xxxxx / Xxxxx / Xxxxx / Xxxxx / Xxxxx
-    Xxxxx / Xxxxx / Xxxxx / Xxxxx / Xxxxx.
+            $(".category").click(function() {
 
+                var id = this.id;
+                console.log(this);
+                
+                $.ajax({
+                    type: 'POST',
+                    url: 'ajax/refreshPassion',
+                    data: "idcategory=" + id,
+                    dataType: 'json',
+                    success:
+                            function(json) {
+                                console.log("this");
+                                alert(json);
+                                if (json !== null) { 
+                                    alert("Non vide.");
+                                    // $('#scroll-content').val("");
+
+                                    alert(json);
+                                    /*
+                                     var $selectVille = $('select[name="register-ville"]');
+                                     $selectVille.empty();
+                                     
+                                     for (var key in json) {
+                                     var ville = json[key];
+                                     
+                                     }
+                                     */
+                                }
+                                if (json === "nopassion") {
+                                    alert("Vide");
+                                   // $('#scroll-content').val("Pas de passion dans cette catégorie.");
+                                }
+                            }
+                });
+
+
+            });
+        });
+    </script>
+
+    <p><span id="0" class="blue category">Toutes les catégories /</span>
+        <?php
+        $i = 1;
+
+        while (!empty($data[$i]["id_category"])) {
+
+            $category = ucfirst($data[$i]["name_category"]);
+            ?>
+            <span id="<?php echo $data[$i]["id_category"]; ?>" class="category"><?php echo $category; ?> / </span>
+            <?php
+            $i++;
+        }
+        ?>
+    </p>
 </div>
 <br>
 
@@ -16,44 +65,39 @@
     <div class="connexion-shadow-1"></div>
     <div class="scroll-pane">
         <div id="scroll-content">
+            <?php
+            $j = 0;
 
-            <div class="details-user-box">
-                <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                <span>
-                    <strong>Stupeflip</strong><br>
-                    Album xxxxxxx
-                </span>
-            </div>
+            if (empty($data["datamember"][$j]["id_category"])) {
+                $errorEmptyPassion = "Aucune passion enregistrée";
+            }
 
-            <div class="details-user-box">
-                <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                <span>
-                    <strong>Stupeflip</strong><br>
-                    Album xxxxxxx
-                </span>
-            </div>
+            if (!empty($errorEmptyPassion)) {
+                echo $errorEmptyPassion;
+            } else {
+                while (!empty($data["datamember"][$j]["id_category"])) {
 
-            <div class="details-user-box">
-                <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                <span>
-                    <strong>Stupeflip</strong><br>
-                    Album xxxxxxx
-                </span>
-            </div>
-            <div class="details-user-box">
-                <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                <span>
-                    <strong>Stupeflip</strong><br>
-                    Album xxxxxxx
-                </span>
-            </div>
-            <div class="details-user-box">
-                <a href="#"><img src="<?php echo $conf["url"]; ?>Images/clip-face3.jpg" alt="" width="50"></a>
-                <span>
-                    <strong>Stupeflip</strong><br>
-                    Album xxxxxxx
-                </span>
-            </div>
+                    $category = ucfirst($data["datamember"][$j]["name_category"]);
+                    $passion = ucfirst($data["datamember"][$j]["name_passion"]);
+
+                    if (!empty($data["datamember"][$j]["icone"])) {
+                        $icone = $data["datamember"][$j]["icone"];
+                    } else {
+                        $icone = "Images/popup-close.png";
+                    }
+                    ?>
+                    <div class="details-user-box">
+                        <a href="#"><img src="<?php echo $icone ?>" alt="" width="50"></a>
+                        <span>
+                            <strong><?php echo $category ?></strong><br>
+                            <?php echo $passion; ?>
+                        </span>
+                    </div>
+                    <?php
+                    $j++;
+                }
+            }
+            ?>
         </div>
     </div>
     <div class="connexion-shadow-2"></div>

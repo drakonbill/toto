@@ -272,6 +272,13 @@ class controllers_ajax extends Controller {
         $this->loadView("ajax", $return);
     }
 
+    function refreshPassionAction() {
+        $indexM = $this->loadModel("ajax_passion");
+        $return = $indexM->RefreshPassion();
+
+        $this->loadView("ajax", $return);
+    }
+
 }
 
 ?>

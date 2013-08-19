@@ -46,9 +46,8 @@ if ($own == true) {
             //include 'Modules/tchat/tchat-left.php';
             /*             * ************************************************* FINTCHAT *************************************** */
             ?>
-
-            <?php if (isset($contr)) $contr->loadvWidget("statistics"); ?>
             <?php if (isset($contr)) $contr->loadvWidget("friends_online"); ?>
+            <?php if (isset($contr)) $contr->loadvWidget("statistics"); ?>
         </div> <!-- #sidebar-left-in -->
     </div> <!-- #sidebar-left -->
 
@@ -336,7 +335,7 @@ if ($own == true) {
         </div>
         <div class="inside-column-sep"></div>
         <?php // if (isset($contr)) $contr->loadmWidgets("profil_passion"); ?>
-        <?php if (isset($contr)) $contr->loadvWidget("profilPassion", "test"); ?>
+        <?php if (isset($contr)) $contr->loadvWidget("profilPassion", "passionCategory"); ?>
 
     </div>
 

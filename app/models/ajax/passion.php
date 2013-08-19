@@ -351,6 +351,26 @@ class models_ajax_passion extends Model {
         }
     }
 
+    function RefreshPassion() {
+
+        $idmember = $_SESSION['id_member'];
+        $idpassion = $_POST['idcategory'];
+
+        $requete_memberpassion = mysql_query("SELECT * FROM passion_category C, member_passion M, passion P WHERE M.id_member = " . $idmember . " AND P.id_passion = M.id_passion AND P.id_category = C.id_category AND P.id_category = " . $idpassion . "");
+
+        while ($donnees = mysql_fetch_assoc($requete_memberpassion)) {
+            $passion["name_passion"] = $donnees['name_passion'];
+            $passion["category_passion"] = $donnees['category_passion'];
+        }
+
+        if (!empty($passion)) {
+            return json_encode($passion);
+        } else {
+            $errormessage = "nopassion";
+            return $errormessage;
+        }
+    }
+
 }
 
 ?>
