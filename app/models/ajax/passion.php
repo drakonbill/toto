@@ -356,7 +356,11 @@ class models_ajax_passion extends Model {
         $idmember = $_SESSION['id_member'];
         $idpassion = $_POST['idcategory'];
 
-        $requete_memberpassion = mysql_query("SELECT * FROM passion_category C, member_passion M, passion P WHERE M.id_member = " . $idmember . " AND P.id_passion = M.id_passion AND P.id_category = C.id_category AND P.id_category = " . $idpassion . "");
+        if ($idpassion == 0) {
+            $requete_memberpassion = mysql_query("SELECT * FROM passion_category C, member_passion M, passion P WHERE M.id_member = " . $idmember . " AND P.id_passion = M.id_passion AND P.id_category = C.id_category");
+        } else {
+            $requete_memberpassion = mysql_query("SELECT * FROM passion_category C, member_passion M, passion P WHERE M.id_member = " . $idmember . " AND P.id_passion = M.id_passion AND P.id_category = C.id_category AND P.id_category = " . $idpassion . "");
+        }
 
         $i = 0;
         while ($donnees = mysql_fetch_assoc($requete_memberpassion)) {
