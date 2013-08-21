@@ -26,7 +26,7 @@ class Core {
 
         global $reg;
         $this->reg = $reg;
-        $this->option = $option;
+        $this->params = $option;
         $this->db = $reg->dbcon;
         $this->validate = $reg->validate;
         $this->user = $reg->user;
@@ -43,7 +43,7 @@ class Core {
         $this->aclLevel[$action]=$level;
     }
     public function getLevel($action) {
-        return isset($this->aclLevel[$action])?$this->aclLevel[$action]:5;
+        return isset($this->aclLevel[$action])?$this->aclLevel[$action]:0;
     }
 }
 

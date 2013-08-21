@@ -78,17 +78,17 @@ abstract class Controller extends Core {
         return array("mWidget" => $mWidget);
     }
 
-    public function loadvWidget($name, $function = "") {
+    public function loadvWidget($name, $function = "", $opt = "") {
 
 
         if ($function == "")
-            $data = "---1---";
+            $data = "";
         else {
-            $wm = $this->loadModel("widgets_" . $name);
+            $wm = $this->loadModel("widgets_" . $name, $opt);
             if (method_exists($wm, $function))
-                $data = $wm->$function();
+                $data = $wm->$function($opt);
             else
-                $data = "---3---";
+                $data = "";
         }
         $options = array('name' => "widgets/" . $name, 'data' => $data);
         return new View($options);
