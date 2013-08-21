@@ -353,7 +353,7 @@ class models_ajax_passion extends Model {
 
     function RefreshPassion() {
 
-        $idmember = $_SESSION['id_member'];
+        $idmember = $_POST['idmember'];
         $idpassion = $_POST['idcategory'];
 
         if ($idpassion == 0) {

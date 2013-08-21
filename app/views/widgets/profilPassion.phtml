@@ -11,7 +11,7 @@
                 $.ajax({
                     type: 'POST',
                     url: '/ajax/refreshPassion',
-                    data: "idcategory=" + id,
+                    data: "idcategory=" + id + '&idmember=' + <?php echo $data["id_member"]; ?>,
                     dataType: 'json',
                     success:
                             function(json) {

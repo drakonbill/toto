@@ -23,7 +23,8 @@ class models_widgets_profilPassion extends Model {
             $data["datamember"][$i] = $result2;
             $i++;
         }
-
+        
+        $data['id_member'] = $idmember;
         return $data;
     }
 
