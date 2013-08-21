@@ -3,6 +3,7 @@ if ($data->id_member != $_SESSION['id_member']) {
     $own = false;
 } else {
     $own = true;
+    $data->id_member = $_SESSION['id_member'];
 }
 
 if ($own == true) {
@@ -335,7 +336,7 @@ if ($own == true) {
         </div>
         <div class="inside-column-sep"></div>
         <?php // if (isset($contr)) $contr->loadmWidgets("profil_passion"); ?>
-        <?php if (isset($contr)) $contr->loadvWidget("profilPassion", "passionCategory"); ?>
+        <?php if (isset($contr)) $contr->loadvWidget("profilPassion", "passionCategory", $data->id_member); ?>
 
     </div>
 
