@@ -5,7 +5,7 @@
  *
  * @author Quentin.L
  */
-class models_widgets_profilPassion extends Model {
+class models_widgets_passionCategory extends Model {
 
     public function passionCategory($idmember) {
 
@@ -15,15 +15,15 @@ class models_widgets_profilPassion extends Model {
             $data[$result['id_category']] = $result;
         }
 
-        $requete_memberpassion = mysql_query("SELECT * FROM passion_category C, member_passion M, passion P WHERE M.id_member = ".$idmember." AND P.id_passion = M.id_passion AND P.id_category = C.id_category");
-        
+        $requete_memberpassion = mysql_query("SELECT * FROM passion_category C, member_passion M, passion P WHERE M.id_member = " . $idmember . " AND P.id_passion = M.id_passion AND P.id_category = C.id_category");
+
         $i = 0;
-        
+
         while ($result2 = mysql_fetch_assoc($requete_memberpassion)) {
             $data["datamember"][$i] = $result2;
             $i++;
         }
-        
+
         $data['id_member'] = $idmember;
         return $data;
     }
