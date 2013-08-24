@@ -1,8 +1,11 @@
 <?php
 if ($data->id_member != $_SESSION['id_member']) {
     $own = false;
+    $ownbool = 0;
 } else {
     $own = true;
+    $ownbool = 1;
+    $data->id_member = $_SESSION['id_member'];
 }
 
 if ($own == true) {
@@ -61,290 +64,20 @@ if ($own == true) {
 
     <!-- This is the main content area -->
     <div id="inside-column">
-        <hr class="top-bar"/>
-        <?php //include 'Modules/tchat/notifications.php';    ?>
         <?php
-        if ($own == true) {
-            $message_profil = "Mon profil";
-        } else {
-            $message_profil = "Profil de $data->pseudo_member";
-        }
+        $datasent['own'] = $ownbool;
+        $datasent['id_member'] = $data->id_member;
+        if (isset($contr))
+            $contr->loadvWidget("profilNavigation", "profilNavigation", $datasent);
         ?>
-        <span class="title_event_header"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-fav.png" alt="" class="vam blue-man" width="27" /><?php echo $message_profil; ?></span>
-        <hr class="clear"/>
-        <div class="inside-column-sep"></div>
-        <div class="inside-column-inside">
-            <div class="cfix">
-                <div class="conversation-left">
-                    <a href="#" class="user-avatar bgr-blue"><img src="/<?php echo $data->error ? $data->error : $data->photo_member; ?>" alt="" width="42" /></a>
-                    <a href="javascript:void()" id="modifAvatar">Modifier ma photo</a>
-                </div> <!-- .conversation-left -->
-                <div class="conversation-main">
-                    <div class="conversation-main-inside cfix">
-                        <div class="ld user-titlro">
-                            <strong><em><?php echo $data->error ? $data->error : ucfirst($data->pseudo_member); ?></em></strong>
-                            <strong><em><a href="#" class="rev blue">Profil</a></em></strong>
-                        </div> <!-- .user-titlro -->
-                        <ul class="user-iconies cfix">
-                            <li><a href="#">
-                                    <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-actuality.png" alt="" /></span>
-                                    <span class="user-iconies-2">Actualités</span>
-                                </a></li>
-                            <li><a href="#">
-                                    <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-photos.png" alt="" /></span>
-                                    <span class="user-iconies-2">Photos</span>
-                                </a></li>
-                            <li><a href="/profil/id/<?php echo $data->id_member; ?>">
-                                    <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-details.png" alt="" /></span>
-                                    <span class="user-iconies-2">Détails</span>
-                                </a></li>
-                            <li><a href="#">
-                                    <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-event.png" alt="" /></span>
-                                    <span class="user-iconies-2">Evènements</span>
-                                </a></li>
-                            <li><a href="/profil/seeContacts/<?php echo $data->id_member; ?>">
-                                    <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-contacts.png" alt="" /></span>
-                                    <span class="user-iconies-2">Contacts</span>
-                                </a></li>
-                            <li><a href="#">
-                                    <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-parameter.png" alt="" /></span>
-                                    <span class="user-iconies-2">Paramètres</span>
-                                </a></li>
-                        </ul> <!-- .user-iconies -->
-                    </div> <!-- .conversation-main-inside -->
-                </div>
-            </div> <!-- .cfix -->
-        </div>
-        <div class="inside-column-sep"></div>
-        <ul id="details-menu">
-            <li><img style="opacity:0.7;" src="<?php echo $conf["url"]; ?>Images/details_glass.png" alt="Photos"/></li>
-            <li><h4 class="details-main-title">Détails</h4></li>
-            <li><div id="addcontact"><?php if ($data->addcontact != "") echo $data->addcontact; ?></div></li>
-            <?php
-            if ($own == false) {
-                ?>
-                <li><a href="#" class="details-btn">Ecrire un message</a></li>
-                <li><a href="#" class="details-btn2">Tchater</a></li>
-                <?php
-            }
-            ?>
-        </ul>
-        <?php
-        if ($data->sex_member == HOMME) {
-            $sexe = "Homme";
-        } else {
-            $sexe = "Femme";
-        }
-        ?>
-        
-        
+
         <div class="details">
-            <div id="map">
-                <?php
-                // MAP and region detection with a function in the user library
-                $idregion = $data->CodeRegionId($data->zipcode_member);
-                ?>
-                <img id="details-map" src="<?php echo $conf["url"]; ?>Images/region-map/<?php echo $idregion; ?>.png" width="360" height="380" alt="Map">
-            </div>
-            <h3 class="details-title">Informations générales</h3>
-
-            <p><strong>Pseudo</strong> : <span id="pseudo"><?php echo $data->error ? $data->error : ucfirst($data->pseudo_member); ?></span></p>
-            <span class="form-validation-pseudo" style="color:red;"></span>
-
-            <strong>Age</strong> : <?php echo $data->Age($data->birth_member); ?> ans<br/>
-            <?php
-            // For the month of birth
-            $mon = $data->Monthdate($data->birth_member);
-            $month = $data->month($mon);
-            ?>
-
-            <p><strong>Anniversaire</strong> : Le <span id="birth"><?php
-                    echo $data->Daydate($data->birth_member);
-                    echo " $month";
-                    ?></span></p>
-            <span class="form-validation-birth" style="color:red;"></span>
-
-            <p><strong>Sexe</strong><span id="sexe"> : <?php echo $sexe; ?></span></p>
-
-            <?php
-            $day2 = $data->Daydate($data->inscription_date_member);
-            $mon2 = $data->Monthdate($data->inscription_date_member);
-            $month2 = $data->month($mon2);
-            $year2 = $data->Yeardate($data->inscription_date_member);
-            ?>
-          <!--  <strong>Date d'inscription</strong> : <?php // echo "Le $day2 $month2 $year2"       ?><br/> -->
-            <strong>Pays</strong> : <?php echo $data->country_member; ?><br/>
-            <p><strong>Ville</strong> : <span id="ville"><?php echo ucfirst(strtolower($data->city_member)); ?></span></p>
-            <span class="form-validation-city" style="color:red;"></span>
-            <p><strong>Code Postal</strong> : <span id="codepostal"><?php echo ucfirst(strtolower($data->zipcode_member)); ?></span></p>
-            <span class="form-validation-codepostal" style="color:red;"></span>
-
-            <p class="general-error" style="color:red; visibility:hidden"></p>
-
-            <br/>
-
-            <h3 class="details-title">Détails</h3>
-            <?php
-            if ($data->statut_member == NULL) {
-                $data->statut_member = NCE;
-            } else if ($data->statut_member == 1) {
-                $data->statut_member = SINGLE;
-            } else if ($data->statut_member == 2) {
-                $data->statut_member = COUPLE;
-            } else if ($data->statut_member == 3) {
-                if ($sexe == "Femme") {
-                    $data->statut_member = BRIDE;
-                } else {
-                    $data->statut_member = MARIED;
-                }
-            }
-
-            if ($sexe == "Femme") {
-                $situation_class = "2";
-            } else {
-                $situation_class = "1";
-            }
-            ?>
-            <p><strong>Situation</strong> : <span id="situation<?php echo $situation_class; ?>"><?php echo $data->statut_member; ?></span></p>
-            <?php
-            $interest = "Intéréssé par";
-            if ($sexe == "Femme") {
-                $interest = "Intéressée par";
-            }
-            if ($data->preference_member == NULL) {
-                $preference = NC;
-            } else if ($data->preference_member == P_M) {
-                $preference = "Homme";
-            } else if ($data->preference_member == P_W) {
-                $preference = "Femme";
-            } else if ($data->preference_member == P_B) {
-                $preference = "Homme et Femme";
-            }
-            ?>
-            <p><strong><?php echo $interest; ?></strong> : <span id="preferance"><?php echo $preference; ?></span></p>
-            <?php
-            if ($data->study_member == COLLEGE) {
-                $study = "Collège";
-            } else if ($data->study_member == LYCEE) {
-                $study = "Lycée";
-            } else if ($data->study_member == BAC1) {
-                $study = "BAC + 1";
-            } else if ($data->study_member == BAC2) {
-                $study = "BAC + 2";
-            } else if ($data->study_member == BAC3) {
-                $study = "BAC + 3";
-            } else if ($data->study_member == BAC4) {
-                $study = "BAC + 4";
-            } else if ($data->study_member == BAC5) {
-                $study = "BAC + 5";
-            } else if ($data->study_member == BAC6) {
-                $study = " > BAC + 5";
-            } else if ($data->study_member == JOBLOOKING) {
-                $study = "En recherche d'emploi";
-            } else if ($data->study_member == EMPLOYEE) {
-                $study = "Salarié";
-            } else if ($data->study_member == FREELANCE) {
-                $study = "Freelance";
-            } else if ($data->study_member == NCE) {
-                $study = "Non communiquée";
-            }
-            ?>
-            <p><strong>Situation professionnelle</strong> : <br/><span id="situationpro"><?php echo $study; ?></span></p>
-
-            <br/>
-
-            <h3 class="details-title">A propos de vous</h3>
-            <?php
-            if ($data->first_name_member == NULL) {
-                $data->first_name_member = NC;
-            }
-            ?>
-            <p><strong>Prénom</strong> : <span id="first-name"><?php echo $data->first_name_member; ?></span></p>
-            <span class="form-validation-firstname" style="color:red;"></span>
-            <?php
-            if ($data->skype_member == NULL) {
-                $data->skype_member = NC;
-            }
-            ?>
-            <p><strong>Pseudo skype</strong> : <span id="skype"><?php echo $data->skype_member; ?></span></p>
-            <span class="form-validation-skype" style="color:red;"></span>
-            <?php
-            if ($data->facebook_member == NULL) {
-                $data->facebook_member = NC;
-                ?>
-                <p><strong>Lien Facebook</strong> : <span id="facebook"><?php echo $data->facebook_member; ?></span></p>
-                <span class="form-validation-portable" style="color:red;"></span>
-                <?php
-            } else {
-                ?>
-                <a href="<?php echo $data->facebook_member; ?>"><img src="<?php echo $conf["url"]; ?>/Images/facebook-logo.jpg" width="10%" alt="Profil Facebook" /></a><br/>
-                <p><strong><span id="facebook">Editer le lien.</span></strong></p>
-                <span class="form-validation-facebook" style="color:red;"></span>
-                <?php
-            }
-            ?>
-
-            <?php
-            if ($data->twitter_member == NULL) {
-                $data->twitter_member = NC;
-                ?>
-                <p><strong>Lien Twitter</strong> : <span id="twitter"><?php echo $data->twitter_member; ?></span></p>
-                <span class="form-validation-twitter" style="color:red;"></span>
-                <?php
-            } else {
-                ?>
-                <a href="<?php echo $data->twitter_member; ?>"><img src="<?php echo $conf["url"]; ?>/Images/twitter-logo.jpg" width="10%" alt="Profil Facebook" /></a>
-                <p><strong><span id="twitter">Editer le lien.</span></strong></p>
-                <span class="form-validation-twitter" style="color:red;"></span>
-                <?php
-            }
-            ?>
-            <?php
-            if ($data->extra_email_member == NULL) {
-                $data->extra_email_member = NC;
-            }
-            ?>
-            <p><strong>Email</strong> : <span id="email"><?php echo $data->extra_email_member; ?></span></p>    
-            <span class="form-validation-email" style="color:red;"></span>
-
-            <?php
-            if ($data->cellular_member == NULL) {
-                $data->cellular_member = NC;
-            }
-            ?>
-            <p><strong>Portable</strong> : <span id="portable"><?php echo $data->cellular_member; ?></span></p>
-            <span class="form-validation-portable" style="color:red;"></span>
-
-            <br/>
-            <h3 class="details-title">Description</h3>
-            <?php
-            if ($data->description_membre == NULL) {
-                $data->description_membre = NCE;
-            }
-            ?>
-            <p><strong>Description du membre</strong> : <span id="description"><?php echo $data->description_membre; ?></span></p>
-            <span class="form-validation-description" style="color:red;"></span>
-
-            <?php
-            if ($data->description_research_member == NULL) {
-                $data->description_research_member = NCE;
-            }
-            ?>
-            <p><strong>A la recherche</strong> : <span id="recherche"><?php echo $data->description_research_member; ?></span></p>
-            <span class="form-validation-recherche" style="color:red;"></span>
-
-            <hr class="clear"/>
         </div>
-        <div class="inside-column-sep"></div>
-        <?php // if (isset($contr)) $contr->loadmWidgets("profil_passion"); ?>
-        <?php if (isset($contr)) $contr->loadvWidget("profilPassion", "passionCategory"); ?>
 
     </div>
-
-</div>
 </div> <!-- #inside-column -->
 <div id="main-footer">
-    <?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
+<?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
 </div> <!-- #main-footer -->
 </div> <!-- .cfix -->
 <?php if (isset($contr)) $contr->loadvWidget("footer_quotation"); ?>
