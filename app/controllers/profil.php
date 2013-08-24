@@ -82,5 +82,22 @@ class controllers_profil extends Controller {
         $this->loadView("footer", "");
     }
 
+    function seeContactsAction() {
+
+        global $_URL;
+
+        $indexM = $this->loadModel("profil");
+
+        if (isset($_URL['id']))
+            $return = $indexM->seeContacts($id);
+        else
+            $return = $indexM->seeContacts("");
+
+        $this->loadView("header_co", "");
+        $this->loadView("seeContacts", $return);
+        $this->loadView("footer", "");
+    }
+
 }
+
 ?>

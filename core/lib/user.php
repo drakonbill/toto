@@ -1,26 +1,23 @@
 <?php
 
-/* Class : libs_user
- * Function : have all informations on each page of the user actually logged
+/* Class : user
+ * Function : basic functions for user
  * Version : 0.1
- * Date : 16/04/13
- * @Author : Miki and Quentin
+ * Date : 16/07/13
+ * @Author : Miki
  */
 
-// For the fonction of crypting (password)
-define("PREFIXE", "prefixeprotecmeeto");
-define("SUFFIXE", "suffixeprotecparty");
 
-class libs_user extends user {
 
-/*
-// Informations of the user 
+class user {
+
+// Informations of the user
     private $userData;
 
 // All informations of the member are stocked in the global variable $userData
     function __construct($id) {
         global $reg;
-// If there is no ID in parametre 
+// If there is no ID in parametre
         if (!isset($id))
             $id = "-1";
 
@@ -41,7 +38,7 @@ class libs_user extends user {
             return 0;
     }
 
-// Change an information of the member 
+// Change an information of the member
     function __set($name, $value) {
         $this->userData[$name] = $value;
     }
@@ -56,13 +53,11 @@ class libs_user extends user {
         return isset($_SESSION['id_member']);
     }
 
-    function getRole(){
+    function getRole() {
         global $roleList;
-        
-        return isset($this->level_member)?$roleList[$this->level_member]['name']:$roleList['-1'];
-        
+        return isset($this->level_member) ? $roleList[$this->level_member]['name'] : $roleList['-1'];
     }
- */           
+/*
     function photoURL($id = '') {
         global $reg;
 
@@ -87,7 +82,7 @@ class libs_user extends user {
         return mysql_fetch_array($query);
     }
 
-// Delete a selected informations 
+// Delete a selected informations
     function __delete($name) {
         if (isset($this->userData[$name])) {
             unset($this->userData[$name]);
@@ -207,11 +202,11 @@ class libs_user extends user {
         }
         return $annees;
     }
-
+*/
     /*
      * Funcion to have the day with a date formated in the database YYYY-MM-DD
      * @return : 03 for example if you are born the third of a month
-     */
+     /
 
     public function Daydate($naiss) {
 
@@ -223,7 +218,7 @@ class libs_user extends user {
     /*
      * Funcion to have the month with a date formated in the database YYYY-MM-DD
      * @return : July for example if you are born this month
-     */
+     /
 
     public function Monthdate($naiss) {
 
@@ -234,8 +229,8 @@ class libs_user extends user {
 
     /*
      * Funcion to have the year with a date formated in the database YYYY-MM-DD
-     * @return : 2015 for example 
-     */
+     * @return : 2015 for example
+     /
 
     public function Yeardate($naiss) {
 
@@ -286,7 +281,7 @@ class libs_user extends user {
     /*
      * Funcion to have the region with the postal code in param
      * @return : The name of the region : Example : Postal code 37300, Region : Centre.
-     */
+     /
 
     public function CodeRegionName($postalcode) {
 
@@ -302,11 +297,11 @@ class libs_user extends user {
             return $region;
         }
     }
-    
-        /*
+
+    /*
      * Funcion to have the region with the postal code in param
      * @return : The id of the region : Example : Postal code 37300, Region : 3
-     */
+     /
 
     public function CodeRegionId($postalcode) {
 
@@ -322,7 +317,7 @@ class libs_user extends user {
             return $region;
         }
     }
-
+*/
 }
 
 ?>

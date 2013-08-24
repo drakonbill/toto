@@ -1,11 +1,11 @@
 <?php
-  
 
- /*
+/*
  * Description of ajax
  *
  * @author Miki
  */
+
 class controllers_ajax extends Controller {
 
     public function init() {
@@ -157,7 +157,7 @@ class controllers_ajax extends Controller {
 
         $this->loadView("ajax", $return);
     }
-    
+
     function searchEventAction() {
         $indexM = $this->loadModel("ajax_event");
         $return = $indexM->searchEvent();
@@ -198,6 +198,83 @@ class controllers_ajax extends Controller {
     function modifySexeAction() {
         $indexM = $this->loadModel("ajax_profile");
         $return = $indexM->ModifySexe();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifyBirthAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifyBirth();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifySituationproAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifySituationpro();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifyCodepostalAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifyCodepostal();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifyVilleAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifyVille();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifyPortableAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifyPortable();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifyRechercheAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifyRecherche();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifyDescriptionAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifyDescription();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifyFacebookAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifyFacebook();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifyTwitterAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifyTwitter();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function modifySkypeAction() {
+        $indexM = $this->loadModel("ajax_profile");
+        $return = $indexM->ModifySkype();
+
+        $this->loadView("ajax", $return);
+    }
+
+    function refreshPassionAction() {
+        $indexM = $this->loadModel("ajax_passion");
+        $return = $indexM->RefreshPassion();
 
         $this->loadView("ajax", $return);
     }

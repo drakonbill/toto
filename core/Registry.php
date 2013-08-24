@@ -19,9 +19,10 @@ class Registry {
     }
 
     public function __get($index) {
-        if(isset($this->vars[$index]))
-        return $this->vars[$index];
-        else return "";
+        if (isset($this->vars[$index]))
+            return $this->vars[$index];
+        else
+            return "";
     }
 
     public function __isset($index) {
@@ -33,6 +34,8 @@ class Registry {
 
         unset($this->vars[$index]);
     }
+
+   
 
 }
 

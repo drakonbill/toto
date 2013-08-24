@@ -1,0 +1,104 @@
+<div class="details">
+    <strong>Passions</strong><br/><br/>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $(".category").click(function() {
+
+                var id = this.id;
+                console.log(this);
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/ajax/refreshPassion',
+                    data: "idcategory=" + id + '&idmember=' + <?php echo $data["id_member"]; ?>,
+                    dataType: 'json',
+                    success:
+                            function(json) {
+
+                                if (json != null) {
+
+                                    $('#scroll-content').html("");
+
+                                    for (var key in json) {
+
+                                        var category = json[key]["category_passion"];
+                                        var name = json[key]["name_passion"];
+                                        var icone = json[key]["icone"];
+                                        
+                                        if(icone === "") {
+                                            icone = "Images/popup-close.png";
+                                        }
+                                       
+                                        $('#scroll-content').append("<div class='details-user-box'><a href='#'><img src='"+icone+"' alt='' width='50'></a><span><strong>" + category + "</strong><br>" + name + "</span></div> ");
+                                    }
+                                }
+                                if (json == null) {
+                                    $('#scroll-content').html("<br/><span class='blue'>Pas de passion dans cette catégorie.</span>");
+                                }
+                            }
+                });
+
+
+            });
+        });
+    </script>
+
+    <p><span id="0" class="blue category">Toutes les catégories /</span>
+        <?php
+        $i = 1;
+
+        while (!empty($data[$i]["id_category"])) {
+
+            $category = ucfirst($data[$i]["name_category"]);
+            ?>
+            <span id="<?php echo $data[$i]["id_category"]; ?>" class="category"><?php echo $category; ?> / </span>
+            <?php
+            $i++;
+        }
+        ?>
+    </p>
+</div>
+<br>
+
+<div class="scroll-content-all">
+    <div class="connexion-shadow-1"></div>
+    <div class="scroll-pane">
+        <div id="scroll-content">
+            <?php
+            $j = 0;
+
+            if (empty($data["datamember"][$j]["id_category"])) {
+                $errorEmptyPassion = "Aucune passion enregistrée";
+            }
+
+            if (!empty($errorEmptyPassion)) {
+                echo $errorEmptyPassion;
+            } else {
+                while (!empty($data["datamember"][$j]["id_category"])) {
+
+                    $category = ucfirst($data["datamember"][$j]["name_category"]);
+                    $passion = ucfirst($data["datamember"][$j]["name_passion"]);
+
+                    if (!empty($data["datamember"][$j]["icone"])) {
+                        $icone = $data["datamember"][$j]["icone"];
+                    } else {
+                        $icone = "Images/popup-close.png";
+                    }
+                    ?>
+                    <div class="details-user-box">
+                        <a href="#"><img src="<?php echo $icone ?>" alt="" width="50"></a>
+                        <span>
+                            <strong><?php echo $category ?></strong><br>
+                            <?php echo $passion; ?>
+                        </span>
+                    </div>
+                    <?php
+                    $j++;
+                }
+            }
+            ?>
+        </div>
+    </div>
+    <div class="connexion-shadow-2"></div>
+</div>

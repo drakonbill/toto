@@ -1,11 +1,8 @@
 <?php
 if ($data->id_member != $_SESSION['id_member']) {
     $own = false;
-    $ownbool = 0;
 } else {
     $own = true;
-    $ownbool = 1;
-    $data->id_member = $_SESSION['id_member'];
 }
 
 if ($own == true) {
@@ -64,11 +61,74 @@ if ($own == true) {
 
     <!-- This is the main content area -->
     <div id="inside-column">
+        <hr class="top-bar"/>
+        <?php //include 'Modules/tchat/notifications.php';    ?>
         <?php
-        $datasent['own'] = $ownbool;
-        $datasent['id_member'] = $data->id_member;
-        if (isset($contr)) $contr->loadvWidget("profilNavigation", "profilNavigation", $datasent); 
+        if ($own == true) {
+            $message_profil = "Mon profil";
+        } else {
+            $message_profil = "Profil de $data->pseudo_member";
+        }
         ?>
+        <span class="title_event_header"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-fav.png" alt="" class="vam blue-man" width="27" /><?php echo $message_profil; ?></span>
+        <hr class="clear"/>
+        <div class="inside-column-sep"></div>
+        <div class="inside-column-inside">
+            <div class="cfix">
+                <div class="conversation-left">
+                    <a href="#" class="user-avatar bgr-blue"><img src="/<?php echo $data->error ? $data->error : $data->photo_member; ?>" alt="" width="42" /></a>
+                    <a href="javascript:void()" id="modifAvatar">Modifier ma photo</a>
+                </div> <!-- .conversation-left -->
+                <div class="conversation-main">
+                    <div class="conversation-main-inside cfix">
+                        <div class="ld user-titlro">
+                            <strong><em><?php echo $data->error ? $data->error : ucfirst($data->pseudo_member); ?></em></strong>
+                            <strong><em><a href="#" class="rev blue">Profil</a></em></strong>
+                        </div> <!-- .user-titlro -->
+                        <ul class="user-iconies cfix">
+                            <li><a href="#">
+                                    <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-actuality.png" alt="" /></span>
+                                    <span class="user-iconies-2">Actualités</span>
+                                </a></li>
+                            <li><a href="#">
+                                    <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-photos.png" alt="" /></span>
+                                    <span class="user-iconies-2">Photos</span>
+                                </a></li>
+                            <li><a href="/profil/id/<?php echo $data->id_member; ?>">
+                                    <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-details.png" alt="" /></span>
+                                    <span class="user-iconies-2">Détails</span>
+                                </a></li>
+                            <li><a href="#">
+                                    <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-event.png" alt="" /></span>
+                                    <span class="user-iconies-2">Evènements</span>
+                                </a></li>
+                            <li><a href="/profil/seeContacts/<?php echo $data->id_member; ?>">
+                                    <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-contacts.png" alt="" /></span>
+                                    <span class="user-iconies-2">Contacts</span>
+                                </a></li>
+                            <li><a href="#">
+                                    <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-parameter.png" alt="" /></span>
+                                    <span class="user-iconies-2">Paramètres</span>
+                                </a></li>
+                        </ul> <!-- .user-iconies -->
+                    </div> <!-- .conversation-main-inside -->
+                </div>
+            </div> <!-- .cfix -->
+        </div>
+        <div class="inside-column-sep"></div>
+        <ul id="details-menu">
+            <li><img style="opacity:0.7;" src="<?php echo $conf["url"]; ?>Images/details_glass.png" alt="Photos"/></li>
+            <li><h4 class="details-main-title">Détails</h4></li>
+            <li><div id="addcontact"><?php if ($data->addcontact != "") echo $data->addcontact; ?></div></li>
+            <?php
+            if ($own == false) {
+                ?>
+                <li><a href="#" class="details-btn">Ecrire un message</a></li>
+                <li><a href="#" class="details-btn2">Tchater</a></li>
+                <?php
+            }
+            ?>
+        </ul>
         <?php
         if ($data->sex_member == HOMME) {
             $sexe = "Homme";
@@ -275,7 +335,7 @@ if ($own == true) {
         </div>
         <div class="inside-column-sep"></div>
         <?php // if (isset($contr)) $contr->loadmWidgets("profil_passion"); ?>
-        <?php if (isset($contr)) $contr->loadvWidget("passionCategory", "passionCategory", $data->id_member); ?>
+        <?php if (isset($contr)) $contr->loadvWidget("profilPassion", "passionCategory"); ?>
 
     </div>
 

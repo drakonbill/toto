@@ -2,8 +2,8 @@
 class config_mysql extends libMySQL {
 	private $host = "localhost";
 	private $user = "root";
-	private $pass = "root";
-	private $db = "meetoparty";
+	private $pass = "";
+	private $db = "meetopartyalpha";
 	private $connection;
 	
 	public function __construct(){

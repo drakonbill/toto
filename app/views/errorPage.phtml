@@ -2,18 +2,12 @@
 <div id="connexion-bar"></div>
 <div id="connexion-box">
     <div id="connexion-box-in">
-        <h3 class="cbox-title blue">ERROR - File, Action Or Controller Not Found</h3>
+        <h3 class="cbox-title blue"><?php echo $data["title"]; ?> </h3>
         <div class="connexion-shadow-1"></div>
-        <h1>File, Action Or Controller Not Found</h1>
-        <p>Error 404 !  =(</p>
-        <p>Pardon, la page que vous recherchez n'existe pas, ou a été modifiée !
-            <br />
-            Si vous rencontrez des problèmes, ou que cette page devrait être encore là, envoyez-nous un email.
-            <br/>
-        </p>
+        
 
         <?php
-        echo $data;
+        echo $data['error'];
         ?>
 
         <div class="contentainer-div-villy amins-div">

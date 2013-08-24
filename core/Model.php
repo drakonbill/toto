@@ -16,7 +16,7 @@ class Model extends Core {
         parent::__construct($option);
     }
 
-    public function indexModel($option = array()){}
+    public function indexModel($option = array('')){}
 }
 
 ?>

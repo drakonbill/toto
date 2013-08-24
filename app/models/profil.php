@@ -114,6 +114,10 @@ class models_profil extends Model {
 
         return $this;
     }
+    
+    function seeContacts($id) {
+        
+    }
 
 }
 
