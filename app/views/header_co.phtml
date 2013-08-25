@@ -30,7 +30,7 @@
         global $controller;
         if ($controller == "controllers_profil") {
             
-            echo'<script type="text/javascript">var iddumembre='.$data.';</script>';
+            echo'<script type="text/javascript">var iddumembre='.$user->id_member.';</script>';
             if (isset($contr))
                 $contr->loadvWidget("profil_js_include");
         }

@@ -57,6 +57,7 @@ require_once(COREDIR . 'Core.php');
 require_once(COREDIR . 'Controller.php');
 require_once(COREDIR . 'Model.php');
 require_once(COREDIR . 'View.php');
+require_once(COREDIR . 'Widget.php');
 debug("main Controller/Model/View  ...included");
 ## end of critical includes
 
@@ -130,7 +131,7 @@ $reg->acl = $acl;
 ## fly to sky
 try {
     $control = new $controller(); //this isnt abstract class, netbeans wrong
-    $reg->controller = $control; //register for after access
+    $reg->contr = $control; //register for after access
     // pack controller in Secure Box for automatic role menagment
     //$userRole = $reg->user->getRole();
     require_once (COREDIR . 'SecureBox.php');

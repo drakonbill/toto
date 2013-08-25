@@ -11,7 +11,12 @@ class controllers_profil extends Controller {
      * @todo : Checking the using of this function ?
      */
 
+    
     public function init() {
+        
+//ADD PAGE WIDGET -- this one you use on all variants of profile page
+$pWidget = $this->Widget["profileWidget"] = new Widget("news","news","",array("p1"=>1,"p2"=>2));
+$pWidget->setMethod("blabla");
         
     }
 
@@ -39,6 +44,11 @@ class controllers_profil extends Controller {
 
     function idAction() {
 
+//WIDGET EXAMPLE --- reuse page widget, reset view:
+$this->Widget["profileWidget"]->setView("profilNavigation");
+//NEW WIDGET -- ONLY for idAction
+$pWidget2 = $this->Widget["profileWidget2"] = new Widget("news");
+        
         global $_URL;
         $pseudo = array_keys($_URL);
 

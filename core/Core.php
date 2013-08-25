@@ -13,6 +13,7 @@
 class Core {
 
     //put your code here
+    
     protected $reg;
     protected $db;
     protected $option;
