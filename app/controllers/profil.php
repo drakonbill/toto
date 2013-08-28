@@ -87,6 +87,7 @@ class controllers_profil extends Controller {
         global $_URL;
 
         $indexM = $this->loadModel("profil");
+        $id = array_keys($_URL);
 
         if (isset($_URL['id']))
             $return = $indexM->seeContacts($id);

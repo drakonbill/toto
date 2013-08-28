@@ -1,14 +1,9 @@
 <?php
-if ($data->id_member != $_SESSION['id_member']) {
-    $own = false;
-    $ownbool = 0;
-} else {
-    $own = true;
-    $ownbool = 1;
-    $data->id_member = $_SESSION['id_member'];
-}
+echo $user->own($data->id_member);
 
-if ($own == true) {
+$own = $user->own($data->id_member);
+
+if ($own == 1) {
     ?>
     <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jeditable.js"></script>
     <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/profil/modify-profil.js"></script>
@@ -65,9 +60,8 @@ if ($own == true) {
     <!-- This is the main content area -->
     <div id="inside-column">
         <?php
-        $datasent['own'] = $ownbool;
-        $datasent['id_member'] = $data->id_member;
-        if (isset($contr)) $contr->loadvWidget("profilNavigation", "profilNavigation", $datasent); 
+        $data->sent = $own;
+        if (isset($contr)) $contr->loadvWidget("profilNavigation", "profilNavigation", $data); 
         ?>
         <?php
         if ($data->sex_member == HOMME) {

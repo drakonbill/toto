@@ -1,15 +1,15 @@
 <?php
+
 /**
  * Model : Profil : all functions relatives to the profil of the member
  * @author Nicolas D, Quentin L
  * @todo : Clean functions
  */
-
 class models_profil extends Model {
-
     /*
      * No using for the moment, because default function in controller is using another function in the model.
      */
+
     function indexModel() {
         
     }
@@ -20,25 +20,28 @@ class models_profil extends Model {
             $pseudoData = $this->reg->user;
         } else {
             $id = libs_user::getID($pseudo);
-            if($id) $pseudoData = new libs_user($id);
-            else $pseudoData->error = "Ce contact n'existe pas." ;
+            if ($id)
+                $pseudoData = new libs_user($id);
+            else
+                $pseudoData->error = "Ce contact n'existe pas.";
         }
-        
+
         return $pseudoData;
     }
-    
+
     function seeProfilID($id) {
 
         if ($id == "") {
             $pseudoData = $this->reg->user;
         } else {
-            
-           $pseudoData = new libs_user($id);
-            if(!$pseudoData->id_member) $pseudoData->error = "Ce contact n'existe pas." ;
+
+            $pseudoData = new libs_user($id);
+            if (!$pseudoData->id_member)
+                $pseudoData->error = "Ce contact n'existe pas.";
         }
 
         $pseudoData->addcontact = $this->ajouterContact($pseudoData->id_member);
-        
+
         return $pseudoData;
     }
 
@@ -63,7 +66,7 @@ class models_profil extends Model {
             $requete = mysql_query("SELECT * FROM member_contacts WHERE id_member=" . $_SESSION['id_member'] . " AND id_contact=" . $id . " OR id_member=" . $id . " AND id_contact=" . $_SESSION['id_member'] . "");
 
             $etat = array();
-            $msg='';
+            $msg = '';
             while ($data = mysql_fetch_array($requete)) {
                 $etat[$data['id_member']] = $data['condition_contact'];
             }
@@ -78,7 +81,7 @@ class models_profil extends Model {
                 else if ($etat[$_SESSION['id_member']] == 1 && $etat[$id] == 1)
                     $msg = "<a href='javascript:void()' id='retirerContact' class='details-btn'>Retirer de mes contacts</a>";
             }
-            
+
             return $msg;
         }
     }
@@ -114,9 +117,31 @@ class models_profil extends Model {
 
         return $this;
     }
-    
+
     function seeContacts($id) {
         
+        if (!empty($id))
+            $requete = mysql_query("SELECT * FROM member WHERE id_member=" . $id . "");
+        else
+            $requete = mysql_query("SELECT * FROM member WHERE id_member=" . $_SESSION['id_member'] . "");
+        $data = mysql_fetch_assoc($requete);
+
+        if (!empty($data['id_member'])) {
+
+            $this->profile_id_member = $data['id_member'];
+            $this->profile_pseudo = $data['pseudo_member'];
+            $this->profile_datenaissance = $data['birth_member'];
+            $this->profile_age = $this->ageDatenaissance($this->profile_datenaissance);
+            $this->profile_maphoto = ($data['photo_member'] != "" ? $data['photo_member'] : ($data['sex_member'] == 1 ? 'Images/no_avatar_homme.png' : 'Images/no_avatar_femme.png'));
+            $this->profile_sexe = ($data['sex_member'] == 1 ? 'Homme' : 'Femme');
+            $this->profile_ville = $data['city_member'];
+            $this->ajouterContact($this->profile_id_member);
+            
+        } else {
+            $this->error['profil'] = "Ce contact n'existe pas";
+        }
+
+        return $this;
     }
 
 }
