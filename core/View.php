@@ -21,12 +21,12 @@ class View extends Core {
         //load all data needed in view
         $data = $this->data; //data got form model        
         $reg = $this->reg;  // registry, for special cases
-        $widgets = $this->reg->mWidget; //widget models -- this need to be changed!!!!
+      
         $applibs = $this->reg->applib; //app libs data
-        $contr = $this->reg->controller; //controller object, for some special access options
+        $contr = $this->reg->contr; //controller object, for some special access options
         $conf = $this->reg->appconf; // application config data from appconf.php appconf array
         $user = $this->reg->user;
-        
+        $widget = $contr->Widget; //widget loaders array
         $login = $this->reg->login; // this isnt needed to be here, it is just now and it is from login model data
 
         include("../" . APPDIR . "views/" . $name . ".phtml");

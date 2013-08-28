@@ -5,7 +5,7 @@ if ($data["id_member"] != $_SESSION['id_member']) {
 } else {
     $own = true;
     $ownbool = 1;
-    $data["id_member"] = $_SESSION['id_member'];
+    $data->id_member = $_SESSION['id_member'];
 }
 
 
@@ -69,18 +69,18 @@ if ($own == true) {
     <div id="inside-column">
         <?php
         $datasent['own'] = $ownbool;
-        $datasent['id_member'] = $data["id_member"];
-        if (isset($contr)) $contr->loadvWidget("profilNavigation", "profilNavigation", $datasent); 
+        $datasent['id_member'] = $data->id_member;
+        if (isset($contr))
+            $contr->loadvWidget("profilNavigation", "profilNavigation", $datasent);
         ?>
-        <div class="details">
 
+        <div class="details">
+        </div>
 
     </div>
-
-</div>
 </div> <!-- #inside-column -->
 <div id="main-footer">
-    <?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
+<?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
 </div> <!-- #main-footer -->
 </div> <!-- .cfix -->
 <?php if (isset($contr)) $contr->loadvWidget("footer_quotation"); ?>

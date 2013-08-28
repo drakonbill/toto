@@ -60,8 +60,9 @@ if ($own == 1) {
     <!-- This is the main content area -->
     <div id="inside-column">
         <?php
-        $data->sent = $own;
-        if (isset($contr)) $contr->loadvWidget("profilNavigation", "profilNavigation", $data); 
+        $datasent['own'] = $ownbool;
+        $datasent['id_member'] = $data->id_member;
+        if (isset($contr)) $contr->loadvWidget("profilNavigation", "profilNavigation", $datasent);
         ?>
         <?php
         if ($data->sex_member == HOMME) {
@@ -236,7 +237,7 @@ if ($own == 1) {
                 $data->extra_email_member = NC;
             }
             ?>
-            <p><strong>Email</strong> : <span id="email"><?php echo $data->extra_email_member; ?></span></p>    
+            <p><strong>Email</strong> : <span id="email"><?php echo $data->extra_email_member; ?></span></p>
             <span class="form-validation-email" style="color:red;"></span>
 
             <?php
@@ -268,7 +269,15 @@ if ($own == 1) {
             <hr class="clear"/>
         </div>
         <div class="inside-column-sep"></div>
-        <?php // if (isset($contr)) $contr->loadmWidgets("profil_passion"); ?>
+        
+<?php
+echo "<br/>========= WIDGET EXAMPLE profil.phtml line 278 ============<br/>";
+$widget["profileWidget"]->load();
+echo "<br/>========= WIDGET EXAMPLE ============<br/>";
+$widget["profileWidget2"]->load();
+echo "<br/>========= WIDGET EXAMPLE ============<br/>";
+?>
+
         <?php if (isset($contr)) $contr->loadvWidget("passionCategory", "passionCategory", $data->id_member); ?>
 
     </div>

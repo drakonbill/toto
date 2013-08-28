@@ -7,8 +7,8 @@
  */
 abstract class Controller extends Core {
 
-    // protected $actionLevel;
-
+    public $Widget = array();
+    
     public function __construct($option = array()) {
         parent::__construct($option);
 
@@ -23,10 +23,6 @@ abstract class Controller extends Core {
 
     private function loadInit() {
         $this->init();
-
-//        if($this->reg->roles->isRole($this)) {
-//            
-//        }
     }
 
     ## make model object and add them in registry
@@ -76,6 +72,13 @@ abstract class Controller extends Core {
         $this->reg->mWidget = $mWidget;
         //$this->reg->vWidget = $vWidget;
         return array("mWidget" => $mWidget);
+    }
+
+    public function loadWidget($widgetName) {
+        if (isset($this->widgetBox[$widgetName]))
+            return $this->widgetBox[$widgetName]->load();
+        else
+            return;
     }
 
     public function loadvWidget($name, $function = "", $opt = "") {
