@@ -1,6 +1,4 @@
 <?php
-echo $user->own($data->id_member);
-
 $own = $user->own($data->id_member);
 
 if ($own == 1) {
@@ -60,9 +58,8 @@ if ($own == 1) {
     <!-- This is the main content area -->
     <div id="inside-column">
         <?php
-        $datasent['own'] = $ownbool;
-        $datasent['id_member'] = $data->id_member;
-        if (isset($contr)) $contr->loadvWidget("profilNavigation", "profilNavigation", $datasent);
+        $data->sent = $own;
+        if (isset($contr)) $contr->loadvWidget("profilNavigation", "profilNavigation", $data);
         ?>
         <?php
         if ($data->sex_member == HOMME) {
