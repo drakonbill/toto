@@ -59,7 +59,8 @@ if ($own == 1) {
     <div id="inside-column">
         <?php
         $data->sent = $own;
-        if (isset($contr)) $contr->loadvWidget("profilNavigation", "profilNavigation", $data);
+        if (isset($contr))
+            $contr->loadvWidget("profilNavigation", "profilNavigation", $data);
         ?>
         <?php
         if ($data->sex_member == HOMME) {
@@ -102,7 +103,7 @@ if ($own == 1) {
             $month2 = $data->month($mon2);
             $year2 = $data->Yeardate($data->inscription_date_member);
             ?>
-          <!--  <strong>Date d'inscription</strong> : <?php // echo "Le $day2 $month2 $year2"       ?><br/> -->
+          <!--  <strong>Date d'inscription</strong> : <?php // echo "Le $day2 $month2 $year2"        ?><br/> -->
             <strong>Pays</strong> : <?php echo $data->country_member; ?><br/>
             <p><strong>Ville</strong> : <span id="ville"><?php echo ucfirst(strtolower($data->city_member)); ?></span></p>
             <span class="form-validation-city" style="color:red;"></span>
@@ -266,24 +267,21 @@ if ($own == 1) {
             <hr class="clear"/>
         </div>
         <div class="inside-column-sep"></div>
-        
-<?php
-echo "<br/>========= WIDGET EXAMPLE profil.phtml line 278 ============<br/>";
-$widget["profileWidget"]->load();
-echo "<br/>========= WIDGET EXAMPLE ============<br/>";
-$widget["profileWidget2"]->load();
-echo "<br/>========= WIDGET EXAMPLE ============<br/>";
-?>
 
-        <?php if (isset($contr)) $contr->loadvWidget("passionCategory", "passionCategory", $data->id_member); ?>
+
+
+        <?php
+        $widget["passionCategory"]->setParams($data->id_member);
+        $widget["passionCategory"]->load();
+        ?>
 
     </div>
 
 </div>
 </div> <!-- #inside-column -->
 <div id="main-footer">
-    <?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); ?>
+<?php $widget["mosaic_pictures"]->load(); ?>
 </div> <!-- #main-footer -->
 </div> <!-- .cfix -->
-<?php if (isset($contr)) $contr->loadvWidget("footer_quotation"); ?>
+<?php $widget["footer_quotation"]->load(); ?>
 <div style="display:none;"></div>

@@ -14,10 +14,12 @@ class controllers_profil extends Controller {
     
     public function init() {
         
-//ADD PAGE WIDGET -- this one you use on all variants of profile page
-$pWidget = $this->Widget["profileWidget"] = new Widget("news","news","",array("p1"=>1,"p2"=>2));
-$pWidget->setMethod("blabla");
-        
+        //<?php if (isset($contr)) $contr->loadvWidget("footer_quotation"); 
+        $this->Widget["footer_quotation"] = new Widget("footer_quotation");
+        //<?php if (isset($contr)) $contr->loadvWidget("mosaic_pictures"); 
+         $this->Widget["mosaic_pictures"] = new Widget("mosaic_pictures");
+        //<?php if (isset($contr)) $contr->loadvWidget("passionCategory", "passionCategory", $data->id_member); 
+         $this->Widget["passionCategory"] = new Widget("passionCategory","passionCategory","passionCategory","");
     }
 
     /*
@@ -44,10 +46,7 @@ $pWidget->setMethod("blabla");
 
     function idAction() {
 
-//WIDGET EXAMPLE --- reuse page widget, reset view:
-$this->Widget["profileWidget"]->setView("profilNavigation");
-//NEW WIDGET -- ONLY for idAction
-$pWidget2 = $this->Widget["profileWidget2"] = new Widget("news");
+
         
         global $_URL;
         $pseudo = array_keys($_URL);
