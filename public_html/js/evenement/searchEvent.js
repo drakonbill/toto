@@ -174,7 +174,7 @@ function initializeEvent() {
 }
 
 function refreshEvent(result) {
-    clearOverlays();
+    clearOverlays();alert(result);
     event_data = $.parseJSON(result);
     initializeEvent();
 }
