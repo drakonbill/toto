@@ -45,7 +45,7 @@ parent::__construct("");
     public function load() {
         global $reg;
         if ($this->model == "")
-            $data = "";
+            $data = $this->params;
         else {
 
             $wm = $reg->contr->loadModel("widgets_" . $this->model, $this->params);
@@ -55,7 +55,7 @@ parent::__construct("");
                 $data = $wm->$method($this->params);
             }
             else
-                $data = "";
+                $data = $this->params;
         }
         $options = array('name' => "widgets/" . $this->view, 'data' => $data);
 

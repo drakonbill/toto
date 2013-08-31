@@ -4,8 +4,8 @@
 session_start();
 
 // debuging (disable when not needed)
-//$debug = FALSE;
-$debug = TRUE;
+$debug = FALSE;
+//$debug = TRUE;
 
 
 if ($debug) {
@@ -51,7 +51,6 @@ loadLibs($core_libs);
 loadLibs(array("urlParse"));
 debug("load libs  ...ok");
 $reg->clean = $reg->cleanData; // fix this name problem NOW!!
-
 ## these are the base classes so that any class can extend them
 require_once(COREDIR . 'Core.php');
 require_once(COREDIR . 'Controller.php');
@@ -60,7 +59,6 @@ require_once(COREDIR . 'View.php');
 require_once(COREDIR . 'Widget.php');
 debug("main Controller/Model/View  ...included");
 ## end of critical includes
-
 ## enter custom code here it is not recomended to edit below this block
 #######################################################################
 ## load app config
@@ -69,7 +67,6 @@ $reg->appconf = $appconf;
 debug("app config  ...ok");
 #######################################################################
 ## end of custom code block
-
 ## DataStore for url params
 $_URL = array();
 
@@ -107,6 +104,7 @@ function my_autoloader($class_name) {
 ## parse url data
 $reg->urlParse->getLoadDetails($controller, $view);
 $action = $view;
+
 
 debug("parse url - got $controller, $view  ...  done");
 ## set prefix or default controller/action

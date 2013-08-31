@@ -12,13 +12,12 @@
  */
 class coreInfo {
 
-    function getControllersList() { // Get controller class names
-        
+    function getControllersList($dir = "") { // Get controller class names
         $classes = get_declared_classes();
-        foreach (glob("../".APPDIR."controllers/*.php") as $value) {
+        foreach (glob("../" . APPDIR . "controllers/$dir*.php") as $value) {
             include_once $value;
         }
-        
+
         return array_diff(get_declared_classes(), $classes);
     }
 

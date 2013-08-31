@@ -41,7 +41,7 @@ class access {
 
     function inRole($class, $level) {
         debug("ACL ===> ".$class." ".$level);
-        return isset($this->acl[$class])?$level <= $this->acl[$class]:1;
+        return isset($this->acl[$class])?$level <= $this->acl[$class]:$level <= LEVELS::DEF;
     }
 
 }

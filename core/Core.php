@@ -21,7 +21,7 @@ class Core {
     protected $user;
     protected $conf;
     protected $role;
-    protected $aclLevel = array();
+    private $aclLevel = array();
 
     public function __construct($option) {
 
@@ -44,7 +44,7 @@ class Core {
         $this->aclLevel[$action]=$level;
     }
     public function getLevel($action) {
-        return isset($this->aclLevel[$action])?$this->aclLevel[$action]:0;
+        return isset($this->aclLevel[$action])?$this->aclLevel[$action]:LEVELS::DEF;
     }
 }
 
