@@ -24,7 +24,7 @@ final class LEVELS {
     const CHANGE = 3;
     const DELETE = 4;
     //default level, it is used if no level set
-    const DEF = LEVELS::FORBIDEN;
+    const DEF = LEVELS::GET;
 
 }
 
