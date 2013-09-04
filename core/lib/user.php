@@ -7,22 +7,25 @@
  * @Author : Miki
  */
 
-
-
 class user {
 
 // Informations of the user
     private $userData;
+    private $reg;
 
-// All informations of the member are stocked in the global variable $userData
+// All informations of the member are stocked in the variable $userData
     function __construct($id) {
         global $reg;
-// If there is no ID in parametre
+        $this->reg = $reg;
+
+        $this->insertTable($reg->userTable, $reg->userIdFild, $id);
+    }
+
+    public function insertTable($table, $idTable, $id) {
         if (!isset($id))
             $id = "-1";
-
-// Select basic member informations + member_details
-        $query = mysql_query("SELECT * FROM member M, member_details D WHERE M.id_member = D.id_member AND M.id_member = '$id'", $reg->dbcon) or die(mysql_error());
+        $q = "SELECT * FROM " . $table . " where " . $idTable . " = $id";
+        $query = mysql_query($q, $this->reg->dbcon) or die(mysql_error() . $q);
         while ($row = mysql_fetch_assoc($query)) {
             foreach ($row as $key => $value) {
                 $this->userData[$key] = $value;
@@ -46,6 +49,20 @@ class user {
 // Check if the information is stocked or not
     function __isset($name) {
         return isset($this->userData[$name]);
+    }
+
+// Delete a selected informations 
+    function __delete($name) {
+        if (isset($this->userData[$name])) {
+            unset($this->userData[$name]);
+        }
+    }
+
+// Update an information
+    function __update($name, $value) {
+        if ($this->userData[$name] != $value) {
+            $this->userData[$name] = $value;
+        }
     }
 
 // Check is an id is stocked on a session or not : if the member is logged or not

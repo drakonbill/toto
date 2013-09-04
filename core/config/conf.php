@@ -12,6 +12,10 @@ require_once('../' . COREDIR . 'lib/libMySQL.php');
 require_once('../' . COREDIR . 'lib/user.php');
 require_once('../' . COREDIR . 'lib/access.php');
 
+## default user table info
+$reg->userTable = "member";
+$reg->userIdFild = "id_member";
+
 //ACL Levels
 
 final class LEVELS {
