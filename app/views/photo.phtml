@@ -1,13 +1,16 @@
 <?php
-if ($data->id_member != $_SESSION['id_member']) {
+if ($data[0]->id_member != $_SESSION['id_member']) {
     $own = false;
 } else {
     $own = true;
 }
 ?>
 
-<div class="popup-other popup-othermini" style="display: none; "></div>
 <!-- the jScroll script -->
+<script type="text/javascript">var var_albums=<?php echo json_encode($data[1]);?>;</script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/files/jquery.upload.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/popup/popup.js"></script>
+<script type="text/javascript" src="<?php echo $conf["url"]; ?>js/photo/photo.js"></script>
 <script type="text/javascript" src="<?php echo $conf["url"]; ?>js/scroll.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -59,7 +62,7 @@ if ($data->id_member != $_SESSION['id_member']) {
         if ($own == true) {
             $message_profil = "Mon profil";
         } else {
-            $message_profil = "Profil de $data->pseudo_member";
+            $message_profil = "Profil de $data[0]->pseudo_member";
         }
         ?>
         <span class="title_event_header"><img src="<?php echo $conf["url"]; ?>Images/menu-icon-fav.png" alt="" class="vam blue-man" width="27" /><?php echo $message_profil; ?></span>
@@ -68,13 +71,13 @@ if ($data->id_member != $_SESSION['id_member']) {
         <div class="inside-column-inside">
             <div class="cfix">
                 <div class="conversation-left">
-                    <a href="#" class="user-avatar bgr-blue"><img src="/<?php echo $data->error ? $data->error : $data->photo_member; ?>" alt="" width="42" /></a>
+                    <a href="#" class="user-avatar bgr-blue"><img src="/<?php echo $data[0]->error ? $data[0]->error : $data[0]->photo_member; ?>" alt="" width="42" /></a>
                     <a href="javascript:void()" id="modifAvatar">Modifier ma photo</a>
                 </div> <!-- .conversation-left -->
                 <div class="conversation-main">
                     <div class="conversation-main-inside cfix">
                         <div class="ld user-titlro">
-                            <strong><em><?php echo $data->error ? $data->error : ucfirst($data->pseudo_member); ?></em></strong>
+                            <strong><em><?php echo $data[0]->error ? $data[0]->error : ucfirst($data[0]->pseudo_member); ?></em></strong>
                             <strong><em><a href="#" class="rev blue">Profil</a></em></strong>
                         </div> <!-- .user-titlro -->
                         <ul class="user-iconies cfix">
@@ -86,7 +89,7 @@ if ($data->id_member != $_SESSION['id_member']) {
                                     <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-photos.png" alt="" /></span>
                                     <span class="user-iconies-2">Photos</span>
                                 </a></li>
-                            <li><a href="/profil/id/<?php echo $data->id_member; ?>">
+                            <li><a href="/profil/id/<?php echo $data[0]->id_member; ?>">
                                     <span class="user-iconies-1"><img src="<?php echo $conf["url"]; ?>Images/icon-details.png" alt="" /></span>
                                     <span class="user-iconies-2">Détails</span>
                                 </a></li>
@@ -111,7 +114,8 @@ if ($data->id_member != $_SESSION['id_member']) {
         <ul id="details-menu">
             <li><img style="opacity:0.7;" src="<?php echo $conf["url"]; ?>Images/details_glass.png" alt="Photos"/></li>
             <li><h4>Détails</h4></li>
-            <li><div id="addcontact"><?php if ($data->addcontact != "") echo $data->addcontact; ?></div></li>
+            <li><a href="javascript:void();" id="addPicture">Ajouter une photo</a></li>
+            <li><div id="addcontact"><?php if ($data[0]->addcontact != "") echo $data[0]->addcontact; ?></div></li>
             <?php
             if ($own == false) {
                 ?>

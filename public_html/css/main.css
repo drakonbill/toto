@@ -1551,6 +1551,33 @@ a.contentvalidright { float: right; }
 
 hr.clear { clear: both; height: 0; border: 0; }
 
+/* PHOTO */
+
+.content_upload_photo { 
+    position:relative; 
+    float: left;
+    height: auto; 
+    background: white;
+    padding: 15px;
+    -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px;
+    border:1px solid #ddd; 
+}
+
+.album_upload_photo {
+    position:relative; 
+    height: auto; 
+    background: white;
+    padding: 15px;
+    -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px;
+    border:1px solid #ddd; 
+    margin-bottom: 2px;
+    background: #EEEEEE;
+}
+/* Charger dès Upload charger miniature */
+.content_upload_photo .picture {
+    width: 250px;
+}
+
 /* Bar top */
 
 hr.top-bar { border: 1px solid #62c4eb; }

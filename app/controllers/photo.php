@@ -17,8 +17,13 @@ class controllers_photo extends Controller {
         $pseudo = array_keys($_URL);
 
         $indexM = $this->loadModel("profil");
-
-        $return = $indexM->seeProfil($pseudo[0]);
+        
+        $photoM = $this->loadModel("photo");
+        
+        $return = array();
+        
+        $return[] = $indexM->seeProfil($pseudo[0]);
+        $return[] = $photoM->loadAlbum();
         
     
             /* $indexM = $this->loadModel("ajax_event");
