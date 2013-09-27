@@ -1,7 +1,7 @@
 <?php
 
 class models_ajax_photo extends Model {
-    
+
     function registerImage() {
 
         if (isset($_SESSION['id_member'])) {
@@ -64,8 +64,7 @@ class models_ajax_photo extends Model {
                         // On verifie les dimensions et taille de l'image
                         if (($infosImg[0] <= WIDTH_MAX) && ($infosImg[1] <= HEIGHT_MAX) && (filesize($_FILES['fichier']['tmp_name']) <= MAX_SIZE)) {
                             // Parcours du tableau d'erreurs
-                            if (isset($_FILES['fichier']['error'])
-                                    && UPLOAD_ERR_OK === $_FILES['fichier']['error']) {
+                            if (isset($_FILES['fichier']['error']) && UPLOAD_ERR_OK === $_FILES['fichier']['error']) {
                                 // On renomme le fichier
                                 $nomImage = 'temp_image.' . $extension;
 
@@ -74,6 +73,11 @@ class models_ajax_photo extends Model {
                                     $message = '1;';
                                     $message .= "/" . TARGET . $nomImage;
                                     $message .= ";" . $nomImage;
+
+                                    $nomImageFinal = 'temp_image_mini.' . strtolower($extension);
+
+                                    $this->resizeThumbnailPhoto(TARGET . $nomImage, TARGET . $nomImageFinal, 250, 170);
+                                    $this->resizeThumbnailPhotoMax(TARGET . $nomImage, TARGET . $nomImage, 500);
                                 } else {
                                     // Sinon on affiche une erreur systeme
                                     $message = 'Problème lors de l\'upload !';
@@ -103,7 +107,115 @@ class models_ajax_photo extends Model {
             return "Vous n'êtes pas connecté";
         }
     }
-    
+
+    private function resizeThumbnailPhotoMax($image, $thumb_image_name, $max) {
+        list($width, $height) = getimagesize($image);
+        $extension = pathinfo(TARGET . $image, PATHINFO_EXTENSION);
+
+        switch (strtolower($extension)) {
+            case "jpg":
+                $source = imagecreatefromjpeg($image);
+                break;
+            case "jpeg":
+                $source = imagecreatefromjpeg($image);
+                break;
+            case "gif":
+                $source = imagecreatefromgif($image);
+                break;
+            case "png":
+                $source = imagecreatefrompng($image);
+                break;
+        }
+
+        $x = $width;
+        $y = $height;
+        if ($x > $max or $y > $max) {
+            if ($x > $y) {
+                $nx = $max;
+                $ny = $y / ($x / $max);
+            } else {
+                $nx = $x / ($y / $max);
+                $ny = $max;
+            }
+        }
+
+        $thumb = imagecreatetruecolor($nx, $ny);
+        imagecopyresampled($thumb, $source, 0, 0, 0, 0, $nx, $ny, $x, $y);
+
+        switch (strtolower($extension)) {
+            case "jpg":
+                imagejpeg($thumb, $thumb_image_name);
+                break;
+            case "jpeg":
+                imagejpeg($thumb, $thumb_image_name);
+                break;
+            case "gif":
+                imagegif($thumb, $thumb_image_name);
+                break;
+            case "png":
+                imagepng($thumb, $thumb_image_name);
+                break;
+        }
+
+        chmod($thumb_image_name, 0777);
+        return $thumb_image_name;
+    }
+
+    private function resizeThumbnailPhoto($image, $thumb_image_name, $newSizeL, $newSizeH) {
+        list($width, $height) = getimagesize($image);
+        $extension = pathinfo(TARGET . $image, PATHINFO_EXTENSION);
+
+        switch (strtolower($extension)) {
+            case "jpg":
+                $source = imagecreatefromjpeg($image);
+                break;
+            case "jpeg":
+                $source = imagecreatefromjpeg($image);
+                break;
+            case "gif":
+                $source = imagecreatefromgif($image);
+                break;
+            case "png":
+                $source = imagecreatefrompng($image);
+                break;
+        }
+
+        $original_aspect = $width / $height;
+        $thumb_aspect = $newSizeL / $newSizeH;
+
+        if ($original_aspect >= $thumb_aspect) {
+            // If image is wider than thumbnail (in aspect ratio sense)
+            $new_height = $newSizeH;
+            $new_width = $width / ($height / $newSizeH);
+        } else {
+            // If the thumbnail is wider than the image
+            $new_width = $newSizeL;
+            $new_height = $height / ($width / $newSizeL);
+        }
+
+
+        $thumb = imagecreatetruecolor($newSizeL, $newSizeH);
+        $cropped = imagecopyresampled($thumb, $source, 0, 0, 0 - ($new_width - $newSizeL) / 2, 0 - ($new_height - $newSizeH) / 2, $new_width, $new_height, $width, $height);
+
+        switch (strtolower($extension)) {
+            case "jpg":
+                imagejpeg($thumb, $thumb_image_name);
+                break;
+            case "jpeg":
+                imagejpeg($thumb, $thumb_image_name);
+                break;
+            case "gif":
+                imagegif($thumb, $thumb_image_name);
+                break;
+            case "png":
+                imagepng($thumb, $thumb_image_name);
+                break;
+        }
+
+        chmod($thumb_image_name, 0777);
+        return $thumb_image_name;
+    }
+
     private function resizeThumbnailImage($image, $thumb_image_name, $w, $h, $start_width, $start_height, $imageheight, $imagewidth) {
 
         $tAttribut = getimagesize($image);
@@ -196,5 +308,7 @@ class models_ajax_photo extends Model {
             }
         }
     }
+
 }
+
 ?>

@@ -287,6 +287,13 @@ class controllers_ajax extends Controller {
 
         $this->loadView("ajax", $return);
     }
+    
+    function registerPhotoAction() {
+        $indexM = $this->loadModel("ajax_photo");
+        $return = $indexM->registerPhoto();
+
+        $this->loadView("ajax", $return);
+    }
 
 }
 

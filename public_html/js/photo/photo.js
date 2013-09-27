@@ -155,12 +155,14 @@ $(function() {
                     $(".popup-other .content_upload_photo input#main_photo").remove();
                 }
             });
-            $(".popup-other .contentdetail").append("<div class='content_upload_photo'><input class='contentinput' type='text' name='libelle' id='libelle' value='Saississez un libelle' /><br/><div id='content_photo_preview'></div><label for='file'>Photo : </label><input type='file' name='fichier' id='fichier' /><br/><label for='main_photo'>Photo principale : </label><input type='checkbox' name='main_photo' id='main_photo' /></div>");
-
+            $(".popup-other .contentdetail").append("<div class='content_upload_photo'><input class='contentinput' type='text' name='libelle' id='libelle' value='Saississez un libelle' /><br/><div id='content_photo_preview'></div><label for='file'>Photo : </label><input type='file' name='fichier' id='fichier' /><br/><label for='main_photo'>Photo principale : </label><input type='checkbox' name='main_photo' id='main_photo' /></div><hr class='clear'/>");
+            $(".popup-other .contentdetail .content_upload_photo:last").after("<div class='content_upload_photo'><input class='contentinput' type='text' name='libelle' id='libelle' value='Saississez un libelle' /><br/><div id='content_photo_preview'></div><label for='file'>Photo : </label><input type='file' name='fichier' id='fichier' /><br/><label for='main_photo'>Photo principale : </label><input type='checkbox' name='main_photo' id='main_photo' /></div>");
+            $(".popup-other .contentdetail .content_upload_photo:last").after("<div class='content_upload_photo'><input class='contentinput' type='text' name='libelle' id='libelle' value='Saississez un libelle' /><br/><div id='content_photo_preview'></div><label for='file'>Photo : </label><input type='file' name='fichier' id='fichier' /><br/><label for='main_photo'>Photo principale : </label><input type='checkbox' name='main_photo' id='main_photo' /></div>");
+            $(".popup-other .contentdetail").append("<div class='contentButtonBottom'><a class='buttonBottom' href='javascript:void();' id='buttonAddPhoto'>Ajouter</a> <a class='buttonBottom' href='javascript:void();' id='cancel'>Annuler</a></div>");
             $("#fichier").change(function() {
 
                 $("div#content_photo_preview").html("<img src='/Images/ajax-loader.gif' alt='loading'/>");
-                $(this).upload('/ajax/registerImageMember', function(res) {
+                $(this).upload('/ajax/registerImagePhoto', function(res) {alert(res);
                     if (res.substring(0, 2) == "1;")
                     {
                         image = res.split(";");
@@ -168,6 +170,18 @@ $(function() {
                     }
                 });
 
+            });
+            
+            $("a#buttonAddPhoto").live('click', function() {
+                 $.ajax({
+                    type: 'POST',
+                    url: '/ajax/registerPhoto',
+                    data: "",
+                    success:
+                        function(result) {
+                            
+                        }  
+                 });
             });
 
             centrer_mini_popup($(".popup-other"));
