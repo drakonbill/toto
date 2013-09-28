@@ -65,8 +65,9 @@ class models_ajax_photo extends Model {
                         if (($infosImg[0] <= WIDTH_MAX) && ($infosImg[1] <= HEIGHT_MAX) && (filesize($_FILES['fichier']['tmp_name']) <= MAX_SIZE)) {
                             // Parcours du tableau d'erreurs
                             if (isset($_FILES['fichier']['error']) && UPLOAD_ERR_OK === $_FILES['fichier']['error']) {
+                                $id_photo = $_POST['id'];
                                 // On renomme le fichier
-                                $nomImage = 'temp_image.' . $extension;
+                                $nomImage = 'temp_image'.$id_photo.'.' . $extension;
 
                                 // Si c'est OK, on teste l'upload
                                 if (move_uploaded_file($_FILES['fichier']['tmp_name'], TARGET . $nomImage)) {
@@ -74,7 +75,7 @@ class models_ajax_photo extends Model {
                                     $message .= "/" . TARGET . $nomImage;
                                     $message .= ";" . $nomImage;
 
-                                    $nomImageFinal = 'temp_image_mini.' . strtolower($extension);
+                                    $nomImageFinal = 'temp_image_mini'.$id_photo.'.'.strtolower($extension);
 
                                     $this->resizeThumbnailPhoto(TARGET . $nomImage, TARGET . $nomImageFinal, 250, 170);
                                     $this->resizeThumbnailPhotoMax(TARGET . $nomImage, TARGET . $nomImage, 500);

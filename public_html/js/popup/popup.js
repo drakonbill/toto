@@ -54,8 +54,8 @@ function centrer_mini_popup(popup) {
 	//request data for centering
 	var windowWidth = document.documentElement.clientWidth;
 	var windowHeight = document.documentElement.clientHeight;
-	var popupHeight = $(popup).height();
-	var popupWidth = $(popup).width();
+	var popupHeight = $(popup).outerHeight();
+	var popupWidth = $(popup).outerWidth();
 	//centering
 	$(popup).css({
 	"position": "fixed",

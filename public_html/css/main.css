@@ -1442,7 +1442,7 @@ label[for=register-ville], select[name=register-ville] {
 }
 
 /* Formulaires */
-input.contentinput, textarea.contentinput { margin-bottom: 2px; float: left; clear: both; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; padding-left: 4px; overflow: visible; font: 12px/13px "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif; width: 266px; height: 30px; border: 1px solid #CCC; -webkit-box-shadow: inset 0 1px 0 #eee,#fff 0 1px 0; -moz-box-shadow: inset 0 1px 0 #eee,#fff 0 1px 0; box-shadow: inset 0 1px 0 #eee,#fff 0 1px 0; text-shadow: 0 1px 0 rgba(255, 255, 255, .5); white-space: nowrap; cursor: text; -webkit-transition: opacity .1s,font-size .1s; -moz-transition: opacity .1s,font-size .1s; -o-transition: opacity .1s,font-size .1s; color: #a9a7a7; }
+input.contentinput, textarea.contentinput { margin-bottom: 2px; float: left; clear: both; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; padding-left: 4px; overflow: visible; font: 12px/13px "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif; width: 262px; height: 30px; border: 1px solid #CCC; -webkit-box-shadow: inset 0 1px 0 #eee,#fff 0 1px 0; -moz-box-shadow: inset 0 1px 0 #eee,#fff 0 1px 0; box-shadow: inset 0 1px 0 #eee,#fff 0 1px 0; text-shadow: 0 1px 0 rgba(255, 255, 255, .5); white-space: nowrap; cursor: text; -webkit-transition: opacity .1s,font-size .1s; -moz-transition: opacity .1s,font-size .1s; -o-transition: opacity .1s,font-size .1s; color: #a9a7a7; }
 input.contentinput:focus, textarea.contentinput:focus { outline:0;color:#333;border-color:#989797;-webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,.05),0 0 8px rgba(82,168,236,.6);-moz-box-shadow:inset 0 1px 3px rgba(0,0,0,.05),0 0 8px rgba(82,168,236,.6);box-shadow:inset 0 1px 3px rgba(0,0,0,.05),0 0 8px rgba(82,168,236,.6); }
 textarea.contentinput { width: 500px; height: 250px; float: none; }
 input.ac_loading { background: white url('images/loader-autocomplete.gif') no-repeat 100% 50%; }
@@ -1500,7 +1500,7 @@ table.calendrier div.time_recover {
     opacity : 0.5;
 }
 
-/* PHOTO */
+/* AVATAR */
 div.loading {
     display: block;
     width: 95%;
@@ -1561,6 +1561,18 @@ hr.clear { clear: both; height: 0; border: 0; }
     padding: 15px;
     -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px;
     border:1px solid #ddd; 
+    margin-left: 7px;
+    margin-bottom: 7px;
+}
+
+.content_photo_preview {
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+.content_upload_photo input[type=file] {
+    width: 225px;
 }
 
 .album_upload_photo {
@@ -1573,10 +1585,22 @@ hr.clear { clear: both; height: 0; border: 0; }
     background: #EEEEEE;
 }
 
+.album_upload_photo .see-more-album {
+    display: block;
+    float: right;
+}
+
 .popup-other input#buttonAddPhoto {
     position: absolute;
     top: 2px; right: 2px;
 }
+
+#content_global_photo {
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 /* Charger dès Upload charger miniature */
 .content_upload_photo .picture {
     width: 250px;

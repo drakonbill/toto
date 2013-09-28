@@ -4,15 +4,13 @@
 	border: 1px solid /*#757575*/ #ccc;
     position:fixed;
     text-align:justify;
-    width:960px;
+    width:980px;
 	max-height: 500px;
     font:normal normal normal 12px/normal Arial, Verdana, sans-serif;
     /*display:none;*/    
 	z-index:1001;
 	padding: 15px;
 	top: 25px;
-        overflow-y: auto;
-        overflow-x: hidden;
 }
 
 .popup-other h2 {
@@ -110,6 +108,7 @@
 .popup-other .contentButtonBottom {
     text-align: center;
     display: block;
+    margin-top: 2px;
 }
 .popup-other a.buttonBottom {
     float: right; margin-left: 2px; background: #e1dddd; border-color:#989797; color:#333; padding: 8px 15px 8px 15px; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; border: 1px solid #CCC; text-decoration: none; font-size: 12px; font-weight: bold; -webkit-box-shadow: inset 0 1px 0 #eee,#fff 0 1px 0; -moz-box-shadow: inset 0 1px 0 #eee,#fff 0 1px 0; box-shadow: inset 0 1px 0 #eee,#fff 0 1px 0; text-shadow: 0 1px 0 rgba(255, 255, 255, .5); white-space: nowrap; -webkit-transition: opacity .1s,font-size .1s; -moz-transition: opacity .1s,font-size .1s; -o-transition: opacity .1s,font-size .1s;

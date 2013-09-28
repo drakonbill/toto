@@ -139,34 +139,30 @@ $(function() {
         resizeimg.cancelSelection();
         return false;
     });
-
+    
+    var number_photo=1;
     $("a#addPicture").live('click', function() {
         if ($("div.popup-other").length == 0) {
             $("body").prepend("<div class='popup-other'><div class='contentdetail'><h2>Ajouter une photo</h2></div></div>");
-            $(".popup-other .contentdetail").append("<div class='album_upload_photo'><label for='album'>Selectionner un évènement ou votre album de profil</label><select name='album' id='album'><option value='0'>Album du profil</option></select></div>");
+            $(".popup-other .contentdetail").append("<div class='album_upload_photo'><label for='album'>Selectionner un évènement ou votre album de profil</label><select name='album' id='album'><option value='0'>Album personnel</option></select><span class='see-more-album'><a href='javascript:void();'>Voir plus d'albums</a></span></div>");
             for (key in var_albums)
                 $(".popup-other select#album").append("<option value='" + var_albums[key]['id_event'] + "'>" + var_albums[key]['name_event'] + "</option>");
 
-            $("select#album").live('change', function() {
-                if ($(this).val() == 0)
-                    $(".popup-other .content_upload_photo").append("<label for='main_photo'>Photo principale : </label><input type='checkbox' name='main_photo' id='main_photo' />");
-                else {
-                    $(".popup-other .content_upload_photo label[for=main_photo]").remove();
-                    $(".popup-other .content_upload_photo input#main_photo").remove();
-                }
-            });
-            $(".popup-other .contentdetail").append("<div class='content_upload_photo'><input class='contentinput' type='text' name='libelle' id='libelle' value='Saississez un libelle' /><br/><div id='content_photo_preview'></div><label for='file'>Photo : </label><input type='file' name='fichier' id='fichier' /><br/><label for='main_photo'>Photo principale : </label><input type='checkbox' name='main_photo' id='main_photo' /></div><hr class='clear'/>");
-            $(".popup-other .contentdetail .content_upload_photo:last").after("<div class='content_upload_photo'><input class='contentinput' type='text' name='libelle' id='libelle' value='Saississez un libelle' /><br/><div id='content_photo_preview'></div><label for='file'>Photo : </label><input type='file' name='fichier' id='fichier' /><br/><label for='main_photo'>Photo principale : </label><input type='checkbox' name='main_photo' id='main_photo' /></div>");
-            $(".popup-other .contentdetail .content_upload_photo:last").after("<div class='content_upload_photo'><input class='contentinput' type='text' name='libelle' id='libelle' value='Saississez un libelle' /><br/><div id='content_photo_preview'></div><label for='file'>Photo : </label><input type='file' name='fichier' id='fichier' /><br/><label for='main_photo'>Photo principale : </label><input type='checkbox' name='main_photo' id='main_photo' /></div>");
+            $(".popup-other .contentdetail").append("<div id='content_global_photo'><div class='content_upload_photo'><input class='contentinput' type='text' name='libelle' id='libelle' value='Saississez un libelle' /><br/><div class='content_photo_preview' id='content_photo_preview"+number_photo+"'></div><label for='file'>Photo : </label><input type='file' name='fichier' id='fichier"+number_photo+"' /><br/><label for='main_photo"+number_photo+"'>Photo principale : </label><input type='radio' name='main_photo"+number_photo+"' id='main_photo"+number_photo+"' value='"+number_photo+"' /></div></div><hr class='clear'/>");
             $(".popup-other .contentdetail").append("<div class='contentButtonBottom'><a class='buttonBottom' href='javascript:void();' id='buttonAddPhoto'>Ajouter</a> <a class='buttonBottom' href='javascript:void();' id='cancel'>Annuler</a></div>");
-            $("#fichier").change(function() {
-
-                $("div#content_photo_preview").html("<img src='/Images/ajax-loader.gif' alt='loading'/>");
-                $(this).upload('/ajax/registerImagePhoto', function(res) {alert(res);
+            $(".content_upload_photo input[name=fichier]").live('change' ,function() {
+                
+                
+                number_file = $(this).attr('id').split("fichier");
+                number_file = number_file[1];
+                $("div#content_photo_preview"+number_file).html("<img src='/Images/ajax-loader.gif' alt='loading'/>");
+                $(this).upload('/ajax/registerImagePhoto', "id="+number_file, function(res) {alert(res);
                     if (res.substring(0, 2) == "1;")
                     {
                         image = res.split(";");
-                        $("div#content_photo_preview").html("<img class='picture' src='"+image[1]+"' alt='' />");
+                        $("div#content_photo_preview"+number_file).html("<img class='picture' src='"+image[1]+"' alt='' />");
+                        number_photo++;
+                        $(".popup-other .contentdetail .content_upload_photo:last").after("<div class='content_upload_photo' id='content_upload_photo"+number_photo+"'><input class='contentinput' type='text' name='libelle"+number_photo+"' id='libelle"+number_photo+"' value='Saississez un libelle' /><br/><div class='content_photo_preview' id='content_photo_preview"+number_photo+"'></div><label for='file'>Photo : </label><input type='file' name='fichier' id='fichier"+number_photo+"' /><br/><label for='main_photo"+number_photo+"'>Photo principale : </label><input type='radio' name='main_photo"+number_photo+"' id='main_photo"+number_photo+"' value='"+number_photo+"' /></div>");
                     }
                 });
 
@@ -188,6 +184,8 @@ $(function() {
             $(window).resize(function() {
                 centrer_mini_popup($(".popup-other"));
             });
+            
+            
         }
     });
 });
